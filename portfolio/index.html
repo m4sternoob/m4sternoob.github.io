@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>M4sterNoob | Game Programmer</title>
+<meta name="description" content="Game programmer in Kitchener-Waterloo, Ontario. C++, Unreal Engine 5.6, Swift. Physics-driven multiplayer games.">
+<meta property="og:title" content="M4sterNoob | Game Programmer">
+<meta property="og:description" content="C++, Unreal Engine 5.6, Swift. Physics-driven multiplayer games.">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%AE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0f;--panel:#171425;--text:#f1eefb;--mute:#a59fbd;--pink:#ff4d6d;--teal:#3dd6d0}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:var(--text);font:16px/1.6 "Bricolage Grotesque",system-ui,sans-serif}
+a{color:var(--teal)}
+a:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
+.w{max-width:960px;margin:0 auto;padding:36px 16px}
+h1{font-size:clamp(34px,7vw,64px);line-height:1.05;margin:8px 0}
+h2{font-size:28px;margin:0 0 6px}
+h3{margin:0 0 6px}
+.mute{color:var(--mute)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.top nav a{margin-left:14px;color:var(--text);text-decoration:none;font-weight:700}
+.clip{margin-top:22px;aspect-ratio:16/9;max-height:340px;width:100%;border:2px dashed var(--mute);border-radius:12px;display:grid;place-items:center;color:var(--mute)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stats div{background:var(--panel);border-radius:12px;padding:16px;text-align:center}
+.stats b{display:block;font-size:40px;color:var(--teal);line-height:1}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;margin-top:16px}
+.card{background:var(--panel);border-radius:12px;padding:18px}
+.card ul{margin:8px 0;padding-left:18px}
+.tag{display:inline-block;font-size:13px;font-weight:700;border-radius:20px;padding:2px 10px;margin-bottom:8px}
+.play{background:var(--teal);color:var(--ink)}
+.prog{background:var(--pink);color:#fff}
+.plan{border:1px solid var(--mute);color:var(--mute)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:16px}
+footer{border-top:1px solid #2a2540}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="w">
+  <div class="top">
+    <strong>M4sterNoob</strong>
+    <nav><a href="#work">Work</a><a href="#skills">Skills</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+  </div>
+  <p class="mute">Game Programmer | Kitchener-Waterloo, ON</p>
+  <h1>Building games that feel right.</h1>
+  <p>I build physics-driven multiplayer games in C++ and Unreal Engine 5.6, and ship a little every day.</p>
+  <div class="clip" role="img" aria-label="Gameplay clip placeholder">Gameplay clip coming soon</div>
+</header>
+
+<section class="w" aria-label="Numbers">
+  <div class="stats">
+    <div><b data-n="1">1</b>Playable Build</div>
+    <div><b data-n="2">2</b>Engines</div>
+    <div><b data-n="30">30</b>Day Roadmap</div>
+  </div>
+</section>
+
+<section class="w" id="work">
+  <h2>Selected Work</h2>
+  <p class="mute">To add a project, copy one article block and edit the text.</p>
+  <div class="grid">
+    <article class="card">
+      <span class="tag prog">In progress</span>
+      <h3>StumbleGuysClone</h3>
+      <p class="mute">Unreal Engine 5.6 | C++ | Chaos Physics</p>
+      <ul><li>Multiplayer party game, pure C++ gameplay, no Blueprints</li><li>EnhancedInput, camera-relative movement</li><li>Planned: server-authoritative physics, LAN browser</li></ul>
+      <a href="https://github.com/m4sternoob/StumbleGuysClone">Code on GitHub</a>
+    </article>
+    <article class="card">
+      <span class="tag play">Playable build</span>
+      <h3>Stumble Lite</h3>
+      <p class="mute">Swift | SceneKit | iOS</p>
+      <ul><li>3D physics party game, 60-second rounds</li><li>Custom collision filtering, kinematic obstacles, virtual joystick</li><li>Python script generates the Xcode project</li></ul>
+      <a href="https://github.com/m4sternoob/stumble-lite">Code on GitHub</a>
+    </article>
+    <article class="card">
+      <span class="tag play">Playable</span>
+      <h3>Snake Game</h3>
+      <p class="mute">JavaScript | Canvas</p>
+      <ul><li>Classic snake with WASD, arrows and touch controls</li><li>Saves your best score</li></ul>
+      <a href="../#2" target="_top">Play it</a>
+    </article>
+    <article class="card">
+      <span class="tag play">Demo</span>
+      <h3>Pixel Market</h3>
+      <p class="mute">JavaScript | Canvas</p>
+      <ul><li>Claim and colour pixels on a shared-style wall</li><li>Saves in your browser, payments planned</li></ul>
+      <a href="../#3" target="_top">Try it</a>
+    </article>
+    <article class="card">
+      <span class="tag play">Tooling</span>
+      <h3>Phone Mirror Pipeline</h3>
+      <p class="mute">Python | adb | scrcpy | AppleScript</p>
+      <ul><li>Auto-reconnects wireless Android debugging when the port changes</li></ul>
+    </article>
+    <article class="card">
+      <span class="tag plan">Planned</span>
+      <h3>PathRush</h3>
+      <p class="mute">Unreal Engine 5.6 | C++</p>
+      <ul><li>Cross-platform parkour obstacle course for PC, iOS and Android</li></ul>
+    </article>
+    <article class="card">
+      <span class="tag plan">Planned</span>
+      <h3>Clean House</h3>
+      <p class="mute">Unreal Engine 5.6 | C++</p>
+      <ul><li>Tactical room-clearing game</li></ul>
+    </article>
+    <article class="card">
+      <span class="tag plan">Planned</span>
+      <h3>1v1MEBIYAAACH</h3>
+      <p class="mute">Unreal Engine 5.6 | C++</p>
+      <ul><li>Low-poly racing and MOBA hybrid with cross-platform multiplayer</li></ul>
+    </article>
+  </div>
+</section>
+
+<section class="w" id="skills">
+  <h2>Technical Depth</h2>
+  <div class="two">
+    <div class="card"><h3>Physics Systems</h3><p>Custom physics twice: SceneKit collision filtering on iOS, Chaos Physics in UE 5.6. Integration, collision response, networked determinism.</p></div>
+    <div class="card"><h3>Build and Pipeline</h3><p>Python-generated Xcode projects, UE Build.cs modules, EnhancedInput setup. Automate the boring parts.</p></div>
+    <div class="card"><h3>Multiplayer</h3><p>Replication from day one: server-authoritative movement, client prediction, bandwidth-aware updates.</p></div>
+    <div class="card"><h3>Daily Discipline</h3><p>30-day roadmap, daily commits, weekly devlogs. The repo is the proof.</p></div>
+  </div>
+</section>
+
+<section class="w" id="about">
+  <h2>About</h2>
+  <p>I'm a game programmer in Kitchener-Waterloo, Ontario, focused on gameplay and physics.</p>
+  <p>I built a 3D physics party game in Swift and SceneKit, and now I'm building a multiplayer party game in Unreal Engine 5.6 with pure C++. No Blueprints for gameplay. Daily commits, public roadmap.</p>
+  <p>What I love: physics systems, game feel ("juice"), and shipping. Every commit in my repo is proof of the work.</p>
+  <p><strong>Looking for:</strong> Junior Gameplay, Engine or Tools Programmer roles at Ontario studios. Open to co-op, internship and junior full-time.</p>
+</section>
+
+<footer class="w" id="contact">
+  <h2>Contact</h2>
+  <p><a href="mailto:m4sternoob@gmail.com">m4sternoob@gmail.com</a> | <a href="https://linkedin.com/in/m4sternoob">LinkedIn</a> | <a href="https://github.com/m4sternoob">GitHub</a></p>
+  <p class="mute">Built with vanilla HTML, CSS and JS. Free to study, fork and learn from. 2026 M4sterNoob.</p>
+</footer>
+
+<script>
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
+  document.querySelectorAll('[data-n]').forEach(el=>{
+    const n=+el.dataset.n;let i=0;el.textContent=0;
+    const t=setInterval(()=>{el.textContent=++i;if(i>=n)clearInterval(t)},Math.max(25,900/n));
+  });
+}
+</script>
+</body>
+</html>
