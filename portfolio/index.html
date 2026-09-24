@@ -16,10 +16,10 @@
 :root{--ink:#0a0a0f;--panel:#171425;--text:#f1eefb;--mute:#a59fbd;--pink:#ff4d6d;--teal:#3dd6d0}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--ink);color:var(--text);font:16px/1.6 "Bricolage Grotesque",system-ui,sans-serif}
+body{margin:0;background:var(--ink);color:var(--text);font:16px/1.6 "Bricolage Grotesque",system-ui,sans-serif;position:relative;min-height:100vh}
 a{color:var(--teal)}
 a:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
-.w{max-width:960px;margin:0 auto;padding:36px 16px}
+.w{max-width:960px;margin:0 auto;padding:36px 16px;position:relative;z-index:2}
 h1{font-size:clamp(34px,7vw,64px);line-height:1.05;margin:8px 0}
 h2{font-size:28px;margin:0 0 6px}
 h3{margin:0 0 6px}
@@ -40,9 +40,22 @@ h3{margin:0 0 6px}
 .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:16px}
 footer{border-top:1px solid #2a2540}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Live background canvas */
+#bg-canvas{
+  position:fixed;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  opacity:0.35;
+}
+@media(prefers-reduced-motion:reduce){
+  #bg-canvas{display:none}
+}
 </style>
 </head>
 <body>
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="w">
   <div class="top">
     <strong>M4sterNoob</strong>
@@ -151,6 +164,95 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
     const t=setInterval(()=>{el.textContent=++i;if(i>=n)clearInterval(t)},Math.max(25,900/n));
   });
 }
+
+/* Live binary rain background with cursor interaction */
+(()=>{
+  const canvas=document.getElementById('bg-canvas');
+  if(!canvas||!canvas.getContext) return;
+  const ctx=canvas.getContext('2d');
+  let w=0,h=0,cols=0,rows=0;
+  let drops=[],mouseX=-9999,mouseY=-9999,time=0;
+  const chars='01';
+  const fontSize=14;
+  const baseSpeed=0.3;
+  const trailLength=20;
+
+  function resize(){
+    w=canvas.width=innerWidth;
+    h=canvas.height=innerHeight;
+    cols=Math.floor(w/fontSize);
+    rows=Math.floor(h/fontSize);
+    if(drops.length!==cols){
+      drops=new Array(cols).fill(0).map((_,i)=>({
+        x:i*fontSize,
+        y:Math.random()*-h,
+        speed:baseSpeed+Math.random()*0.4,
+        chars:Array.from({length:trailLength},()=>chars[Math.floor(Math.random()*2)]),
+        opacity:Math.random()*0.5+0.1,
+        hue:Math.random()>0.5?180:300
+      }));
+    }
+  }
+
+  function animate(now){
+    time=now*0.001;
+    ctx.fillStyle='rgba(10,10,15,0.15)';
+    ctx.fillRect(0,0,w,h);
+    ctx.font=`${fontSize}px monospace`;
+    ctx.textBaseline='top';
+
+    drops.forEach((drop,i)=>{
+      const mx=mouseX-drop.x;
+      const my=mouseY-drop.y;
+      const dist=Math.hypot(mx,my);
+      const influence=dist<200?Math.pow(1-dist/200,2)*0.8:0;
+
+      drop.y+=drop.speed*(1+influence*3);
+      if(influence>0.3){
+        drop.opacity=Math.min(1,drop.opacity+0.02);
+        drop.speed=Math.min(1.5,drop.speed+0.01);
+      }else{
+        drop.opacity*=0.995;
+        drop.speed=baseSpeed+Math.random()*0.4;
+      }
+
+      if(drop.y>h+trailLength*fontSize){
+        drop.y=Math.random()*-h;
+        drop.x=i*fontSize;
+        drop.opacity=Math.random()*0.5+0.1;
+        drop.speed=baseSpeed+Math.random()*0.4;
+      }
+
+      drop.chars.push(chars[Math.floor(Math.random()*2)]);
+      if(drop.chars.length>trailLength) drop.chars.shift();
+
+      drop.chars.forEach((ch,j)=>{
+        const py=drop.y-j*fontSize;
+        if(py<-fontSize||py>h) return;
+        const alpha=(j/trailLength)*drop.opacity*0.8;
+        const isHead=j===drop.chars.length-1;
+        const color=isHead?'#3dd6d0':(drop.hue===180?'#3dd6d0':'#ff4d6d');
+        ctx.fillStyle=isHead?'rgba(61,214,208,'+alpha+')':(drop.hue===180?'rgba(61,214,208,'+alpha*0.6+')':'rgba(255,77,109,'+alpha*0.6+')');
+        if(isHead) ctx.fillStyle='rgba(241,238,251,'+Math.min(1,alpha*2)+')';
+        ctx.fillText(ch,drop.x,py);
+      });
+    });
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('resize',resize,{passive:true});
+  document.addEventListener('mousemove',e=>{
+    mouseX=e.clientX;
+    mouseY=e.clientY;
+  },{passive:true});
+  document.addEventListener('mouseleave',()=>{
+    mouseX=-9999;
+    mouseY=-9999;
+  });
+
+  resize();
+  animate(0);
+})();
 </script>
 </body>
 </html>
