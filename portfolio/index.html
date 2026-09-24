@@ -47,7 +47,7 @@ footer{border-top:1px solid #2a2540}
   inset:0;
   z-index:1;
   pointer-events:none;
-  opacity:0.6;
+  opacity:0.85;
 }
 @media(prefers-reduced-motion:reduce){
   #bg-canvas{display:none}
@@ -89,7 +89,7 @@ footer{border-top:1px solid #2a2540}
       <span class="tag play">Playable build</span>
       <h3>Stumble Lite</h3>
       <p class="mute">Swift | SceneKit | iOS</p>
-      <ul><li>3D physics party game, 60-second rounds</li><li>Custom collision filtering, kinematic obstacles, virtual joystick</li><li>Python script generates the Xcode project</li></ul>
+      <ul><li>3D physics party game, 60-second rounds</li><li>Custom collision filtering, kinematic obstacles, virtual joystick</li></ul>
       <a href="https://github.com/m4sternoob/stumble-lite">Code on GitHub</a>
     </article>
     <article class="card">
@@ -177,6 +177,14 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
   const baseSpeed=0.4;
   const trailLength=28;
 
+  // Faded orb that follows cursor
+  const orb={
+    x:w/2,y:h/2,
+    targetX:w/2,targetY:h/2,
+    radius:180,
+    opacity:0.15
+  };
+
   function resize(){
     w=canvas.width=innerWidth;
     h=canvas.height=innerHeight;
@@ -192,12 +200,26 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
         hue:Math.random()>0.5?180:300
       }));
     }
+    orb.x=w/2;orb.y=h/2;orb.targetX=w/2;orb.targetY=h/2;
   }
 
   function animate(now){
     time=now*0.001;
     ctx.fillStyle='rgba(10,10,15,0.12)';
     ctx.fillRect(0,0,w,h);
+
+    // Draw faded orb following cursor
+    orb.x+=(orb.targetX-orb.x)*0.08;
+    orb.y+=(orb.targetY-orb.y)*0.08;
+    const orbGrad=ctx.createRadialGradient(orb.x,orb.y,0,orb.x,orb.y,orb.radius);
+    orbGrad.addColorStop(0,'rgba(61,214,208,'+orb.opacity+')');
+    orbGrad.addColorStop(0.4,'rgba(255,77,109,'+orb.opacity*0.6+')');
+    orbGrad.addColorStop(1,'rgba(10,10,15,0)');
+    ctx.fillStyle=orbGrad;
+    ctx.beginPath();
+    ctx.arc(orb.x,orb.y,orb.radius,0,Math.PI*2);
+    ctx.fill();
+
     ctx.font=`${fontSize}px monospace`;
     ctx.textBaseline='top';
 
@@ -207,8 +229,15 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
       const dist=Math.hypot(mx,my);
       const influence=dist<220?Math.pow(1-dist/220,2)*1.0:0;
 
-      drop.y+=drop.speed*(1+influence*4);
-      if(influence>0.2){
+      // Orb also influences drops
+      const omx=orb.x-drop.x;
+      const omy=orb.y-drop.y;
+      const odist=Math.hypot(omx,omy);
+      const oinfluence=odist<orb.radius?Math.pow(1-odist/orb.radius,2)*0.5:0;
+      const totalInfluence=Math.max(influence,oinfluence);
+
+      drop.y+=drop.speed*(1+totalInfluence*4);
+      if(totalInfluence>0.2){
         drop.opacity=Math.min(1,drop.opacity+0.03);
         drop.speed=Math.min(2,drop.speed+0.015);
       }else{
@@ -248,10 +277,14 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
   document.addEventListener('mousemove',e=>{
     mouseX=e.clientX;
     mouseY=e.clientY;
+    orb.targetX=e.clientX;
+    orb.targetY=e.clientY;
   },{passive:true});
   document.addEventListener('mouseleave',()=>{
     mouseX=-9999;
     mouseY=-9999;
+    orb.targetX=w/2;
+    orb.targetY=h/2;
   });
 
   resize();
