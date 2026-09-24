@@ -59,9 +59,9 @@ canvas{max-width:100%;height:auto;border:3px solid var(--teal);border-radius:8px
 <section class="panel" id="cv" aria-label="CV">
 <div class="pad">
   <button class="btn noprint" onclick="window.print()">Save CV as PDF</button>
-  <h1>[Your Full Name]</h1>
+  <h1>XX</h1>
   <p>Game Programmer | Kitchener-Waterloo, Ontario, Canada</p>
-  <p>Email: <a href="mailto:m4sternoob@gmail.com">m4sternoob@gmail.com</a> | LinkedIn: <a href="https://linkedin.com/in/m4sternoob">linkedin.com/in/m4sternoob</a> | GitHub: <a href="https://github.com/m4sternoob">github.com/m4sternoob</a> | Phone: [Your Phone]</p>
+  <p>Email: <a href="mailto:m4sternoob@gmail.com">m4sternoob@gmail.com</a> | LinkedIn: <a href="https://linkedin.com/in/m4sternoob">linkedin.com/in/m4sternoob</a> | GitHub: <a href="https://github.com/m4sternoob">github.com/m4sternoob</a> | Phone: XX</p>
 
   <h2>Summary</h2>
   <p>Junior gameplay and engine programmer with a BTech in Computer Science. Builds physics-driven multiplayer games in C++ (Unreal Engine 5.6) and Swift. Seeking a junior gameplay, engine or tools programmer role at an Ontario studio.</p>
@@ -75,31 +75,20 @@ canvas{max-width:100%;height:auto;border:3px solid var(--teal);border-radius:8px
 
   <h2>Projects</h2>
   <h3>StumbleGuysClone | Unreal Engine 5.6, C++ | In progress</h3>
-  <ul>
-    <li>Building a multiplayer party game in C++ with no Blueprints for gameplay</li>
-    <li>Implemented capsule character with EnhancedInput and camera-relative movement</li>
-    <li>Planned: server-authoritative physics, replication and LAN session browser</li>
-    <li>Public 30-day roadmap with daily commits on GitHub</li>
-  </ul>
+  <ul><li>Building a multiplayer party game in C++ with no Blueprints for gameplay</li><li>Implemented capsule character with EnhancedInput and camera-relative movement</li><li>Planned: server-authoritative physics, replication and LAN session browser</li><li>Public 30-day roadmap with daily commits on GitHub</li></ul>
   <h3>Stumble Lite | Swift, SceneKit, iOS | Playable build</h3>
-  <ul>
-    <li>Built a 3D physics party game for up to four players with 60-second rounds</li>
-    <li>Wrote custom collision filtering, kinematic obstacles and a virtual joystick</li>
-    <li>Wrote a Python script that generates the Xcode project from the source tree</li>
-  </ul>
+  <ul><li>Built a 3D physics party game for up to four players with 60-second rounds</li><li>Wrote custom collision filtering, kinematic obstacles and a virtual joystick</li><li>Wrote a Python script that generates the Xcode project from the source tree</li></ul>
   <h3>Phone Mirror and Agent Pipeline | Python, adb, scrcpy, AppleScript</h3>
-  <ul>
-    <li>Automated wireless Android debugging reconnects, removing a manual step from every session</li>
-  </ul>
+  <ul><li>Automated wireless Android debugging reconnects, removing a manual step from every session</li></ul>
 
   <h2>Experience</h2>
-  <h3>Customer Support (Chat) | Apple | [Start Year] to [End Year]</h3>
+  <h3>Customer Support (Chat) | Apple | XX to XX</h3>
   <ul><li>Resolved customer issues in real time over chat with clear, accurate communication</li></ul>
-  <h3>Customer Support | Mercer Mettl | [Start Year] to [End Year]</h3>
+  <h3>Customer Support | Mercer Mettl | XX to XX</h3>
   <ul><li>Supported customers and resolved issues across chat channels</li></ul>
 
   <h2>Education</h2>
-  <p>Bachelor of Technology, Computer Science | MRSPTU, India | [Year]</p>
+  <p>Bachelor of Technology, Computer Science | MRSPTU, India | XX</p>
   <p>Game Design Program (partially completed) | Conestoga College, Ontario</p>
 </div>
 </section>
@@ -160,7 +149,7 @@ function step(){d=nd;const h={x:s[0].x+d.x,y:s[0].y+d.y};
     clearInterval(tm);tm=0;best=Math.max(best,sc);ls('snakeBest',best);draw();return}
   s.unshift(h);if(h.x===f.x&&h.y===f.y){sc++;food()}else s.pop();draw()}
 function turn(x,y){
-  if(!tm){s=[{x:10,y:10}];d=nd={x,y};sc=0;food();tm=setInterval(step,110);return}
+  if(!tm){s=[{x:10,y:10}];d=nd={x,y};sc=0;food();tm=setInterval(step,150);return}
   if(x===-d.x&&y===-d.y)return;nd={x,y}}
 draw();
 const keys={ArrowUp:[0,-1],KeyW:[0,-1],ArrowDown:[0,1],KeyS:[0,1],ArrowLeft:[-1,0],KeyA:[-1,0],ArrowRight:[1,0],KeyD:[1,0]};
