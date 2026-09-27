@@ -47,8 +47,7 @@ canvas{max-width:100%;height:auto;border:3px solid var(--teal);border-radius:8px
 .nokia-phone{position:relative;transform-style:preserve-3d}
 .nokia-body{background:linear-gradient(180deg,var(--nokia-body) 0%,var(--nokia-dark) 100%);border-radius:28px;padding:16px 12px 20px;box-shadow:0 20px 60px rgba(0,0,0,0.6),0 0 0 2px var(--nokia-light),inset 0 2px 0 var(--nokia-light),inset 0 -2px 0 #000;position:relative;width:200px;min-height:380px;display:flex;flex-direction:column;align-items:center}
 .nokia-body::before{content:"";position:absolute;top:12px;left:50%;transform:translateX(-50%);width:60px;height:4px;background:var(--nokia-dark);border-radius:2px;box-shadow:0 2px 4px rgba(0,0,0,0.5)}
-.nokia-antenna{position:absolute;top:-18px;right:18px;width:4px;height:18px;background:linear-gradient(180deg,var(--nokia-light),var(--nokia-dark));border-radius:2px 2px 0 0;box-shadow:0 2px 4px rgba(0,0,0,0.3)}
-.nokia-antenna::after{content:"";position:absolute;top:-6px;left:-2px;width:8px;height:6px;background:var(--nokia-accent);border-radius:50%;opacity:0.8}
+.nokia-antenna{position:absolute;top:0;left:50%;transform:translateX(-50%);width:4px;height:14px;background:linear-gradient(180deg,var(--nokia-light),var(--nokia-dark));border-radius:2px 2px 0 0;box-shadow:0 2px 4px rgba(0,0,0,0.3);z-index:-1}
 .nokia-score{text-align:center;margin:8px 0 4px;font-family:"Courier New",monospace;font-size:13px;color:var(--nokia-accent);text-shadow:0 0 6px var(--nokia-accent);width:100%}
 .nokia-screen-frame{background:var(--nokia-screen-dark);border-radius:8px;padding:4px;box-shadow:inset 0 2px 8px rgba(0,0,0,0.5),0 1px 0 var(--nokia-light);position:relative}
 .nokia-screen-frame::before{content:"";position:absolute;top:4px;left:4px;right:4px;bottom:4px;border:1px solid var(--nokia-screen);pointer-events:none}
@@ -62,8 +61,7 @@ canvas{max-width:100%;height:auto;border:3px solid var(--teal);border-radius:8px
 .nav-key{position:relative}
 .key-num{font-family:"Courier New",monospace;font-size:14px;font-weight:700;color:var(--text);line-height:1}
 .key-dir{font-size:9px;color:var(--mute);line-height:1}
-.center-key{background:linear-gradient(180deg,#2a2a4a 0%,#1a1a2e 100%)}
-.key-dot{width:6px;height:6px;background:var(--nokia-accent);border-radius:50%;box-shadow:0 0 6px var(--nokia-accent)}
+.center-key{background:linear-gradient(180deg,#2a2a4a 0%,#1a1a2e 100%);display:flex;flex-direction:column;align-items:center;gap:1px}
 .nokia-hint{text-align:center;margin-top:12px;font-size:11px;color:var(--mute);font-family:Arial,sans-serif;width:100%}
 @media(max-width:400px){.nokia-body{width:180px;padding:12px 10px 16px}.key{padding:10px 6px}.key-num{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.nokia-phone{animation:none}.screen-glare{animation:none}}
@@ -144,7 +142,6 @@ canvas{max-width:100%;height:auto;border:3px solid var(--teal);border-radius:8px
         </div>
         <div class="key center-key" data-key="select" aria-label="Select (5)">
           <span class="key-num">5</span>
-          <span class="key-dot">●</span>
         </div>
         <div class="key nav-key" data-key="right" aria-label="Right (6)">
           <span class="key-num">6</span>
