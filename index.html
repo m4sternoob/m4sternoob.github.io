@@ -7,7 +7,7 @@
 <meta name="description" content="Game programmer (C++, Unreal Engine 5.6, Swift). Portfolio, CV and playable demos.">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#15121f;--panel:#1f1b2e;--text:#f1eefb;--mute:#a59fbd;--pink:#ff4d6d;--teal:#3dd6d0;--paper:#fbfaf7;--paper-ink:#1a1a1a}
+:root{--ink:#15121f;--panel:#1f1b2e;--text:#f1eefb;--mute:#a59fbd;--pink:#ff4d6d;--teal:#3dd6d0;--paper:#fbfaf7;--paper-ink:#1a1a1a;--nokia-body:#1a1a2e;--nokia-dark:#0d0d1a;--nokia-light:#2a2a4a;--nokia-screen:#8fb88f;--nokia-screen-dark:#4a6b4a;--nokia-key:#25253d;--nokia-key-border:#3a3a5a;--nokia-accent:#ffd700}
 *{box-sizing:border-box}
 html,body{height:100%;margin:0}
 body{background:var(--ink);color:var(--text);font:16px/1.55 "Bricolage Grotesque",system-ui,sans-serif;display:flex;flex-direction:column}
@@ -15,8 +15,8 @@ nav{display:flex;gap:6px;padding:10px 12px;background:var(--panel);overflow-x:au
 nav button{font:inherit;font-weight:700;color:var(--mute);background:none;border:2px solid transparent;border-radius:10px;padding:8px 16px;cursor:pointer;white-space:nowrap}
 nav button[aria-selected=true]{color:var(--ink);background:var(--teal)}
 nav button:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
-.stage{flex:1;position:relative;perspective:1800px;overflow:hidden}
-.panel{position:absolute;inset:0;overflow:auto;backface-visibility:hidden;transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .5s}
+.stage{flex:1;position:relative;perspective:1800px;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:20px}
+.panel{position:absolute;inset:0;overflow:auto;backface-visibility:hidden;transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .5s;display:flex;align-items:center;justify-content:center;padding:20px}
 .panel[data-pos="0"]{transform:none;opacity:1}
 .panel[data-pos="-1"]{transform:rotateY(-90deg);opacity:0;pointer-events:none}
 .panel[data-pos="1"]{transform:rotateY(90deg);opacity:0;pointer-events:none}
@@ -41,6 +41,34 @@ canvas{max-width:100%;height:auto;border:3px solid var(--teal);border-radius:8px
 .pad4 :nth-child(1){grid-column:2}.pad4 :nth-child(2){grid-column:1}.pad4 :nth-child(3){grid-column:2}.pad4 :nth-child(4){grid-column:3}
 .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}
 @media print{nav,.panel:not(#cv),.noprint{display:none!important}.panel{position:static;transform:none!important;opacity:1!important}body{display:block;background:#fff}}
+
+/* Nokia 1100 Styles */
+.nokia-wrapper{display:flex;align-items:center;justify-content:center;perspective:1000px}
+.nokia-phone{position:relative;transform-style:preserve-3d;animation:phoneFloat 6s ease-in-out infinite}
+@keyframes phoneFloat{0%,100%{transform:translateY(0) rotateX(0deg)}50%{transform:translateY(-8px) rotateX(2deg)}}
+.nokia-body{background:linear-gradient(180deg,var(--nokia-body) 0%,var(--nokia-dark) 100%);border-radius:28px;padding:16px 12px 20px;box-shadow:0 20px 60px rgba(0,0,0,0.6),0 0 0 2px var(--nokia-light),inset 0 2px 0 var(--nokia-light),inset 0 -2px 0 #000;position:relative;width:200px;min-height:380px}
+.nokia-body::before{content:"";position:absolute;top:12px;left:50%;transform:translateX(-50%);width:60px;height:4px;background:var(--nokia-dark);border-radius:2px;box-shadow:0 2px 4px rgba(0,0,0,0.5)}
+.nokia-antenna{position:absolute;top:-18px;right:18px;width:4px;height:18px;background:linear-gradient(180deg,var(--nokia-light),var(--nokia-dark));border-radius:2px 2px 0 0;box-shadow:0 2px 4px rgba(0,0,0,0.3)}
+.nokia-antenna::after{content:"";position:absolute;top:-6px;left:-2px;width:8px;height:6px;background:var(--nokia-accent);border-radius:50%;opacity:0.8;animation:antennaBlink 2s ease-in-out infinite}
+@keyframes antennaBlink{0%,100%{opacity:0.8}50%{opacity:0.3}}
+.nokia-screen-frame{background:var(--nokia-screen-dark);border-radius:8px;padding:4px;margin-bottom:16px;box-shadow:inset 0 2px 8px rgba(0,0,0,0.5),0 1px 0 var(--nokia-light);position:relative}
+.nokia-screen-frame::before{content:"";position:absolute;top:4px;left:4px;right:4px;bottom:4px;border:1px solid var(--nokia-screen);pointer-events:none}
+#snake{display:block;background:#6b8e6b;border:2px solid var(--nokia-screen-dark);border-radius:4px;image-rendering:pixelated;image-rendering:crisp-edges}
+.screen-glare{position:absolute;top:6px;left:6px;right:6px;height:40%;background:linear-gradient(180deg,rgba(255,255,255,0.08),transparent);pointer-events:none;border-radius:2px}
+.nokia-keypad{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px}
+.nav-key{background:linear-gradient(180deg,var(--nokia-key) 0%,var(--nokia-dark) 100%);border:1px solid var(--nokia-key-border);border-radius:10px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;user-select:none;transition:all 0.1s;box-shadow:0 2px 0 var(--nokia-light),inset 0 -2px 0 #000}
+.nav-key:active,.nav-key.pressed{transform:translateY(1px);box-shadow:0 1px 0 var(--nokia-light),inset 0 -1px 0 #000;background:linear-gradient(180deg,var(--nokia-dark) 0%,var(--nokia-key) 100%)}
+.nav-key:focus-visible{outline:2px solid var(--nokia-accent);outline-offset:2px}
+.key-num{font-family:"Courier New",monospace;font-size:16px;font-weight:700;color:var(--text);line-height:1}
+.key-dir{font-size:10px;color:var(--mute);line-height:1}
+.center-key{grid-column:2;background:linear-gradient(180deg,#2a2a4a 0%,#1a1a2e 100%)}
+.key-dot{width:8px;height:8px;background:var(--nokia-accent);border-radius:50%;box-shadow:0 0 8px var(--nokia-accent)}
+.soft-key{grid-column:span 3;display:flex;justify-content:space-between;padding:0 8px;margin-top:4px;color:var(--mute);font-size:11px;font-weight:700}
+.soft-key.left{text-align:left}
+.soft-key.right{text-align:right}
+.nokia-hint{text-align:center;margin-top:16px;font-size:12px;color:var(--mute);font-family:Arial,sans-serif}
+@media(max-width:400px){.nokia-body{width:180px;padding:12px 10px 16px}.nav-key{padding:12px 6px}}
+@media(prefers-reduced-motion:reduce){.nokia-phone{animation:none}.screen-glare{animation:none}}
 </style>
 </head>
 <body>
@@ -61,7 +89,7 @@ canvas{max-width:100%;height:auto;border:3px solid var(--teal);border-radius:8px
   <button class="btn noprint" onclick="window.print()">Save CV as PDF</button>
   <h1>XX</h1>
   <p>Game Programmer | Kitchener-Waterloo, Ontario, Canada</p>
-  <p>Email: <a href="mailto:masternoob102030@gmail.com">masternoob102030@gmail.com</a> | LinkedIn: <a href="https://linkedin.com/in/m4sternoob">linkedin.com/in/m4sternoob</a> | GitHub: <a href="https://github.com/m4sternoob">github.com/m4sternoob</a> | Phone: XX</p>
+  <p>Email: <a href="mailto:masternoob102030@gmail.com">masternoob102030@gmail.com</a> | LinkedIn: <a href="https://linkedin.com/in/m4sternoob" target="_top">linkedin.com/in/m4sternoob</a> | GitHub: <a href="https://github.com/m4sternoob" target="_top">github.com/m4sternoob</a> | Phone: XX</p>
 
   <h2>Summary</h2>
   <p>Junior gameplay and engine programmer with a BTech in Computer Science. Builds physics-driven multiplayer games in C++ (Unreal Engine 5.6) and Swift. Seeking a junior gameplay, engine or tools programmer role at an Ontario studio.</p>
@@ -93,17 +121,40 @@ canvas{max-width:100%;height:auto;border:3px solid var(--teal);border-radius:8px
 </section>
 
 <section class="panel" id="snakeP" aria-label="Game">
-<div class="game">
-  <h2>Game: Snake</h2>
-  <canvas id="snake" width="320" height="320" aria-label="Snake game board"></canvas>
-  <p id="snakeScore" aria-live="polite"></p>
-  <div class="pad4" aria-label="Controls">
-    <button class="btn" data-d="0,-1" aria-label="Up">&#9650;</button>
-    <button class="btn" data-d="-1,0" aria-label="Left">&#9664;</button>
-    <button class="btn" data-d="0,1" aria-label="Down">&#9660;</button>
-    <button class="btn" data-d="1,0" aria-label="Right">&#9654;</button>
+<div class="nokia-wrapper">
+  <div class="nokia-phone" role="img" aria-label="Nokia 1100 Snake Simulator">
+    <div class="nokia-body">
+      <div class="nokia-screen-frame">
+        <canvas id="snake" width="176" height="176" aria-label="Snake game on Nokia 1100 screen"></canvas>
+        <div class="screen-glare"></div>
+      </div>
+      <div class="nokia-keypad">
+        <div class="nav-key" data-key="up" aria-label="Up (2)">
+          <span class="key-num">2</span>
+          <span class="key-dir">▲</span>
+        </div>
+        <div class="nav-key" data-key="left" aria-label="Left (4)">
+          <span class="key-num">4</span>
+          <span class="key-dir">◄</span>
+        </div>
+        <div class="nav-key center-key" aria-label="Select">
+          <span class="key-dot">●</span>
+        </div>
+        <div class="nav-key" data-key="right" aria-label="Right (6)">
+          <span class="key-num">6</span>
+          <span class="key-dir">►</span>
+        </div>
+        <div class="nav-key" data-key="down" aria-label="Down (8)">
+          <span class="key-num">8</span>
+          <span class="key-dir">▼</span>
+        </div>
+        <div class="soft-key left" aria-label="Menu">Menu</div>
+        <div class="soft-key right" aria-label="Names">Names</div>
+      </div>
+    </div>
+    <div class="nokia-antenna"></div>
+    <p class="nokia-hint">Press 2/4/6/8 or arrow keys to play. Click keys or use keyboard.</p>
   </div>
-  <p>Arrow keys or WASD. Press any direction to start or restart.</p>
 </div>
 </section>
 
@@ -134,26 +185,30 @@ function go(i){cur=i;tabs.forEach((t,k)=>t.setAttribute('aria-selected',k===i));
 tabs.forEach((t,i)=>t.onclick=()=>go(i));
 const fromHash=()=>go(Math.min(3,Math.max(0,+location.hash.slice(1)||0)));fromHash();addEventListener('hashchange',()=>{if(location.hash.slice(1)!==String(cur))fromHash()});
 
-/* Snake */
-(()=>{const cv=$('#snake'),g=cv.getContext('2d'),N=20,S=16,out=$('#snakeScore');
-let s=[{x:10,y:10}],d={x:1,y:0},nd=d,f={x:5,y:5},tm=0,sc=0,best=+ls('snakeBest')||0;
-const rnd=n=>Math.floor(Math.random()*n);
-function food(){do f={x:rnd(N),y:rnd(N)};while(s.some(p=>p.x===f.x&&p.y===f.y))}
-function draw(){g.fillStyle='#15121f';g.fillRect(0,0,320,320);
-  g.fillStyle='#ff4d6d';g.fillRect(f.x*S,f.y*S,S-2,S-2);
-  g.fillStyle='#3dd6d0';s.forEach(p=>g.fillRect(p.x*S,p.y*S,S-2,S-2));
-  out.textContent='Score '+sc+' | Best '+best}
-function step(){d=nd;const h={x:s[0].x+d.x,y:s[0].y+d.y};
-  if(h.x<0||h.y<0||h.x>=N||h.y>=N||s.some(p=>p.x===h.x&&p.y===h.y)){
-    clearInterval(tm);tm=0;best=Math.max(best,sc);ls('snakeBest',best);draw();return}
-  s.unshift(h);if(h.x===f.x&&h.y===f.y){sc++;food()}else s.pop();draw()}
-function turn(x,y){
-  if(!tm){s=[{x:10,y:10}];d=nd={x,y};sc=0;food();tm=setInterval(step,150);return}
-  if(x===-d.x&&y===-d.y)return;nd={x,y}}
-draw();
-const keys={ArrowUp:[0,-1],KeyW:[0,-1],ArrowDown:[0,1],KeyS:[0,1],ArrowLeft:[-1,0],KeyA:[-1,0],ArrowRight:[1,0],KeyD:[1,0]};
-addEventListener('keydown',e=>{if(cur!==2||!keys[e.code])return;e.preventDefault();turn(...keys[e.code])});
-document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>turn(...b.dataset.d.split(',').map(Number)));
+/* Snake - Nokia 1100 Style */
+(()=>{
+  const cv=$('#snake'),g=cv.getContext('2d'),N=11,S=16,out=$('#snakeScore');
+  let s=[{x:5,y:5}],d={x:1,y:0},nd=d,f={x:8,y:8},tm=0,sc=0,best=+ls('snakeBest')||0;
+  const rnd=n=>Math.floor(Math.random()*n);
+  function food(){do f={x:rnd(N),y:rnd(N)};while(s.some(p=>p.x===f.x&&p.y===f.y))}
+  function draw(){
+    g.fillStyle='#4a6b4a';g.fillRect(0,0,176,176);
+    g.fillStyle='#8fb88f';g.fillRect(f.x*S,f.y*S,S-1,S-1);
+    g.fillStyle='#c8e6c8';s.forEach(p=>g.fillRect(p.x*S,p.y*S,S-1,S-1));
+    out.textContent='Score '+sc+'  Best '+best}
+  function step(){
+    d=nd;const h={x:s[0].x+d.x,y:s[0].y+d.y};
+    if(h.x<0||h.y<0||h.x>=N||h.y>=N||s.some(p=>p.x===h.x&&p.y===h.y)){
+      clearInterval(tm);tm=0;best=Math.max(best,sc);ls('snakeBest',best);draw();return}
+    s.unshift(h);if(h.x===f.x&&h.y===f.y){sc++;food()}else s.pop();draw()}
+  function turn(x,y){
+    if(!tm){s=[{x:5,y:5}];d=nd={x,y};sc=0;food();tm=setInterval(step,150);return}
+    if(x===-d.x&&y===-d.y)return;nd={x,y}}
+  draw();
+  const keys={ArrowUp:[0,-1],KeyW:[0,-1],ArrowDown:[0,1],KeyS:[0,1],ArrowLeft:[-1,0],KeyA:[-1,0],ArrowRight:[1,0],KeyD:[1,0],Digit2:[0,-1],Digit4:[-1,0],Digit6:[1,0],Digit8:[0,1],Numpad2:[0,-1],Numpad4:[-1,0],Numpad6:[1,0],Numpad8:[0,1]};
+  addEventListener('keydown',e=>{if(cur!==2||!keys[e.code])return;e.preventDefault();turn(...keys[e.code])});
+  document.querySelectorAll('[data-key]').forEach(b=>{b.onclick=()=>turn(...{up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]}[b.dataset.key])});
+  document.querySelectorAll('[data-key]').forEach(b=>{b.addEventListener('mousedown',()=>b.classList.add('pressed'));b.addEventListener('mouseup',()=>b.classList.remove('pressed'));b.addEventListener('mouseleave',()=>b.classList.remove('pressed'))});
 })();
 
 /* Pixel wall */
