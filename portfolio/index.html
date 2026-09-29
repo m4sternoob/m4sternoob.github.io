@@ -5,15 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>M4sterNoob | Game Programmer</title>
 <meta name="description" content="Game programmer in Kitchener-Waterloo, Ontario. C++, Unreal Engine 5.6, Swift. Physics-driven multiplayer games.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://m4sternoob.github.io/portfolio/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="M4sterNoob | Game Programmer">
+<meta name="twitter:description" content="C++, Unreal Engine 5.6, Swift. Physics-driven multiplayer games.">
+<link rel="canonical" href="https://m4sternoob.github.io/portfolio/">
 <meta property="og:title" content="M4sterNoob | Game Programmer">
 <meta property="og:description" content="C++, Unreal Engine 5.6, Swift. Physics-driven multiplayer games.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://m4sternoob.github.io/portfolio/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="M4sterNoob | Game Programmer">
+<meta name="twitter:description" content="C++, Unreal Engine 5.6, Swift. Physics-driven multiplayer games.">
+<link rel="canonical" href="https://m4sternoob.github.io/portfolio/">
 <meta name="theme-color" content="#0a0a0f">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%AE%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#0a0a0f;--panel:#171425;--text:#f1eefb;--mute:#a59fbd;--pink:#ff4d6d;--teal:#3dd6d0}
+:root{--ink:#0a0a0f;--panel:#171425;--text:#f1eefb;--mute:#a59fbd;--pink:#cf1f4b;--teal:#3dd6d0}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--ink);color:var(--text);font:16px/1.6 "Bricolage Grotesque",system-ui,sans-serif;position:relative;min-height:100vh}
@@ -69,8 +81,8 @@ footer{border-top:1px solid #2a2540}
 
 <section class="w" aria-label="Numbers">
   <div class="stats">
-    <div><b data-n="1">1</b>Playable Build</div>
-    <div><b data-n="2">2</b>Engines</div>
+    <div><b data-n="3">3</b>Playable Builds</div>
+    <div><b data-n="2">2</b>Game Engines</div>
     <div><b data-n="30">30</b>Day Roadmap</div>
   </div>
 </section>
@@ -170,8 +182,8 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
   const canvas=document.getElementById('bg-canvas');
   if(!canvas||!canvas.getContext) return;
   const ctx=canvas.getContext('2d');
-  let w=0,h=0,cols=0,rows=0;
-  let drops=[],mouseX=-9999,mouseY=-9999,time=0;
+  let w=0,h=0,cols=0;
+  let drops=[],mouseX=-9999,mouseY=-9999;
   const chars='01';
   const fontSize=14;
   const baseSpeed=0.4;
@@ -189,7 +201,7 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
     w=canvas.width=innerWidth;
     h=canvas.height=innerHeight;
     cols=Math.floor(w/fontSize);
-    rows=Math.floor(h/fontSize);
+    
     if(drops.length!==cols){
       drops=new Array(cols).fill(0).map((_,i)=>({
         x:i*fontSize,
@@ -204,7 +216,7 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
   }
 
   function animate(now){
-    time=now*0.001;
+    
     ctx.fillStyle='rgba(10,10,15,0.12)';
     ctx.fillRect(0,0,w,h);
 
