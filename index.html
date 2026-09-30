@@ -190,7 +190,8 @@ const tabs=[...document.querySelectorAll('[role=tab]')],ps=[...document.querySel
 let cur=0;
 function go(i){cur=i;tabs.forEach((t,k)=>t.setAttribute('aria-selected',k===i));
   ps.forEach((p,k)=>{p.dataset.pos=k===i?'0':k<i?'-1':'1';p.inert=k!==i});
-  if(location.hash!=='#'+i)history.replaceState(null,'','#'+i)}
+  if(location.hash!=='#'+i)history.replaceState(null,'','#'+i);
+  try{$('#home iframe').contentWindow.postMessage({tab:i},location.origin)}catch(e){}}
 tabs.forEach((t,i)=>t.onclick=()=>go(i));
 const fromHash=()=>go(Math.min(3,Math.max(0,+location.hash.slice(1)||0)));fromHash();addEventListener('hashchange',()=>{if(location.hash.slice(1)!==String(cur))fromHash()});
 

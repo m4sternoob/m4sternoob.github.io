@@ -216,8 +216,22 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
     orb.x=w/2;orb.y=h/2;orb.targetX=w/2;orb.targetY=h/2;
   }
 
+  const reduceMotion=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  let running=!reduceMotion;
+  function setRain(on){
+    if(reduceMotion)on=false;
+    if(on===running)return;
+    running=on;
+    if(on)requestAnimationFrame(animate);
+  }
+  addEventListener('message',e=>{
+    if(e.origin!==location.origin)return;
+    if(e.data&&typeof e.data.tab==='number')setRain(e.data.tab===0);
+  });
+  document.addEventListener('visibilitychange',()=>setRain(!document.hidden));
+
   function animate(now){
-    
+    if(!running)return;
     ctx.fillStyle='rgba(10,10,15,0.12)';
     ctx.fillRect(0,0,w,h);
 
