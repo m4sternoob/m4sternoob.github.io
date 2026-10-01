@@ -54,6 +54,36 @@ h3{margin:0 0 6px}
 footer{border-top:1px solid #2a2540}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
+/* Project cards: clickable, open a detail modal */
+.card[data-project]{cursor:pointer;transition:transform .15s ease,box-shadow .15s ease}
+.card[data-project]:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.card[data-project]:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
+.card a+a{margin-left:12px}
+.card-hint{display:inline-block;margin-top:10px;font-size:13px;font-weight:700;color:var(--teal)}
+.tag.live{background:#22c55e;color:#06130b}
+@media(prefers-reduced-motion:reduce){.card[data-project]{transition:none}.card[data-project]:hover{transform:none}}
+
+/* Detail modal */
+.modal-backdrop{position:fixed;inset:0;z-index:60;background:rgba(5,5,12,.78);display:flex;align-items:center;justify-content:center;padding:20px}
+.modal-backdrop[hidden]{display:none}
+.modal{position:relative;background:var(--panel);border:1px solid #2a2540;border-radius:14px;max-width:640px;width:100%;max-height:88vh;overflow:auto;padding:28px 28px 24px;box-shadow:0 24px 80px rgba(0,0,0,.6)}
+.modal h2{margin:8px 0 10px;padding-right:44px;font-size:30px}
+.modal h3{margin:18px 0 6px;font-size:17px;color:var(--teal)}
+.modal ul{margin:6px 0;padding-left:20px}
+.modal li{margin:4px 0}
+.modal p{margin:8px 0}
+.modal-close{position:absolute;top:14px;right:14px;width:40px;height:40px;border-radius:10px;border:1px solid #2a2540;background:#0a0a0f;color:var(--text);font-size:22px;line-height:1;cursor:pointer}
+.modal-close:hover{border-color:var(--pink);color:var(--pink)}
+.modal-close:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
+.modal-links{display:flex;gap:16px;flex-wrap:wrap;margin-top:18px}
+.modal-links a{font-weight:700}
+@media(prefers-reduced-motion:no-preference){
+  .modal-backdrop{animation:modalFade .18s ease}
+  .modal{animation:modalPop .18s ease}
+  @keyframes modalFade{from{opacity:0}}
+  @keyframes modalPop{from{opacity:0;transform:translateY(10px) scale(.98)}}
+}
+
 /* Live background canvas */
 #bg-canvas{
   position:fixed;
@@ -90,64 +120,83 @@ footer{border-top:1px solid #2a2540}
 
 <section class="w" id="work">
   <h2>Selected Work</h2>
+  <p class="mute">Click any card for the full breakdown.</p>
   <div class="grid">
-    <article class="card">
+    <article class="card" data-project="stumbleguysclone" tabindex="0" role="button" aria-haspopup="dialog">
       <span class="tag prog">In progress</span>
       <h3>StumbleGuysClone</h3>
       <p class="mute">Solo dev — design, code, physics | UE 5.6, C++, Chaos Physics</p>
       <ul><li>Multiplayer party game. Gameplay is 100% C++ — Blueprints aren't allowed to touch it</li><li>Capsule character, EnhancedInput, camera-relative movement</li><li>Next up: server-authoritative physics and a LAN session browser</li></ul>
+      <span class="card-hint" aria-hidden="true">Details →</span>
     </article>
-    <article class="card">
-      <span class="tag play">Shipped</span>
-      <h3>Number Guessing Game</h3>
-      <p class="mute">Solo dev — design, code, release | C++, Dear ImGui, SDL2</p>
-      <ul><li>Cross-platform GUI game: modern dark UI, high-DPI ready</li><li>v2.5.1 macOS build — SDL2 bundled, runs on any Mac (v2.5.0 only worked on the dev machine)</li></ul>
+    <article class="card" data-project="five-in-one" tabindex="0" role="button" aria-haspopup="dialog">
+      <span class="tag prog">In progress</span>
+      <h3>5IN1</h3>
+      <p class="mute">Solo dev — design, code, release | Swift, SwiftUI, SpriteKit</p>
+      <ul><li>Five mini-games in one native macOS app: Guessing, Snake, Snakes &amp; Ladders, Ludo vs CPU, Tic-Tac-Toe vs CPU</li><li>Zero third-party dependencies. Apple Silicon native</li></ul>
       <a href="https://github.com/m4sternoob/guessing-game-gui" target="_top">Code on GitHub</a>
+      <span class="card-hint" aria-hidden="true">Details →</span>
     </article>
-    <article class="card">
+    <article class="card" data-project="roadmap-tracker" tabindex="0" role="button" aria-haspopup="dialog">
+      <span class="tag live">Live</span>
+      <h3>Roadmap Tracker</h3>
+      <p class="mute">Solo dev — design, code, deploy | React 19, TypeScript, Tailwind, Zustand</p>
+      <ul><li>Kanban board with drag-and-drop, sprints and burndown charts — the board I use to track my own projects</li><li>Offline-first, zero backend. Live on Vercel</li></ul>
+      <a href="https://m4ster-tracker.vercel.app" target="_top">Open the live app</a>
+      <a href="https://github.com/m4sternoob/m4ster-roadmap-tracker" target="_top">Code on GitHub</a>
+      <span class="card-hint" aria-hidden="true">Details →</span>
+    </article>
+    <article class="card" data-project="stumble-lite" tabindex="0" role="button" aria-haspopup="dialog">
       <span class="tag play">Playable build</span>
       <h3>Stumble Lite</h3>
       <p class="mute">Solo dev — design, code | Swift, SceneKit, iOS</p>
       <ul><li>3D physics party game: 4 players, 60-second rounds</li><li>Hand-rolled collision filtering, kinematic obstacles, virtual joystick</li></ul>
-      <a href="https://github.com/m4sternoob/stumble-lite" target="_top">Code on GitHub</a>
+      <a href="https://github.com/m4sternoob/m4ster-stumble-lite" target="_top">Code on GitHub</a>
+      <span class="card-hint" aria-hidden="true">Details →</span>
     </article>
-    <article class="card">
+    <article class="card" data-project="snake" tabindex="0" role="button" aria-haspopup="dialog">
       <span class="tag play">Playable</span>
       <h3>Snake Game</h3>
       <p class="mute">Solo dev | JavaScript, Canvas</p>
       <ul><li>Nokia-1100-style Snake. Arrows, WASD, or the actual phone keypad</li><li>Best score saves. Try to beat mine</li></ul>
       <a href="../#2" target="_top">Play it</a>
+      <span class="card-hint" aria-hidden="true">Details →</span>
     </article>
-    <article class="card">
+    <article class="card" data-project="pixel-market" tabindex="0" role="button" aria-haspopup="dialog">
       <span class="tag play">Demo</span>
       <h3>Pixel Market</h3>
       <p class="mute">Solo dev | JavaScript, Canvas</p>
       <ul><li>Claim pixels on a shared wall, right in your browser</li><li>Saves locally. No payments, just pixels</li></ul>
       <a href="../#3" target="_top">Try it</a>
+      <span class="card-hint" aria-hidden="true">Details →</span>
     </article>
-    <article class="card">
+    <article class="card" data-project="phone-mirror" tabindex="0" role="button" aria-haspopup="dialog">
       <span class="tag play">Tooling</span>
       <h3>Phone Mirror Pipeline</h3>
       <p class="mute">Solo dev | Python, adb, scrcpy</p>
       <ul><li>Auto-reconnects wireless Android debugging when the port changes</li><li>Built because I got tired of typing the same command every morning</li></ul>
+      <span class="card-hint" aria-hidden="true">Details →</span>
     </article>
-    <article class="card">
+    <article class="card" data-project="pathrush" tabindex="0" role="button" aria-haspopup="dialog">
       <span class="tag plan">Planned</span>
       <h3>PathRush</h3>
       <p class="mute">Solo dev — planned | UE 5.6, C++</p>
       <ul><li>Parkour obstacle course. PC, iOS and Android, one codebase</li></ul>
+      <span class="card-hint" aria-hidden="true">Details →</span>
     </article>
-    <article class="card">
+    <article class="card" data-project="clean-house" tabindex="0" role="button" aria-haspopup="dialog">
       <span class="tag plan">Planned</span>
       <h3>Clean House</h3>
       <p class="mute">Solo dev — planned | UE 5.6, C++</p>
       <ul><li>Tactical room-clearing. Breach, clear, repeat</li></ul>
+      <span class="card-hint" aria-hidden="true">Details →</span>
     </article>
-    <article class="card">
+    <article class="card" data-project="mebiyaach" tabindex="0" role="button" aria-haspopup="dialog">
       <span class="tag plan">Planned</span>
       <h3>1v1MEBIYAAACH</h3>
       <p class="mute">Solo dev — planned | UE 5.6, C++</p>
       <ul><li>Low-poly racing x MOBA hybrid. Cross-platform multiplayer</li></ul>
+      <span class="card-hint" aria-hidden="true">Details →</span>
     </article>
   </div>
 </section>
@@ -175,6 +224,14 @@ footer{border-top:1px solid #2a2540}
   <p><a href="mailto:masternoob102030@gmail.com">masternoob102030@gmail.com</a> | <a href="https://linkedin.com/in/m4sternoob" target="_top">LinkedIn</a> | <a href="https://github.com/m4sternoob" target="_top">GitHub</a></p>
   <p class="mute">Free to study, fork and learn from. Built by hand, not by template. 2026 M4sterNoob.</p>
 </footer>
+
+<!-- Project detail modal: content is rendered by the script below -->
+<div class="modal-backdrop" id="modalBackdrop" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" aria-label="Close details">&times;</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
 
 <script>
 if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
@@ -311,6 +368,213 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
 });
   resize();
   animate(0);
+})();
+
+/* Project detail modals: click a card (or Enter/Space on it) to open.
+   Esc, backdrop click, or the close button dismisses. Focus is trapped
+   while open and returned to the opening card on close. */
+(()=>{
+  const backdrop=document.getElementById('modalBackdrop');
+  const modal=backdrop.querySelector('.modal');
+  const content=document.getElementById('modalContent');
+  const closeBtn=document.getElementById('modalClose');
+  if(!backdrop||!modal||!content||!closeBtn)return;
+
+  /* Per-project detail content. Every claim here is verifiable against
+     the linked repo or this site — no invented features or timelines. */
+  const PROJECTS={
+    'stumbleguysclone':{
+      title:'StumbleGuysClone',tag:'In progress',tagClass:'prog',
+      what:'The big one. A multiplayer party game I\'m building solo in Unreal Engine 5.6 — the project I\'m learning real netcode on.',
+      features:[
+        'Gameplay is 100% C++ — Blueprints aren\'t allowed to touch it',
+        'Capsule character controller with EnhancedInput and camera-relative movement',
+        'Chaos Physics for collisions',
+        'On the roadmap: server-authoritative physics, client prediction, LAN session browser'
+      ],
+      stack:['Unreal Engine 5.6','C++','Chaos Physics','EnhancedInput'],
+      role:'Solo dev — design, code, physics. Every gameplay system is mine, written in C++.',
+      links:[]
+    },
+    'five-in-one':{
+      title:'5IN1',tag:'In progress',tagClass:'prog',
+      what:'Five mini-games in one native macOS app. This repo used to be my C++ SDL2 guessing game — I rewrote it from scratch in SwiftUI and kept going until it was five games.',
+      features:[
+        'Guessing game with a hot/cold proximity meter and difficulty levels (Easy 8 tries, Medium 10, Hard 15, Custom unlimited)',
+        'Snake with speed settings (Chill / Normal / Insane) and a combo multiplier for chained pickups',
+        'Snakes &amp; Ladders, Ludo vs CPU, and Tic-Tac-Toe vs CPU',
+        'Shared toolbar to switch games; v3.1.1 polish in progress (game-switch transitions, win confetti)',
+        'Zero third-party dependencies — every linked library is a system one'
+      ],
+      stack:['Swift','SwiftUI + SpriteKit','Apple Silicon (arm64)','Zero third-party dependencies'],
+      role:'Solo dev — design, code, release. Rewrote the whole thing natively after the C++ SDL2 build kept breaking on other Macs.',
+      links:[{label:'Code on GitHub',href:'https://github.com/m4sternoob/guessing-game-gui'}]
+    },
+    'roadmap-tracker':{
+      title:'Roadmap Tracker',tag:'Live',tagClass:'live',
+      what:'The kanban board I actually use to track my own projects. I needed something that wasn\'t Jira, so I built it — then shipped it.',
+      features:[
+        'Kanban board with drag-and-drop across 5 columns (Backlog → To Do → In Progress → Review → Done)',
+        'Sprint planning with burndown charts and velocity tracking',
+        'Epics, issue types (Epic/Story/Task/Subtask/Bug), priorities, story points, labels, due dates',
+        'Offline-first — everything persists in localStorage, zero backend',
+        'Dark/light themes, keyboard navigation, JSON export/import'
+      ],
+      stack:['React 19','TypeScript (strict)','Tailwind CSS v4','Zustand','Vite','Deployed on Vercel'],
+      role:'Solo dev — I built the tracker I wanted for my own roadmap, then made it shippable.',
+      links:[
+        {label:'Open the live app',href:'https://m4ster-tracker.vercel.app'},
+        {label:'Code on GitHub',href:'https://github.com/m4sternoob/m4ster-roadmap-tracker'}
+      ]
+    },
+    'stumble-lite':{
+      title:'Stumble Lite',tag:'Playable build',tagClass:'play',
+      what:'A 3D physics party game for iOS — 4 players, 60-second rounds, one winner. I built this to prove I could do physics-driven party gameplay before taking it to C++.',
+      features:[
+        '4 players, 60-second rounds',
+        'Hand-rolled collision filtering',
+        'Kinematic obstacles',
+        'Virtual joystick controls'
+      ],
+      stack:['Swift','SceneKit','iOS'],
+      role:'Solo dev — design, code. All the physics plumbing is mine.',
+      links:[{label:'Code on GitHub',href:'https://github.com/m4sternoob/m4ster-stumble-lite'}]
+    },
+    'snake':{
+      title:'Snake Game',tag:'Playable',tagClass:'play',
+      what:'Nokia-1100-style Snake that lives on this site. Looks like the phone, plays like the phone.',
+      features:[
+        'Arrow keys, WASD, or the actual on-screen phone keypad',
+        'Speed ramps up every 5 points across 5 levels',
+        'Best score saved in your browser'
+      ],
+      stack:['JavaScript','Canvas'],
+      role:'Solo dev. Yes, the keypad buttons are clickable.',
+      links:[{label:'Play it',href:'../#2'}]
+    },
+    'pixel-market':{
+      title:'Pixel Market',tag:'Demo',tagClass:'play',
+      what:'A wall of pixels you can claim, right in your browser. A demo — no payments, no accounts, just pixels.',
+      features:[
+        'Pick a colour, click the wall to claim a block',
+        'Wall persists in your browser via localStorage',
+        'Clear button if you want to start over'
+      ],
+      stack:['JavaScript','Canvas'],
+      role:'Solo dev.',
+      links:[{label:'Try it',href:'../#3'}]
+    },
+    'phone-mirror':{
+      title:'Phone Mirror Pipeline',tag:'Tooling',tagClass:'play',
+      what:'A small script that auto-reconnects wireless Android debugging when the port changes. Built because I got tired of typing the same adb command every morning.',
+      features:[
+        'Watches for the port change and reconnects automatically',
+        'Wraps adb + scrcpy into one less thing to think about',
+        'Removed a manual step from every dev session'
+      ],
+      stack:['Python','adb','scrcpy'],
+      role:'Solo dev — tools I build for myself first.',
+      links:[]
+    },
+    'pathrush':{
+      title:'PathRush',tag:'Planned',tagClass:'plan',
+      what:'Planned, not started. A parkour obstacle course — PC, iOS and Android from one codebase. StumbleGuysClone ships first.',
+      features:[
+        'Parkour obstacle-course gameplay (concept)',
+        'One C++ codebase targeting PC, iOS and Android (plan)'
+      ],
+      stack:['Unreal Engine 5.6 (planned)','C++ (planned)'],
+      role:'Solo dev — concept stage. No code yet, and I\'m not pretending otherwise.',
+      links:[]
+    },
+    'clean-house':{
+      title:'Clean House',tag:'Planned',tagClass:'plan',
+      what:'Planned, not started. Tactical room-clearing — breach, clear, repeat.',
+      features:[
+        'Room-clearing tactical gameplay (concept)'
+      ],
+      stack:['Unreal Engine 5.6 (planned)','C++ (planned)'],
+      role:'Solo dev — concept stage. No code yet.',
+      links:[]
+    },
+    'mebiyaach':{
+      title:'1v1MEBIYAAACH',tag:'Planned',tagClass:'plan',
+      what:'Planned, not started. Low-poly racing × MOBA hybrid with cross-platform multiplayer. The name stays.',
+      features:[
+        'Racing meets MOBA, low-poly (concept)',
+        'Cross-platform multiplayer (plan)'
+      ],
+      stack:['Unreal Engine 5.6 (planned)','C++ (planned)'],
+      role:'Solo dev — concept stage. No code yet.',
+      links:[]
+    }
+  };
+
+  let lastOpener=null;
+
+  function render(p){
+    const li=a=>a.map(x=>'<li>'+x+'</li>').join('');
+    return '<span class="tag '+p.tagClass+'">'+p.tag+'</span>'
+      +'<h2 id="modalTitle">'+p.title+'</h2>'
+      +'<p>'+p.what+'</p>'
+      +'<h3>Key features</h3><ul>'+li(p.features)+'</ul>'
+      +'<h3>Tech stack</h3><ul>'+li(p.stack)+'</ul>'
+      +'<h3>My role</h3><p>'+p.role+'</p>'
+      +(p.links.length?'<p class="modal-links">'+p.links.map(l=>'<a href="'+l.href+'" target="_top">'+l.label+'</a>').join('')+'</p>':'');
+  }
+
+  function focusables(){
+    return [...modal.querySelectorAll('a[href],button:not([disabled])')]
+      .filter(el=>el.getClientRects().length>0);
+  }
+
+  function onKey(e){
+    if(e.key==='Escape'){e.preventDefault();closeModal();return;}
+    if(e.key!=='Tab')return;
+    const f=focusables();
+    if(!f.length)return;
+    const first=f[0],last=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+  }
+
+  function openModal(slug,opener){
+    const p=PROJECTS[slug];
+    if(!p)return;
+    lastOpener=opener||document.activeElement;
+    content.innerHTML=render(p);
+    backdrop.hidden=false;
+    document.body.style.overflow='hidden'; /* lock background scroll */
+    closeBtn.focus();
+    document.addEventListener('keydown',onKey);
+  }
+
+  function closeModal(){
+    backdrop.hidden=true;
+    document.body.style.overflow='';
+    document.removeEventListener('keydown',onKey);
+    if(lastOpener&&lastOpener.focus)lastOpener.focus();
+    lastOpener=null;
+  }
+
+  closeBtn.addEventListener('click',closeModal);
+  backdrop.addEventListener('click',e=>{if(e.target===backdrop)closeModal();});
+
+  /* Wire up every project card: mouse click opens, Enter/Space opens.
+     Clicks on links inside a card follow the link instead. */
+  document.querySelectorAll('.card[data-project]').forEach(card=>{
+    const slug=card.dataset.project;
+    const title=(card.querySelector('h3')||{}).textContent||slug;
+    card.setAttribute('aria-label',title.trim()+' — open details');
+    card.addEventListener('click',e=>{
+      if(e.target.closest('a,button'))return;
+      openModal(slug,card);
+    });
+    card.addEventListener('keydown',e=>{
+      if(e.target.closest('a,button'))return;
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();openModal(slug,card);}
+    });
+  });
 })();
 </script>
 </body>
