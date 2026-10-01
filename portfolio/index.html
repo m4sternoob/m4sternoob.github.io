@@ -240,8 +240,8 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
     if(!running)return;
     ctx.fillStyle='rgba(10,10,15,0.12)';
     ctx.fillRect(0,0,w,h);
-    orb.x+=(orb.targetX-orb.x)*0.08;
-    orb.y+=(orb.targetY-orb.y)*0.08;
+    orb.x=orb.targetX;
+    orb.y=orb.targetY;
     const orbGrad=ctx.createRadialGradient(orb.x,orb.y,0,orb.x,orb.y,orb.radius);
     orbGrad.addColorStop(0,'rgba(61,214,208,'+orb.opacity+')');
     orbGrad.addColorStop(0.4,'rgba(255,77,109,'+orb.opacity*0.6+')');
