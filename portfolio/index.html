@@ -85,12 +85,14 @@ footer{border-top:1px solid #2a2540}
 .work-row-head::after{content:"";flex:1;height:1px;background:#2a2540}
 .row-play .work-row-head{color:var(--teal)}
 .row-tools .work-row-head{color:#ff8fa3}
+.row-prog .work-row-head{color:var(--pink)}
 .row-next .work-row-head{color:var(--mute)}
 #work .grid{grid-auto-rows:1fr;margin-top:12px}
 #work .card{background:#1a1628;display:flex;flex-direction:column}
 #work .card .card-hint{margin-top:auto;padding-top:10px}
 .row-play .card{border-top:2px solid rgba(61,214,208,.4)}
 .row-tools .card{border-top:2px solid rgba(255,143,163,.4)}
+.row-prog .card{border-top:2px solid rgba(207,31,75,.45)}
 .row-next .card{border-top:2px solid rgba(165,159,189,.35)}
 
 /* Modal live background: its own canvas, distinct from the page's binary rain */
@@ -143,8 +145,29 @@ footer{border-top:1px solid #2a2540}
   <h2>Selected Work</h2>
   <p class="mute">Click any card for the full breakdown.</p>
 
+  <div class="work-row row-prog">
+    <h3 class="work-row-head">In progress</h3>
+    <div class="grid">
+    <article class="card" data-project="stumbleguysclone" tabindex="0" role="button" aria-haspopup="dialog">
+      <span class="tag prog">In progress</span>
+      <h3>StumbleGuysClone</h3>
+      <p class="mute">Solo dev — design, code, physics | UE 5.6, C++, Chaos Physics</p>
+      <ul><li>Multiplayer party game. Gameplay is 100% C++ — Blueprints aren't allowed to touch it</li><li>Capsule character, EnhancedInput, camera-relative movement</li><li>Next up: server-authoritative physics and a LAN session browser</li></ul>
+      <span class="card-hint" aria-hidden="true">Details →</span>
+    </article>
+    <article class="card" data-project="five-in-one" tabindex="0" role="button" aria-haspopup="dialog">
+      <span class="tag prog">In progress</span>
+      <h3>5IN1</h3>
+      <p class="mute">Solo dev — design, code, release | Swift, SwiftUI, SpriteKit</p>
+      <ul><li>Five mini-games in one native macOS app: Guessing, Snake, Snakes &amp; Ladders, Ludo vs CPU, Tic-Tac-Toe vs CPU</li><li>Zero third-party dependencies. Apple Silicon native</li></ul>
+      <a href="https://github.com/m4sternoob/m4ster-5in1" target="_top">Code on GitHub</a>
+      <span class="card-hint" aria-hidden="true">Details →</span>
+    </article>
+    </div>
+  </div>
+
   <div class="work-row row-play">
-    <h3 class="work-row-head">Playable now</h3>
+    <h3 class="work-row-head">Playable</h3>
     <div class="grid">
     <article class="card" data-project="stumble-lite" tabindex="0" role="button" aria-haspopup="dialog">
       <span class="tag play">Playable build</span>
@@ -162,19 +185,11 @@ footer{border-top:1px solid #2a2540}
       <a href="../#2" target="_top">Play it</a>
       <span class="card-hint" aria-hidden="true">Details →</span>
     </article>
-    <article class="card" data-project="pixel-market" tabindex="0" role="button" aria-haspopup="dialog">
-      <span class="tag play">Demo</span>
-      <h3>Pixel Market</h3>
-      <p class="mute">Solo dev | JavaScript, Canvas</p>
-      <ul><li>Claim pixels on a shared wall, right in your browser</li><li>Saves locally. No payments, just pixels</li></ul>
-      <a href="../#3" target="_top">Try it</a>
-      <span class="card-hint" aria-hidden="true">Details →</span>
-    </article>
     </div>
   </div>
 
   <div class="work-row row-tools">
-    <h3 class="work-row-head">Tools I actually use</h3>
+    <h3 class="work-row-head">Live, demo &amp; tools</h3>
     <div class="grid">
     <article class="card" data-project="roadmap-tracker" tabindex="0" role="button" aria-haspopup="dialog">
       <span class="tag live">Live</span>
@@ -183,6 +198,14 @@ footer{border-top:1px solid #2a2540}
       <ul><li>Kanban board with drag-and-drop, sprints and burndown charts — the board I use to track my own projects</li><li>Offline-first, zero backend. Live on Vercel</li></ul>
       <a href="https://m4ster-tracker.vercel.app" target="_top">Open the live app</a>
       <a href="https://github.com/m4sternoob/m4ster-roadmap-tracker" target="_top">Code on GitHub</a>
+      <span class="card-hint" aria-hidden="true">Details →</span>
+    </article>
+    <article class="card" data-project="pixel-market" tabindex="0" role="button" aria-haspopup="dialog">
+      <span class="tag play">Demo</span>
+      <h3>Pixel Market</h3>
+      <p class="mute">Solo dev | JavaScript, Canvas</p>
+      <ul><li>Claim pixels on a shared wall, right in your browser</li><li>Saves locally. No payments, just pixels</li></ul>
+      <a href="../#3" target="_top">Try it</a>
       <span class="card-hint" aria-hidden="true">Details →</span>
     </article>
     <article class="card" data-project="phone-mirror" tabindex="0" role="button" aria-haspopup="dialog">
@@ -196,23 +219,8 @@ footer{border-top:1px solid #2a2540}
   </div>
 
   <div class="work-row row-next">
-    <h3 class="work-row-head">In progress &amp; up next</h3>
+    <h3 class="work-row-head">Planned</h3>
     <div class="grid">
-    <article class="card" data-project="stumbleguysclone" tabindex="0" role="button" aria-haspopup="dialog">
-      <span class="tag prog">In progress</span>
-      <h3>StumbleGuysClone</h3>
-      <p class="mute">Solo dev — design, code, physics | UE 5.6, C++, Chaos Physics</p>
-      <ul><li>Multiplayer party game. Gameplay is 100% C++ — Blueprints aren't allowed to touch it</li><li>Capsule character, EnhancedInput, camera-relative movement</li><li>Next up: server-authoritative physics and a LAN session browser</li></ul>
-      <span class="card-hint" aria-hidden="true">Details →</span>
-    </article>
-    <article class="card" data-project="five-in-one" tabindex="0" role="button" aria-haspopup="dialog">
-      <span class="tag prog">In progress</span>
-      <h3>5IN1</h3>
-      <p class="mute">Solo dev — design, code, release | Swift, SwiftUI, SpriteKit</p>
-      <ul><li>Five mini-games in one native macOS app: Guessing, Snake, Snakes &amp; Ladders, Ludo vs CPU, Tic-Tac-Toe vs CPU</li><li>Zero third-party dependencies. Apple Silicon native</li></ul>
-      <a href="https://github.com/m4sternoob/m4ster-5in1" target="_top">Code on GitHub</a>
-      <span class="card-hint" aria-hidden="true">Details →</span>
-    </article>
     <article class="card" data-project="pathrush" tabindex="0" role="button" aria-haspopup="dialog">
       <span class="tag plan">Planned</span>
       <h3>PathRush</h3>
