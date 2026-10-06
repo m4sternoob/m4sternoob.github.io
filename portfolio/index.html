@@ -37,6 +37,8 @@ h1{font-size:clamp(34px,7vw,64px);line-height:1.05;margin:8px 0}
 h2{font-size:28px;margin:0 0 6px}
 h3{margin:0 0 6px}
 .mute{color:var(--mute)}
+.now{margin:10px 0 0;font-size:15px;color:var(--text)}
+.now strong{color:var(--teal)}
 .top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 .top nav a{margin-left:14px;color:var(--text);text-decoration:none;font-weight:700}
 .clip{margin-top:22px;aspect-ratio:16/9;max-height:340px;width:100%;border:2px dashed var(--mute);border-radius:12px;display:grid;place-items:center;color:var(--mute)}
@@ -128,6 +130,7 @@ footer{border-top:1px solid #2a2540}
     <nav><a href="#work">Work</a><a href="#skills">Skills</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
   </div>
   <p class="mute">Game Programmer | Kitchener-Waterloo, ON</p>
+  <p class="now"><strong>Now:</strong> 5IN1 v1.4.0 (Memory Match + Tic-Tac-Toe misère) · Tracker polish, one PR a day</p>
   <h1>I write C++ that makes things collide.</h1>
   <p>M4sterNoob — gameplay and engine programmer. I build physics-driven multiplayer games in Unreal Engine 5.6. Pure C++, no Blueprints for gameplay. And I finish what I start.</p>
   <div class="clip" role="img" aria-label="Gameplay clip placeholder">Gameplay clip coming soon</div>
@@ -158,9 +161,9 @@ footer{border-top:1px solid #2a2540}
     <article class="card" data-project="five-in-one" tabindex="0" role="button" aria-haspopup="dialog">
       <span class="tag prog">In progress</span>
       <h3>5IN1</h3>
-      <p class="mute">Solo dev — design, code, release | Swift, SwiftUI, SpriteKit</p>
-      <ul><li>Five mini-games in one native macOS app: Guessing, Snake, Snakes &amp; Ladders, Ludo vs CPU, Tic-Tac-Toe vs CPU</li><li>Zero third-party dependencies. Apple Silicon native</li></ul>
-      <a href="https://github.com/m4sternoob/m4ster-5in1" target="_top">Code on GitHub</a>
+      <p class="mute">Solo dev — design, code, release | Swift, SwiftUI · Kotlin, Compose</p>
+      <ul><li>Six mini-games in one app: macOS (SwiftUI) + Android (Kotlin/Compose) companions</li><li>Zero third-party dependencies on macOS. Fully offline on Android</li></ul>
+      <a href="https://github.com/m4sternoob/m4ster-5in1-android/releases" target="_top">Android releases</a>
       <span class="card-hint" aria-hidden="true">Details →</span>
     </article>
     </div>
@@ -443,21 +446,29 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
       ],
       stack:['Unreal Engine 5.6','C++','Chaos Physics','EnhancedInput'],
       role:'Solo dev — design, code, physics. Every gameplay system is mine, written in C++.',
+      build:'The standing rule on this project: gameplay lives in C++, full stop. Blueprints are for wiring assets, never for logic — that constraint is what forces me to actually learn the engine instead of clicking around it.',
+      lessons:'Start netcode earlier. Gameplay-first was the right call, but retrofitting server-authoritative physics late costs more than building the replication skeleton from day one.',
       links:[]
     },
     'five-in-one':{
       title:'5IN1',tag:'In progress',tagClass:'prog',
-      what:'Five mini-games in one native macOS app. This repo used to be my C++ SDL2 guessing game — I rewrote it from scratch in SwiftUI and kept going until it was five games.',
+      what:'Six mini-games in one app — native macOS (SwiftUI) and Android (Kotlin/Compose) companions. This repo used to be my C++ SDL2 guessing game; I rewrote it from scratch after the SDL2 build kept breaking on other Macs.',
       features:[
-        'Guessing game with a hot/cold proximity meter and difficulty levels (Easy 8 tries, Medium 10, Hard 15, Custom unlimited)',
-        'Snake with speed settings (Chill / Normal / Insane) and a combo multiplier for chained pickups',
-        'Snakes &amp; Ladders, Ludo vs CPU, and Tic-Tac-Toe vs CPU',
-        'Shared toolbar to switch games; v3.1.1 polish in progress (game-switch transitions, win confetti)',
-        'Zero third-party dependencies — every linked library is a system one'
+        'Guessing game with hot/cold proximity meter, difficulty levels, and cryptic hints',
+        'Snake with speed settings, wall modes, golden food and combo multipliers',
+        'Snakes &amp; Ladders, Ludo, Tic-Tac-Toe (with misère mode) and Memory Match',
+        'Session stats, haptics, confetti — fully offline, no accounts, no ads',
+        'Zero third-party dependencies on macOS; one codebase, two APK editions on Android (with/without hints)'
       ],
-      stack:['Swift','SwiftUI + SpriteKit','Apple Silicon (arm64)','Zero third-party dependencies'],
-      role:'Solo dev — design, code, release. Rewrote the whole thing natively after the C++ SDL2 build kept breaking on other Macs.',
-      links:[{label:'Code on GitHub',href:'https://github.com/m4sternoob/m4ster-5in1'}]
+      stack:['Swift','SwiftUI + SpriteKit','Kotlin','Jetpack Compose (Material3)','Apple Silicon (arm64)'],
+      role:'Solo dev — design, code, release. Rewrote the whole thing natively after the C++ SDL2 build linked a hardcoded Homebrew path and shipped an empty bundle executable.',
+      build:'v3.1.0 froze on launch: a digit filter on the guessing input re-fired on every redraw and rewrote the text fields in an infinite loop, eating ~40GB of memory. Fixed with onChange handlers that only rewrite when the filter actually changes the text. The Android port survived two red CI builds from animation API mistakes (wrong import package for animateFloatAsState, an internal-only AnimationState API) before going green — the fix was verifying against the Compose BOM instead of guessing packages.',
+      lessons:'With two more weeks I\'d add automated UI tests. Right now every release rides on my own playtesting, and that doesn\'t scale past six games.',
+      links:[
+        {label:'macOS code',href:'https://github.com/m4sternoob/m4ster-5in1'},
+        {label:'Android code',href:'https://github.com/m4sternoob/m4ster-5in1-android'},
+        {label:'Android releases',href:'https://github.com/m4sternoob/m4ster-5in1-android/releases'}
+      ]
     },
     'roadmap-tracker':{
       title:'Roadmap Tracker',tag:'Live',tagClass:'live',
@@ -471,6 +482,8 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
       ],
       stack:['React 19','TypeScript (strict)','Tailwind CSS v4','Zustand','Vite','Deployed on Vercel'],
       role:'Solo dev — I built the tracker I wanted for my own roadmap, then made it shippable.',
+      build:'Runs on a 14-day Notion-grade polish roadmap, one item shipped per day. Along the way I caught a real bug: the per-column filter kept filter state that was never applied to the issue list — dead UI in every column header. Removed it (PR #4); the board-level filter bar lands as Day 13.',
+      lessons:'Kill dead UI the week you spot it. That broken filter sat in the column headers for weeks because "Day 13 will fix it" — meanwhile every user who tapped it got nothing.',
       links:[
         {label:'Open the live app',href:'https://m4ster-tracker.vercel.app'},
         {label:'Code on GitHub',href:'https://github.com/m4sternoob/m4ster-roadmap-tracker'}
@@ -487,6 +500,8 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
       ],
       stack:['Swift','SceneKit','iOS'],
       role:'Solo dev — design, code. All the physics plumbing is mine.',
+      build:'The physics is hand-rolled on top of SceneKit: custom collision filtering so players, obstacles and pickups each interact exactly as designed, plus kinematic obstacles that move on rails without participating in dynamics.',
+      lessons:'I built the fun (physics, rounds, joystick) before the packaging — TestFlight and App Store metadata took longer than any gameplay system. Next time, packaging starts in week one.',
       links:[{label:'Code on GitHub',href:'https://github.com/m4sternoob/m4ster-stumble-lite'}]
     },
     'snake':{
@@ -626,6 +641,8 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
       +'<h3>Key features</h3><ul>'+li(p.features)+'</ul>'
       +'<h3>Tech stack</h3><ul>'+li(p.stack)+'</ul>'
       +'<h3>My role</h3><p>'+p.role+'</p>'
+      +(p.build?'<h3>Build notes</h3><p>'+p.build+'</p>':'')
+      +(p.lessons?'<h3>What I\'d change</h3><p>'+p.lessons+'</p>':'')
       +(p.links.length?'<p class="modal-links">'+p.links.map(l=>'<a href="'+l.href+'" target="_top">'+l.label+'</a>').join('')+'</p>':'');
   }
 
