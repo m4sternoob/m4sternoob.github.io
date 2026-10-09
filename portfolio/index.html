@@ -5,20 +5,20 @@
 <script>if(window.self===window.top)location.replace('../#0');</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>M4sterNoob | Game Programmer</title>
-<meta name="description" content="Game programmer in Kitchener-Waterloo, Ontario. C++, Unreal Engine 5.6, Swift. Physics-driven multiplayer games.">
+<meta name="description" content="Game programmer in Kitchener-Waterloo, Ontario. C++, Unreal Engine 5.6, Swift, Kotlin, React. Physics-driven multiplayer games.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://m4sternoob.github.io/portfolio/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="M4sterNoob | Game Programmer">
-<meta name="twitter:description" content="C++, Unreal Engine 5.6, Swift. Physics-driven multiplayer games.">
+<meta name="twitter:description" content="C++, Unreal Engine 5.6, Swift, Kotlin, React. Physics-driven multiplayer games.">
 <link rel="canonical" href="https://m4sternoob.github.io/portfolio/">
 <meta property="og:title" content="M4sterNoob | Game Programmer">
-<meta property="og:description" content="C++, Unreal Engine 5.6, Swift. Physics-driven multiplayer games.">
+<meta property="og:description" content="C++, Unreal Engine 5.6, Swift, Kotlin, React. Physics-driven multiplayer games.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://m4sternoob.github.io/portfolio/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="M4sterNoob | Game Programmer">
-<meta name="twitter:description" content="C++, Unreal Engine 5.6, Swift. Physics-driven multiplayer games.">
+<meta name="twitter:description" content="C++, Unreal Engine 5.6, Swift, Kotlin, React. Physics-driven multiplayer games.">
 <link rel="canonical" href="https://m4sternoob.github.io/portfolio/">
 <meta name="theme-color" content="#0a0a0f">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%AE%3C/text%3E%3C/svg%3E">
@@ -120,6 +120,20 @@ footer{border-top:1px solid #2a2540}
 @media(prefers-reduced-motion:reduce){
   #bg-canvas{display:none}
 }
+
+/* Mobile: the page had zero small-screen rules — tighten stats, cards and modal */
+@media(max-width:560px){
+  .w{padding:28px 14px}
+  .stats{gap:8px}
+  .stats div{padding:12px 6px;font-size:13px;line-height:1.4}
+  .stats b{font-size:30px}
+  #work .grid{grid-template-columns:1fr}
+  .modal-backdrop{padding:12px}
+  .modal{padding:22px 18px}
+  .modal h2{font-size:24px}
+  .top nav{width:100%}
+  .top nav a{margin:0 14px 0 0}
+}
 </style>
 </head>
 <body>
@@ -130,7 +144,7 @@ footer{border-top:1px solid #2a2540}
     <nav><a href="#work">Work</a><a href="#skills">Skills</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
   </div>
   <p class="mute">Game Programmer | Kitchener-Waterloo, ON</p>
-  <p class="now"><strong>Now:</strong> 5IN1 v1.4.0 (Memory Match + Tic-Tac-Toe misère) · Tracker polish, one PR a day</p>
+  <p class="now"><strong>Now:</strong> 5IN1 Android v1.5.0 sprint: 2048 + Minesweeper on main · Tracker dark-UI overhaul landing as one PR</p>
   <h1>I write C++ that makes things collide.</h1>
   <p>M4sterNoob — gameplay and engine programmer. I build physics-driven multiplayer games in Unreal Engine 5.6. Pure C++, no Blueprints for gameplay. And I finish what I start.</p>
   <div class="clip" role="img" aria-label="Gameplay clip placeholder">Gameplay clip coming soon</div>
@@ -161,8 +175,8 @@ footer{border-top:1px solid #2a2540}
     <article class="card" data-project="five-in-one" tabindex="0" role="button" aria-haspopup="dialog">
       <span class="tag prog">In progress</span>
       <h3>5IN1</h3>
-      <p class="mute">Solo dev — design, code, release | Swift, SwiftUI · Kotlin, Compose</p>
-      <ul><li>Six mini-games in one app: macOS (SwiftUI) + Android (Kotlin/Compose) companions</li><li>Zero third-party dependencies on macOS. Fully offline on Android</li></ul>
+      <p class="mute">Solo dev — design, code, release | Swift, SwiftUI + SpriteKit · Kotlin, Compose</p>
+      <ul><li>Eight games on Android, five on macOS — same idea, two native builds</li><li>Zero third-party dependencies on macOS. Fully offline on Android, no network permission</li></ul>
       <a href="https://github.com/m4sternoob/m4ster-5in1-android/releases" target="_top">Android releases</a>
       <span class="card-hint" aria-hidden="true">Details →</span>
     </article>
@@ -251,11 +265,18 @@ footer{border-top:1px solid #2a2540}
 
 <section class="w" id="skills">
   <h2>What I'm actually good at</h2>
+  <div class="card" style="margin-top:16px">
+    <h3>Languages</h3>
+    <p style="margin-bottom:6px">C++ · Swift · Kotlin · Python · JavaScript · TypeScript</p>
+    <h3>Engines &amp; frameworks</h3>
+    <p style="margin-bottom:6px">Unreal Engine 5.6 · React 19 · SwiftUI · Jetpack Compose · SceneKit · Chaos Physics · SDL2 · Dear ImGui · Git</p>
+    <p class="mute" style="margin-bottom:0">Also comfortable with C and C#. Everything above has shipped code behind it. Check the repos.</p>
+  </div>
   <div class="two">
-    <div class="card"><h3>Things that collide</h3><p>Custom physics twice: collision filtering in SceneKit, Chaos in UE 5.6. Integration, collision response, and the netcode to keep it fair.</p></div>
-    <div class="card"><h3>Automating the boring parts</h3><p>Python-generated Xcode projects, UE Build.cs modules, EnhancedInput setups. If I do it twice, I script it.</p></div>
+    <div class="card"><h3>Things that collide</h3><p>Collision filtering hand-rolled in SceneKit (Stumble Lite), Chaos Physics in UE 5.6 (StumbleGuysClone). Integration, collision response, and next up: server-authoritative physics with client prediction.</p></div>
+    <div class="card"><h3>Automating the boring parts</h3><p>gen_pbxproj.py generates my Xcode projects; UE build modules and EnhancedInput setups are scripted too. If I do it twice, I script it.</p></div>
     <div class="card"><h3>Netcode, learned by building</h3><p>Server-authoritative movement and client prediction are next on my StumbleGuysClone roadmap. I'm learning netcode by building it, not from tutorials.</p></div>
-    <div class="card"><h3>Building in the open</h3><p>Public roadmap, honest READMEs, real releases. Shipped a C++ number-guessing game on GitHub — currently reworking the macOS build so it runs on any Mac.</p></div>
+    <div class="card"><h3>Building in the open</h3><p>Public roadmap, honest READMEs, real releases. 5IN1 ships on two platforms, the tracker is live on Vercel. All solo, all in the open.</p></div>
   </div>
 </section>
 
@@ -263,8 +284,8 @@ footer{border-top:1px solid #2a2540}
   <h2>About</h2>
   <p>I'm M4sterNoob, a game programmer in Kitchener-Waterloo, Ontario. BTech in computer science — though I'll admit I learned more from breaking my own physics code at 3 AM than from any lecture.</p>
   <p>I built a 3D physics party game in Swift, then immediately thought: cool, now do it in C++ with netcode. That's StumbleGuysClone — pure C++ gameplay, zero Blueprints, because I like knowing exactly what my code is doing.</p>
-  <p>My rule is simple: finish what I start. A shipped v2.5.0, a playable iOS party game, and this site — all solo.</p>
-  <p><strong>Looking for:</strong> Junior Gameplay, Engine or Tools Programmer roles at Ontario studios. Co-op, internship or full-time — I'm in.</p>
+  <p>My rule is simple: finish what I start. A shipped v2.5.1, a six-game Android app, a playable iOS party game, and this site — all solo.</p>
+  <p><strong>Looking for:</strong> junior or mid-level software dev roles: games, web, mobile, backend, all of it. Remote-first; Toronto in-person works too. Co-op, internship or full-time — I'm in.</p>
 </section>
 
 <footer class="w" id="contact">
@@ -452,27 +473,29 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
     },
     'five-in-one':{
       title:'5IN1',tag:'In progress',tagClass:'prog',
-      what:'Six mini-games in one app — native macOS (SwiftUI) and Android (Kotlin/Compose) companions. This repo used to be my C++ SDL2 guessing game; I rewrote it from scratch after the SDL2 build kept breaking on other Macs.',
+      what:'Eight mini-games on Android, five on macOS. Same idea, two native builds, plus a web companion. This started as my C++ SDL2 guessing game; v3.0.0 was a from-scratch native rewrite (the old SDL2 builds live on the legacy/cpp-sdl2 branch).',
       features:[
-        'Guessing game with hot/cold proximity meter, difficulty levels, and cryptic hints',
-        'Snake with speed settings, wall modes, golden food and combo multipliers',
-        'Snakes &amp; Ladders, Ludo, Tic-Tac-Toe (with misère mode) and Memory Match',
-        'Session stats, haptics, confetti — fully offline, no accounts, no ads',
-        'Zero third-party dependencies on macOS; one codebase, two APK editions on Android (with/without hints)'
+        'Guessing game: hot/cold proximity meter, difficulties, cryptic hints (3 per round), daily challenge',
+        'Snake: speed settings, wall modes, golden food with combo multipliers up to x5',
+        'Snakes &amp; Ladders (1P vs CPU or 2-4 pass-and-play), Ludo (vs CPU or 2P), Tic-Tac-Toe (Easy/Hard minimax + Misère), Memory Match (3 grid sizes)',
+        '2048 and Minesweeper are on main for v1.5.0 (Android only)',
+        'Two APK editions (with/without hints). Fully offline, no network permission, no ads',
+        'macOS: SwiftUI + SpriteKit, zero third-party dependencies, per-game stats on your Mac'
       ],
-      stack:['Swift','SwiftUI + SpriteKit','Kotlin','Jetpack Compose (Material3)','Apple Silicon (arm64)'],
-      role:'Solo dev — design, code, release. Rewrote the whole thing natively after the C++ SDL2 build linked a hardcoded Homebrew path and shipped an empty bundle executable.',
-      build:'v3.1.0 froze on launch: a digit filter on the guessing input re-fired on every redraw and rewrote the text fields in an infinite loop, eating ~40GB of memory. Fixed with onChange handlers that only rewrite when the filter actually changes the text. The Android port survived two red CI builds from animation API mistakes (wrong import package for animateFloatAsState, an internal-only AnimationState API) before going green — the fix was verifying against the Compose BOM instead of guessing packages.',
-      lessons:'With two more weeks I\'d add automated UI tests. Right now every release rides on my own playtesting, and that doesn\'t scale past six games.',
+      stack:['Swift','SwiftUI + SpriteKit','Kotlin','Jetpack Compose (Material3)','Next.js + TypeScript (web companion)'],
+      role:'Solo dev — design, code, release. Both platforms, every game, mine.',
+      build:'v3.2.1 ported the cryptic-hint engine from the Android build to macOS, so both platforms share the same hints. The Android v1.5.0 games survived two red CI builds before going green (the fix is PR #2).',
+      lessons:'With two more weeks I\'d add automated UI tests. Right now every release rides on my own playtesting, and that doesn\'t scale past eight games.',
       links:[
         {label:'macOS code',href:'https://github.com/m4sternoob/m4ster-5in1'},
         {label:'Android code',href:'https://github.com/m4sternoob/m4ster-5in1-android'},
-        {label:'Android releases',href:'https://github.com/m4sternoob/m4ster-5in1-android/releases'}
+        {label:'Android releases',href:'https://github.com/m4sternoob/m4ster-5in1-android/releases'},
+        {label:'Web companion',href:'https://github.com/m4sternoob/m4ster-5in1-web'}
       ]
     },
     'roadmap-tracker':{
       title:'Roadmap Tracker',tag:'Live',tagClass:'live',
-      what:'The kanban board I actually use to track my own projects. I needed something that wasn\'t Jira, so I built it — then shipped it.',
+      what:'The kanban board I actually use to track my own projects. I needed a board without the enterprise bloat, so I built one, then shipped it.',
       features:[
         'Kanban board with drag-and-drop across 5 columns (Backlog → To Do → In Progress → Review → Done)',
         'Sprint planning with burndown charts and velocity tracking',
@@ -480,9 +503,9 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
         'Offline-first — everything persists in localStorage, zero backend',
         'Dark/light themes, keyboard navigation, JSON export/import'
       ],
-      stack:['React 19','TypeScript (strict)','Tailwind CSS v4','Zustand','Vite','Deployed on Vercel'],
+      stack:['React 19','TypeScript (strict)','Tailwind CSS v4','Zustand','Vite','Vitest','Deployed on Vercel'],
       role:'Solo dev — I built the tracker I wanted for my own roadmap, then made it shippable.',
-      build:'Runs on a 14-day Notion-grade polish roadmap, one item shipped per day. Along the way I caught a real bug: the per-column filter kept filter state that was never applied to the issue list — dead UI in every column header. Removed it (PR #4); the board-level filter bar lands as Day 13.',
+      build:'Ships on a day-by-day polish roadmap. Along the way I caught a real bug: the per-column filter kept filter state that was never applied to the issue list — dead UI in every column header. Removed it (PR #4).',
       lessons:'Kill dead UI the week you spot it. That broken filter sat in the column headers for weeks because "Day 13 will fix it" — meanwhile every user who tapped it got nothing.',
       links:[
         {label:'Open the live app',href:'https://m4ster-tracker.vercel.app'},
@@ -501,7 +524,7 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
       stack:['Swift','SceneKit','iOS'],
       role:'Solo dev — design, code. All the physics plumbing is mine.',
       build:'The physics is hand-rolled on top of SceneKit: custom collision filtering so players, obstacles and pickups each interact exactly as designed, plus kinematic obstacles that move on rails without participating in dynamics.',
-      lessons:'I built the fun (physics, rounds, joystick) before the packaging — TestFlight and App Store metadata took longer than any gameplay system. Next time, packaging starts in week one.',
+      lessons:'I built the fun (physics, rounds, joystick) before the packaging. Next time, packaging starts in week one.',
       links:[{label:'Code on GitHub',href:'https://github.com/m4sternoob/m4ster-stumble-lite'}]
     },
     'snake':{
