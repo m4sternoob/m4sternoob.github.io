@@ -68,13 +68,6 @@ canvas{max-width:100%;height:auto;border:3px solid var(--teal);border-radius:8px
 .center-key{background:linear-gradient(180deg,#2a2a4a 0%,#1a1a2e 100%);display:flex;flex-direction:column;align-items:center;gap:2px}
 .nokia-hint{text-align:center;margin-top:16px;font-size:12px;color:var(--mute);font-family:Arial,sans-serif;width:100%}
 @media(max-width:400px){.nokia-body{width:220px;padding:16px 12px 20px}.key{padding:12px 8px}.key-num{font-size:14px}}
-/* On-screen D-pad for touch play */
-.dpad{display:none;grid-template-columns:repeat(3,62px);grid-template-rows:repeat(3,62px);gap:8px;touch-action:none;user-select:none;-webkit-user-select:none}
-@media(pointer:coarse){.dpad{display:grid}}
-.dkey{font:inherit;font-size:20px;color:var(--text);background:linear-gradient(180deg,var(--nokia-key) 0%,var(--nokia-dark) 100%);border:1px solid var(--nokia-key-border);border-radius:14px;cursor:pointer;box-shadow:0 3px 0 var(--nokia-light);display:flex;align-items:center;justify-content:center;padding:0}
-.dkey:active,.dkey.pressed{transform:translateY(2px);box-shadow:0 1px 0 var(--nokia-light)}
-.dkey:focus-visible{outline:3px solid var(--nokia-accent);outline-offset:2px}
-.dup{grid-area:1/2}.dleft{grid-area:2/1}.dpause{grid-area:2/2;font-size:13px;font-weight:700}.dright{grid-area:2/3}.ddown{grid-area:3/2}
 .nokia-keypad{touch-action:none}
 @media(prefers-reduced-motion:reduce){.nokia-phone{animation:none}.screen-glare{animation:none}}
 </style>
@@ -171,14 +164,7 @@ canvas{max-width:100%;height:auto;border:3px solid var(--teal);border-radius:8px
       </div>
     </div>
     <div class="nokia-antenna"></div>
-    <p class="nokia-hint">Use the D-pad, 2/4/6/8 keys or arrow keys. P pauses.</p>
-  </div>
-  <div class="dpad" aria-label="Snake D-pad controls">
-    <button class="dkey dup" data-dir="up" aria-label="Move up">▲</button>
-    <button class="dkey dleft" data-dir="left" aria-label="Move left">◄</button>
-    <button class="dkey dpause" data-dir="pause" aria-label="Pause or resume">II</button>
-    <button class="dkey dright" data-dir="right" aria-label="Move right">►</button>
-    <button class="dkey ddown" data-dir="down" aria-label="Move down">▼</button>
+    <p class="nokia-hint">Swipe the screen, tap 2/4/6/8, or use arrow keys. 5 pauses.</p>
   </div>
 </div>
 </section>
@@ -211,7 +197,7 @@ function go(i){cur=i;tabs.forEach((t,k)=>t.setAttribute('aria-selected',k===i));
 tabs.forEach((t,i)=>t.onclick=()=>go(i));
 const fromHash=()=>go(Math.min(3,Math.max(0,+location.hash.slice(1)||0)));fromHash();addEventListener('hashchange',()=>{if(location.hash.slice(1)!==String(cur))fromHash()});
 
-/* Snake - Nokia 1100 Style (smooth motion, particles, dpad) */
+/* Snake - Nokia 1100 Style (smooth motion, particles, swipe) */
 (()=>{
   const cv=$('#snake'),g=cv.getContext('2d'),N=15,S=16,out=$('#snakeScore');
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -297,17 +283,29 @@ const fromHash=()=>go(Math.min(3,Math.max(0,+location.hash.slice(1)||0)));fromHa
     b.addEventListener('pointerdown',e=>{e.preventDefault();b.classList.add('pressed');press(b)});
     ['pointerup','pointercancel','pointerleave'].forEach(ev=>b.addEventListener(ev,()=>b.classList.remove('pressed')));
   };
-  document.querySelectorAll('.nav-key[data-key],.dkey[data-dir]').forEach(bindBtn);
+  document.querySelectorAll('.nav-key[data-key]').forEach(bindBtn);
   document.querySelectorAll('.center-key').forEach(b=>{
     b.addEventListener('pointerdown',e=>{e.preventDefault();b.classList.add('pressed');togglePause()});
     ['pointerup','pointercancel','pointerleave'].forEach(ev=>b.addEventListener(ev,()=>b.classList.remove('pressed')));
   });
-  document.querySelectorAll('.key[data-key],.dkey[data-dir]').forEach(b=>{
+  document.querySelectorAll('.key[data-key]').forEach(b=>{
     b.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();b.classList.add('pressed');press(b)}});
     b.addEventListener('keyup',e=>{if(e.key==='Enter'||e.key===' ')b.classList.remove('pressed')});
   });
   const keys={ArrowUp:[0,-1],KeyW:[0,-1],ArrowDown:[0,1],KeyS:[0,1],ArrowLeft:[-1,0],KeyA:[-1,0],ArrowRight:[1,0],KeyD:[1,0],Digit2:[0,-1],Digit4:[-1,0],Digit6:[1,0],Digit8:[0,1],Numpad2:[0,-1],Numpad4:[-1,0],Numpad6:[1,0],Numpad8:[0,1]};
   addEventListener('keydown',e=>{if(cur!==2)return;if(e.code==='KeyP'){e.preventDefault();togglePause();return}if(!keys[e.code])return;e.preventDefault();turn(...keys[e.code])});
+  // swipe directly on the game screen (primary touch control)
+  let swX=0,swY=0,swOn=false;
+  cv.addEventListener('touchstart',e=>{const t=e.changedTouches[0];swX=t.clientX;swY=t.clientY;swOn=true},{passive:true});
+  cv.addEventListener('touchmove',e=>{
+    if(!swOn)return;e.preventDefault();
+    const t=e.changedTouches[0],dx=t.clientX-swX,dy=t.clientY-swY;
+    if(Math.abs(dx)<24&&Math.abs(dy)<24)return;
+    if(Math.abs(dx)>Math.abs(dy))turn(dx>0?1:-1,0);else turn(0,dy>0?1:-1);
+    swX=t.clientX;swY=t.clientY;
+  },{passive:false});
+  cv.addEventListener('touchend',()=>{swOn=false});
+  cv.addEventListener('touchcancel',()=>{swOn=false});
 })();
 /* Pixel wall */
 (()=>{const cv=$('#wall'),g=cv.getContext('2d'),C=12,W=40,H=25,out=$('#wallCount');
