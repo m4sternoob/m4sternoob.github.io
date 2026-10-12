@@ -47,7 +47,7 @@ canvas{max-width:100%;height:auto;border:3px solid var(--teal);border-radius:8px
 @media print{nav,.panel:not(#cv),.noprint{display:none!important}.panel{position:static;transform:none!important;opacity:1!important}body{display:block;background:#fff}}
 
 /* Nokia 1100 Styles */
-.nokia-wrapper{display:flex;align-items:center;justify-content:center;perspective:1000px}
+.nokia-wrapper{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;margin:auto;perspective:1000px}
 .nokia-phone{position:relative;transform-style:preserve-3d}
 .nokia-body{background:linear-gradient(180deg,var(--nokia-body) 0%,var(--nokia-dark) 100%);border-radius:32px;padding:20px 16px 24px;box-shadow:0 25px 70px rgba(0,0,0,0.6),0 0 0 3px var(--nokia-light),inset 0 3px 0 var(--nokia-light),inset 0 -3px 0 #000;position:relative;width:260px;min-height:460px;display:flex;flex-direction:column;align-items:center}
 .nokia-body::before{content:"";position:absolute;top:16px;left:50%;transform:translateX(-50%);width:80px;height:5px;background:var(--nokia-dark);border-radius:3px;box-shadow:0 2px 4px rgba(0,0,0,0.5)}
@@ -68,6 +68,14 @@ canvas{max-width:100%;height:auto;border:3px solid var(--teal);border-radius:8px
 .center-key{background:linear-gradient(180deg,#2a2a4a 0%,#1a1a2e 100%);display:flex;flex-direction:column;align-items:center;gap:2px}
 .nokia-hint{text-align:center;margin-top:16px;font-size:12px;color:var(--mute);font-family:Arial,sans-serif;width:100%}
 @media(max-width:400px){.nokia-body{width:220px;padding:16px 12px 20px}.key{padding:12px 8px}.key-num{font-size:14px}}
+/* On-screen D-pad for touch play */
+.dpad{display:none;grid-template-columns:repeat(3,62px);grid-template-rows:repeat(3,62px);gap:8px;touch-action:none;user-select:none;-webkit-user-select:none}
+@media(pointer:coarse){.dpad{display:grid}}
+.dkey{font:inherit;font-size:20px;color:var(--text);background:linear-gradient(180deg,var(--nokia-key) 0%,var(--nokia-dark) 100%);border:1px solid var(--nokia-key-border);border-radius:14px;cursor:pointer;box-shadow:0 3px 0 var(--nokia-light);display:flex;align-items:center;justify-content:center;padding:0}
+.dkey:active,.dkey.pressed{transform:translateY(2px);box-shadow:0 1px 0 var(--nokia-light)}
+.dkey:focus-visible{outline:3px solid var(--nokia-accent);outline-offset:2px}
+.dup{grid-area:1/2}.dleft{grid-area:2/1}.dpause{grid-area:2/2;font-size:13px;font-weight:700}.dright{grid-area:2/3}.ddown{grid-area:3/2}
+.nokia-keypad{touch-action:none}
 @media(prefers-reduced-motion:reduce){.nokia-phone{animation:none}.screen-glare{animation:none}}
 </style>
 </head>
@@ -163,7 +171,14 @@ canvas{max-width:100%;height:auto;border:3px solid var(--teal);border-radius:8px
       </div>
     </div>
     <div class="nokia-antenna"></div>
-    <p class="nokia-hint">Press 2/4/6/8 or arrow keys to play. Click keys or use keyboard.</p>
+    <p class="nokia-hint">Use the D-pad, 2/4/6/8 keys or arrow keys. P pauses.</p>
+  </div>
+  <div class="dpad" aria-label="Snake D-pad controls">
+    <button class="dkey dup" data-dir="up" aria-label="Move up">▲</button>
+    <button class="dkey dleft" data-dir="left" aria-label="Move left">◄</button>
+    <button class="dkey dpause" data-dir="pause" aria-label="Pause or resume">II</button>
+    <button class="dkey dright" data-dir="right" aria-label="Move right">►</button>
+    <button class="dkey ddown" data-dir="down" aria-label="Move down">▼</button>
   </div>
 </div>
 </section>
@@ -196,35 +211,104 @@ function go(i){cur=i;tabs.forEach((t,k)=>t.setAttribute('aria-selected',k===i));
 tabs.forEach((t,i)=>t.onclick=()=>go(i));
 const fromHash=()=>go(Math.min(3,Math.max(0,+location.hash.slice(1)||0)));fromHash();addEventListener('hashchange',()=>{if(location.hash.slice(1)!==String(cur))fromHash()});
 
-/* Snake - Nokia 1100 Style */
+/* Snake - Nokia 1100 Style (smooth motion, particles, dpad) */
 (()=>{
   const cv=$('#snake'),g=cv.getContext('2d'),N=15,S=16,out=$('#snakeScore');
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   let s=[{x:7,y:7}],d={x:1,y:0},nd=d,f={x:10,y:10},tm=0,sc=0,best=+ls('snakeBest')||0,level=1;
+  let prevHead={x:7,y:7},lastStep=performance.now(),stepDur=200,paused=false;
+  let parts=[],floaters=[],shakeUntil=0,tailFade=null;
   const speeds={1:200,2:170,3:140,4:120,5:100};
-  const rnd=n=>Math.floor(Math.random()*n);
+  const rnd=n=>Math.floor(Math.random()*n),now=()=>performance.now();
   function food(){do f={x:rnd(N),y:rnd(N)};while(s.some(p=>p.x===f.x&&p.y===f.y))}
-  function draw(){
-    g.fillStyle='#4a6b4a';g.fillRect(0,0,240,240);
-    g.fillStyle='#8fb88f';g.fillRect(f.x*S,f.y*S,S-1,S-1);
-    g.fillStyle='#c8e6c8';s.forEach(p=>g.fillRect(p.x*S,p.y*S,S-1,S-1));
-    if(out) out.textContent='Score '+sc+'  Best '+best+'  Lv '+level}
+  function burst(px,py,col,n,spd){if(reduced)return;for(let i=0;i<n;i++){const a=Math.random()*6.283,v=spd*(0.4+Math.random()*0.8);parts.push({x:px,y:py,vx:Math.cos(a)*v,vy:Math.sin(a)*v-30,life:1,col})}}
+  function draw(t){
+    t=t===undefined?1:t;
+    g.save();
+    if(!reduced&&now()<shakeUntil)g.translate(rnd(7)-3,rnd(7)-3);
+    g.fillStyle='#4a6b4a';g.fillRect(-8,-8,256,256);
+    // food: amber, pulsing
+    const pu=reduced?0:Math.sin(now()/180)*0.13,fs=S*(1+pu),fo=(S-fs)/2,fw=Math.max(2,fs-1);
+    g.fillStyle='#ffb340';g.fillRect(f.x*S+fo,f.y*S+fo,fw,fw);
+    const iw=Math.max(2,fs-7);g.fillStyle='#d98a1f';g.fillRect(f.x*S+fo+3,f.y*S+fo+3,iw,iw);
+    // body
+    g.fillStyle='#c8e6c8';
+    for(let i=1;i<s.length;i++)g.fillRect(s[i].x*S,s[i].y*S,S-1,S-1);
+    if(tailFade&&tailFade.t>0){g.globalAlpha=tailFade.t*0.55;g.fillRect(tailFade.p.x*S,tailFade.p.y*S,S-1,S-1);g.globalAlpha=1}
+    // head: dark, interpolated, with eyes facing travel direction
+    const h=s[0],hx=(prevHead.x+(h.x-prevHead.x)*t)*S,hy=(prevHead.y+(h.y-prevHead.y)*t)*S;
+    g.fillStyle='#1d3a24';g.fillRect(hx,hy,S-1,S-1);
+    g.fillStyle='#dff0df';
+    if(d.x===1){g.fillRect(hx+10,hy+3,3,4);g.fillRect(hx+10,hy+9,3,4)}
+    else if(d.x===-1){g.fillRect(hx+3,hy+3,3,4);g.fillRect(hx+3,hy+9,3,4)}
+    else if(d.y===-1){g.fillRect(hx+3,hy+3,4,3);g.fillRect(hx+9,hy+3,4,3)}
+    else{g.fillRect(hx+3,hy+10,4,3);g.fillRect(hx+9,hy+10,4,3)}
+    // particles + floating texts
+    parts.forEach(p=>{g.globalAlpha=Math.max(0,p.life);g.fillStyle=p.col;g.fillRect(p.x-2,p.y-2,4,4)});
+    g.globalAlpha=1;g.textAlign='center';
+    floaters.forEach(fl=>{g.globalAlpha=Math.min(1,fl.life);g.fillStyle=fl.big?'#ffd700':'#ffffff';g.font=(fl.big?'bold 15px':'bold 11px')+' "Courier New",monospace';g.fillText(fl.text,fl.x,fl.y)});
+    g.globalAlpha=1;
+    if(paused){g.fillStyle='rgba(0,0,0,0.5)';g.fillRect(0,0,240,240);g.fillStyle='#ffd700';g.font='bold 18px "Courier New",monospace';g.fillText('PAUSED',120,128)}
+    g.restore();
+    if(out)out.textContent='Score '+sc+'  Best '+best+'  Lv '+level;
+  }
   function step(){
     d=nd;const h={x:s[0].x+d.x,y:s[0].y+d.y};
     if(h.x<0||h.y<0||h.x>=N||h.y>=N||s.some(p=>p.x===h.x&&p.y===h.y)){
-      clearInterval(tm);tm=0;best=Math.max(best,sc);ls('snakeBest',best);draw();return}
-    s.unshift(h);if(h.x===f.x&&h.y===f.y){sc++;food();if(sc%5===0){level=Math.min(5,level+1);clearInterval(tm);tm=setInterval(step,speeds[level])}}else s.pop();draw()}
+      clearInterval(tm);tm=0;paused=false;best=Math.max(best,sc);ls('snakeBest',best);
+      shakeUntil=now()+450;burst(h.x*S+8,h.y*S+8,'#c8e6c8',14,90);
+      floaters.push({x:120,y:112,text:'GAME OVER',life:2.4,big:true});
+      draw(1);return}
+    prevHead={x:s[0].x,y:s[0].y};
+    s.unshift(h);
+    if(h.x===f.x&&h.y===f.y){
+      sc++;burst(f.x*S+8,f.y*S+8,'#ffb340',10,70);
+      floaters.push({x:f.x*S+8,y:f.y*S+4,text:'+1',life:1});
+      food();
+      if(sc%5===0&&level<5){level++;stepDur=speeds[level];clearInterval(tm);tm=setInterval(step,stepDur);
+        floaters.push({x:120,y:112,text:'LEVEL '+level,life:1.8,big:true})}
+    }else{const tp=s.pop();if(!reduced)tailFade={p:tp,t:1}}
+    lastStep=now();
+  }
+  function frame(){
+    const n=now(),t=reduced?1:Math.min(1,(n-lastStep)/stepDur);
+    if(parts.length){parts.forEach(p=>{p.x+=p.vx/60;p.y+=p.vy/60;p.vy+=2.5;p.life-=0.035});parts=parts.filter(p=>p.life>0)}
+    if(floaters.length){floaters.forEach(fl=>{fl.y-=0.5;fl.life-=0.022});floaters=floaters.filter(fl=>fl.life>0)}
+    if(tailFade){tailFade.t-=0.07;if(tailFade.t<=0)tailFade=null}
+    if(cur===2)draw(t);
+    requestAnimationFrame(frame);
+  }
   function turn(x,y){
-    if(!tm){s=[{x:7,y:7}];d=nd={x,y};sc=0;level=1;food();tm=setInterval(step,speeds[1]);return}
-    if(x===-d.x&&y===-d.y)return;nd={x,y}}
-  draw();
+    if(paused)togglePause();
+    if(!tm){s=[{x:7,y:7}];prevHead={x:7,y:7};d=nd={x,y};sc=0;level=1;stepDur=speeds[1];food();parts=[];floaters=[];tailFade=null;shakeUntil=0;tm=setInterval(step,stepDur);lastStep=now();return}
+    if(x===-d.x&&y===-d.y)return;nd={x,y};
+  }
+  function togglePause(){
+    if(!tm&&!paused)return;
+    if(paused){paused=false;lastStep=now();tm=setInterval(step,stepDur)}
+    else{paused=true;clearInterval(tm);tm=0}
+    draw(1);
+  }
+  document.addEventListener('visibilitychange',()=>{if(document.hidden&&tm)togglePause()});
+  draw(1);frame();
   const dirMap={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]};
+  const press=b=>{const k=b.dataset.dir||b.dataset.key;if(k==='pause'||k==='select'){togglePause();return}turn(...dirMap[k])};
+  const bindBtn=b=>{
+    b.addEventListener('pointerdown',e=>{e.preventDefault();b.classList.add('pressed');press(b)});
+    ['pointerup','pointercancel','pointerleave'].forEach(ev=>b.addEventListener(ev,()=>b.classList.remove('pressed')));
+  };
+  document.querySelectorAll('.nav-key[data-key],.dkey[data-dir]').forEach(bindBtn);
+  document.querySelectorAll('.center-key').forEach(b=>{
+    b.addEventListener('pointerdown',e=>{e.preventDefault();b.classList.add('pressed');togglePause()});
+    ['pointerup','pointercancel','pointerleave'].forEach(ev=>b.addEventListener(ev,()=>b.classList.remove('pressed')));
+  });
+  document.querySelectorAll('.key[data-key],.dkey[data-dir]').forEach(b=>{
+    b.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();b.classList.add('pressed');press(b)}});
+    b.addEventListener('keyup',e=>{if(e.key==='Enter'||e.key===' ')b.classList.remove('pressed')});
+  });
   const keys={ArrowUp:[0,-1],KeyW:[0,-1],ArrowDown:[0,1],KeyS:[0,1],ArrowLeft:[-1,0],KeyA:[-1,0],ArrowRight:[1,0],KeyD:[1,0],Digit2:[0,-1],Digit4:[-1,0],Digit6:[1,0],Digit8:[0,1],Numpad2:[0,-1],Numpad4:[-1,0],Numpad6:[1,0],Numpad8:[0,1]};
-  addEventListener('keydown',e=>{if(cur!==2||!keys[e.code])return;e.preventDefault();turn(...keys[e.code])});
-  document.querySelectorAll('.nav-key[data-key]').forEach(b=>{b.onclick=()=>turn(...dirMap[b.dataset.key])});document.querySelectorAll('.key[data-key]').forEach(b=>{b.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();b.classList.add('pressed');if(b.classList.contains('nav-key'))turn(...dirMap[b.dataset.key])}});b.addEventListener('keyup',e=>{if(e.key==='Enter'||e.key===' ')b.classList.remove('pressed')})});
-  document.querySelectorAll('.nav-key[data-key]').forEach(b=>{b.addEventListener('mousedown',()=>b.classList.add('pressed'));b.addEventListener('mouseup',()=>b.classList.remove('pressed'));b.addEventListener('mouseleave',()=>b.classList.remove('pressed'))});
-  document.querySelectorAll('.center-key').forEach(b=>{b.addEventListener('mousedown',()=>b.classList.add('pressed'));b.addEventListener('mouseup',()=>b.classList.remove('pressed'));b.addEventListener('mouseleave',()=>b.classList.remove('pressed'))});
+  addEventListener('keydown',e=>{if(cur!==2)return;if(e.code==='KeyP'){e.preventDefault();togglePause();return}if(!keys[e.code])return;e.preventDefault();turn(...keys[e.code])});
 })();
-
 /* Pixel wall */
 (()=>{const cv=$('#wall'),g=cv.getContext('2d'),C=12,W=40,H=25,out=$('#wallCount');
 let grid={};try{grid=JSON.parse(ls('pixelWall')||'{}')}catch(e){}
