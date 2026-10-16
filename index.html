@@ -1066,7 +1066,7 @@ section{transition:padding .35s ease}
 
   function setEditing(on){
     editing=on;
-    body.classList.toggle('mml-on',on);
+    /* body.classList.toggle('mml-on',on); REMOVED - white screen */
     if(on){buildHandles();buildToolbar();pokeToolbar();toast('Tools on — drag frames anywhere, pin to lock');
       $$('[data-mml-edit]').forEach(function(el){el.contentEditable='true'});}
     else{dropHandles();dropToolbar();
