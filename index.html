@@ -184,6 +184,16 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
 @keyframes rgbtext{to{background-position:300% 0}}
 /* ---- m4ster layout tools: drag-drop reorder, edit mode only (locked otherwise) ---- */
 .mml-handle{display:none}
+.mml-always .mml-handle{display:flex;align-items:center;gap:8px;position:relative;z-index:60;
+  width:max-content;margin:-14px auto 0;background:#160f14;border:1px solid #e63946;border-radius:8px;
+  padding:4px 10px;font-size:12px;color:#ff8a8a;white-space:nowrap;box-shadow:0 0 14px rgba(230,57,70,.35),0 4px 14px rgba(0,0,0,.5);
+  cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.mml-always .mml-resize{display:block;position:absolute;width:16px;height:16px;z-index:61;
+  cursor:nwse-resize;background:#e63946;border:2px solid #fff;border-radius:50%;box-shadow:0 0 10px rgba(230,57,70,.8)}
+.mml-always .mml-resize.nw{top:-8px;left:-8px;cursor:nwse-resize}
+.mml-always .mml-resize.se{bottom:-8px;right:-8px;cursor:nwse-resize}
+.mml-always .mml-resize.ne{top:-8px;right:-8px;cursor:nesw-resize}
+.mml-always .mml-resize.sw{bottom:-8px;left:-8px;cursor:nesw-resize}
 .mml-handle{display:flex;align-items:center;gap:8px;position:relative;z-index:60;
   width:max-content;margin:-14px auto 0;background:#160f14;border:1px solid #e63946;border-radius:8px;
   padding:4px 10px;font-size:12px;color:#ff8a8a;white-space:nowrap;box-shadow:0 0 14px rgba(230,57,70,.35),0 4px 14px rgba(0,0,0,.5);
@@ -442,6 +452,7 @@ section{transition:padding .35s ease}
         <div class="card" data-cat="games" data-title="Polar Hopper 2D" data-tech="C# · Unity" data-body="Ice-physics 2D platformer in Unity. Custom slippery-surface movement with momentum conservation, coyote time, and hand-tuned jump curves."><h3>Polar Hopper 2D</h3><p>Ice-physics platformer in Unity. Custom slippery-surface movement.</p><span class="tech">C# · Unity</span></div>
         <div class="card" data-cat="web" data-title="Spice Sector" data-tech="React · Node.js" data-body="Punjab-inspired food-truck web app: storefront with cart, customer accounts, order email notifications, and an admin dashboard. React + GSAP frontend, Node/Express backend."><h3>Spice Sector</h3><p>Food-truck web app: cart, accounts, admin, email notifications.</p><span class="tech">React · Node.js</span></div>
         <div class="card" data-cat="tools" data-title="Phone Mirror Pipeline" data-tech="Python · adb" data-body="Automated wireless Android debugging: Python orchestration over adb plus scrcpy mirroring. One command connects, mirrors, and streams logs — built to speed up the 5IN1 Android dev loop."><h3>Phone Mirror Pipeline</h3><p>Automated wireless Android debugging with Python + adb + scrcpy.</p><span class="tech">Python · adb</span></div>
+        <div class="card" data-cat="tools" data-title="On-Site Layout Editor" data-tech="JavaScript · CSS 3D" data-body="Drag, resize, and pin any section of this portfolio — live in the browser, Figma-style. Free-position frames, corner scaling, pin locks, plus a public Tools Playground sandbox. Zero dependencies, built into the site."><h3>On-Site Layout Editor</h3><p>Drag, resize, pin any section of this site live. Figma-style, zero dependencies.</p><span class="tech">JavaScript · CSS 3D</span></div>
         <div class="card" data-cat="games" data-title="College Builds" data-tech="C# · Unity · Maya" data-body="Two years of game-design coursework: a Pac-Man clone, puzzle games, 15+ hard-surface Maya models, vector and pixel art, and original sound packs."><h3>College Builds</h3><p>Pac-Man clone, puzzle games, 15+ Maya 3D models, vector/pixel art, sound packs.</p><span class="tech">C# · Unity · Maya</span></div>
       </div>
     </section>
@@ -502,7 +513,23 @@ section{transition:padding .35s ease}
         <a href="https://linkedin.com/in/m4sternoob" target="_blank" rel="noopener">linkedin.com/in/m4sternoob</a>
       </div>
     </section>
-    <footer>© 2026 M4sterNoob — Shipped on GitHub Pages.</footer>
+    <!-- Tools Playground: public sandbox, drag/resize/pin demo frames -->
+    <section id="sec-playground" data-mml="playground">
+      <p class="kicker">Sandbox</p>
+      <h2 class="sec">Tools Playground</h2>
+      <p style="color:var(--muted);margin:0 0 18px">Try the layout tools live — drag, resize, and pin these demo frames. Your changes save in this browser only.</p>
+      <div class="mml-always" style="display:flex;gap:16px;flex-wrap:wrap">
+        <div data-mml="pg-demo1" style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;min-width:220px;flex:1">
+          <h4 style="margin:0 0 8px">Demo Frame 1</h4>
+          <p style="margin:0;color:var(--muted);font-size:14px">Drag me by the red handle. Resize from the corners.</p>
+        </div>
+        <div data-mml="pg-demo2" style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;min-width:220px;flex:1">
+          <h4 style="margin:0 0 8px">Demo Frame 2</h4>
+          <p style="margin:0;color:var(--muted);font-size:14px">Pin me to lock me in place.</p>
+        </div>
+      </div>
+    </section>
+    <footer>© 2026 M4sterNoob</footer>
   </div>
 </section>
 
@@ -545,10 +572,11 @@ section{transition:padding .35s ease}
       <div class="snake-main" data-mml="game-main">
       <div class="arcade-cabinet" id="arcadeCabinet">
       <div class="arcade-phone-side">
-      <div style="display:flex;align-items:center;justify-content:space-between;width:100%;margin:0 0 14px;gap:12px">
+      <div style="display:flex;align-items:center;justify-content:space-between;width:100%;margin:-15px 0 8px;gap:12px">
       <h3 class="rgb-text" style="margin:0;white-space:nowrap">Snake — Nokia 1100</h3>
       <button id="snakePauseBtn" class="snake-pause-btn" type="button">Pause</button>
       </div>
+      <p class="nokia-hint" style="text-align:left;max-width:none;margin:0 0 12px"><strong>Instructions:</strong><br>Tap the phone keys (2/4/6/8), 5 pauses. Swipe or arrow keys / WASD work too.</p>
       <div class="phone-stage" role="group" aria-label="Snake game">
         <img src="assets/nokia-phone-labeled.png" class="phone-img" alt="Nokia 1100 style phone" draggable="false">
         <div class="phone-score-tag">Score <b id="scoreV">0</b><br>Best <b id="bestV">0</b></div>
@@ -569,7 +597,6 @@ section{transition:padding .35s ease}
           <button class="pkey" data-key="#" aria-label="#"></button>
         </div>
       </div>
-      <p class="nokia-hint" style="text-align:left;max-width:none">Tap the phone keys (2/4/6/8), 5 pauses. Swipe or arrow keys / WASD work too.</p>
       </div><!-- /arcade-phone-side -->
       </div><!-- /arcade-cabinet -->
       </div>
@@ -1010,7 +1037,7 @@ section{transition:padding .35s ease}
     if($('#mmlToolbar'))return;
     var t=document.createElement('div');
     t.className='mml-toolbar';t.id='mmlToolbar';
-    t.innerHTML='<span class="mml-ttitle" title="Drag to move">Layout tools</span><button class="mml-pin" type="button" data-act="pin" title="Pin toolbar">&#x1F4CC;</button><button type="button" data-act="add">+ Frame</button><button type="button" data-act="copy">Copy layout</button><button type="button" data-act="reset">Reset</button><button type="button" data-act="done" class="primary">Done</button>';
+    t.innerHTML='<span class="mml-grip" style="cursor:grab" title="Drag to move">⋮⋮</span><span class="mml-ttitle" title="Drag to move">Toolbar</span><button class="mml-pin" type="button" data-act="pin" title="Pin toolbar">&#x1F4CC;</button><button type="button" data-act="add">+ Frame</button><button type="button" data-act="copy">Copy layout</button><button type="button" data-act="reset">Reset</button><button type="button" data-act="done" class="primary">Done</button>';
     body.appendChild(t);
     t.addEventListener('click',function(e){
       var a=e.target&&e.target.getAttribute&&e.target.getAttribute('data-act');if(!a)return;
