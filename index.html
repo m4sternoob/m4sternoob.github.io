@@ -318,7 +318,8 @@ body.mml-editing,.mml-always .mml-pinned .mml-resize{display:none}
 .card.hide{display:none}
 .card.pop{animation:cardPop .25s cubic-bezier(.2,.8,.2,1)}
 @keyframes cardPop{from{opacity:0;transform:scale(.97) translateY(6px)}to{opacity:1;transform:none}}
-/* ---- 3D card flip (matches the tab flip theme) ---- */
+/* ---- 3D card flip DISABLED for white-screen debug ---- */
+/*
 #projGrid .card{padding:0;position:relative}
 .card-face{padding:24px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
   transition:transform .65s cubic-bezier(.2,.8,.2,1),opacity .3s}
@@ -333,7 +334,7 @@ body.mml-editing,.mml-always .mml-pinned .mml-resize{display:none}
 .flip-hint{display:block;margin-top:14px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
   color:var(--dim);opacity:.75}
 @media(max-width:760px){.card-face{padding:16px}}
-@media(prefers-reduced-motion:reduce){.card-face{transition:none}}
+@media(prefers-reduced-motion:reduce){.card-face{transition:none}}*/
 @media(prefers-reduced-motion:reduce){
   .rv,.hero .eyebrow,.hero h1,.hero .tagline,.hero .chips,.hero .cta-row,.hero .socials,.hero-media{opacity:1!important;transform:none!important;animation:none!important;transition:none!important}
 }
@@ -727,7 +728,7 @@ body.mml-editing,.mml-always .mml-pinned .mml-resize{display:none}
   watchActive();
   document.addEventListener('tabswitch',watchActive);
 })();
-/* project filters + 3D card flip (matches the tab flip theme) */
+/* project filters (flip disabled for white-screen debug) */
 (function(){
   var btns=[...document.querySelectorAll('.fbtn')],
       cards=[...document.querySelectorAll('#projGrid .card')];
@@ -742,44 +743,6 @@ body.mml-editing,.mml-always .mml-pinned .mml-resize{display:none}
         if(show){c.classList.remove('pop');void c.offsetWidth;c.classList.add('pop')}
       });
     };
-  });
-  cards.forEach(function(c){
-    var front=document.createElement('div');
-    front.className='card-face card-front';
-    while(c.firstChild)front.appendChild(c.firstChild);
-    var hint=document.createElement('span');
-    hint.className='flip-hint';hint.textContent='tap to flip';
-    front.appendChild(hint);
-    var back=document.createElement('div');
-    back.className='card-face card-back';
-    var h3=document.createElement('h3');h3.textContent=c.dataset.title;
-    var tech=document.createElement('span');tech.className='tech';tech.textContent=c.dataset.tech;
-    var p=document.createElement('p');p.textContent=c.dataset.body;
-    back.appendChild(h3);back.appendChild(tech);back.appendChild(p);
-    if(c.dataset.link){
-      var a=document.createElement('a');
-      a.href=c.dataset.link;a.target='_blank';a.rel='noopener';a.textContent='View on GitHub \u2192';
-      back.appendChild(a);
-    }
-    var bh=document.createElement('span');bh.className='flip-hint';bh.textContent='tap to flip back';
-    back.appendChild(bh);
-    c.appendChild(front);c.appendChild(back);
-    c.setAttribute('tabindex','0');c.setAttribute('role','button');
-    c.setAttribute('aria-label','Flip card: '+c.dataset.title);
-    function toggle(){c.classList.toggle('flipped')}
-    c.addEventListener('click',function(e){
-      if(e.target.tagName==='A')return;
-      toggle();
-    });
-    c.addEventListener('keydown',function(e){
-      if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle()}
-    });
-  });
-  document.addEventListener('keydown',function(e){
-    if(e.key==='Escape'){
-      var f=document.querySelector('#projGrid .card.flipped');
-      if(f){f.classList.remove('flipped');f.focus()}
-    }
   });
 })();
 /* snake */
