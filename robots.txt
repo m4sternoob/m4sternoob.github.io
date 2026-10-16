@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://m4sternoob.github.io/sitemap.xml

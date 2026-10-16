@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>M4sterNoob — Junior Game Programmer | C++, Unreal Engine 5</title>
+<meta name="description" content="M4sterNoob — Junior game programmer in Ontario, Canada. C++, Unreal Engine 5, Swift, Kotlin. Shipped 5IN1 (8 games, 3 platforms).">
+<meta property="og:title" content="M4sterNoob — Junior Game Programmer">
+<meta property="og:description" content="C++ / Unreal Engine 5 / Swift / Kotlin. Shipped 5IN1: 8 games, 3 platforms, 0 network permissions.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://m4sternoob.github.io/">
+<meta property="og:image" content="https://m4sternoob.github.io/assets/32win-poster.jpg">
+<link rel="canonical" href="https://m4sternoob.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="M4sterNoob — Junior Game Programmer">
+<meta name="twitter:description" content="C++ / Unreal Engine 5 / Swift / Kotlin. Shipped 5IN1: 8 games, 3 platforms.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314092b'/%3E%3Ctext x='16' y='23' font-size='18' text-anchor='middle' fill='%23a78bfa' font-family='monospace' font-weight='bold'%3E01%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"M4sterNoob","url":"https://m4sternoob.github.io/","jobTitle":"Junior Game Programmer","knowsAbout":["C++","Unreal Engine 5","Swift","Kotlin","TypeScript","Game Physics"],"sameAs":["https://github.com/m4sternoob","https://linkedin.com/in/m4sternoob"]}
+</script>
+<style>
+:root{
+  --bg:#0c0916;--ink:#12101f;--panel:#151223;--line:#2a2440;
+  --text:#ede9fe;--mute:#a89fc7;--dim:#7c739e;
+  --violet:#a78bfa;--violet-deep:#7c3aed;--green:#a78bfa;
+  --r:14px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;
+  font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow:hidden}
+#aurora,.aurora{display:none}
+#bg-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.85}
+@media(prefers-reduced-motion:reduce){#bg-canvas{display:none}}
+a{color:var(--violet);text-decoration:none}
+a:hover{text-decoration:underline}
+/* tab bar */
+nav{display:flex;gap:4px;padding:12px 16px;background:rgba(12,9,22,.9);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);position:relative;z-index:50;justify-content:center}
+nav button{background:none;border:1px solid transparent;color:var(--mute);font:inherit;font-weight:700;font-size:15px;
+  padding:10px 28px;border-radius:10px;cursor:pointer;transition:all .2s}
+nav button:hover{color:var(--text)}
+nav button[aria-selected="true"]{color:var(--violet);border-color:var(--violet);background:rgba(167,139,250,.08)}
+.brand{position:absolute;left:20px;top:50%;transform:translateY(-50%);font-weight:800;font-size:17px;color:var(--text)}
+.brand span{color:var(--violet)}
+/* flip panels */
+.stage{position:relative;height:calc(100% - 61px);perspective:1600px;z-index:1}
+.panel{position:absolute;inset:0;overflow-y:auto;backface-visibility:hidden;
+  transition:transform .65s cubic-bezier(.2,.8,.2,1),opacity .45s;padding:0}
+.panel[data-pos="0"]{transform:none;opacity:1;z-index:2}
+.panel[data-pos="-1"]{transform:rotateY(-88deg);opacity:0;pointer-events:none;z-index:1}
+.panel[data-pos="1"]{transform:rotateY(88deg);opacity:0;pointer-events:none;z-index:1}
+@media(prefers-reduced-motion:reduce){.panel{transition:none}}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+section{padding:64px 0}
+.kicker{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--violet);margin:0 0 12px}
+.sec{font-size:32px;margin:0 0 12px;letter-spacing:-.02em;font-weight:800}
+.sub{color:var(--mute);font-size:17px;margin:0 0 36px;max-width:640px}
+/* hero */
+.hero{padding:72px 0 56px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--violet);margin-bottom:16px}
+.hero h1{font-size:52px;line-height:1.08;margin:0 0 16px;letter-spacing:-.03em;font-weight:800}
+.hero h1 span{color:var(--violet)}
+.tagline{font-size:19px;color:var(--mute);margin:0 0 24px;max-width:520px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.chip{font-size:13px;font-weight:600;padding:6px 14px;border-radius:999px;background:var(--panel);border:1px solid var(--line);color:var(--mute)}
+.chip.hot{border-color:var(--violet);color:var(--violet)}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+.btn{display:inline-block;padding:12px 24px;border-radius:10px;font-weight:700;font-size:15px;border:1px solid transparent;cursor:pointer}
+.btn-primary{background:var(--violet);color:#0c0916}
+.btn-primary:hover{background:#c4b5fd;text-decoration:none}
+.btn-ghost{border-color:var(--line);color:var(--text);background:transparent}
+.btn-ghost:hover{border-color:var(--violet);text-decoration:none}
+.socials{display:flex;gap:20px;font-size:14px;font-weight:600}
+.socials a{color:var(--dim)}
+.socials a:hover{color:var(--violet)}
+.hero-media img{width:100%;border-radius:var(--r);border:1px solid var(--line);display:block}
+.hero-media figcaption{font-size:13px;color:var(--dim);margin-top:10px;text-align:center}
+/* cards */
+.featured-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:36px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+.featured-card h3{font-size:24px;margin:0 0 12px}
+.featured-card p{color:var(--mute);margin:0 0 16px}
+.featured-card ul{margin:0 0 20px;padding-left:20px;color:var(--mute)}
+.featured-card li{margin:6px 0}
+.featured-card li strong{color:var(--text)}
+.meta{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--dim);margin-bottom:20px}
+.meta strong{color:var(--text)}
+.links{display:flex;gap:16px;font-weight:600;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.card:hover{border-color:var(--violet)}
+.card h3{margin:0 0 8px;font-size:18px}
+.card h3 a{color:var(--text)}
+.card p{color:var(--mute);font-size:14px;margin:0 0 14px}
+.card .tech{font-size:12px;font-weight:700;color:var(--violet)}
+.timeline{position:relative;padding-left:28px;max-width:700px}
+.timeline::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,var(--violet),transparent)}
+.tl-item{position:relative;padding-bottom:32px;transition:transform .15s ease}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{content:"";position:absolute;left:-26px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--violet);transition:all .15s ease}
+.tl-item:hover::before{background:var(--violet);box-shadow:0 0 10px var(--violet)}
+.tl-item:hover{transform:translateX(4px)}
+.tl-item.now::before{background:var(--green);border-color:var(--green);box-shadow:0 0 12px var(--green)}
+.tl-date{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--violet);background:var(--violet-deep)/15;background:rgba(124,58,237,.12);padding:3px 10px;border-radius:999px;margin-bottom:2px}
+.tl-date{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.tl-item h3{margin:6px 0 8px;font-size:19px}
+.tl-item p{color:var(--mute);font-size:15px;margin:0}
+.tl-item p strong{color:var(--text)}
+.skill-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.skill-group{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.skill-group h3{margin:0 0 14px;font-size:15px;color:var(--violet);text-transform:uppercase;letter-spacing:.06em}
+.skill-group ul{margin:0;padding:0;list-style:none}
+.skill-group li{padding:7px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--mute)}
+.skill-group li:last-child{border:none}
+.skill-group li strong{color:var(--text)}
+.oss-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.oss-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;font-size:14px;display:block;color:var(--text)}
+.oss-card:hover{border-color:var(--violet);text-decoration:none}
+.oss-card .repo{font-size:12px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;display:block}
+.oss-card p{margin:0;color:var(--mute)}
+.oss-card p strong{color:var(--text)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.about-grid p{color:var(--mute)}
+.about-grid p strong{color:var(--text)}
+.contact{text-align:center}
+.contact-box{display:inline-block;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:32px 48px;margin-top:24px}
+.contact-box a{display:block;margin:8px 0;font-size:17px;font-weight:600}
+footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
+/* cv panel */
+.cv-wrap{max-width:780px;margin:0 auto}
+.cv-box{background:var(--ink);border:1px solid var(--line);border-radius:var(--r);padding:40px;color:var(--text)}
+.cv-box h1{font-size:30px;margin:0 0 4px}
+.cv-box .role{color:var(--violet);font-weight:700;margin:0 0 8px}
+.cv-box .contact-line{color:var(--mute);font-size:14px;margin:0 0 8px}
+.cv-box h2{font-size:17px;border-bottom:2px solid var(--line);padding-bottom:4px;margin:26px 0 10px}
+.cv-box h3{font-size:15px;margin:14px 0 4px}
+.cv-box p,.cv-box ul{margin:6px 0;color:var(--mute);font-size:14px}
+.cv-box ul{padding-left:20px}
+.cv-box strong{color:var(--text)}
+/* arcade panel — HD phone image with overlaid game */
+/* arcade cabinet — phone pinned extreme left, future games fully separate */
+.arcade-cabinet{border:1px solid var(--violet);border-radius:14px;padding:20px;margin:16px 0;
+  max-width:420px;width:calc(100% - 32px);background:rgba(167,139,250,.04)}
+.arcade-phone-side{display:flex;flex-direction:column;align-items:flex-start}
+.arcade-phone-side .phone-stage{margin:0}
+.arcade-games-side{margin:24px 0;max-width:1000px;width:calc(100% - 32px);
+  border:1px dashed rgba(167,139,250,.35);border-radius:10px;
+  padding:20px;display:flex;align-items:center;justify-content:center;color:var(--dim);
+  font-size:14px;text-align:center;min-height:120px}
+@media(max-width:700px){.arcade-cabinet{padding:14px;max-width:none}.arcade-games-side{min-height:100px}}
+.phone-stage{position:relative;width:min(340px,88vw);margin:0 auto}
+@media(max-width:640px){
+  .phone-stage{width:min(78vw,calc((100dvh - 300px)*0.44))}
+  .arcade-wrap{padding:12px 0}
+  .game-section{padding:4px 0 20px}
+  .game-section h3{margin:8px 0 10px !important;font-size:17px}
+  .nokia-hint{margin-top:8px;font-size:12px}
+}
+.phone-img{display:block;width:100%;height:auto;position:relative;z-index:1}
+.phone-screen{position:absolute;z-index:2;left:12.4%;top:17.8%;width:75.8%;height:33.0%;
+  border-radius:6px;touch-action:none;image-rendering:pixelated;background:#1a9edb;overflow:hidden}
+.phone-keys{position:absolute;z-index:3;left:8.0%;top:60.6%;width:84.6%;height:30.3%;
+  display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(4,1fr);touch-action:none}
+.pkey{background:transparent;border:none;border-radius:50%;cursor:pointer;min-height:0}
+.pkey:active{background:rgba(255,255,255,.18)}
+.nokia-score{text-align:center;margin:10px 0 6px;font-family:"Courier New",monospace;font-size:14px;color:var(--na);width:100%}
+.nokia-hint{text-align:center;margin-top:14px;font-size:13px;color:var(--dim);max-width:300px}
+.game-section{width:100%;display:flex;flex-direction:column;align-items:center;padding:8px 0 32px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.game-section:last-child{border-bottom:none}
+.game-section h3{color:var(--text)}
+@media(max-width:760px){
+  .hero-grid,.featured-card,.about-grid{grid-template-columns:1fr}
+  .hero h1{font-size:38px}
+  .brand{display:none}
+  nav{justify-content:center}
+  section{padding:48px 0}
+}
+@media(max-width:640px){
+  .grid,.oss-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .card{padding:16px}
+  .skill-groups{grid-template-columns:repeat(2,1fr);gap:12px}
+}
+/* ---- motion & feel batch ---- */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .28s ease,transform .28s cubic-bezier(.2,.8,.2,1)}
+.rv.on{opacity:1;transform:none}
+.hero .eyebrow,.hero h1,.hero .tagline,.hero .chips,.hero .cta-row,.hero .socials,.hero-media{opacity:0;transform:translateY(12px);animation:heroIn .45s cubic-bezier(.2,.8,.2,1) forwards}
+.hero .eyebrow{animation-delay:.02s}.hero h1{animation-delay:.08s}.hero .tagline{animation-delay:.14s}
+.hero .chips{animation-delay:.2s}.hero .cta-row{animation-delay:.26s}.hero .socials{animation-delay:.32s}
+.hero-media{animation-delay:.18s}
+@keyframes heroIn{to{opacity:1;transform:none}}
+.featured-card,.card{transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease}
+.featured-card:hover,.card:hover{transform:translateY(-3px);border-color:var(--violet);box-shadow:0 12px 32px rgba(0,0,0,.35)}
+.panel{transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .3s ease}
+::selection{background:var(--violet);color:#fff}
+:focus-visible{outline:2px solid var(--violet);outline-offset:3px;border-radius:4px}
+/* ---- devlog ---- */
+.devlog{display:grid;gap:16px}
+.dl-item{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:24px;transition:transform .15s ease,border-color .15s ease}
+.dl-item:hover{transform:translateY(-2px);border-color:var(--violet)}
+.dl-date{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--violet)}
+.dl-item h3{font-size:18px;margin:8px 0}
+.dl-item p{color:var(--mute);margin:0;line-height:1.7}
+/* ---- project filters + modal ---- */
+.filters{display:flex;gap:8px;margin:0 0 20px;flex-wrap:wrap}
+.fbtn{background:var(--panel);border:1px solid var(--line);color:var(--mute);font:inherit;font-size:13px;font-weight:600;padding:7px 16px;border-radius:999px;cursor:pointer;transition:all .15s ease}
+.fbtn:hover{color:var(--text);border-color:var(--violet)}
+.fbtn.on{background:var(--violet);border-color:var(--violet);color:#14092b}
+.card{cursor:pointer}
+.card.hide{display:none}
+.card.pop{animation:cardPop .25s cubic-bezier(.2,.8,.2,1)}
+@keyframes cardPop{from{opacity:0;transform:scale(.97) translateY(6px)}to{opacity:1;transform:none}}
+.pmodal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(8,5,18,.75);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .2s ease}
+.pmodal.open{opacity:1;pointer-events:auto}
+.pmodal-box{max-width:560px;width:100%;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:32px;transform:translateY(10px) scale(.98);transition:transform .2s cubic-bezier(.2,.8,.2,1);max-height:85vh;overflow-y:auto}
+.pmodal.open .pmodal-box{transform:none}
+.pmodal-box h3{font-size:24px;margin:0 0 8px}
+.pmodal-box .tech{display:inline-block;margin:0 0 16px}
+.pmodal-box p{color:var(--mute);line-height:1.7;margin:0 0 20px}
+.pmodal-x{float:right;background:none;border:none;color:var(--mute);font-size:22px;cursor:pointer;padding:4px;line-height:1}
+.pmodal-x:hover{color:var(--text)}
+@media(prefers-reduced-motion:reduce){
+  .rv,.hero .eyebrow,.hero h1,.hero .tagline,.hero .chips,.hero .cta-row,.hero .socials,.hero-media{opacity:1!important;transform:none!important;animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+<nav aria-label="Main">
+  <span class="brand">M4ster<span>Noob</span></span>
+  <button role="tab" aria-selected="true">Portfolio</button>
+  <button role="tab" aria-selected="false">CV</button>
+  <button role="tab" aria-selected="false">Game</button>
+</nav>
+
+<div class="stage">
+<!-- ============ PORTFOLIO ============ -->
+<section class="panel" id="p-portfolio" data-pos="0" aria-label="Portfolio">
+  <div class="wrap">
+    <header class="hero">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow">Junior Game Programmer</span>
+          <h1>M4ster<span>Noob</span></h1>
+          <p class="tagline">I build physics-driven games in C++ and Unreal Engine 5 — and I ship them on multiple platforms.</p>
+          <div class="chips">
+            <span class="chip hot">C++</span><span class="chip hot">Unreal Engine 5</span>
+            <span class="chip">Swift</span><span class="chip">Kotlin</span>
+            <span class="chip">TypeScript</span><span class="chip">C#</span>
+          </div>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#projects" onclick="return false">View Projects</a>
+            <a class="btn btn-ghost" href="https://linkedin.com/in/m4sternoob" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+          <div class="socials">
+            <a href="https://github.com/m4sternoob" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://linkedin.com/in/m4sternoob" target="_blank" rel="noopener">LinkedIn</a>
+            
+          </div>
+        </div>
+        <figure class="hero-media" style="margin:0">
+          <video autoplay muted loop playsinline preload="metadata" aria-label="Gameplay footage" style="width:100%;border-radius:var(--r);border:1px solid var(--line);display:block">
+            <source src="assets/32win.webm" type="video/webm">
+            <source src="assets/32win.mp4" type="video/mp4">
+          </video>
+          <figcaption>Actual gameplay — from a shipped build</figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <section id="projects" style="padding-top:0">
+      <p class="kicker">Featured Project</p>
+      <div class="featured-card" style="margin-bottom:40px">
+        <div>
+          <h3>5IN1 — Multi-Game Hub</h3>
+          <div class="meta"><span><strong>8</strong> games</span><span><strong>3</strong> platforms</span><span><strong>0</strong> network permissions</span></div>
+          <p>What started as a number-guessing toy became a full multi-game hub shipping on Android, macOS, and web.</p>
+          <ul>
+            <li><strong>Android</strong> (Kotlin/Compose): 2048, Minesweeper, 4-in-a-Row + 5 more — offline-first, CI on every push</li>
+            <li><strong>macOS</strong> (Swift/SwiftUI): native multi-game app</li>
+            <li><strong>Web</strong> (TypeScript): playable browser demo</li>
+          </ul>
+          <div class="links">
+            <a href="https://github.com/m4sternoob/m4ster-5in1-android" target="_blank" rel="noopener">Android →</a>
+            <a href="https://github.com/m4sternoob/m4ster-5in1" target="_blank" rel="noopener">macOS →</a>
+            <a href="https://github.com/m4sternoob/m4ster-5in1-web" target="_blank" rel="noopener">Web →</a>
+          </div>
+        </div>
+        <div>
+          <p style="color:var(--mute);font-size:14px;margin:0"><strong style="color:var(--text)">Engineering highlights:</strong><br><br>
+          Forensic APK verification before every release. Hint-gating across variants. Offline-first — zero network permissions.</p>
+        </div>
+      </div>
+      <p class="kicker">Selected Work</p>
+      <h2 class="sec">Projects</h2>
+      <p class="sub">Shipped software with real users.</p>
+      <div class="filters" role="group" aria-label="Filter projects">
+        <button class="fbtn on" data-f="all">All</button>
+        <button class="fbtn" data-f="games">Games</button>
+        <button class="fbtn" data-f="web">Web</button>
+        <button class="fbtn" data-f="tools">Tools</button>
+      </div>
+      <div class="grid" id="projGrid">
+        <div class="card" data-cat="web" data-title="Roadmap Tracker" data-tech="React · TypeScript" data-link="https://github.com/m4sternoob/m4ster-roadmap-tracker" data-body="Full project-management app: Kanban board, list, backlog, sprints, calendar, timeline, workload views. GitHub OAuth, per-user workspaces, real-time sync via Upstash Redis, serverless on Vercel. Shipped with keyboard shortcuts, @mentions, notifications, dependencies, time tracking, and automation rules."><h3><a href="https://github.com/m4sternoob/m4ster-roadmap-tracker" target="_blank" rel="noopener">Roadmap Tracker</a></h3><p>Kanban with sprints, calendar, timeline, sync. Serverless on Vercel.</p><span class="tech">React · TypeScript</span></div>
+        <div class="card" data-cat="games" data-title="StumbleGuysClone" data-tech="C++ · Unreal Engine 5" data-body="Multiplayer party game in UE5. 100% C++ gameplay code — no Blueprints. Chaos physics for knockback and ragdolls, replicated movement, lobby and match flow."><h3>StumbleGuysClone</h3><p>Multiplayer party game in UE5. 100% C++ gameplay — no Blueprints. Chaos physics.</p><span class="tech">C++ · Unreal Engine 5</span></div>
+        <div class="card" data-cat="games" data-title="Polar Hopper 2D" data-tech="C# · Unity" data-body="Ice-physics 2D platformer in Unity. Custom slippery-surface movement with momentum conservation, coyote time, and hand-tuned jump curves."><h3>Polar Hopper 2D</h3><p>Ice-physics platformer in Unity. Custom slippery-surface movement.</p><span class="tech">C# · Unity</span></div>
+        <div class="card" data-cat="web" data-title="Spice Sector" data-tech="React · Node.js" data-body="Punjab-inspired food-truck web app: storefront with cart, customer accounts, order email notifications, and an admin dashboard. React + GSAP frontend, Node/Express backend."><h3>Spice Sector</h3><p>Food-truck web app: cart, accounts, admin, email notifications.</p><span class="tech">React · Node.js</span></div>
+        <div class="card" data-cat="tools" data-title="Phone Mirror Pipeline" data-tech="Python · adb" data-body="Automated wireless Android debugging: Python orchestration over adb plus scrcpy mirroring. One command connects, mirrors, and streams logs — built to speed up the 5IN1 Android dev loop."><h3>Phone Mirror Pipeline</h3><p>Automated wireless Android debugging with Python + adb + scrcpy.</p><span class="tech">Python · adb</span></div>
+        <div class="card" data-cat="games" data-title="College Builds" data-tech="C# · Unity · Maya" data-body="Two years of game-design coursework: a Pac-Man clone, puzzle games, 15+ hard-surface Maya models, vector and pixel art, and original sound packs."><h3>College Builds</h3><p>Pac-Man clone, puzzle games, 15+ Maya 3D models, vector/pixel art, sound packs.</p><span class="tech">C# · Unity · Maya</span></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="kicker">Background</p>
+      <h2 class="sec">Experience</h2>
+      <div class="timeline">
+        <div class="tl-item"><span class="tl-date">Game Design — Ontario</span><h3>Built games before I could code engines</h3><p>Unity + C#, level design, 2D/3D art, sound. Shipped <strong>Pac-Man</strong>, <strong>Polar Hopper 2D</strong>, <strong>ICE_BLOCK_PUZZLE</strong>.</p></div>
+        <div class="tl-item"><span class="tl-date">Self-Directed — C++ &amp; UE5</span><h3>Went deep on systems</h3><p>Physics-driven multiplayer in <strong>pure C++</strong>. Chaos physics, replication.</p></div>
+        <div class="tl-item"><span class="tl-date">2026 — Shipped</span><h3>5IN1: 8 games, 3 platforms</h3><p>Android, macOS, web. <strong>Offline-first</strong>, CI on every push.</p></div>
+        <div class="tl-item"><span class="tl-date">2026 — Open Source</span><h3>Reviewing engine code in public</h3><p><strong>8 code reviews</strong> across SFML, MonoGame, Godot, ImGui.</p></div>
+        <div class="tl-item now"><span class="tl-date">Now</span><h3>Seeking a junior role</h3><p><strong>Ontario studios</strong>, open to remote across Canada.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="kicker">Notes</p>
+      <h2 class="sec">Devlog</h2>
+      <p class="sub">Short build notes. Newest first.</p>
+      <div class="devlog">
+        <article class="dl-item"><span class="dl-date">Oct 2026</span><h3>Shipped a project tracker with automations</h3><p>Built a full Kanban app with calendar, timeline, workload views, @mentions, time tracking, and an automation rules engine. Hardest part: keeping every serverless API route self-contained.</p></article>
+        <article class="dl-item"><span class="dl-date">Oct 2026</span><h3>5IN1 hit 8 games on Android</h3><p>Added 2048 and Minesweeper. Verified the APKs carry zero network permissions — the offline-first promise holds.</p></article>
+        <article class="dl-item"><span class="dl-date">Sep 2026</span><h3>Going pure C++ in UE5</h3><p>Rebuilding gameplay systems without Blueprints. Chaos physics for knockback, replicated movement from scratch.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <p class="kicker">Technical Range</p>
+      <h2 class="sec">Skills</h2>
+      <div class="skill-groups">
+        <div class="skill-group"><h3>Languages</h3><ul><li><strong>C++</strong> — gameplay, systems</li><li>Swift / SwiftUI</li><li>Kotlin / Compose</li><li>TypeScript</li><li>C# / Python</li></ul></div>
+        <div class="skill-group"><h3>Engines &amp; Tools</h3><ul><li><strong>Unreal Engine 5</strong></li><li>Unity</li><li>Git / GitHub Actions</li></ul></div>
+        <div class="skill-group"><h3>Systems</h3><ul><li>Gameplay programming</li><li>Physics &amp; collision</li><li>Replication</li><li>Build automation</li></ul></div>
+        <div class="skill-group"><h3>Web &amp; Mobile</h3><ul><li>React / Vite</li><li>Node.js</li><li>Vercel serverless</li><li>Offline-first</li></ul></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="kicker">Public Contributions</p>
+      <h2 class="sec">Open Source</h2>
+      <p class="sub">Code reviews on engine repos — verified against source.</p>
+      <div class="oss-grid">
+        <a class="oss-card" href="https://github.com/SFML/SFML/pull/3751" target="_blank" rel="noopener"><span class="repo">SFML #3751</span><p><strong>QOA seek div-by-zero</strong> — verified in source.</p></a>
+        <a class="oss-card" href="https://github.com/SFML/SFML/pull/2380" target="_blank" rel="noopener"><span class="repo">SFML #2380</span><p><strong>operator&lt;&lt; breaks rvalues</strong> — T&amp; rejects temporaries.</p></a>
+        <a class="oss-card" href="https://github.com/godotengine/godot/pull/124221" target="_blank" rel="noopener"><span class="repo">Godot #124221</span><p><strong>Live review</strong> — confirmed active.</p></a>
+        <a class="oss-card" href="https://github.com/MonoGame/MonoGame/pull/9499" target="_blank" rel="noopener"><span class="repo">MonoGame #9499</span><p><strong>Dispose race</strong> — races playback thread.</p></a>
+      </div>
+    </section>
+
+    <section class="contact">
+      <p class="kicker" style="text-align:center">Contact</p>
+      <h2 class="sec">Let's Talk</h2>
+      <div class="contact-box">
+        <a href="https://github.com/m4sternoob" target="_blank" rel="noopener">github.com/m4sternoob</a>
+        <a href="https://linkedin.com/in/m4sternoob" target="_blank" rel="noopener">linkedin.com/in/m4sternoob</a>
+      </div>
+    </section>
+    <footer>© 2026 M4sterNoob — Shipped on GitHub Pages.</footer>
+  </div>
+</section>
+
+<!-- ============ CV ============ -->
+<section class="panel" id="p-cv" data-pos="1" aria-label="CV">
+  <div class="wrap">
+    <section>
+      <div class="cv-wrap"><div class="cv-box">
+        <h1>M4sterNoob</h1>
+        <p class="role">Junior Gameplay &amp; Engine Programmer | C++, Unreal Engine 5.6, Swift</p>
+        <p class="contact-line">Ontario, Canada | <a href="https://github.com/m4sternoob" target="_blank" rel="noopener">github.com/m4sternoob</a> | <a href="https://linkedin.com/in/m4sternoob" target="_blank" rel="noopener">linkedin.com/in/m4sternoob</a></p>
+        <h2>Summary</h2>
+        <p>Junior gameplay and engine programmer (BTech, Computer Science) building physics-driven multiplayer games in C++ and Unreal Engine 5.6. Shipped 5IN1 (8 games, 3 platforms). Gameplay code is pure C++ — no Blueprints. Seeking junior gameplay, engine, or tools roles at Ontario studios.</p>
+        <h2>Technical Skills</h2>
+        <ul><li><strong>Languages:</strong> C++, Swift, Kotlin, TypeScript, C#, Python</li>
+        <li><strong>Engines &amp; Tools:</strong> Unreal Engine 5.6, Chaos Physics, Unity, Git, GitHub Actions</li>
+        <li><strong>Systems:</strong> gameplay programming, physics &amp; collision, replication, build automation</li></ul>
+        <h2>Projects</h2>
+        <h3>5IN1 — Solo Developer | Kotlin, Swift, TypeScript | Shipped</h3>
+        <ul><li>8 mini-games across Android, macOS, web — offline-first, zero network permissions, CI on every push</li></ul>
+        <h3>StumbleGuysClone — Solo Developer | UE 5.6, C++ | In progress</h3>
+        <ul><li>Multiplayer party game, 100% C++ gameplay — no Blueprints</li></ul>
+        <h3>Roadmap Tracker — Solo Developer | React, TypeScript | Live</h3>
+        <ul><li>Kanban with sprints, burndown, dark mode, cross-device sync — Vercel serverless</li></ul>
+        <h2>Education</h2>
+        <p><strong>BTech, Computer Science</strong> — MRSPTU, India<br><strong>Game Design</strong> (2 years) — Ontario, Canada</p>
+      </div></div>
+    </section>
+  </div>
+</section>
+
+<!-- ============ GAME ============ -->
+<section class="panel" id="p-game" data-pos="1" aria-label="Game">
+  <div class="wrap">
+    <div class="arcade-wrap">
+      <p class="kicker" style="text-align:center">Playable Demos</p>
+      <h2 class="sec" style="text-align:center">Games</h2>
+      <!-- Game 1: Snake -->
+      <div class="game-section" id="game-snake" style="border:none;padding:0;margin:0">
+      <div class="arcade-cabinet" id="arcadeCabinet">
+      <div class="arcade-phone-side">
+      <h3 style="text-align:center;margin:0 0 12px">Snake — Nokia 1100</h3>
+      <div class="phone-stage" role="group" aria-label="Snake game">
+        <img src="assets/nokia-phone-labeled.png" class="phone-img" alt="Nokia 1100 style phone" draggable="false">
+        <canvas id="snake" class="phone-screen" width="256" height="256" aria-label="Snake game"></canvas>
+        <div class="phone-keys">
+          <button class="pkey" data-key="up" aria-label="Up (2)" style="grid-row:1;grid-column:2"></button>
+          <button class="pkey" data-key="left" aria-label="Left (4)" style="grid-row:2;grid-column:1"></button>
+          <button class="pkey" data-key="pause" aria-label="Pause (5)" style="grid-row:2;grid-column:2"></button>
+          <button class="pkey" data-key="right" aria-label="Right (6)" style="grid-row:2;grid-column:3"></button>
+          <button class="pkey" data-key="down" aria-label="Down (8)" style="grid-row:3;grid-column:2"></button>
+        </div>
+      </div>
+      <div id="snakeScore" class="nokia-score" style="text-align:left;width:100%">Score 0 Best 0</div>
+      <p class="nokia-hint" style="text-align:left;max-width:none">Tap the phone keys (2/4/6/8), 5 pauses. Swipe or arrow keys / WASD work too.</p>
+      </div><!-- /arcade-phone-side -->
+      </div><!-- /arcade-cabinet -->
+      <div class="arcade-games-side">
+        <div>More games coming soon.<br>Your HDD projects land here, one by one.</div>
+      </div>
+      </div><!-- /game-snake -->
+      <!-- Future games go here as .game-section blocks -->
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- project detail modal -->
+<div class="pmodal" id="pmodal" role="dialog" aria-modal="true" aria-labelledby="pmTitle" hidden>
+  <div class="pmodal-box">
+    <button class="pmodal-x" id="pmClose" aria-label="Close">&times;</button>
+    <h3 id="pmTitle"></h3>
+    <span class="tech" id="pmTech"></span>
+    <p id="pmBody"></p>
+    <a class="btn btn-primary" id="pmLink" href="#" target="_blank" rel="noopener" style="display:none">View on GitHub</a>
+  </div>
+</div>
+
+<script>
+/* binary rain background with cursor interaction */
+(function(){
+  var canvas=document.getElementById('bg-canvas');
+  if(!canvas||!canvas.getContext)return;
+  var ctx=canvas.getContext('2d');
+  var w=0,h=0,cols=0;
+  var drops=[],mouseX=-9999,mouseY=-9999;
+  var chars='01',fontSize=14,baseSpeed=0.4,trailLength=28;
+  var mobile=innerWidth<640;
+  var orb={x:0,y:0,targetX:0,targetY:0,radius:180,opacity:0.15};
+  function resize(){
+    var s=mobile?0.7:1;
+    w=canvas.width=Math.round(innerWidth*s);
+    h=canvas.height=Math.round(innerHeight*s);
+    canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';
+    cols=Math.floor(w/fontSize);
+    if(drops.length!==cols){
+      drops=[];
+      for(var i=0;i<cols;i++)drops.push({
+        x:i*fontSize,y:Math.random()*-h,
+        speed:baseSpeed+Math.random()*0.5,
+        chars:Array.from({length:trailLength},function(){return chars[Math.floor(Math.random()*2)]}),
+        opacity:Math.random()*0.6+0.2,
+        hue:280+Math.random()*40
+      });
+    }
+    orb.x=w/2;orb.y=h/2;orb.targetX=w/2;orb.targetY=h/2;
+  }
+  var reduced=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var running=!reduced;
+  function setRain(on){
+    if(reduced)on=false;
+    if(on===running)return;
+    running=on;
+    if(on)requestAnimationFrame(animate);
+  }
+  document.addEventListener('visibilitychange',function(){setRain(!document.hidden)});
+  function animate(){
+    if(!running)return;
+    if(document.hidden){requestAnimationFrame(animate);return}
+    ctx.fillStyle='rgba(12,9,22,0.12)';
+    ctx.fillRect(0,0,w,h);
+    orb.x+=(orb.targetX-orb.x)*0.1;
+    orb.y+=(orb.targetY-orb.y)*0.1;
+    var orbGrad=ctx.createRadialGradient(orb.x,orb.y,0,orb.x,orb.y,orb.radius);
+    orbGrad.addColorStop(0,'rgba(196,181,253,'+orb.opacity+')');
+    orbGrad.addColorStop(0.4,'rgba(139,92,246,'+orb.opacity*0.6+')');
+    orbGrad.addColorStop(1,'rgba(12,9,22,0)');
+    ctx.fillStyle=orbGrad;
+    ctx.beginPath();ctx.arc(orb.x,orb.y,orb.radius,0,Math.PI*2);ctx.fill();
+    ctx.font=fontSize+'px monospace';
+    ctx.textBaseline='top';
+    drops.forEach(function(drop,i){
+      var mx=mouseX-drop.x,my=mouseY-drop.y;
+      var dist=Math.hypot(mx,my);
+      var influence=dist<220?Math.pow(1-dist/220,2):0;
+      var omx=orb.x-drop.x,omy=orb.y-drop.y;
+      var odist=Math.hypot(omx,omy);
+      var oinfluence=odist<orb.radius?Math.pow(1-odist/orb.radius,2)*0.5:0;
+      var totalInfluence=Math.max(influence,oinfluence);
+      drop.y+=drop.speed*(1+totalInfluence*4);
+      if(totalInfluence>0.2){
+        drop.opacity=Math.min(1,drop.opacity+0.03);
+        drop.speed=Math.min(2,drop.speed+0.015);
+      }else{
+        drop.opacity*=0.992;
+        drop.speed=baseSpeed+Math.random()*0.5;
+      }
+      if(drop.y>h+trailLength*fontSize){
+        drop.y=Math.random()*-h;drop.x=i*fontSize;
+        drop.opacity=Math.random()*0.6+0.2;
+        drop.speed=baseSpeed+Math.random()*0.5;
+      }
+      drop.chars.push(chars[Math.floor(Math.random()*2)]);
+      if(drop.chars.length>trailLength)drop.chars.shift();
+      drop.chars.forEach(function(ch,j){
+        var py=drop.y-j*fontSize;
+        if(py<-fontSize||py>h)return;
+        var alpha=(j/trailLength)*drop.opacity;
+        var isHead=j===drop.chars.length-1;
+        if(isHead)ctx.fillStyle='rgba(237,233,254,'+Math.min(1,alpha*2.5)+')';
+        else if(drop.hue<295)ctx.fillStyle='rgba(167,139,250,'+alpha*0.9+')';
+        else ctx.fillStyle='rgba(196,181,253,'+alpha*0.85+')';
+        ctx.fillText(ch,drop.x,py);
+      });
+    });
+    requestAnimationFrame(animate);
+  }
+  addEventListener('resize',resize,{passive:true});
+  document.addEventListener('mousemove',function(e){
+    var r=canvas.getBoundingClientRect();
+    var s=mobile?0.7:1;
+    mouseX=(e.clientX-r.left)*s;mouseY=(e.clientY-r.top)*s;
+    orb.targetX=mouseX;orb.targetY=mouseY;
+  },{passive:true});
+  document.addEventListener('mouseleave',function(){
+    mouseX=-9999;mouseY=-9999;orb.targetX=w/2;orb.targetY=h/2;
+  });
+  resize();animate();
+})();
+/* flip tab navigation with URL hash persistence */
+(function(){
+  var tabs=[...document.querySelectorAll('[role=tab]')],
+      ps=[...document.querySelectorAll('.panel')],cur=0;
+  var names=['portfolio','cv','game'];
+  function go(i,skipHash){cur=i;
+    tabs.forEach(function(t,k){t.setAttribute('aria-selected',k===i)});
+    ps.forEach(function(p,k){p.dataset.pos=k===i?'0':k<i?'-1':'1';p.inert=k!==i});
+    if(!skipHash&&location.hash!=='#'+names[i])history.replaceState(null,'','#'+names[i]);
+    document.dispatchEvent(new CustomEvent('tabswitch'));
+  }
+  tabs.forEach(function(t,i){t.onclick=function(){go(i)}});
+  function fromHash(){
+    var h=(location.hash||'').replace('#','');
+    var i=names.indexOf(h);
+    go(i<0?0:i,true);
+  }
+  fromHash();
+  addEventListener('hashchange',fromHash);
+})();
+/* scroll reveal */
+(function(){
+  var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('#p-portfolio section, #p-cv section').forEach(function(el){
+    if(!el.closest('.hero'))el.classList.add('rv');
+  });
+  if(reduced||!('IntersectionObserver' in window)){
+    document.querySelectorAll('.rv').forEach(function(el){el.classList.add('on')});
+    return;
+  }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}});
+  },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+  function watchActive(){
+    document.querySelectorAll('.panel[data-pos="0"] .rv:not(.on)').forEach(function(el){io.observe(el)});
+  }
+  watchActive();
+  document.addEventListener('tabswitch',watchActive);
+})();
+/* project filters + detail modal */
+(function(){
+  var btns=[...document.querySelectorAll('.fbtn')],
+      cards=[...document.querySelectorAll('#projGrid .card')];
+  btns.forEach(function(b){
+    b.onclick=function(){
+      btns.forEach(function(x){x.classList.remove('on')});
+      b.classList.add('on');
+      var f=b.dataset.f;
+      cards.forEach(function(c){
+        var show=f==='all'||c.dataset.cat===f;
+        c.classList.toggle('hide',!show);
+        if(show){c.classList.remove('pop');void c.offsetWidth;c.classList.add('pop')}
+      });
+    };
+  });
+  var m=document.getElementById('pmodal'),
+      t=document.getElementById('pmTitle'),
+      tc=document.getElementById('pmTech'),
+      bd=document.getElementById('pmBody'),
+      lk=document.getElementById('pmLink');
+  function open(c){
+    t.textContent=c.dataset.title;tc.textContent=c.dataset.tech;bd.textContent=c.dataset.body;
+    if(c.dataset.link){lk.href=c.dataset.link;lk.style.display='inline-block'}
+    else lk.style.display='none';
+    m.hidden=false;requestAnimationFrame(function(){m.classList.add('open')});
+    document.getElementById('pmClose').focus();
+  }
+  function close(){m.classList.remove('open');setTimeout(function(){m.hidden=true},200)}
+  cards.forEach(function(c){
+    c.setAttribute('tabindex','0');c.setAttribute('role','button');
+    c.setAttribute('aria-label','Details: '+c.dataset.title);
+    c.addEventListener('click',function(e){
+      if(e.target.tagName==='A')return;
+      open(c);
+    });
+    c.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();open(c)}
+    });
+  });
+  document.getElementById('pmClose').onclick=close;
+  m.addEventListener('click',function(e){if(e.target===m)close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!m.hidden)close()});
+})();
+/* snake */
+(function(){
+  var cv=document.getElementById('snake');if(!cv||!cv.getContext)return;
+  var $=function(s){return document.querySelector(s)};
+  var ls=function(k,v){try{return v===undefined?localStorage.getItem(k):localStorage.setItem(k,v)}catch(e){return null}};
+  var g=cv.getContext('2d'),N=15,S=16,out=$('#snakeScore');
+  var reduced=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var s=[{x:7,y:7}],d={x:1,y:0},nd=d,f={x:10,y:10},tm=0,sc=0,best=+ls('snakeBest')||0,level=1;
+  var prevHead={x:7,y:7},lastStep=performance.now(),stepDur=200,paused=false;
+  var parts=[],floaters=[],shakeUntil=0;
+  var speeds={1:200,2:170,3:140,4:120,5:100};
+  var rnd=function(n){return Math.floor(Math.random()*n)},now=function(){return performance.now()};
+  var gameTab=document.querySelectorAll('[role=tab]')[2];
+  function isActive(){return gameTab.getAttribute('aria-selected')==='true'}
+  function food(){do f={x:rnd(N),y:rnd(N)};while(s.some(function(p){return p.x===f.x&&p.y===f.y}))}
+  function draw(t){t=t===undefined?1:t;g.save();
+    if(!reduced&&now()<shakeUntil)g.translate(rnd(7)-3,rnd(7)-3);
+    g.fillStyle='#4a6b4a';g.fillRect(-8,-8,256,256);
+    var pu=reduced?0:Math.sin(now()/180)*0.13,fs=S*(1+pu),fo=(S-fs)/2;
+    g.fillStyle='#ffb340';g.fillRect(f.x*S+fo,f.y*S+fo,Math.max(2,fs-1),Math.max(2,fs-1));
+    g.fillStyle='#c8e6c8';
+    for(var i=1;i<s.length;i++)g.fillRect(s[i].x*S,s[i].y*S,S-1,S-1);
+    var h=s[0],hx=(prevHead.x+(h.x-prevHead.x)*t)*S,hy=(prevHead.y+(h.y-prevHead.y)*t)*S;
+    g.fillStyle='#1d3a24';g.fillRect(hx,hy,S-1,S-1);g.fillStyle='#dff0df';
+    if(d.x===1){g.fillRect(hx+10,hy+3,3,4);g.fillRect(hx+10,hy+9,3,4)}
+    else if(d.x===-1){g.fillRect(hx+3,hy+3,3,4);g.fillRect(hx+3,hy+9,3,4)}
+    else if(d.y===-1){g.fillRect(hx+3,hy+3,4,3);g.fillRect(hx+9,hy+3,4,3)}
+    else{g.fillRect(hx+3,hy+10,4,3);g.fillRect(hx+9,hy+10,4,3)}
+    parts.forEach(function(p){g.globalAlpha=Math.max(0,p.life);g.fillStyle=p.col;g.fillRect(p.x-2,p.y-2,4,4)});
+    g.globalAlpha=1;g.textAlign='center';
+    floaters.forEach(function(fl){g.globalAlpha=Math.min(1,fl.life);g.fillStyle=fl.big?'#ffd700':'#ffffff';
+      g.font=(fl.big?'bold 15px':'bold 11px')+' "Courier New",monospace';g.fillText(fl.text,fl.x,fl.y)});
+    g.globalAlpha=1;
+    if(paused){g.fillStyle='rgba(0,0,0,0.5)';g.fillRect(0,0,240,240);g.fillStyle='#ffd700';
+      g.font='bold 18px "Courier New",monospace';g.fillText('PAUSED',120,128)}
+    g.restore();if(out)out.textContent='Score '+sc+'  Best '+best+'  Lv '+level;}
+  function step(){d=nd;var h={x:s[0].x+d.x,y:s[0].y+d.y};
+    if(h.x<0||h.y<0||h.x>=N||h.y>=N||s.some(function(p){return p.x===h.x&&p.y===h.y})){
+      clearInterval(tm);tm=0;best=Math.max(best,sc);ls('snakeBest',best);
+      shakeUntil=now()+450;floaters.push({x:120,y:112,text:'GAME OVER',life:2.4,big:true});draw(1);return}
+    prevHead={x:s[0].x,y:s[0].y};s.unshift(h);
+    if(h.x===f.x&&h.y===f.y){sc++;food();floaters.push({x:f.x*S+8,y:f.y*S+4,text:'+1',life:1});
+      if(sc%5===0&&level<5){level++;stepDur=speeds[level];clearInterval(tm);tm=setInterval(step,stepDur);
+        floaters.push({x:120,y:112,text:'LEVEL '+level,life:1.8,big:true})}
+    }else{s.pop()}
+    lastStep=now();}
+  function frame(){var n=now(),t=reduced?1:Math.min(1,(n-lastStep)/stepDur);
+    if(parts.length){parts.forEach(function(p){p.x+=p.vx/60;p.y+=p.vy/60;p.vy+=2.5;p.life-=0.035});
+      parts=parts.filter(function(p){return p.life>0})}
+    if(floaters.length){floaters.forEach(function(fl){fl.y-=0.5;fl.life-=0.022});
+      floaters=floaters.filter(function(fl){return fl.life>0})}
+    if(isActive())draw(t);requestAnimationFrame(frame);}
+  function turn(x,y){if(paused)togglePause();
+    if(!tm){s=[{x:7,y:7}];prevHead={x:7,y:7};d=nd={x:x,y:y};sc=0;level=1;stepDur=speeds[1];
+      food();parts=[];floaters=[];shakeUntil=0;tm=setInterval(step,stepDur);lastStep=now();return}
+    if(x===-d.x&&y===-d.y)return;nd={x:x,y:y};}
+  function togglePause(){if(!tm&&!paused)return;
+    if(paused){paused=false;lastStep=now();tm=setInterval(step,stepDur)}
+    else{paused=true;clearInterval(tm);tm=0}draw(1);}
+  draw(1);frame();
+  var dirMap={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]};
+  document.querySelectorAll('.pkey[data-key]').forEach(function(b){
+    b.addEventListener('pointerdown',function(e){e.preventDefault();var k=b.dataset.key;
+      if(k==='pause'){togglePause();return}turn(dirMap[k][0],dirMap[k][1])});});
+  var keys={ArrowUp:[0,-1],KeyW:[0,-1],ArrowDown:[0,1],KeyS:[0,1],ArrowLeft:[-1,0],KeyA:[-1,0],ArrowRight:[1,0],KeyD:[1,0]};
+  addEventListener('keydown',function(e){if(!isActive())return;
+    if(e.code==='KeyP'){togglePause();return}if(!keys[e.code])return;
+    e.preventDefault();turn(keys[e.code][0],keys[e.code][1])});
+  var swX=0,swY=0,swOn=false;
+  cv.addEventListener('touchstart',function(e){var t=e.changedTouches[0];swX=t.clientX;swY=t.clientY;swOn=true},{passive:true});
+  cv.addEventListener('touchmove',function(e){if(!swOn)return;e.preventDefault();
+    var t=e.changedTouches[0],dx=t.clientX-swX,dy=t.clientY-swY;
+    if(Math.abs(dx)<24&&Math.abs(dy)<24)return;
+    if(Math.abs(dx)>Math.abs(dy))turn(dx>0?1:-1,0);else turn(0,dy>0?1:-1);swX=t.clientX;swY=t.clientY},{passive:false});
+  cv.addEventListener('touchend',function(){swOn=false});
+  /* auto-pause when last touch lands outside the arcade cabinet */
+  var cabinet=document.getElementById('arcadeCabinet');
+  document.addEventListener('touchend',function(e){
+    if(!cabinet||paused||!tm)return;
+    var t=e.changedTouches[0];
+    var el=document.elementFromPoint(t.clientX,t.clientY);
+    if(el&&!cabinet.contains(el))togglePause();
+  },{passive:true});
+})();
+/* nokia screen fit - pin canvas to phone screen from rendered image size */
+(function(){var img=document.querySelector(".phone-img"),cv=document.getElementById("snake");
+if(!img||!cv)return;function fit(){var r=img.getBoundingClientRect(),p=cv.parentElement.getBoundingClientRect();
+if(!r.width)return;cv.style.left=(r.left-p.left+r.width*0.124)+"px";cv.style.top=(r.top-p.top+r.height*0.178)+"px";
+cv.style.width=(r.width*0.758)+"px";cv.style.height=(r.height*0.33)+"px";}
+addEventListener("resize",fit);addEventListener("orientationchange",fit);
+if(img.complete&&img.naturalWidth)fit();else img.addEventListener("load",fit);setTimeout(fit,800);})();
+</script>
+</body>
+</html>
