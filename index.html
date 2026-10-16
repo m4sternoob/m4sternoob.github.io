@@ -228,7 +228,7 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
   touch-action:none;user-select:none;-webkit-user-select:none}
 .mml-fab:hover{opacity:1;box-shadow:0 0 28px rgba(230,57,70,.95),0 4px 14px rgba(0,0,0,.5)}
 .mml-fab:active{cursor:grabbing}
-/* DISABLED .mml-playground{display:flex;gap:16px;flex-wrap:wrap;min-height:230px;padding:22px;
+.mml-playground{display:flex;gap:16px;flex-wrap:wrap;min-height:230px;padding:22px;
   border:1px dashed #e63946;border-radius:14px;background:rgba(230,57,70,.04);position:relative}
 .mml-demo{background:#160f14;border:1px solid #e63946;border-radius:12px;padding:18px;
   min-width:180px;max-width:260px;box-shadow:0 0 16px rgba(230,57,70,.25)}
@@ -237,7 +237,7 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
 .mml-link-btn{background:none;border:none;color:#ff8a8a;font-size:13px;cursor:pointer;
   text-decoration:underline;padding:0}*/
 .mml-resize{display:none}
-.mml-resize{display:none;/* corners disabled - use handle bar */
+.mml-resize{display:block;position:absolute;width:16px;height:16px;z-index:61;
   background:#160f14;border:2px solid #e63946;border-radius:4px;touch-action:none;
   box-shadow:0 0 10px rgba(230,57,70,.5)}
 .mml-resize.nw{top:-8px;left:-8px;cursor:nwse-resize}
@@ -337,7 +337,7 @@ section{transition:padding .35s ease}
 .card-back::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#ff004c,#ff8a00,#ffee00,#00e676,#00b0ff,#7c3aed,#ff004c);
   border-radius:8px;border:2px solid transparent;background-clip:padding-box}
 .card-back::-webkit-scrollbar-thumb:hover{border:none;background-clip:border-box}
-/* ---- 3D card flip DISABLED for white-screen debug ---- */
+/* ---- 3D card flip ---- */
 /*
 #projGrid .card{padding:0;position:relative}
 .card-face{padding:24px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
@@ -492,7 +492,7 @@ section{transition:padding .35s ease}
       </div>
     </section>
 
-    <!-- PLAYGROUND DISABLED FOR DEBUG -->
+
 
     <section class="contact" id="sec-contact" data-mml="contact">
       <p class="kicker" style="text-align:center">Contact</p>
@@ -918,6 +918,7 @@ section{transition:padding .35s ease}
       if(b.querySelector(':scope > .mml-handle'))return;
       var hidPanel=b.closest('.panel[data-pos]');
       if(hidPanel&&hidPanel.getAttribute('data-pos')!=='0')return;
+      b.style.position='relative';
       var h=document.createElement('div');
       h.className='mml-handle';
       h.innerHTML='<span class="mml-grip" title="Drag to move">\u22EE\u22EE</span><span></span><button class="mml-pin" type="button" title="Pin / unpin">&#x1F4CC;</button>';
@@ -936,8 +937,7 @@ section{transition:padding .35s ease}
         if(e.target.closest('.mml-pin'))return;
         b.style.transform='';save();toast('Position cleared');
       });
-      /* resize corners disabled - white screen issue
-      if(!b.querySelector(':scope > .mml-resize.nw')){
+            if(!b.querySelector(':scope > .mml-resize.nw')){
         ['nw','ne','sw','se'].forEach(function(c){
           var rh=document.createElement('div');
           rh.className='mml-resize '+c;
@@ -945,11 +945,10 @@ section{transition:padding .35s ease}
           rh.addEventListener('pointerdown',function(e){e.stopPropagation();e.preventDefault();startResize(e,b)});
         });
       }
-      */
       var p0=posOf(b);if(p0.s!==1)setScale(b,p0.x,p0.y,p0.s);
     });
   }
-  function dropHandles(){$$('.mml-handle,.mml-resize').forEach(function(h){h.remove()})}
+  function dropHandles(){$$('.mml-handle,.mml-resize').forEach(function(h){h.remove()});$$('[data-mml]').forEach(function(b){b.style.position=''})}
 
   function startDrag(e,b){
     if(b.classList.contains('mml-pinned')){toast('Unpin it first to move it');return}
@@ -1148,7 +1147,7 @@ section{transition:padding .35s ease}
   });
   document.addEventListener('tabswitch',function(){if(editing)buildHandles();});
   buildFab();
-  /* DISABLED var pg=document.querySelector('.mml-always'); if(pg)buildHandles(pg); */
+  var pg=document.querySelector('.mml-always'); if(pg)buildHandles(pg);
   var dr=document.getElementById('mmlDemoReset');
   if(dr)dr.addEventListener('click',function(){
     $$('[data-mml^="demo-"]').forEach(function(b){b.style.transform='';b.classList.remove('mml-pinned')});
