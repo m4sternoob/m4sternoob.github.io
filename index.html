@@ -182,6 +182,31 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
   background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
   animation:rgbtext 6s linear infinite}
 @keyframes rgbtext{to{background-position:300% 0}}
+/* ---- m4ster layout tools: drag-drop reorder, edit mode only (locked otherwise) ---- */
+.mml-handle{display:none}
+body.mml-editing [data-mml]{position:relative}
+body.mml-editing .mml-handle{display:flex;align-items:center;gap:8px;position:absolute;top:-14px;left:50%;
+  transform:translateX(-50%);z-index:60;background:#16162a;border:1px solid #7c3aed;border-radius:8px;
+  padding:4px 10px;font-size:12px;color:#c4b5fd;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.5)}
+body.mml-editing .mml-grip{letter-spacing:2px;cursor:grab;color:#a78bfa;font-weight:700;touch-action:none;
+  user-select:none;-webkit-user-select:none;padding:2px 4px}
+body.mml-editing .mml-pin{background:none;border:none;font-size:14px;cursor:pointer;opacity:.4;padding:0 2px}
+body.mml-editing .mml-pinned .mml-pin{opacity:1}
+body.mml-editing .mml-pinned .mml-grip{opacity:.3;cursor:not-allowed}
+.mml-placeholder{border:2px dashed #7c3aed;border-radius:12px;background:rgba(124,58,237,.08);
+  margin:8px 0;flex-shrink:0}
+.mml-dragging{position:fixed !important;z-index:9999 !important;margin:0 !important;
+  pointer-events:none;opacity:.92;box-shadow:0 18px 50px rgba(0,0,0,.6)}
+.mml-toolbar{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:10000;display:flex;
+  gap:8px;align-items:center;background:#16162a;border:1px solid #7c3aed;border-radius:12px;
+  padding:8px 12px;box-shadow:0 8px 30px rgba(0,0,0,.6);font-size:13px;color:#fff;white-space:nowrap}
+.mml-toolbar button{background:#23233a;border:1px solid #3b3b5c;color:#fff;border-radius:8px;
+  padding:6px 12px;font-size:13px;cursor:pointer}
+.mml-toolbar button.primary{background:#7c3aed;border-color:#7c3aed}
+.mml-toast{position:fixed;bottom:72px;left:50%;transform:translateX(-50%) translateY(8px);background:#16162a;
+  border:1px solid #7c3aed;color:#fff;padding:8px 16px;border-radius:8px;font-size:13px;opacity:0;
+  transition:opacity .2s,transform .2s;z-index:10001;pointer-events:none;max-width:90vw;text-align:center}
+.mml-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .stat-chip{font-family:"Courier New",monospace;font-size:12px;color:var(--na);
   border:1px solid rgba(167,139,250,.35);border-radius:6px;padding:5px 9px;
   background:rgba(167,139,250,.06);white-space:nowrap}
@@ -281,8 +306,8 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
 <div class="stage">
 <!-- ============ PORTFOLIO ============ -->
 <section class="panel" id="p-portfolio" data-pos="0" aria-label="Portfolio">
-  <div class="wrap">
-    <header class="hero">
+  <div class="wrap" data-mml-zone="portfolio">
+    <header class="hero" id="sec-hero" data-mml="hero">
       <div class="hero-grid">
         <div>
           <span class="eyebrow">Junior Game Programmer</span>
@@ -313,7 +338,7 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
       </div>
     </header>
 
-    <section id="projects" style="padding-top:0">
+    <section id="projects" style="padding-top:0" data-mml="projects">
       <p class="kicker">Featured Project</p>
       <div class="featured-card" style="margin-bottom:40px">
         <div>
@@ -355,7 +380,7 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
       </div>
     </section>
 
-    <section>
+    <section id="sec-experience" data-mml="experience">
       <p class="kicker">Background</p>
       <h2 class="sec">Experience</h2>
       <div class="timeline">
@@ -367,7 +392,7 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
       </div>
     </section>
 
-    <section>
+    <section id="sec-devlog" data-mml="devlog">
       <p class="kicker">Notes</p>
       <h2 class="sec">Devlog</h2>
       <p class="sub">Short build notes. Newest first.</p>
@@ -378,7 +403,7 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
       </div>
     </section>
 
-    <section>
+    <section id="sec-skills" data-mml="skills">
       <p class="kicker">Technical Range</p>
       <h2 class="sec">Skills</h2>
       <div class="skill-groups">
@@ -389,7 +414,7 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
       </div>
     </section>
 
-    <section>
+    <section id="sec-oss" data-mml="oss">
       <p class="kicker">Public Contributions</p>
       <h2 class="sec">Open Source</h2>
       <p class="sub">Code reviews on engine repos — verified against source.</p>
@@ -401,7 +426,7 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
       </div>
     </section>
 
-    <section class="contact">
+    <section class="contact" id="sec-contact" data-mml="contact">
       <p class="kicker" style="text-align:center">Contact</p>
       <h2 class="sec">Let's Talk</h2>
       <div class="contact-box">
@@ -448,8 +473,8 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
       <p class="kicker" style="text-align:right">Playable Demos</p>
       <!-- Game 1: Snake -->
       <div class="game-section" id="game-snake" style="border:none;padding:0;margin:0">
-      <div class="snake-layout">
-      <div class="snake-main">
+      <div class="snake-layout" data-mml-zone="game">
+      <div class="snake-main" data-mml="game-main">
       <div class="arcade-cabinet" id="arcadeCabinet">
       <div class="arcade-phone-side">
       <div style="display:flex;align-items:center;justify-content:space-between;width:100%;margin:0 0 14px;gap:12px">
@@ -480,7 +505,7 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
       </div><!-- /arcade-phone-side -->
       </div><!-- /arcade-cabinet -->
       </div>
-      <div class="snake-side">
+      <div class="snake-side" data-mml="game-side">
       <h3 style="text-align:center;margin:6px 0 14px">Ready To Play Games</h3>
       <div class="arcade-games-side">
         <div>More games coming soon.<br>Your HDD projects land here, one by one.</div>
@@ -781,6 +806,158 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
     var el=document.elementFromPoint(t.clientX,t.clientY);
     if(el&&!cabinet.contains(el))togglePause();
   },{passive:true});
+})();
+</script>
+<script>
+/* ---- m4ster layout tools: drag-drop reorder. Locked unless edit tools enabled ---- */
+(function(){
+  var LS='mml-layout-v1';
+  var $=function(s,r){return (r||document).querySelector(s)};
+  var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var body=document.body, editing=false, drag=null, toastT=null;
+
+  function load(){try{return JSON.parse(localStorage.getItem(LS))||{}}catch(e){return{}}}
+  function save(){
+    var d={order:{},pinned:[]};
+    $$('[data-mml-zone]').forEach(function(z){
+      d.order[z.getAttribute('data-mml-zone')]=$$('[data-mml]',z).map(function(b){return b.getAttribute('data-mml')});
+    });
+    d.pinned=$$('[data-mml].mml-pinned').map(function(b){return b.getAttribute('data-mml')});
+    try{localStorage.setItem(LS,JSON.stringify(d))}catch(e){}
+  }
+  function apply(){
+    var d=load();
+    Object.keys(d.order||{}).forEach(function(zid){
+      var z=document.querySelector('[data-mml-zone="'+zid+'"]'); if(!z)return;
+      var byId={}; $$('[data-mml]',z).forEach(function(b){byId[b.getAttribute('data-mml')]=b});
+      d.order[zid].forEach(function(id){if(byId[id])z.appendChild(byId[id])});
+    });
+    (d.pinned||[]).forEach(function(id){
+      var b=document.querySelector('[data-mml="'+id+'"]'); if(b)b.classList.add('mml-pinned');
+    });
+  }
+  function toast(msg){
+    var t=$('#mmlToast');
+    if(!t){t=document.createElement('div');t.id='mmlToast';t.className='mml-toast';body.appendChild(t);}
+    t.textContent=msg; t.classList.add('show');
+    clearTimeout(toastT); toastT=setTimeout(function(){t.classList.remove('show')},1800);
+  }
+  function label(b){var h=b.querySelector('h1,h2,h3');return (h?h.textContent:'frame').trim().slice(0,26)}
+
+  function buildHandles(){
+    $$('[data-mml]').forEach(function(b){
+      if(b.querySelector(':scope > .mml-handle'))return;
+      var h=document.createElement('div');
+      h.className='mml-handle';
+      h.innerHTML='<span class="mml-grip" title="Drag to move">\u22EE\u22EE</span><span></span><button class="mml-pin" type="button" title="Pin / unpin">&#x1F4CC;</button>';
+      h.children[1].textContent=label(b);
+      b.insertBefore(h,b.firstChild);
+      h.querySelector('.mml-pin').addEventListener('click',function(e){
+        e.stopPropagation();e.preventDefault();
+        b.classList.toggle('mml-pinned');save();
+        toast(b.classList.contains('mml-pinned')?'Pinned \u2014 locked in place':'Unpinned \u2014 draggable');
+      });
+      h.querySelector('.mml-grip').addEventListener('pointerdown',function(e){startDrag(e,b)});
+    });
+  }
+  function dropHandles(){$$('.mml-handle').forEach(function(h){h.remove()})}
+
+  function zoneDir(z){
+    var cs=getComputedStyle(z);
+    return (cs.display.indexOf('flex')===0&&cs.flexDirection.indexOf('row')===0)?'x':'y';
+  }
+  function startDrag(e,b){
+    if(b.classList.contains('mml-pinned')){toast('Unpin it first to move it');return}
+    e.preventDefault();
+    var sx=e.clientX,sy=e.clientY,active=false,rect=b.getBoundingClientRect();
+    var z=b.parentNode,dir=zoneDir(z);
+    var ph=document.createElement('div');ph.className='mml-placeholder';
+    if(dir==='x')ph.style.width=rect.width+'px';else ph.style.height=rect.height+'px';
+    function place(x,y){
+      b.style.left=(x-rect.width/2)+'px';
+      b.style.top=(y-28)+'px';
+    }
+    function movePh(ev){
+      var kids=Array.prototype.filter.call(z.children,function(c){
+        return c!==b&&c!==ph&&c.hasAttribute('data-mml');
+      });
+      var p=dir==='x'?ev.clientX:ev.clientY, done=false;
+      for(var i=0;i<kids.length;i++){
+        var r=kids[i].getBoundingClientRect();
+        var mid=dir==='x'?r.left+r.width/2:r.top+r.height/2;
+        if(p<mid){z.insertBefore(ph,kids[i]);done=true;break}
+      }
+      if(!done)z.appendChild(ph);
+    }
+    function mv(ev){
+      if(!active){
+        if(Math.hypot(ev.clientX-sx,ev.clientY-sy)<6)return;
+        active=true;drag={el:b};
+        z.insertBefore(ph,b);
+        b.classList.add('mml-dragging');
+        b.style.width=rect.width+'px';
+      }
+      place(ev.clientX,ev.clientY);movePh(ev);
+    }
+    function up(){
+      window.removeEventListener('pointermove',mv);
+      window.removeEventListener('pointerup',up);
+      window.removeEventListener('pointercancel',up);
+      if(!active)return;
+      z.insertBefore(b,ph);ph.remove();
+      b.classList.remove('mml-dragging');
+      b.style.width='';b.style.left='';b.style.top='';
+      drag=null;save();toast('Moved \u2014 layout saved');
+    }
+    window.addEventListener('pointermove',mv);
+    window.addEventListener('pointerup',up);
+    window.addEventListener('pointercancel',up);
+  }
+
+  function buildToolbar(){
+    if($('#mmlToolbar'))return;
+    var t=document.createElement('div');
+    t.className='mml-toolbar';t.id='mmlToolbar';
+    t.innerHTML='<span>Layout tools</span><button type="button" data-act="copy">Copy layout</button><button type="button" data-act="reset">Reset</button><button type="button" data-act="done" class="primary">Done</button>';
+    body.appendChild(t);
+    t.addEventListener('click',function(e){
+      var a=e.target&&e.target.getAttribute&&e.target.getAttribute('data-act');if(!a)return;
+      if(a==='done')setEditing(false);
+      else if(a==='reset'){try{localStorage.removeItem(LS)}catch(_){} location.reload();}
+      else if(a==='copy'){
+        save();
+        var txt='';
+        try{txt=localStorage.getItem(LS)||''}catch(_){}
+        copyText(txt);
+        toast('Layout copied \u2014 send it to me and I\u2019ll bake it into the site');
+      }
+    });
+  }
+  function dropToolbar(){var t=$('#mmlToolbar');if(t)t.remove()}
+  function copyText(txt){
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).catch(function(){fallback()});}
+    else fallback();
+    function fallback(){
+      var ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';
+      body.appendChild(ta);ta.select();
+      try{document.execCommand('copy')}catch(e){}
+      ta.remove();
+    }
+  }
+
+  function setEditing(on){
+    editing=on;
+    body.classList.toggle('mml-editing',on);
+    if(on){buildHandles();buildToolbar();toast('Tools on \u2014 drag frames by their handle, pin to lock');}
+    else{dropHandles();dropToolbar();}
+  }
+  document.addEventListener('keydown',function(e){
+    var tag=(e.target&&e.target.tagName)||'';
+    if(tag==='INPUT'||tag==='TEXTAREA')return;
+    if((e.ctrlKey||e.metaKey)&&e.shiftKey&&e.code==='KeyE'){e.preventDefault();setEditing(!editing);}
+  });
+  apply();
+  if(/[?&]edit(=1)?(&|$)/.test(location.search))setEditing(true);
 })();
 </script>
 </body>
