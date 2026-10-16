@@ -202,6 +202,12 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
   width:max-content;margin:-14px auto 0;background:#160f14;border:1px solid #e63946;border-radius:8px;
   padding:4px 10px;font-size:12px;color:#ff8a8a;white-space:nowrap;box-shadow:0 0 14px rgba(230,57,70,.35),0 4px 14px rgba(0,0,0,.5);
   cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.mml-resize{display:block;position:absolute;width:16px;height:16px;z-index:61;
+  cursor:nwse-resize;background:#e63946;border:2px solid #fff;border-radius:50%;box-shadow:0 0 10px rgba(230,57,70,.8)}
+.mml-resize.nw{top:-8px;left:-8px;cursor:nwse-resize}
+.mml-resize.se{bottom:-8px;right:-8px;cursor:nwse-resize}
+.mml-resize.ne{top:-8px;right:-8px;cursor:nesw-resize}
+.mml-resize.sw{bottom:-8px;left:-8px;cursor:nesw-resize}
 .mml-always .mml-resize{display:block;position:absolute;width:16px;height:16px;z-index:61;
   cursor:nwse-resize;background:#e63946;border:2px solid #fff;border-radius:50%;box-shadow:0 0 10px rgba(230,57,70,.8)}
 .mml-always .mml-resize.nw{top:-8px;left:-8px;cursor:nwse-resize}
