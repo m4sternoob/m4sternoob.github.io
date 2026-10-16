@@ -207,6 +207,10 @@ body.mml-editing .mml-pinned .mml-grip{opacity:.3;cursor:not-allowed}
   border:1px solid #7c3aed;color:#fff;padding:8px 16px;border-radius:8px;font-size:13px;opacity:0;
   transition:opacity .2s,transform .2s;z-index:10001;pointer-events:none;max-width:90vw;text-align:center}
 .mml-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+body.mml-editing .mml-ttitle{cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;font-weight:600;color:#c4b5fd}
+body.mml-editing .mml-toolbar.mml-pinned .mml-ttitle{cursor:default;opacity:.55}
+body.mml-editing .mml-toolbar .mml-pin{background:none;border:none;font-size:14px;cursor:pointer;opacity:.4;padding:0 2px}
+body.mml-editing .mml-toolbar.mml-pinned .mml-pin{opacity:1}
 .stat-chip{font-family:"Courier New",monospace;font-size:12px;color:var(--na);
   border:1px solid rgba(167,139,250,.35);border-radius:6px;padding:5px 9px;
   background:rgba(167,139,250,.06);white-space:nowrap}
@@ -918,22 +922,47 @@ body.mml-editing .mml-pinned .mml-grip{opacity:.3;cursor:not-allowed}
     if($('#mmlToolbar'))return;
     var t=document.createElement('div');
     t.className='mml-toolbar';t.id='mmlToolbar';
-    t.innerHTML='<span>Layout tools</span><button type="button" data-act="copy">Copy layout</button><button type="button" data-act="reset">Reset</button><button type="button" data-act="done" class="primary">Done</button>';
+    t.innerHTML='<span class="mml-ttitle" title="Drag to move">Layout tools</span><button class="mml-pin" type="button" data-act="pin" title="Pin toolbar">&#x1F4CC;</button><button type="button" data-act="copy">Copy layout</button><button type="button" data-act="reset">Reset</button><button type="button" data-act="done" class="primary">Done</button>';
     body.appendChild(t);
     t.addEventListener('click',function(e){
       var a=e.target&&e.target.getAttribute&&e.target.getAttribute('data-act');if(!a)return;
       if(a==='done')setEditing(false);
-      else if(a==='reset'){try{localStorage.removeItem(LS)}catch(_){} location.reload();}
+      else if(a==='pin'){t.classList.toggle('mml-pinned');saveTb();toast(t.classList.contains('mml-pinned')?'Toolbar pinned':'Toolbar unpinned');}
+      else if(a==='reset'){try{localStorage.removeItem(LS);localStorage.removeItem('mml-toolbar-v1')}catch(_){} location.reload();}
       else if(a==='copy'){
         save();
         var txt='';
         try{txt=localStorage.getItem(LS)||''}catch(_){}
         copyText(txt);
         toast('Layout copied \u2014 send it to me and I\u2019ll bake it into the site');
+        toast('Layout copied — send it to me and I’ll bake it into the site');
       }
     });
+    restoreTb(t);
+    t.querySelector('.mml-ttitle').addEventListener('pointerdown',function(e){
+      if(t.classList.contains('mml-pinned')){toast('Unpin the toolbar to move it');return}
+      e.preventDefault();
+      var r=t.getBoundingClientRect();
+      t.style.left=r.left+'px';t.style.top=r.top+'px';t.style.transform='none';t.style.bottom='auto';
+      var dx=e.clientX-r.left,dy=e.clientY-r.top,rw=r.width,rh=r.height;
+      function mv(ev){
+        t.style.left=Math.min(Math.max(ev.clientX-dx,8),window.innerWidth-rw-8)+'px';
+        t.style.top=Math.min(Math.max(ev.clientY-dy,8),window.innerHeight-rh-8)+'px';
+      }
+      function up(){window.removeEventListener('pointermove',mv);window.removeEventListener('pointerup',up);saveTb();}
+      window.addEventListener('pointermove',mv);window.addEventListener('pointerup',up);
+    });
   }
-  function dropToolbar(){var t=$('#mmlToolbar');if(t)t.remove()}
+  function saveTb(){
+    var t=$('#mmlToolbar');if(!t)return;
+    try{localStorage.setItem('mml-toolbar-v1',JSON.stringify({left:t.style.left||'',top:t.style.top||'',pinned:t.classList.contains('mml-pinned')}))}catch(e){}
+  }
+  function restoreTb(t){
+    var d=null;try{d=JSON.parse(localStorage.getItem('mml-toolbar-v1'))}catch(e){}
+    if(!d)return;
+    if(d.left&&d.top){t.style.left=d.left;t.style.top=d.top;t.style.transform='none';t.style.bottom='auto';}
+    if(d.pinned)t.classList.add('mml-pinned');
+  }{var t=$('#mmlToolbar');if(t)t.remove()}
   function copyText(txt){
     if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).catch(function(){fallback()});}
     else fallback();
