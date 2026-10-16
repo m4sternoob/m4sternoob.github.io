@@ -318,15 +318,23 @@ body.mml-editing,.mml-always .mml-pinned .mml-resize{display:none}
 .card.hide{display:none}
 .card.pop{animation:cardPop .25s cubic-bezier(.2,.8,.2,1)}
 @keyframes cardPop{from{opacity:0;transform:scale(.97) translateY(6px)}to{opacity:1;transform:none}}
-.pmodal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(8,5,18,.75);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .2s ease}
-.pmodal.open{opacity:1;pointer-events:auto}
-.pmodal-box{max-width:560px;width:100%;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:32px;transform:translateY(10px) scale(.98);transition:transform .2s cubic-bezier(.2,.8,.2,1);max-height:85vh;overflow-y:auto}
-.pmodal.open .pmodal-box{transform:none}
-.pmodal-box h3{font-size:24px;margin:0 0 8px}
-.pmodal-box .tech{display:inline-block;margin:0 0 16px}
-.pmodal-box p{color:var(--mute);line-height:1.7;margin:0 0 20px}
-.pmodal-x{float:right;background:none;border:none;color:var(--mute);font-size:22px;cursor:pointer;padding:4px;line-height:1}
-.pmodal-x:hover{color:var(--text)}
+/* ---- 3D card flip (matches the tab flip theme) ---- */
+#projGrid{perspective:1600px}
+#projGrid .card{perspective:1200px;padding:0;overflow:hidden}
+.card-inner{position:relative;display:grid;transform-style:preserve-3d;
+  transition:transform .65s cubic-bezier(.2,.8,.2,1)}
+.card.flipped .card-inner{transform:rotateY(180deg)}
+.card-face{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  min-width:0;padding:24px}
+.card-back{transform:rotateY(180deg);background:rgba(124,58,237,.07)}
+.card-back h3{margin:0 0 6px}
+.card-back .tech{margin-bottom:4px}
+.card-back p{color:var(--mute);line-height:1.7;margin:10px 0;font-size:14px}
+.card-back a{display:inline-block;margin:6px 0 4px;color:var(--violet);font-weight:600}
+.flip-hint{display:block;margin-top:14px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--dim);opacity:.75}
+@media(max-width:760px){.card-face{padding:16px}}
+@media(prefers-reduced-motion:reduce){.card-inner{transition:none}}
 @media(prefers-reduced-motion:reduce){
   .rv,.hero .eyebrow,.hero h1,.hero .tagline,.hero .chips,.hero .cta-row,.hero .socials,.hero-media{opacity:1!important;transform:none!important;animation:none!important;transition:none!important}
 }
@@ -580,16 +588,6 @@ body.mml-editing,.mml-always .mml-pinned .mml-resize{display:none}
 </div>
 
 <!-- project detail modal -->
-<div class="pmodal" id="pmodal" role="dialog" aria-modal="true" aria-labelledby="pmTitle" hidden>
-  <div class="pmodal-box">
-    <button class="pmodal-x" id="pmClose" aria-label="Close">&times;</button>
-    <h3 id="pmTitle"></h3>
-    <span class="tech" id="pmTech"></span>
-    <p id="pmBody"></p>
-    <a class="btn btn-primary" id="pmLink" href="#" target="_blank" rel="noopener" style="display:none">View on GitHub</a>
-  </div>
-</div>
-
 <script>
 /* binary rain background with cursor interaction */
 (function(){
@@ -730,7 +728,7 @@ body.mml-editing,.mml-always .mml-pinned .mml-resize{display:none}
   watchActive();
   document.addEventListener('tabswitch',watchActive);
 })();
-/* project filters + detail modal */
+/* project filters + 3D card flip (matches the tab flip theme) */
 (function(){
   var btns=[...document.querySelectorAll('.fbtn')],
       cards=[...document.querySelectorAll('#projGrid .card')];
@@ -746,33 +744,47 @@ body.mml-editing,.mml-always .mml-pinned .mml-resize{display:none}
       });
     };
   });
-  var m=document.getElementById('pmodal'),
-      t=document.getElementById('pmTitle'),
-      tc=document.getElementById('pmTech'),
-      bd=document.getElementById('pmBody'),
-      lk=document.getElementById('pmLink');
-  function open(c){
-    t.textContent=c.dataset.title;tc.textContent=c.dataset.tech;bd.textContent=c.dataset.body;
-    if(c.dataset.link){lk.href=c.dataset.link;lk.style.display='inline-block'}
-    else lk.style.display='none';
-    m.hidden=false;requestAnimationFrame(function(){m.classList.add('open')});
-    document.getElementById('pmClose').focus();
-  }
-  function close(){m.classList.remove('open');setTimeout(function(){m.hidden=true},200)}
   cards.forEach(function(c){
+    var inner=document.createElement('div');
+    inner.className='card-inner';
+    var front=document.createElement('div');
+    front.className='card-face card-front';
+    while(c.firstChild)front.appendChild(c.firstChild);
+    var hint=document.createElement('span');
+    hint.className='flip-hint';hint.textContent='tap to flip';
+    front.appendChild(hint);
+    var back=document.createElement('div');
+    back.className='card-face card-back';
+    var h3=document.createElement('h3');h3.textContent=c.dataset.title;
+    var tech=document.createElement('span');tech.className='tech';tech.textContent=c.dataset.tech;
+    var p=document.createElement('p');p.textContent=c.dataset.body;
+    back.appendChild(h3);back.appendChild(tech);back.appendChild(p);
+    if(c.dataset.link){
+      var a=document.createElement('a');
+      a.href=c.dataset.link;a.target='_blank';a.rel='noopener';a.textContent='View on GitHub \u2192';
+      back.appendChild(a);
+    }
+    var bh=document.createElement('span');bh.className='flip-hint';bh.textContent='tap to flip back';
+    back.appendChild(bh);
+    inner.appendChild(front);inner.appendChild(back);
+    c.appendChild(inner);
     c.setAttribute('tabindex','0');c.setAttribute('role','button');
-    c.setAttribute('aria-label','Details: '+c.dataset.title);
+    c.setAttribute('aria-label','Flip card: '+c.dataset.title);
+    function toggle(){c.classList.toggle('flipped')}
     c.addEventListener('click',function(e){
       if(e.target.tagName==='A')return;
-      open(c);
+      toggle();
     });
     c.addEventListener('keydown',function(e){
-      if(e.key==='Enter'||e.key===' '){e.preventDefault();open(c)}
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle()}
     });
   });
-  document.getElementById('pmClose').onclick=close;
-  m.addEventListener('click',function(e){if(e.target===m)close()});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!m.hidden)close()});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){
+      var f=document.querySelector('#projGrid .card.flipped');
+      if(f){f.classList.remove('flipped');f.focus()}
+    }
+  });
 })();
 /* snake */
 (function(){
