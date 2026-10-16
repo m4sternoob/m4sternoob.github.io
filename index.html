@@ -907,7 +907,7 @@ body.mml-editing,.mml-always .mml-pinned .mml-resize{display:none}
       if(hidPanel&&hidPanel.getAttribute('data-pos')!=='0')return;
       if(!b.parentNode.classList.contains('mml-wrap')){
         var w=document.createElement('div');
-        w.className='mml-wrap';w.style.position='relative';
+        w.className='mml-wrap';/* w.style.position='relative'; DEBUG */
         b.parentNode.insertBefore(w,b);w.appendChild(b);
       }
       var h=document.createElement('div');
