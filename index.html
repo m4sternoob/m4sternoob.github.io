@@ -237,7 +237,7 @@ body.mml-editing,.mml-always .mml-toolbar.mml-pinned .mml-pin{opacity:1}
 .mml-link-btn{background:none;border:none;color:#ff8a8a;font-size:13px;cursor:pointer;
   text-decoration:underline;padding:0}*/
 .mml-resize{display:none}
-body.mml-editing,.mml-always .mml-resize{display:block;position:absolute;width:16px;height:16px;z-index:61;
+body.mml-editing .mml-resize{display:none;/* corners disabled - use handle bar */
   background:#160f14;border:2px solid #e63946;border-radius:4px;touch-action:none;
   box-shadow:0 0 10px rgba(230,57,70,.5)}
 body.mml-editing,.mml-always .mml-resize.nw{top:-8px;left:-8px;cursor:nwse-resize}
@@ -905,11 +905,6 @@ body.mml-editing,.mml-always .mml-pinned .mml-resize{display:none}
       if(b.querySelector(':scope > .mml-handle'))return;
       var hidPanel=b.closest('.panel[data-pos]');
       if(hidPanel&&hidPanel.getAttribute('data-pos')!=='0')return;
-      if(!b.parentNode.classList.contains('mml-wrap')){
-        var w=document.createElement('div');
-        w.className='mml-wrap';/* w.style.position='relative'; DEBUG */
-        b.parentNode.insertBefore(w,b);w.appendChild(b);
-      }
       var h=document.createElement('div');
       h.className='mml-handle';
       h.innerHTML='<span class="mml-grip" title="Drag to move">\u22EE\u22EE</span><span></span><button class="mml-pin" type="button" title="Pin / unpin">&#x1F4CC;</button>';
@@ -928,6 +923,7 @@ body.mml-editing,.mml-always .mml-pinned .mml-resize{display:none}
         if(e.target.closest('.mml-pin'))return;
         b.style.transform='';save();toast('Position cleared');
       });
+      /* resize corners disabled - white screen issue
       if(!b.querySelector(':scope > .mml-resize.nw')){
         ['nw','ne','sw','se'].forEach(function(c){
           var rh=document.createElement('div');
@@ -936,11 +932,11 @@ body.mml-editing,.mml-always .mml-pinned .mml-resize{display:none}
           rh.addEventListener('pointerdown',function(e){e.stopPropagation();e.preventDefault();startResize(e,b)});
         });
       }
+      */
       var p0=posOf(b);if(p0.s!==1)setScale(b,p0.x,p0.y,p0.s);
     });
   }
-  function dropHandles(){$$('.mml-handle,.mml-resize').forEach(function(h){h.remove()});
-    $$('.mml-wrap').forEach(function(w){var p=w.parentNode;while(w.firstChild)p.insertBefore(w.firstChild,w);p.removeChild(w);});}
+  function dropHandles(){$$('.mml-handle,.mml-resize').forEach(function(h){h.remove()})}
 
   function startDrag(e,b){
     if(b.classList.contains('mml-pinned')){toast('Unpin it first to move it');return}
