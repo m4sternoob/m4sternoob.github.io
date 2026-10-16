@@ -319,17 +319,17 @@ body.mml-editing,.mml-always .mml-pinned .mml-resize{display:none}
 .card.pop{animation:cardPop .25s cubic-bezier(.2,.8,.2,1)}
 @keyframes cardPop{from{opacity:0;transform:scale(.97) translateY(6px)}to{opacity:1;transform:none}}
 /* ---- 3D card flip (matches the tab flip theme) ---- */
-#projGrid .card{perspective:1200px;padding:0;overflow:hidden;position:relative}
+#projGrid .card{padding:0;position:relative}
 .card-face{padding:24px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
-  transition:transform .65s cubic-bezier(.2,.8,.2,1)}
-.card-back{position:absolute;inset:0;transform:rotateY(180deg);overflow-y:auto;
-  background:rgba(124,58,237,.07)}
+  transition:transform .65s cubic-bezier(.2,.8,.2,1),opacity .3s}
+.card-back{position:absolute;inset:0;transform:rotateY(180deg);overflow-y:auto;opacity:0;
+  background:rgba(124,58,237,.07);border-radius:var(--r)}
 .card-back h3{margin:0 0 6px}
 .card-back .tech{margin-bottom:4px}
 .card-back p{color:var(--mute);line-height:1.7;margin:10px 0;font-size:14px}
 .card-back a{display:inline-block;margin:6px 0 4px;color:var(--violet);font-weight:600}
-.card.flipped .card-front{transform:rotateY(180deg)}
-.card.flipped .card-back{transform:rotateY(360deg)}
+.card.flipped .card-front{transform:rotateY(180deg);opacity:0}
+.card.flipped .card-back{transform:rotateY(360deg);opacity:1}
 .flip-hint{display:block;margin-top:14px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
   color:var(--dim);opacity:.75}
 @media(max-width:760px){.card-face{padding:16px}}
