@@ -658,7 +658,7 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
       g.fillText('SNAKE',135,112);g.restore();
       if(out)out.textContent='Score '+sc+'  Best '+best+'  Lv '+level;return}
     if(!reduced&&now()<shakeUntil)g.translate(rnd(7)-3,rnd(7)-3);
-    g.fillStyle='#4a6b4a';g.fillRect(-8,-8,256,256);
+    g.fillStyle='#1a9edb';g.fillRect(-8,-8,256,256);
     var pu=reduced?0:Math.sin(now()/180)*0.13,fs=S*(1+pu),fo=(S-fs)/2;
     g.fillStyle='#ffb340';g.fillRect(f.x*S+fo,f.y*S+fo,Math.max(2,fs-1),Math.max(2,fs-1));
     g.fillStyle='#c8e6c8';
