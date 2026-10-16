@@ -1016,7 +1016,7 @@ section{transition:padding .35s ease}
       var p0=posOf(b);if(p0.s!==1)setScale(b,p0.x,p0.y,p0.s);
     });
   }
-  function dropHandles(){$$('.mml-handle,.mml-resize').forEach(function(h){h.remove()});$$('[data-mml]').forEach(function(b){b.style.position=''})}
+  function dropHandles(){$$('.mml-handle,.mml-resize').forEach(function(h){if(!h.closest('.mml-always'))h.remove()});$$('[data-mml]').forEach(function(b){if(!b.closest('.mml-always'))b.style.position=''})}
 
   function showGuide(ori,pos){
     var id='mmlGuide'+ori,g=document.getElementById(id);
