@@ -509,7 +509,37 @@ section{transition:padding .35s ease}
       <p class="kicker">Public Contributions</p>
       <h2 class="sec">Open Source</h2>
       <p class="sub">Code reviews on engine repos — verified against source.</p>
-      <div class="oss-grid">
+
+      
+      <div class="contrib-radar" style="max-width:360px;margin:0 auto;text-align:center">
+<svg viewBox="0 0 360 300" style="width:100%;height:auto" role="img" aria-label="Overall contribution distribution">
+<g stroke="#1e293b" stroke-width="1" fill="none">
+<polygon points="180,30 316,165 180,270 44,165"/>
+<polygon points="180,65 282,165 180,244 78,165" opacity="0.7"/>
+<polygon points="180,100 248,165 180,218 112,165" opacity="0.5"/>
+<polygon points="180,135 214,165 180,192 146,165" opacity="0.35"/>
+</g>
+<g stroke="#334155" stroke-width="1">
+<line x1="180" y1="165" x2="180" y2="30"/><line x1="180" y1="165" x2="316" y2="165"/>
+<line x1="180" y1="165" x2="180" y2="270"/><line x1="180" y1="165" x2="44" y2="165"/>
+</g>
+<polygon points="180,163.65 186.8,165 180,172.35 61.68,165"
+fill="rgba(34,197,94,0.22)" stroke="#22c55e" stroke-width="2"/>
+<g fill="#22c55e">
+<circle cx="180" cy="163.65" r="4"/><circle cx="186.8" cy="165" r="4"/>
+<circle cx="180" cy="172.35" r="4"/><circle cx="61.68" cy="165" r="4"/>
+</g>
+<g fill="#94a3b8" font-size="13" font-family="system-ui,sans-serif" text-anchor="middle">
+<text x="180" y="20">1% Code review</text>
+<text x="330" y="169">5% Issues</text>
+<text x="180" y="290">7% Pull requests</text>
+<text x="52" y="150">87% Commits</text>
+</g>
+</svg>
+<p style="color:#64748b;font-size:12px;margin-top:4px">Overall contribution distribution</p>
+</div>
+
+  <div class="oss-grid">
         <a class="oss-card" href="https://github.com/SFML/SFML/pull/3751" target="_blank" rel="noopener"><span class="repo">SFML #3751</span><p><strong>QOA seek div-by-zero</strong> — verified in source.</p></a>
         <a class="oss-card" href="https://github.com/SFML/SFML/pull/2380" target="_blank" rel="noopener"><span class="repo">SFML #2380</span><p><strong>operator&lt;&lt; breaks rvalues</strong> — T&amp; rejects temporaries.</p></a>
         <a class="oss-card" href="https://github.com/godotengine/godot/pull/124221" target="_blank" rel="noopener"><span class="repo">Godot #124221</span><p><strong>Live review</strong> — confirmed active.</p></a>
