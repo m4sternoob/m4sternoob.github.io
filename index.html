@@ -680,7 +680,7 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
     floaters.forEach(function(fl){g.globalAlpha=Math.min(1,fl.life);g.fillStyle=fl.big?'#ffd700':'#ffffff';
       g.font=(fl.big?'bold 15px':'bold 11px')+' "Courier New",monospace';g.fillText(fl.text,fl.x,fl.y)});
     g.globalAlpha=1;
-    if(paused){g.fillStyle='rgba(0,0,0,0.5)';g.fillRect(0,0,256,208);g.fillStyle='#ffd700';
+    if(paused){g.fillStyle='rgba(0,0,0,0.5)';g.fillRect(0,0,270,214);g.fillStyle='#ffd700';
       g.font='bold 18px "Courier New",monospace';g.fillText('PAUSED',128,110)}
     g.restore();if(out)out.textContent='Score '+sc+'  Best '+best+'  Lv '+level;}
   function step(){d=nd;var h={x:s[0].x+d.x,y:s[0].y+d.y};
