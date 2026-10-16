@@ -527,7 +527,7 @@ section{transition:padding .35s ease}
     <section id="sec-playground" data-mml="playground">
       <p class="kicker">Sandbox</p>
       <h2 class="sec">Tools Playground</h2>
-      <p style="color:var(--muted);margin:0 0 18px">Try the layout tools live — drag, resize, and pin these demo frames. Your changes save in this browser only.</p>
+      <p style="color:var(--muted);margin:0 0 18px">Try the layout tools live — drag, resize, and pin these demo frames. Your changes save in this browser only. <button type="button" id="pgReset" style="background:none;border:1px solid var(--line);color:var(--mute);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:13px">Reset demo</button></p>
       <div class="mml-always" style="display:flex;gap:16px;flex-wrap:wrap">
         <div data-mml="pg-demo1" style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;min-width:220px;flex:1">
           <h4 style="margin:0 0 8px">Demo Frame 1</h4>
@@ -1212,6 +1212,22 @@ section{transition:padding .35s ease}
   document.addEventListener('tabswitch',function(){if(editing)buildHandles();});
   buildFab();
   var pg=document.querySelector('.mml-always'); if(pg)buildHandles(pg);
+  var pgR=document.getElementById('pgReset');
+  if(pgR)pgR.addEventListener('click',function(){
+    $$('[data-mml^="pg-"]').forEach(function(b){
+      b.style.transform='';b.style.position='';
+      b.classList.remove('mml-pinned');
+      var h=b.querySelector(':scope > .mml-handle .mml-pin');
+      if(h)h.textContent='📌';
+    });
+    try{
+      var order=JSON.parse(localStorage.getItem(LSK)||'[]');
+      order=order.filter(function(o){return o.id.indexOf('pg-')!==0});
+      localStorage.setItem(LSK,JSON.stringify(order));
+    }catch(e){}
+    buildHandles(pg);
+    toast('Demo reset');
+  });
   var dr=document.getElementById('mmlDemoReset');
   if(dr)dr.addEventListener('click',function(){
     $$('[data-mml^="demo-"]').forEach(function(b){b.style.transform='';b.classList.remove('mml-pinned')});
