@@ -168,6 +168,13 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
 .snake-layout{flex-direction:row;justify-content:space-between;align-items:center;gap:48px;padding:0 24px}
 .snake-side{max-width:340px;flex-shrink:0}
 .snake-side .arcade-games-side{width:100%;margin:0}
+.m4ster5in1-panel{width:100%;background:#0d0d1a;border:2px solid #7c3aed;border-radius:16px;overflow:hidden;box-shadow:0 0 24px rgba(124,58,237,.35)}
+.m4ster5in1-panel iframe{width:100%;height:540px;border:0;display:block;background:#0d0d1a}
+.m4ster5in1-open{text-align:center;margin:10px 0 0;font-size:14px}
+.m4ster5in1-open a{color:#a78bfa;font-weight:600;text-decoration:none}
+.m4ster5in1-open a:hover{text-decoration:underline}
+@media(min-width:701px){.snake-side.m5in1{max-width:430px;flex-shrink:0}}
+@media(max-width:700px){.m4ster5in1-panel iframe{height:440px}}
 }
 @media(min-width:1200px){#p-game .wrap{padding-left:200px}.snake-layout{padding:0}}
 @media(max-width:700px){.arcade-cabinet{padding:14px;max-width:none}.arcade-phone-side{align-items:center}.arcade-phone-side .phone-stage{margin:0 auto}.arcade-phone-side .nokia-hint{text-align:center !important;max-width:300px;margin-left:auto;margin-right:auto}.arcade-games-side{min-height:100px}}
@@ -644,11 +651,12 @@ fill="rgba(34,197,94,0.22)" stroke="#22c55e" stroke-width="2"/>
       </div><!-- /arcade-phone-side -->
       </div><!-- /arcade-cabinet -->
       </div>
-<!-- 5IN1 web embed — white/purple frame, sits beside Nokia Snake --><div class="fiveinone-frame" style="max-width:420px;margin:0 auto;background:#fff;border:3px solid #8b5cf6;border-radius:18px;overflow:hidden;box-shadow:0 0 24px rgba(139,92,246,.35)"><div style="background:linear-gradient(135deg,#8b5cf6,#6d28d9);color:#fff;font-family:system-ui,sans-serif;font-weight:700;font-size:15px;padding:10px 16px;letter-spacing:.5px">5IN1 — Play on Web</div><iframe src="https://m4ster-5in1-web.vercel.app/play" title="5IN1 web games" style="width:100%;height:560px;border:0;display:block;background:#fff" loading="lazy" allow="fullscreen"></iframe></div>      <div class="snake-side" data-mml="game-side">
-      <h3 style="text-align:center;margin:6px 0 14px">Ready To Play Games</h3>
-      <div class="arcade-games-side">
-        <div>More games coming soon.<br>Your HDD projects land here, one by one.</div>
+      <div class="snake-side m5in1" data-mml="game-side">
+      <h3 class="rgb-text" style="text-align:center;margin:6px 0 14px">m4ster-5in1</h3>
+      <div class="m4ster5in1-panel">
+        <iframe src="https://m4ster-5in1.vercel.app/play" title="m4ster-5in1 web games" loading="lazy" allow="fullscreen"></iframe>
       </div>
+      <p class="m4ster5in1-open"><a href="https://m4ster-5in1.vercel.app/play" target="_blank" rel="noopener">Open full screen</a></p>
       </div>
       </div>
       </div><!-- /game-snake -->
