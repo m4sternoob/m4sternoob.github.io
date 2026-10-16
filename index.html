@@ -184,15 +184,15 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
 @keyframes rgbtext{to{background-position:300% 0}}
 /* ---- m4ster layout tools: drag-drop reorder, edit mode only (locked otherwise) ---- */
 .mml-handle{display:none}
-body.mml-on,.mml-always .mml-handle{display:flex;align-items:center;gap:8px;position:relative;z-index:60;
+.mml-handle{display:flex;align-items:center;gap:8px;position:relative;z-index:60;
   width:max-content;margin:-14px auto 0;background:#160f14;border:1px solid #e63946;border-radius:8px;
   padding:4px 10px;font-size:12px;color:#ff8a8a;white-space:nowrap;box-shadow:0 0 14px rgba(230,57,70,.35),0 4px 14px rgba(0,0,0,.5);
   cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
-body.mml-on,.mml-always .mml-grip{letter-spacing:2px;cursor:grab;color:#ff8a8a;font-weight:700;touch-action:none;
+.mml-grip{letter-spacing:2px;cursor:grab;color:#ff8a8a;font-weight:700;touch-action:none;
   user-select:none;-webkit-user-select:none;padding:2px 4px}
-body.mml-on,.mml-always .mml-pin{background:none;border:none;font-size:14px;cursor:pointer;opacity:.4;padding:0 2px}
-body.mml-on,.mml-always .mml-pinned .mml-pin{opacity:1}
-body.mml-on,.mml-always .mml-pinned .mml-grip{opacity:.3;cursor:not-allowed}
+.mml-pin{background:none;border:none;font-size:14px;cursor:pointer;opacity:.4;padding:0 2px}
+.mml-pinned .mml-pin{opacity:1}
+.mml-pinned .mml-grip{opacity:.3;cursor:not-allowed}
 .mml-placeholder{border:2px dashed #e63946;border-radius:12px;background:rgba(230,57,70,.08);
   margin:8px 0;flex-shrink:0}
 .mml-dragging{z-index:9999 !important;pointer-events:none;opacity:.92;
@@ -216,10 +216,10 @@ body.mml-on,.mml-always .mml-pinned .mml-grip{opacity:.3;cursor:not-allowed}
 .mml-custom [data-mml-edit]{outline:none;border-radius:6px;padding:2px 4px}
 .mml-custom [data-mml-edit]:focus{background:rgba(124,58,237,.14)}
 .mml-toolbar{flex-wrap:wrap;justify-content:center;max-width:94vw}
-body.mml-on,.mml-always .mml-ttitle{cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;font-weight:600;color:#ff8a8a}
-body.mml-on,.mml-always .mml-toolbar.mml-pinned .mml-ttitle{cursor:default;opacity:.55}
-body.mml-on,.mml-always .mml-toolbar .mml-pin{background:none;border:none;font-size:14px;cursor:pointer;opacity:.4;padding:0 2px}
-body.mml-on,.mml-always .mml-toolbar.mml-pinned .mml-pin{opacity:1}
+.mml-ttitle{cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;font-weight:600;color:#ff8a8a}
+.mml-toolbar.mml-pinned .mml-ttitle{cursor:default;opacity:.55}
+.mml-toolbar .mml-pin{background:none;border:none;font-size:14px;cursor:pointer;opacity:.4;padding:0 2px}
+.mml-toolbar.mml-pinned .mml-pin{opacity:1}
 .mml-fab{position:fixed;bottom:16px;right:16px;z-index:9000;width:46px;height:46px;border-radius:50%;
   border:none;color:#fff;font-size:20px;cursor:grab;
   background:radial-gradient(circle at 35% 32%,#ff8a8a,#e63946 45%,#a4161a 100%);
@@ -237,14 +237,14 @@ body.mml-on,.mml-always .mml-toolbar.mml-pinned .mml-pin{opacity:1}
 .mml-link-btn{background:none;border:none;color:#ff8a8a;font-size:13px;cursor:pointer;
   text-decoration:underline;padding:0}*/
 .mml-resize{display:none}
-body.mml-on .mml-resize{display:none;/* corners disabled - use handle bar */
+.mml-resize{display:none;/* corners disabled - use handle bar */
   background:#160f14;border:2px solid #e63946;border-radius:4px;touch-action:none;
   box-shadow:0 0 10px rgba(230,57,70,.5)}
-body.mml-on,.mml-always .mml-resize.nw{top:-8px;left:-8px;cursor:nwse-resize}
-body.mml-on,.mml-always .mml-resize.se{bottom:-8px;right:-8px;cursor:nwse-resize}
-body.mml-on,.mml-always .mml-resize.ne{top:-8px;right:-8px;cursor:nesw-resize}
-body.mml-on,.mml-always .mml-resize.sw{bottom:-8px;left:-8px;cursor:nesw-resize}
-body.mml-on,.mml-always .mml-pinned .mml-resize{display:none}
+.mml-resize.nw{top:-8px;left:-8px;cursor:nwse-resize}
+.mml-resize.se{bottom:-8px;right:-8px;cursor:nwse-resize}
+.mml-resize.ne{top:-8px;right:-8px;cursor:nesw-resize}
+.mml-resize.sw{bottom:-8px;left:-8px;cursor:nesw-resize}
+.mml-pinned .mml-resize{display:none}
 .stat-chip{font-family:"Courier New",monospace;font-size:12px;color:var(--na);
   border:1px solid rgba(167,139,250,.35);border-radius:6px;padding:5px 9px;
   background:rgba(167,139,250,.06);white-space:nowrap}
