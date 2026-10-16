@@ -1083,7 +1083,8 @@ section{transition:padding .35s ease}
       }
     });
     restoreTb(t);
-    t.querySelector('.mml-ttitle').addEventListener('pointerdown',function(e){
+    t.addEventListener('pointerdown',function(e){
+      if(e.target.closest('button'))return;
       if(t.classList.contains('mml-pinned')){toast('Unpin the toolbar to move it');return}
       e.preventDefault();
       var r=t.getBoundingClientRect();
