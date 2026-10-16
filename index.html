@@ -149,7 +149,7 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
   border:1px dashed rgba(167,139,250,.35);border-radius:10px;
   padding:20px;display:flex;align-items:center;justify-content:center;color:var(--dim);
   font-size:14px;text-align:center;min-height:120px}
-@media(max-width:700px){.arcade-cabinet{padding:14px;max-width:none}.arcade-games-side{min-height:100px}}
+@media(max-width:700px){.arcade-cabinet{padding:14px;max-width:none}.arcade-phone-side{align-items:center}.arcade-phone-side .phone-stage{margin:0 auto}#snakeScore{text-align:center !important}.arcade-phone-side .nokia-hint{text-align:center !important;max-width:300px;margin-left:auto;margin-right:auto}.arcade-games-side{min-height:100px}}
 .phone-stage{position:relative;width:min(340px,88vw);margin:0 auto}
 @media(max-width:640px){
   .phone-stage{width:min(78vw,calc((100dvh - 300px)*0.44))}
@@ -411,13 +411,20 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
       <h3 style="text-align:center;margin:0 0 12px">Snake — Nokia 1100</h3>
       <div class="phone-stage" role="group" aria-label="Snake game">
         <img src="assets/nokia-phone-labeled.png" class="phone-img" alt="Nokia 1100 style phone" draggable="false">
-        <canvas id="snake" class="phone-screen" width="256" height="256" aria-label="Snake game"></canvas>
+        <canvas id="snake" class="phone-screen" width="270" height="214" aria-label="Snake game"></canvas>
         <div class="phone-keys">
-          <button class="pkey" data-key="up" aria-label="Up (2)" style="grid-row:1;grid-column:2"></button>
-          <button class="pkey" data-key="left" aria-label="Left (4)" style="grid-row:2;grid-column:1"></button>
-          <button class="pkey" data-key="pause" aria-label="Pause (5)" style="grid-row:2;grid-column:2"></button>
-          <button class="pkey" data-key="right" aria-label="Right (6)" style="grid-row:2;grid-column:3"></button>
-          <button class="pkey" data-key="down" aria-label="Down (8)" style="grid-row:3;grid-column:2"></button>
+          <button class="pkey" data-key="1" aria-label="1"></button>
+          <button class="pkey" data-key="up" aria-label="Up (2)"></button>
+          <button class="pkey" data-key="3" aria-label="3"></button>
+          <button class="pkey" data-key="left" aria-label="Left (4)"></button>
+          <button class="pkey" data-key="pause" aria-label="Pause (5)"></button>
+          <button class="pkey" data-key="right" aria-label="Right (6)"></button>
+          <button class="pkey" data-key="7" aria-label="7"></button>
+          <button class="pkey" data-key="down" aria-label="Down (8)"></button>
+          <button class="pkey" data-key="9" aria-label="9"></button>
+          <button class="pkey" data-key="*" aria-label="*"></button>
+          <button class="pkey" data-key="0" aria-label="0"></button>
+          <button class="pkey" data-key="#" aria-label="#"></button>
         </div>
       </div>
       <div id="snakeScore" class="nokia-score" style="text-align:left;width:100%">Score 0 Best 0</div>
@@ -713,13 +720,6 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
     if(el&&!cabinet.contains(el))togglePause();
   },{passive:true});
 })();
-/* nokia screen fit - pin canvas to phone screen from rendered image size */
-(function(){var img=document.querySelector(".phone-img"),cv=document.getElementById("snake");
-if(!img||!cv)return;function fit(){var r=img.getBoundingClientRect(),p=cv.parentElement.getBoundingClientRect();
-if(!r.width)return;cv.style.left=(r.left-p.left+r.width*0.124)+"px";cv.style.top=(r.top-p.top+r.height*0.178)+"px";
-cv.style.width=(r.width*0.758)+"px";cv.style.height=(r.height*0.33)+"px";}
-addEventListener("resize",fit);addEventListener("orientationchange",fit);
-if(img.complete&&img.naturalWidth)fit();else img.addEventListener("load",fit);setTimeout(fit,800);})();
 </script>
 </body>
 </html>
