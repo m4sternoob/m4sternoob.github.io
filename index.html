@@ -80,6 +80,10 @@ section{padding:64px 0}
 .socials a{color:var(--dim)}
 .socials a:hover{color:var(--violet)}
 .hero-media img{width:100%;border-radius:var(--r);border:1px solid var(--line);display:block}
+.hero-media{position:relative;padding:3px;border-radius:calc(var(--r) + 3px);
+  background:linear-gradient(90deg,#ff004c,#ff8a00,#ffee00,#00e676,#00b0ff,#7c3aed,#ff004c);
+  background-size:300% 100%;animation:rgbtext 20s linear infinite}
+.hero-media video{border-radius:var(--r);display:block;width:100%}
 .hero-media figcaption{font-size:13px;color:var(--dim);margin-top:10px;text-align:center}
 /* cards */
 .featured-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:36px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
@@ -411,7 +415,7 @@ section{transition:padding .35s ease}
           </div>
         </div>
         <figure class="hero-media" style="margin:0">
-          <video autoplay muted loop playsinline preload="metadata" aria-label="Gameplay footage" style="width:100%;border-radius:var(--r);border:1px solid var(--line);display:block">
+          <video autoplay muted loop playsinline preload="metadata" aria-label="Gameplay footage" style="width:100%;border-radius:var(--r);display:block">
             <source src="assets/32win.webm" type="video/webm">
             <source src="assets/32win.mp4" type="video/mp4">
           </video>
