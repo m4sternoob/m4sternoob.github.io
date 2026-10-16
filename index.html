@@ -163,7 +163,7 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
   border-radius:6px;touch-action:none;image-rendering:pixelated;background:#1a9edb;overflow:hidden}
 .phone-keys{position:absolute;z-index:3;left:8.0%;top:60.6%;width:84.6%;height:30.3%;
   display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(4,1fr);touch-action:none}
-.pkey{background:transparent;border:none;border-radius:50%;cursor:pointer;min-height:0}
+.pkey{background:transparent;border:1.5px solid rgba(196,181,253,.45);border-radius:50%;cursor:pointer;min-height:0;box-shadow:0 0 8px rgba(167,139,250,.30),inset 0 0 6px rgba(167,139,250,.18)}
 .pkey:active{background:rgba(255,255,255,.18)}
 .nokia-score{text-align:center;margin:10px 0 6px;font-family:"Courier New",monospace;font-size:14px;color:var(--na);width:100%}
 .nokia-hint{text-align:center;margin-top:14px;font-size:13px;color:var(--dim);max-width:300px}
@@ -431,6 +431,7 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
       <p class="nokia-hint" style="text-align:left;max-width:none">Tap the phone keys (2/4/6/8), 5 pauses. Swipe or arrow keys / WASD work too.</p>
       </div><!-- /arcade-phone-side -->
       </div><!-- /arcade-cabinet -->
+      <h3 style="text-align:center;margin:6px 0 14px">Ready To Play Games</h3>
       <div class="arcade-games-side">
         <div>More games coming soon.<br>Your HDD projects land here, one by one.</div>
       </div>
@@ -652,6 +653,10 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
   function isActive(){return gameTab.getAttribute('aria-selected')==='true'}
   function food(){do f={x:rnd(N),y:rnd(N)};while(s.some(function(p){return p.x===f.x&&p.y===f.y}))}
   function draw(t){t=t===undefined?1:t;g.save();
+    if(!tm&&!paused&&sc===0){g.clearRect(0,0,270,214);g.fillStyle='#ffffff';
+      g.font='bold 22px "Courier New",monospace';g.textAlign='center';
+      g.fillText('SNAKE',135,112);g.restore();
+      if(out)out.textContent='Score '+sc+'  Best '+best+'  Lv '+level;return}
     if(!reduced&&now()<shakeUntil)g.translate(rnd(7)-3,rnd(7)-3);
     g.fillStyle='#4a6b4a';g.fillRect(-8,-8,256,256);
     var pu=reduced?0:Math.sin(now()/180)*0.13,fs=S*(1+pu),fo=(S-fs)/2;
