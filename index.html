@@ -210,6 +210,11 @@ body.mml-editing .mml-pinned .mml-grip{opacity:.3;cursor:not-allowed}
   border:1px solid #7c3aed;color:#fff;padding:8px 16px;border-radius:8px;font-size:13px;opacity:0;
   transition:opacity .2s,transform .2s;z-index:10001;pointer-events:none;max-width:90vw;text-align:center}
 .mml-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.mml-custom{background:rgba(124,58,237,.06);border:1px dashed #7c3aed;border-radius:12px;
+  padding:20px;min-height:110px}
+.mml-custom [data-mml-edit]{outline:none;border-radius:6px;padding:2px 4px}
+.mml-custom [data-mml-edit]:focus{background:rgba(124,58,237,.14)}
+.mml-toolbar{flex-wrap:wrap;justify-content:center;max-width:94vw}
 body.mml-editing .mml-ttitle{cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;font-weight:600;color:#c4b5fd}
 body.mml-editing .mml-toolbar.mml-pinned .mml-ttitle{cursor:default;opacity:.55}
 body.mml-editing .mml-toolbar .mml-pin{background:none;border:none;font-size:14px;cursor:pointer;opacity:.4;padding:0 2px}
@@ -832,17 +837,45 @@ body.mml-editing .mml-toolbar.mml-pinned .mml-pin{opacity:1}
     var m=/translate\(([-\d.]+)px,\s*([-\d.]+)px\)/.exec(b.style.transform||'');
     return m?{x:Math.round(+m[1]),y:Math.round(+m[2])}:{x:0,y:0};
   }
+  function addFrame(){
+    var panel=document.querySelector('.panel[data-pos="0"]');
+    var z=panel?panel.querySelector('[data-mml-zone]'):null;
+    if(!z)z=document.querySelector('[data-mml-zone="portfolio"]');
+    if(!z){toast('No place to add a frame');return}
+    var sec=document.createElement('section');
+    sec.setAttribute('data-mml','custom-'+Date.now());
+    sec.className='mml-custom';
+    sec.innerHTML='<h3 data-mml-edit>New frame</h3><p data-mml-edit>Tap the text to edit it. Drag the handle to place it anywhere.</p>';
+    z.appendChild(sec);
+    buildHandles();save();
+    if(sec.scrollIntoView)sec.scrollIntoView({block:'nearest'});
+    toast('Frame added — drag it anywhere');
+  }
   function save(){
-    var d={pos:{},pinned:[]};
+    var d={pos:{},pinned:[],custom:[]};
     $$('[data-mml]').forEach(function(b){
-      var p=posOf(b);
-      if(p.x||p.y)d.pos[b.getAttribute('data-mml')]=p;
+      var id=b.getAttribute('data-mml'),p=posOf(b);
+      if(p.x||p.y)d.pos[id]=p;
+      if(id.indexOf('custom-')===0){
+        var clone=b.cloneNode(true);
+        clone.querySelectorAll('.mml-handle').forEach(function(h){h.remove()});
+        clone.querySelectorAll('[data-mml-edit]').forEach(function(el){el.removeAttribute('contenteditable')});
+        var zb=b.parentNode,zid=zb&&zb.getAttribute?zb.getAttribute('data-mml-zone'):null;
+        d.custom.push({id:id,zone:zid,html:clone.outerHTML});
+      }
     });
     d.pinned=$$('[data-mml].mml-pinned').map(function(b){return b.getAttribute('data-mml')});
     try{localStorage.setItem(LS,JSON.stringify(d))}catch(e){}
   }
   function apply(){
     var d=load();
+    (d.custom||[]).forEach(function(c){
+      if(document.querySelector('[data-mml="'+c.id+'"]'))return;
+      var z=(c.zone&&document.querySelector('[data-mml-zone="'+c.zone+'"]'))||document.querySelector('[data-mml-zone="portfolio"]');
+      if(!z)return;
+      var tmp=document.createElement('div');tmp.innerHTML=c.html;
+      if(tmp.firstChild)z.appendChild(tmp.firstChild);
+    });
     Object.keys(d.pos||{}).forEach(function(id){
       var b=document.querySelector('[data-mml="'+id+'"]');
       if(b)b.style.transform='translate('+d.pos[id].x+'px,'+d.pos[id].y+'px)';
@@ -916,12 +949,13 @@ body.mml-editing .mml-toolbar.mml-pinned .mml-pin{opacity:1}
     if($('#mmlToolbar'))return;
     var t=document.createElement('div');
     t.className='mml-toolbar';t.id='mmlToolbar';
-    t.innerHTML='<span class="mml-ttitle" title="Drag to move">Layout tools</span><button class="mml-pin" type="button" data-act="pin" title="Pin toolbar">&#x1F4CC;</button><button type="button" data-act="copy">Copy layout</button><button type="button" data-act="reset">Reset</button><button type="button" data-act="done" class="primary">Done</button>';
+    t.innerHTML='<span class="mml-ttitle" title="Drag to move">Layout tools</span><button class="mml-pin" type="button" data-act="pin" title="Pin toolbar">&#x1F4CC;</button><button type="button" data-act="add">+ Frame</button><button type="button" data-act="copy">Copy layout</button><button type="button" data-act="reset">Reset</button><button type="button" data-act="done" class="primary">Done</button>';
     body.appendChild(t);
     t.addEventListener('click',function(e){
       var a=e.target&&e.target.getAttribute&&e.target.getAttribute('data-act');if(!a)return;
       if(a==='done')setEditing(false);
       else if(a==='pin'){t.classList.toggle('mml-pinned');saveTb();toast(t.classList.contains('mml-pinned')?'Toolbar pinned':'Toolbar unpinned');}
+      else if(a==='add')addFrame();
       else if(a==='reset'){try{localStorage.removeItem(LS);localStorage.removeItem('mml-toolbar-v1')}catch(_){} location.reload();}
       else if(a==='copy'){
         save();
@@ -971,8 +1005,10 @@ body.mml-editing .mml-toolbar.mml-pinned .mml-pin{opacity:1}
   function setEditing(on){
     editing=on;
     body.classList.toggle('mml-editing',on);
-    if(on){buildHandles();buildToolbar();pokeToolbar();toast('Tools on — drag frames anywhere, pin to lock');}
-    else{dropHandles();dropToolbar();}
+    if(on){buildHandles();buildToolbar();pokeToolbar();toast('Tools on — drag frames anywhere, pin to lock');
+      $$('[data-mml-edit]').forEach(function(el){el.contentEditable='true'});}
+    else{dropHandles();dropToolbar();
+      $$('[data-mml-edit]').forEach(function(el){el.removeAttribute('contenteditable')});}
     syncFab();
   }
   var idleT=null,lastPoke=0;
