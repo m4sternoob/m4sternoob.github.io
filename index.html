@@ -141,10 +141,10 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
 .cv-box strong{color:var(--text)}
 /* arcade panel — HD phone image with overlaid game */
 /* arcade cabinet — phone pinned extreme left, future games fully separate */
-.arcade-cabinet{border:1px solid var(--violet);border-radius:14px;padding:20px;margin:16px 0;
+.arcade-cabinet{border:2px solid var(--violet);border-radius:14px;padding:28px 20px 24px;margin:16px 0;
   max-width:420px;width:calc(100% - 32px);background:rgba(167,139,250,.04)}
-.arcade-phone-side{display:flex;flex-direction:column;align-items:flex-start}
-.arcade-phone-side .phone-stage{margin:0}
+.arcade-phone-side{display:flex;flex-direction:column;align-items:center}
+.arcade-phone-side .phone-stage{margin:0 auto}
 .arcade-games-side{margin:24px 0;max-width:1000px;width:calc(100% - 32px);
   border:1px dashed rgba(167,139,250,.35);border-radius:10px;
   padding:20px;display:flex;align-items:center;justify-content:center;color:var(--dim);
@@ -411,13 +411,16 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
 <section class="panel" id="p-game" data-pos="1" aria-label="Game">
   <div class="wrap">
     <div class="arcade-wrap">
-      <p class="kicker" style="text-align:center">Playable Demos</p>
-      <h2 class="sec" style="text-align:center">Games</h2>
+      <p class="kicker" style="text-align:right">Playable Demos</p>
       <!-- Game 1: Snake -->
       <div class="game-section" id="game-snake" style="border:none;padding:0;margin:0">
       <h3 style="text-align:center;margin:0 0 14px">Snake — Nokia 1100</h3>
       <div class="arcade-cabinet" id="arcadeCabinet">
       <div class="arcade-phone-side">
+      <div style="display:flex;align-items:center;justify-content:flex-end;width:100%;margin:0 0 14px;gap:12px">
+      <div id="snakeScore" class="nokia-score" style="text-align:right">Score 0 Best 0</div>
+      <button id="snakePauseBtn" class="snake-pause-btn" type="button">Pause</button>
+      </div>
       <div class="phone-stage" role="group" aria-label="Snake game">
         <img src="assets/nokia-phone-labeled.png" class="phone-img" alt="Nokia 1100 style phone" draggable="false">
         <div class="phone-screen-wrap"><canvas id="snake" class="phone-screen" width="270" height="214" aria-label="Snake game"></canvas></div>
@@ -435,10 +438,6 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
           <button class="pkey" data-key="0" aria-label="0"></button>
           <button class="pkey" data-key="#" aria-label="#"></button>
         </div>
-      </div>
-      <div style="display:flex;align-items:center;justify-content:space-between;width:100%;margin-top:10px;gap:12px">
-      <div id="snakeScore" class="nokia-score" style="text-align:left">Score 0 Best 0</div>
-      <button id="snakePauseBtn" class="snake-pause-btn" type="button">Pause</button>
       </div>
       <p class="nokia-hint" style="text-align:left;max-width:none">Tap the phone keys (2/4/6/8), 5 pauses. Swipe or arrow keys / WASD work too.</p>
       </div><!-- /arcade-phone-side -->
