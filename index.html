@@ -187,7 +187,8 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
 body.mml-editing [data-mml]{position:relative}
 body.mml-editing .mml-handle{display:flex;align-items:center;gap:8px;position:absolute;top:-14px;left:50%;
   transform:translateX(-50%);z-index:60;background:#16162a;border:1px solid #7c3aed;border-radius:8px;
-  padding:4px 10px;font-size:12px;color:#c4b5fd;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.5)}
+  padding:4px 10px;font-size:12px;color:#c4b5fd;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.5);
+  cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
 body.mml-editing .mml-grip{letter-spacing:2px;cursor:grab;color:#a78bfa;font-weight:700;touch-action:none;
   user-select:none;-webkit-user-select:none;padding:2px 4px}
 body.mml-editing .mml-pin{background:none;border:none;font-size:14px;cursor:pointer;opacity:.4;padding:0 2px}
@@ -211,6 +212,11 @@ body.mml-editing .mml-ttitle{cursor:grab;touch-action:none;user-select:none;-web
 body.mml-editing .mml-toolbar.mml-pinned .mml-ttitle{cursor:default;opacity:.55}
 body.mml-editing .mml-toolbar .mml-pin{background:none;border:none;font-size:14px;cursor:pointer;opacity:.4;padding:0 2px}
 body.mml-editing .mml-toolbar.mml-pinned .mml-pin{opacity:1}
+.mml-fab{position:fixed;bottom:16px;right:16px;z-index:9000;width:42px;height:42px;border-radius:50%;
+  background:#16162a;border:1px solid #7c3aed;color:#c4b5fd;font-size:19px;cursor:pointer;opacity:.45;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.45)}
+.mml-fab:hover{opacity:1}
+body.mml-editing .mml-fab{display:none}
 .stat-chip{font-family:"Courier New",monospace;font-size:12px;color:var(--na);
   border:1px solid rgba(167,139,250,.35);border-radius:6px;padding:5px 9px;
   background:rgba(167,139,250,.06);white-space:nowrap}
@@ -861,7 +867,10 @@ body.mml-editing .mml-toolbar.mml-pinned .mml-pin{opacity:1}
         b.classList.toggle('mml-pinned');save();
         toast(b.classList.contains('mml-pinned')?'Pinned \u2014 locked in place':'Unpinned \u2014 draggable');
       });
-      h.querySelector('.mml-grip').addEventListener('pointerdown',function(e){startDrag(e,b)});
+      h.addEventListener('pointerdown',function(e){
+        if(e.target.closest('.mml-pin'))return;
+        startDrag(e,b);
+      });
     });
   }
   function dropHandles(){$$('.mml-handle').forEach(function(h){h.remove()})}
@@ -980,13 +989,22 @@ body.mml-editing .mml-toolbar.mml-pinned .mml-pin{opacity:1}
     if(on){buildHandles();buildToolbar();toast('Tools on \u2014 drag frames by their handle, pin to lock');}
     else{dropHandles();dropToolbar();}
   }
+  function buildFab(){
+    if(document.getElementById('mmlFab'))return;
+    var f=document.createElement('button');
+    f.id='mmlFab';f.className='mml-fab';f.type='button';f.title='Layout tools';f.setAttribute('aria-label','Open layout tools');
+    f.textContent='✎';
+    f.addEventListener('click',function(){setEditing(true)});
+    document.body.appendChild(f);
+  }
   document.addEventListener('keydown',function(e){
     var tag=(e.target&&e.target.tagName)||'';
     if(tag==='INPUT'||tag==='TEXTAREA')return;
     if((e.ctrlKey||e.metaKey)&&e.shiftKey&&e.code==='KeyE'){e.preventDefault();setEditing(!editing);}
   });
+  buildFab();
   apply();
-  if(/[?&]edit(=1)?(&|$)/.test(location.search))setEditing(true);
+  if(/(?:\?|&|#)edit(?:=1)?(?:&|$)/.test(location.href))setEditing(true);
 })();
 </script>
 </body>
