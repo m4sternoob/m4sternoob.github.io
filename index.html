@@ -159,7 +159,13 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
   .nokia-hint{margin-top:8px;font-size:12px}
 }
 .phone-img{display:block;width:100%;height:auto;position:relative;z-index:1}
-.phone-screen{position:absolute;z-index:2;left:12.4%;top:17.8%;width:75.8%;height:33.0%;
+.phone-screen-wrap{position:absolute;z-index:2;left:12.4%;top:17.8%;width:75.8%;height:33.0%}
+.phone-screen-wrap::before{content:"";position:absolute;inset:-5px;border-radius:12px;
+  background:conic-gradient(#ff004c,#ff8a00,#ffee00,#00e676,#00b0ff,#7c3aed,#ff004c);
+  filter:blur(6px);opacity:.8;z-index:-1;animation:rgbspin 6s linear infinite}
+@keyframes rgbspin{to{filter:blur(6px) hue-rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.phone-screen-wrap::before{animation:none}}
+.phone-screen{position:absolute;left:0;top:0;width:100%;height:100%;border:3px solid #000;
   border-radius:6px;touch-action:none;image-rendering:pixelated;background:#1a9edb;overflow:hidden}
 .phone-keys{position:absolute;z-index:3;left:8.0%;top:60.6%;width:84.6%;height:30.3%;
   display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(4,1fr);touch-action:none}
@@ -411,7 +417,7 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
       <h3 style="text-align:center;margin:0 0 12px">Snake — Nokia 1100</h3>
       <div class="phone-stage" role="group" aria-label="Snake game">
         <img src="assets/nokia-phone-labeled.png" class="phone-img" alt="Nokia 1100 style phone" draggable="false">
-        <canvas id="snake" class="phone-screen" width="270" height="214" aria-label="Snake game"></canvas>
+        <div class="phone-screen-wrap"><canvas id="snake" class="phone-screen" width="270" height="214" aria-label="Snake game"></canvas></div>
         <div class="phone-keys">
           <button class="pkey" data-key="1" aria-label="1"></button>
           <button class="pkey" data-key="up" aria-label="Up (2)"></button>
