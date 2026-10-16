@@ -276,6 +276,19 @@ body.mml-editing,.mml-always .mml-pinned .mml-resize{display:none}
 .game-section{width:100%;display:flex;flex-direction:column;align-items:center;padding:8px 0 32px;border-bottom:1px solid var(--line);margin-bottom:8px}
 .game-section:last-child{border-bottom:none}
 .game-section h3{color:var(--text)}
+@media(max-width:1024px){
+  .hero-grid{grid-template-columns:1fr;gap:28px}
+  .hero-media{max-width:560px;margin:0 auto}
+  .hero h1{font-size:clamp(32px,5vw,52px)}
+  .featured-card{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+  .skill-groups{grid-template-columns:repeat(2,1fr)}
+  .cv-grid{grid-template-columns:1fr}
+}
+.grid,.skill-groups,.hero-grid,.featured-card,.about-grid,.cv-grid{transition:grid-template-columns .35s ease}
+.hero h1{transition:font-size .35s ease}
+section{transition:padding .35s ease}
 @media(max-width:760px){
   .hero-grid,.featured-card,.about-grid{grid-template-columns:1fr}
   .hero h1{font-size:38px}
@@ -1104,12 +1117,24 @@ body.mml-editing,.mml-always .mml-pinned .mml-resize{display:none}
     var f=document.getElementById('mmlFab');if(!f)return;
     try{localStorage.setItem('mml-fab-v1',JSON.stringify({left:f.style.left||'',top:f.style.top||''}))}catch(e){}
   }
+  function clampFab(){
+    var f=document.getElementById('mmlFab');if(!f)return;
+    var r=f.getBoundingClientRect();
+    var m=10,changed=false;
+    if(r.right>window.innerWidth-m){f.style.left=(window.innerWidth-m-r.width)+'px';f.style.right='auto';changed=true;}
+    if(r.bottom>window.innerHeight-m){f.style.top=(window.innerHeight-m-r.height)+'px';f.style.bottom='auto';changed=true;}
+    if(r.left<m){f.style.left=m+'px';changed=true;}
+    if(r.top<m){f.style.top=m+'px';changed=true;}
+    if(changed)saveFab();
+  }
   function restoreFab(){
     var f=document.getElementById('mmlFab');if(!f)return;
     var d=null;try{d=JSON.parse(localStorage.getItem('mml-fab-v1'))}catch(e){}
     if(!d||!d.left||!d.top)return;
     f.style.left=d.left;f.style.top=d.top;f.style.bottom='auto';f.style.right='auto';
+    clampFab();
   }
+  window.addEventListener('resize',function(){clampFab();});
   function syncFab(){
     var f=document.getElementById('mmlFab');if(!f)return;
     f.textContent=editing?'✕':'✎';
