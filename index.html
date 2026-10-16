@@ -82,8 +82,12 @@ section{padding:64px 0}
 .hero-media img{width:100%;border-radius:var(--r);border:1px solid var(--line);display:block}
 .hero-media{position:relative}
 .hero-media video{padding:3px;border-radius:calc(var(--r) + 3px);display:block;width:100%;
-  background:linear-gradient(90deg,rgba(255,0,76,.85),rgba(255,138,0,.85),rgba(255,238,0,.85),rgba(0,230,118,.85),rgba(0,176,255,.85),rgba(124,58,237,.85),rgba(255,0,76,.85));
-  background-size:300% 100%;animation:rgbtext 20s linear infinite}
+  background:linear-gradient(135deg,#ffffff,#a78bfa,#7c3aed,#ffffff);
+  background-size:200% 200%;animation:rgbtext 12s ease infinite}
+.hero-media figcaption{font-size:14px;font-weight:700;margin-top:12px;text-align:center;
+  background:linear-gradient(90deg,#fff,#c4b5fd,#a78bfa,#fff);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  background-size:200% auto;animation:rgbtext 6s linear infinite}
 .hero-media figcaption{font-size:13px;color:var(--dim);margin-top:10px;text-align:center}
 /* cards */
 .featured-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:36px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
