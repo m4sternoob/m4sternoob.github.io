@@ -318,6 +318,13 @@ body.mml-editing,.mml-always .mml-pinned .mml-resize{display:none}
 .card.hide{display:none}
 .card.pop{animation:cardPop .25s cubic-bezier(.2,.8,.2,1)}
 @keyframes cardPop{from{opacity:0;transform:scale(.97) translateY(6px)}to{opacity:1;transform:none}}
+/* ---- RGB custom scrollbar for card backs ---- */
+.card-back{scrollbar-width:thin;scrollbar-color:#7c3aed transparent}
+.card-back::-webkit-scrollbar{width:8px}
+.card-back::-webkit-scrollbar-track{background:transparent}
+.card-back::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#ff004c,#ff8a00,#ffee00,#00e676,#00b0ff,#7c3aed,#ff004c);
+  border-radius:8px;border:2px solid transparent;background-clip:padding-box}
+.card-back::-webkit-scrollbar-thumb:hover{border:none;background-clip:border-box}
 /* ---- 3D card flip DISABLED for white-screen debug ---- */
 /*
 #projGrid .card{padding:0;position:relative}
@@ -1043,7 +1050,7 @@ body.mml-editing,.mml-always .mml-pinned .mml-resize{display:none}
 
   function setEditing(on){
     editing=on;
-    body.classList.toggle('mml-editing',on);
+    /* DEBUG: body.classList.toggle('mml-editing',on); */
     if(on){buildHandles();buildToolbar();pokeToolbar();toast('Tools on — drag frames anywhere, pin to lock');
       $$('[data-mml-edit]').forEach(function(el){el.contentEditable='true'});}
     else{dropHandles();dropToolbar();
