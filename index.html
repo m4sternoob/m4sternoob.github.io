@@ -184,7 +184,7 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center}
 @keyframes rgbtext{to{background-position:300% 0}}
 /* ---- m4ster layout tools: drag-drop reorder, edit mode only (locked otherwise) ---- */
 .mml-handle{display:none}
-/* DEBUG: body.mml-editing [data-mml]{position:relative} disabled */
+body.mml-editing [data-mml]{position:relative}
 body.mml-editing,.mml-always .mml-handle{display:flex;align-items:center;gap:8px;position:absolute;top:-14px;left:50%;
   transform:translateX(-50%);z-index:60;background:#160f14;border:1px solid #e63946;border-radius:8px;
   padding:4px 10px;font-size:12px;color:#ff8a8a;white-space:nowrap;box-shadow:0 0 14px rgba(230,57,70,.35),0 4px 14px rgba(0,0,0,.5);
@@ -904,6 +904,8 @@ body.mml-editing,.mml-always .mml-pinned .mml-resize{display:none}
   function buildHandles(root){
     $$('[data-mml]',root||document).forEach(function(b){
       if(b.querySelector(':scope > .mml-handle'))return;
+      var hidPanel=b.closest('.panel[data-pos]');
+      if(hidPanel&&hidPanel.getAttribute('data-pos')!=='0')return;
       var h=document.createElement('div');
       h.className='mml-handle';
       h.innerHTML='<span class="mml-grip" title="Drag to move">\u22EE\u22EE</span><span></span><button class="mml-pin" type="button" title="Pin / unpin">&#x1F4CC;</button>';
@@ -1118,6 +1120,7 @@ body.mml-editing,.mml-always .mml-pinned .mml-resize{display:none}
     if((e.ctrlKey||e.metaKey)&&e.shiftKey&&e.code==='KeyE'){e.preventDefault();setEditing(!editing);}
     if(e.code==='Escape'&&editing)setEditing(false);
   });
+  document.addEventListener('tabswitch',function(){if(editing)buildHandles();});
   buildFab();
   /* DISABLED var pg=document.querySelector('.mml-always'); if(pg)buildHandles(pg); */
   var dr=document.getElementById('mmlDemoReset');
