@@ -229,14 +229,14 @@ body.mml-editing,.mml-always .mml-toolbar.mml-pinned .mml-pin{opacity:1}
   touch-action:none;user-select:none;-webkit-user-select:none}
 .mml-fab:hover{opacity:1;box-shadow:0 0 28px rgba(230,57,70,.95),0 4px 14px rgba(0,0,0,.5)}
 .mml-fab:active{cursor:grabbing}
-.mml-playground{display:flex;gap:16px;flex-wrap:wrap;min-height:230px;padding:22px;
+/* DISABLED .mml-playground{display:flex;gap:16px;flex-wrap:wrap;min-height:230px;padding:22px;
   border:1px dashed #e63946;border-radius:14px;background:rgba(230,57,70,.04);position:relative}
 .mml-demo{background:#160f14;border:1px solid #e63946;border-radius:12px;padding:18px;
   min-width:180px;max-width:260px;box-shadow:0 0 16px rgba(230,57,70,.25)}
 .mml-demo h4{margin:0 0 8px;color:#ff8a8a;font-size:16px}
 .mml-demo p{margin:0;font-size:13px;color:#ffd9dc;line-height:1.5}
 .mml-link-btn{background:none;border:none;color:#ff8a8a;font-size:13px;cursor:pointer;
-  text-decoration:underline;padding:0}
+  text-decoration:underline;padding:0}*/
 .mml-resize{display:none}
 body.mml-editing,.mml-always .mml-resize{display:block;position:absolute;width:16px;height:16px;z-index:61;
   background:#160f14;border:2px solid #e63946;border-radius:4px;touch-action:none;
@@ -473,26 +473,7 @@ body.mml-editing,.mml-always .mml-pinned .mml-resize{display:none}
       </div>
     </section>
 
-    <section id="sec-playground">
-      <p class="kicker">Tools Programming</p>
-      <h2 class="sec">Tools Playground</h2>
-      <p class="sub">I build dev tools, not just games. This mini layout editor runs live on this page — grab a frame by its red handle, drop it anywhere, pull its corners to scale it, pin it to lock it. Go break it.</p>
-      <div class="mml-playground mml-always" data-mml-zone="playground">
-        <div class="mml-demo" data-mml="demo-1">
-          <h4>Drag me</h4>
-          <p>Grab my red handle and drop me anywhere on this page.</p>
-        </div>
-        <div class="mml-demo" data-mml="demo-2">
-          <h4>Scale me</h4>
-          <p>Pull my corners — I scale like a frame in a level editor.</p>
-        </div>
-        <div class="mml-demo" data-mml="demo-3">
-          <h4>Pin me</h4>
-          <p>Hit the pin and I lock in place, even in edit mode.</p>
-        </div>
-      </div>
-      <p class="sub" style="margin-top:14px">Your arrangement auto-saves in this browser only. <button type="button" id="mmlDemoReset" class="mml-link-btn">Reset playground</button></p>
-    </section>
+    <!-- PLAYGROUND DISABLED FOR DEBUG -->
 
     <section class="contact" id="sec-contact" data-mml="contact">
       <p class="kicker" style="text-align:center">Contact</p>
@@ -1131,8 +1112,7 @@ body.mml-editing,.mml-always .mml-pinned .mml-resize{display:none}
     if(e.code==='Escape'&&editing)setEditing(false);
   });
   buildFab();
-  var pg=document.querySelector('.mml-always');
-  if(pg)buildHandles(pg);
+  /* DISABLED var pg=document.querySelector('.mml-always'); if(pg)buildHandles(pg); */
   var dr=document.getElementById('mmlDemoReset');
   if(dr)dr.addEventListener('click',function(){
     $$('[data-mml^="demo-"]').forEach(function(b){b.style.transform='';b.classList.remove('mml-pinned')});
