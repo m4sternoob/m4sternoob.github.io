@@ -450,27 +450,34 @@ section{transition:padding .35s ease}
             
           </div>
         </div>
-        <figure class="hero-media gif-carousel" data-mml="hero-gif" style="margin:0">
-          <div class="gif-stage">
-            <video id="gifShow" autoplay muted loop playsinline preload="metadata" aria-label="Gameplay footage">
-              <source src="assets/32win.webm" type="video/webm">
-              <source src="assets/32win.mp4" type="video/mp4">
-            </video>
-            <div class="gif-empty" id="gifEmpty" hidden>
-              <span>🎬</span>
-              <p>Next gameplay drop lands here</p>
-            </div>
-            <button class="gif-nav prev" id="gifPrev" type="button" aria-label="Previous">&#8249;</button>
-            <button class="gif-nav next" id="gifNext" type="button" aria-label="Next">&#8250;</button>
-            <div class="gif-count"><span id="gifNum">1</span> / <span id="gifTotal">3</span></div>
-          </div>
-          <figcaption>
-            <strong id="gifTitle" class="gif-title">3 To Win — Streak Platformer</strong>
-            <span id="gifDesc">Actual gameplay — from a shipped build</span>
-          </figcaption>
-        </figure>
       </div>
     </header>
+    <!-- GIF Showcase: standalone movable frame -->
+    <section data-mml="gif-showcase" style="max-width:640px;margin:0 auto;padding:0 16px">
+      <figure class="hero-media gif-carousel" style="margin:0">
+        <div class="gif-stage">
+          <video id="gifShow0" autoplay muted loop playsinline preload="metadata" aria-label="Gameplay footage">
+            <source src="assets/32win.webm" type="video/webm">
+            <source src="assets/32win.mp4" type="video/mp4">
+          </video>
+          <div class="gif-empty" id="gifEmpty1" hidden>
+            <span>🎬</span>
+            <p>Next gameplay drop lands here</p>
+          </div>
+          <div class="gif-empty" id="gifEmpty2" hidden>
+            <span>🎬</span>
+            <p>One more gameplay drop on the way</p>
+          </div>
+          <button class="gif-nav prev" id="gifPrev" type="button" aria-label="Previous">&#8249;</button>
+          <button class="gif-nav next" id="gifNext" type="button" aria-label="Next">&#8250;</button>
+          <div class="gif-count"><span id="gifNum">1</span> / 3</div>
+        </div>
+        <figcaption>
+          <strong id="gifTitle" class="gif-title">3 To Win — Streak Platformer</strong>
+          <span id="gifDesc">Actual gameplay — from a shipped build</span>
+        </figcaption>
+      </figure>
+    </section>
 
     <section id="projects" style="padding-top:0" data-mml="projects">
       <p class="kicker">Featured Project</p>
@@ -1337,30 +1344,28 @@ window.MML_DEFAULT={desktop:null,mobile:null};
 <script>
 /* GIF showcase carousel */
 (function(){
-  var gifs=[
-    {src:'assets/32win',title:'3 To Win \u2014 Streak Platformer',desc:'Actual gameplay \u2014 from a shipped build'},
-    {src:null,title:'Slot 2 \u2014 Coming Soon',desc:'Your next shipped build lands here'},
-    {src:null,title:'Slot 3 \u2014 Coming Soon',desc:'One more gameplay drop on the way'}
+  var slides=[
+    {el:'gifShow0',title:'3 To Win \u2014 Streak Platformer',desc:'Actual gameplay \u2014 from a shipped build'},
+    {el:'gifEmpty1',title:'Slot 2 \u2014 Coming Soon',desc:'Your next shipped build lands here'},
+    {el:'gifEmpty2',title:'Slot 3 \u2014 Coming Soon',desc:'One more gameplay drop on the way'}
   ];
-  var i=0,vid=document.getElementById('gifShow'),empty=document.getElementById('gifEmpty');
-  if(!vid)return;
+  var i=0;
   function show(n){
-    i=(n+gifs.length)%gifs.length;
-    var g=gifs[i];
+    i=(n+slides.length)%slides.length;
+    slides.forEach(function(sl,idx){
+      var el=document.getElementById(sl.el);
+      if(el)el.hidden=idx!==i;
+      if(el&&el.tagName==='VIDEO')el.style.display=idx===i?'block':'none';
+    });
     document.getElementById('gifNum').textContent=i+1;
-    document.getElementById('gifTitle').textContent=g.title;
-    document.getElementById('gifDesc').textContent=g.desc;
-    if(g.src){
-      empty.hidden=true;vid.style.display='block';
-      vid.innerHTML='<source src="'+g.src+'.webm" type="video/webm"><source src="'+g.src+'.mp4" type="video/mp4">';
-      vid.load();
-    }else{
-      vid.style.display='none';empty.hidden=false;
-    }
+    document.getElementById('gifTitle').textContent=slides[i].title;
+    document.getElementById('gifDesc').textContent=slides[i].desc;
   }
-  document.getElementById('gifPrev').addEventListener('click',function(e){e.stopPropagation();show(i-1);});
-  document.getElementById('gifNext').addEventListener('click',function(e){e.stopPropagation();show(i+1);});
-  document.getElementById('gifTotal').textContent=gifs.length;
+  var pv=document.getElementById('gifPrev'),nx=document.getElementById('gifNext');
+  if(!pv||!nx)return;
+  pv.addEventListener('click',function(e){e.stopPropagation();show(i-1);});
+  nx.addEventListener('click',function(e){e.stopPropagation();show(i+1);});
+  show(0);
 })();
 </script>
 </body>
