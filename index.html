@@ -371,8 +371,8 @@ section{transition:padding .35s ease}
   border-radius:8px;border:2px solid transparent;background-clip:padding-box}
 .card-back::-webkit-scrollbar-thumb:hover{border:none;background-clip:border-box}
 /* ---- 3D card flip ---- */
-#projGrid .card{padding:0;position:relative;cursor:pointer}
-.card-inner{position:relative;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;min-height:200px}
+/*
+#projGrid .card{padding:0;position:relative}
 .card-face{padding:24px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
   transition:transform .65s cubic-bezier(.2,.8,.2,1),opacity .3s}
 .card-back{position:absolute;inset:0;transform:rotateY(180deg);overflow-y:auto;opacity:0;
@@ -470,13 +470,13 @@ section{transition:padding .35s ease}
         <button class="fbtn" data-f="tools">Tools</button>
       </div>
       <div class="grid" id="projGrid">
-        <div class="card" data-cat="web" data-title="Roadmap Tracker" data-tech="React · TypeScript" data-link="https://github.com/m4sternoob/m4ster-roadmap-tracker" data-body="Full project-management app: Kanban board, list, backlog, sprints, calendar, timeline, workload views. GitHub OAuth, per-user workspaces, real-time sync via Upstash Redis, serverless on Vercel. Shipped with keyboard shortcuts, @mentions, notifications, dependencies, time tracking, and automation rules."><div class="card-inner"><div class="card-face card-front"><h3><a href="https://github.com/m4sternoob/m4ster-roadmap-tracker" target="_blank" rel="noopener">Roadmap Tracker</a></h3><p>Kanban with sprints, calendar, timeline, sync. Serverless on Vercel.</p><span class="tech">React · TypeScript</span><span class="flip-hint">Tap for details</span></div><div class="card-face card-back"><h3>Roadmap Tracker</h3><span class="tech">React · TypeScript</span><p>Full project-management app: Kanban board, list, backlog, sprints, calendar, timeline, workload views. GitHub OAuth, per-user workspaces, real-time sync via Upstash Redis, serverless on Vercel. Shipped with keyboard shortcuts, @mentions, notifications, dependencies, time tracking, and automation rules.</p><a href="https://github.com/m4sternoob/m4ster-roadmap-tracker" target="_blank" rel="noopener">GitHub &rarr;</a><span class="flip-hint">Tap to flip back</span></div></div></div>
-        <div class="card" data-cat="games" data-title="StumbleGuysClone" data-tech="C++ · Unreal Engine 5" data-body="Multiplayer party game in UE5. 100% C++ gameplay code — no Blueprints. Chaos physics for knockback and ragdolls, replicated movement, lobby and match flow."><div class="card-inner"><div class="card-face card-front"><h3>StumbleGuysClone</h3><p>Multiplayer party game in UE5. 100% C++ gameplay — no Blueprints. Chaos physics.</p><span class="tech">C++ · Unreal Engine 5</span><span class="flip-hint">Tap for details</span></div><div class="card-face card-back"><h3>StumbleGuysClone</h3><span class="tech">C++ · Unreal Engine 5</span><p>Multiplayer party game in UE5. 100% C++ gameplay code — no Blueprints. Chaos physics for knockback and ragdolls, replicated movement, lobby and match flow.</p><span class="flip-hint">Tap to flip back</span></div></div></div>
-        <div class="card" data-cat="games" data-title="Polar Hopper 2D" data-tech="C# · Unity" data-body="Ice-physics 2D platformer in Unity. Custom slippery-surface movement with momentum conservation, coyote time, and hand-tuned jump curves."><div class="card-inner"><div class="card-face card-front"><h3>Polar Hopper 2D</h3><p>Ice-physics platformer in Unity. Custom slippery-surface movement.</p><span class="tech">C# · Unity</span><span class="flip-hint">Tap for details</span></div><div class="card-face card-back"><h3>Polar Hopper 2D</h3><span class="tech">C# · Unity</span><p>Ice-physics 2D platformer in Unity. Custom slippery-surface movement with momentum conservation, coyote time, and hand-tuned jump curves.</p><span class="flip-hint">Tap to flip back</span></div></div></div>
-        <div class="card" data-cat="web" data-title="Spice Sector" data-tech="React · Node.js" data-body="Punjab-inspired food-truck web app: storefront with cart, customer accounts, order email notifications, and an admin dashboard. React + GSAP frontend, Node/Express backend."><div class="card-inner"><div class="card-face card-front"><h3>Spice Sector</h3><p>Food-truck web app: cart, accounts, admin, email notifications.</p><span class="tech">React · Node.js</span><span class="flip-hint">Tap for details</span></div><div class="card-face card-back"><h3>Spice Sector</h3><span class="tech">React · Node.js</span><p>Punjab-inspired food-truck web app: storefront with cart, customer accounts, order email notifications, and an admin dashboard. React + GSAP frontend, Node/Express backend.</p><span class="flip-hint">Tap to flip back</span></div></div></div>
-        <div class="card" data-cat="tools" data-title="Phone Mirror Pipeline" data-tech="Python · adb" data-body="Automated wireless Android debugging: Python orchestration over adb plus scrcpy mirroring. One command connects, mirrors, and streams logs — built to speed up the 5IN1 Android dev loop."><div class="card-inner"><div class="card-face card-front"><h3>Phone Mirror Pipeline</h3><p>Automated wireless Android debugging with Python + adb + scrcpy.</p><span class="tech">Python · adb</span><span class="flip-hint">Tap for details</span></div><div class="card-face card-back"><h3>Phone Mirror Pipeline</h3><span class="tech">Python · adb</span><p>Automated wireless Android debugging: Python orchestration over adb plus scrcpy mirroring. One command connects, mirrors, and streams logs — built to speed up the 5IN1 Android dev loop.</p><span class="flip-hint">Tap to flip back</span></div></div></div>
-        <div class="card" data-cat="tools" data-title="On-Site Layout Editor" data-tech="JavaScript · CSS 3D" data-body="Drag, resize, and pin any section of this portfolio — live in the browser, Figma-style. Free-position frames, corner scaling, pin locks, plus a public Tools Playground sandbox. Zero dependencies, built into the site."><div class="card-inner"><div class="card-face card-front"><h3>On-Site Layout Editor</h3><p>Drag, resize, pin any section of this site live. Figma-style, zero dependencies.</p><span class="tech">JavaScript · CSS 3D</span><span class="flip-hint">Tap for details</span></div><div class="card-face card-back"><h3>On-Site Layout Editor</h3><span class="tech">JavaScript · CSS 3D</span><p>Drag, resize, and pin any section of this portfolio — live in the browser, Figma-style. Free-position frames, corner scaling, pin locks, plus a public Tools Playground sandbox. Zero dependencies, built into the site.</p><span class="flip-hint">Tap to flip back</span></div></div></div>
-        <div class="card" data-cat="games" data-title="College Builds" data-tech="C# · Unity · Maya" data-body="Two years of game-design coursework: a Pac-Man clone, puzzle games, 15+ hard-surface Maya models, vector and pixel art, and original sound packs."><div class="card-inner"><div class="card-face card-front"><h3>College Builds</h3><p>Pac-Man clone, puzzle games, 15+ Maya 3D models, vector/pixel art, sound packs.</p><span class="tech">C# · Unity · Maya</span><span class="flip-hint">Tap for details</span></div><div class="card-face card-back"><h3>College Builds</h3><span class="tech">C# · Unity · Maya</span><p>Two years of game-design coursework: a Pac-Man clone, puzzle games, 15+ hard-surface Maya models, vector and pixel art, and original sound packs.</p><span class="flip-hint">Tap to flip back</span></div></div></div>
+        <div class="card" data-cat="web" data-title="Roadmap Tracker" data-tech="React · TypeScript" data-link="https://github.com/m4sternoob/m4ster-roadmap-tracker" data-body="Full project-management app: Kanban board, list, backlog, sprints, calendar, timeline, workload views. GitHub OAuth, per-user workspaces, real-time sync via Upstash Redis, serverless on Vercel. Shipped with keyboard shortcuts, @mentions, notifications, dependencies, time tracking, and automation rules."><h3><a href="https://github.com/m4sternoob/m4ster-roadmap-tracker" target="_blank" rel="noopener">Roadmap Tracker</a></h3><p>Kanban with sprints, calendar, timeline, sync. Serverless on Vercel.</p><span class="tech">React · TypeScript</span></div>
+        <div class="card" data-cat="games" data-title="StumbleGuysClone" data-tech="C++ · Unreal Engine 5" data-body="Multiplayer party game in UE5. 100% C++ gameplay code — no Blueprints. Chaos physics for knockback and ragdolls, replicated movement, lobby and match flow."><h3>StumbleGuysClone</h3><p>Multiplayer party game in UE5. 100% C++ gameplay — no Blueprints. Chaos physics.</p><span class="tech">C++ · Unreal Engine 5</span></div>
+        <div class="card" data-cat="games" data-title="Polar Hopper 2D" data-tech="C# · Unity" data-body="Ice-physics 2D platformer in Unity. Custom slippery-surface movement with momentum conservation, coyote time, and hand-tuned jump curves."><h3>Polar Hopper 2D</h3><p>Ice-physics platformer in Unity. Custom slippery-surface movement.</p><span class="tech">C# · Unity</span></div>
+        <div class="card" data-cat="web" data-title="Spice Sector" data-tech="React · Node.js" data-body="Punjab-inspired food-truck web app: storefront with cart, customer accounts, order email notifications, and an admin dashboard. React + GSAP frontend, Node/Express backend."><h3>Spice Sector</h3><p>Food-truck web app: cart, accounts, admin, email notifications.</p><span class="tech">React · Node.js</span></div>
+        <div class="card" data-cat="tools" data-title="Phone Mirror Pipeline" data-tech="Python · adb" data-body="Automated wireless Android debugging: Python orchestration over adb plus scrcpy mirroring. One command connects, mirrors, and streams logs — built to speed up the 5IN1 Android dev loop."><h3>Phone Mirror Pipeline</h3><p>Automated wireless Android debugging with Python + adb + scrcpy.</p><span class="tech">Python · adb</span></div>
+        <div class="card" data-cat="tools" data-title="On-Site Layout Editor" data-tech="JavaScript · CSS 3D" data-body="Drag, resize, and pin any section of this portfolio — live in the browser, Figma-style. Free-position frames, corner scaling, pin locks, plus a public Tools Playground sandbox. Zero dependencies, built into the site."><h3>On-Site Layout Editor</h3><p>Drag, resize, pin any section of this site live. Figma-style, zero dependencies.</p><span class="tech">JavaScript · CSS 3D</span></div>
+        <div class="card" data-cat="games" data-title="College Builds" data-tech="C# · Unity · Maya" data-body="Two years of game-design coursework: a Pac-Man clone, puzzle games, 15+ hard-surface Maya models, vector and pixel art, and original sound packs."><h3>College Builds</h3><p>Pac-Man clone, puzzle games, 15+ Maya 3D models, vector/pixel art, sound packs.</p><span class="tech">C# · Unity · Maya</span></div>
       </div>
     </section>
 
@@ -911,6 +911,10 @@ section{transition:padding .35s ease}
 })();
 </script>
 <script>
+/* Published layout: owner's saved arrangement. Desktop visitors see desktop, phone visitors see mobile. */
+window.MML_DEFAULT={desktop:null,mobile:null};
+</script>
+<script>
 /* ---- m4ster layout tools: drag-drop reorder. Locked unless edit tools enabled ---- */
 (function(){
   var LS='mml-layout-v2';
@@ -959,8 +963,12 @@ section{transition:padding .35s ease}
     d.pinned=$$('[data-mml].mml-pinned').map(function(b){return b.getAttribute('data-mml')});
     try{localStorage.setItem(LS,JSON.stringify(d))}catch(e){}
   }
+  function bp(){return window.innerWidth<=700?'mobile':'desktop';}
   function apply(){
     var d=load();
+    if(!d||!Object.keys(d).length){
+      try{var defs=window.MML_DEFAULT||{};if(defs[bp()])d=defs[bp()];}catch(e){}
+    }
     (d.custom||[]).forEach(function(c){
       if(document.querySelector('[data-mml="'+c.id+'"]'))return;
       var z=(c.zone&&document.querySelector('[data-mml-zone="'+c.zone+'"]'))||document.querySelector('[data-mml-zone="portfolio"]');
@@ -1107,7 +1115,7 @@ section{transition:padding .35s ease}
     if($('#mmlToolbar'))return;
     var t=document.createElement('div');
     t.className='mml-toolbar';t.id='mmlToolbar';
-    t.innerHTML='<span class="mml-grip" style="cursor:grab" title="Drag to move">⋮⋮</span><span class="mml-ttitle" title="Drag to move">Toolbar</span><button class="mml-pin" type="button" data-act="pin" title="Pin toolbar">&#x1F4CC;</button><button type="button" data-act="add">+ Frame</button><button type="button" data-act="copy">Copy layout</button><button type="button" data-act="reset">Reset</button><button type="button" data-act="done" class="primary">Done</button>';
+    t.innerHTML='<span class="mml-grip" style="cursor:grab" title="Drag to move">⋮⋮</span><span class="mml-ttitle" title="Drag to move">Toolbar</span><button class="mml-pin" type="button" data-act="pin" title="Pin toolbar">&#x1F4CC;</button><button type="button" data-act="add">+ Frame</button><button type="button" data-act="copy">Copy layout</button><button type="button" data-act="publish" class="primary">Publish</button><button type="button" data-act="reset">Reset</button><button type="button" data-act="done" class="primary">Done</button>';
     body.appendChild(t);
     t.addEventListener('click',function(e){
       var a=e.target&&e.target.getAttribute&&e.target.getAttribute('data-act');if(!a)return;
@@ -1121,6 +1129,13 @@ section{transition:padding .35s ease}
         try{txt=localStorage.getItem(LS)||''}catch(_){}
         copyText(txt);
         toast('Layout copied — send it to me and I’ll bake it into the site');
+      }
+      else if(a==='publish'){
+        save();
+        var txt='';
+        try{txt=localStorage.getItem(LS)||''}catch(_){}
+        copyText(txt);
+        toast('Published ('+bp()+') copied — send it to me, every visitor sees YOUR layout');
       }
     });
     restoreTb(t);
@@ -1283,21 +1298,6 @@ section{transition:padding .35s ease}
   apply();
   if(/(?:\?|&|#)edit(?:=1)?(?:&|$)/.test(location.href))setEditing(true);
 })();
-</script>
-<script>
-// Card flip: click toggles, Escape unflips all
-document.querySelectorAll('#projGrid .card').forEach(card => {
-  card.addEventListener('click', (e) => {
-    // Don't flip if clicking a link
-    if (e.target.closest('a')) return;
-    card.classList.toggle('flipped');
-  });
-});
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    document.querySelectorAll('#projGrid .card.flipped').forEach(c => c.classList.remove('flipped'));
-  }
-});
 </script>
 </body>
 </html>
