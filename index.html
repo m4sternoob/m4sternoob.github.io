@@ -91,8 +91,9 @@ section{padding:64px 0}
 .hero-media figcaption{font-size:13px;color:var(--dim);margin-top:10px;text-align:center}
 .gif-carousel .gif-stage{position:relative;padding:3px;border-radius:calc(var(--r) + 3px);
   background:linear-gradient(135deg,#ffffff,#a78bfa,#7c3aed,#ffffff);
-  background-size:200% 200%;animation:rgbtext 12s ease infinite}
-.gif-carousel video{width:100%;border-radius:var(--r);display:block;background:#0a0a12;pointer-events:none}
+  background-size:200% 200%;animation:rgbtext 12s ease infinite;
+  aspect-ratio:16/9;min-height:200px}
+.gif-carousel video{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover;border-radius:var(--r);background:#0a0a12;pointer-events:none}
 .gif-carousel .gif-empty{position:absolute;inset:3px;border-radius:var(--r);background:#0c0916;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--dim)}
 .gif-carousel .gif-empty span{font-size:40px}
