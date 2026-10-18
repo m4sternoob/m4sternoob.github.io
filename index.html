@@ -401,11 +401,16 @@ section{transition:padding .35s ease}
   border-radius:8px;border:2px solid transparent;background-clip:padding-box}
 .card-back::-webkit-scrollbar-thumb:hover{border:none;background-clip:border-box}
 /* ---- 3D card flip ---- */
-#projGrid .card{padding:0;position:relative;cursor:pointer;min-height:220px}
+#projGrid .card{padding:0;position:relative;cursor:pointer;min-height:220px;perspective:1200px}
 .card-face{padding:24px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
   transition:transform .65s cubic-bezier(.2,.8,.2,1),opacity .3s}
 .card-back{position:absolute;inset:0;transform:rotateY(180deg);overflow-y:auto;opacity:0;
-  background:rgba(124,58,237,.07);border-radius:var(--r)}
+  background:#ede9fe;color:#1a1033;border-radius:var(--r);border:1px solid #a78bfa;
+  box-shadow:inset 0 0 40px rgba(124,58,237,.15)}
+.card-back h3{color:#1a1033}
+.card-back p{color:#4a4458!important}
+.card-back .tech{color:#6d28d9!important}
+.card-back a{color:#6d28d9!important}
 .card-back h3{margin:0 0 6px}
 .card-back .tech{margin-bottom:4px}
 .card-back p{color:var(--mute);line-height:1.7;margin:10px 0;font-size:14px}
