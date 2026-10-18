@@ -436,7 +436,7 @@ section{transition:padding .35s ease}
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 
 <nav aria-label="Main">
-  <span class="brand">M4ster<span>Noob</span></span>
+  <span class="brand" id="brandHome" role="button" tabindex="0" aria-label="Go to Portfolio" style="cursor:pointer">M4ster<span>Noob</span></span>
   <button role="tab" aria-selected="true">Portfolio</button>
   <button role="tab" aria-selected="false">CV</button>
   <button role="tab" aria-selected="false">Game</button>
@@ -974,6 +974,9 @@ section{transition:padding .35s ease}
     document.dispatchEvent(new CustomEvent('tabswitch'));
   }
   tabs.forEach(function(t,i){t.onclick=function(){go(i)}});
+  var brand=document.getElementById('brandHome');
+  if(brand){brand.addEventListener('click',function(){go(0);window.scrollTo({top:0,behavior:'smooth'})});
+  brand.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go(0);window.scrollTo({top:0,behavior:'smooth'})}});}
   function fromHash(){
     var h=(location.hash||'').replace('#','');
     var i=names.indexOf(h);
