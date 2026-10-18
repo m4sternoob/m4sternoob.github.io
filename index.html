@@ -3,12 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#0c0916">
-<link rel="apple-touch-icon" href="/icon-192.png">
-<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
-<link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
 <meta name="theme-color" content="#0c0916">
 <title>M4sterNoob — Game Programmer | C++, Unreal Engine 5</title>
 <meta name="description" content="M4sterNoob — Game programmer in Ontario, Canada. C++, Unreal Engine 5, Swift, Kotlin. Shipped 5IN1 (6 games, 3 platforms).">
@@ -654,8 +648,9 @@ section{transition:padding .35s ease}
           <div class="card-face card-back">
             <h3>On-Site Layout Editor</h3>
             <span class="tech">JavaScript · CSS 3D</span>
-            <p>Drag, resize, and pin any section of this portfolio — live in the browser, Figma-style. Free-position frames, corner scaling, pin locks, plus a public Tools Playground sandbox. Zero dependencies, built into the site.</p>
-            
+            <p><strong>How it works:</strong> every section is a frame. Hit the edit tool, drag frames anywhere, scale from corners, pin to lock. Layouts save per device — hit Publish to bake yours in as the public default.</p>
+            <a href="https://github.com/m4sternoob/m4sternoob.github.io" target="_blank" rel="noopener">GitHub — editor source ↗</a><br>
+            <a href="#" class="view-playground">View on site — try it live ↓</a>
           </div>
         </div>
         <div class="card" data-cat="games">
@@ -1533,6 +1528,17 @@ document.querySelectorAll('#projGrid .card').forEach(function(c){
   c.addEventListener('click', function(e){
     if(e.target.closest('a'))return;
     c.classList.toggle('flipped');
+  });
+});
+document.querySelectorAll('.view-playground').forEach(function(a){
+  a.addEventListener('click', function(e){
+    e.preventDefault();e.stopPropagation();
+    var card=a.closest('.card');
+    card.classList.remove('flipped');
+    setTimeout(function(){
+      var pg=document.getElementById('sec-playground');
+      if(pg)pg.scrollIntoView({behavior:'smooth',block:'start'});
+    }, 650);
   });
 });
 </script>
