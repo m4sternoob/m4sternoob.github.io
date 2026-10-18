@@ -1163,7 +1163,7 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"s":1.2892},"g
     });
     Object.keys(d.pos||{}).forEach(function(id){
       var b=document.querySelector('[data-mml="'+id+'"]');
-      if(b){var pp=d.pos[id];setScale(b,pp.x,pp.y,pp.s||1);}
+      if(b){var pp=d.pos[id];var px=(bp()==='mobile')?0:pp.x;setScale(b,px,pp.y,pp.s||1);}
     });
     (d.pinned||[]).forEach(function(id){
       var b=document.querySelector('[data-mml="'+id+'"]'); if(b)b.classList.add('mml-pinned');
@@ -1236,6 +1236,7 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"s":1.2892},"g
         b.classList.add('mml-dragging');
       }
       var nx=cur.x+ev.clientX-sx,ny=cur.y+ev.clientY-sy;
+      if(bp()==='mobile')nx=0;
       // alignment guides: snap to centers of other frames
       var br=b.getBoundingClientRect();
       var bcx=br.left+br.width/2,bcy=br.top+br.height/2;
