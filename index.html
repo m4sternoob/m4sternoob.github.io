@@ -261,8 +261,8 @@ footer::before{content:'';position:absolute;left:0;right:0;top:0;height:2px;
 .mml-dragging{z-index:9999 !important;pointer-events:none;opacity:.92;
   box-shadow:0 18px 50px rgba(0,0,0,.6);will-change:transform}
 .mml-toolbar{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:10000;display:flex;
-  gap:8px;align-items:center;background:#160f14;border:1px solid #e63946;border-radius:14px;
-  padding:8px 12px;box-shadow:0 0 22px rgba(230,57,70,.45),0 8px 30px rgba(0,0,0,.6);
+  gap:8px;align-items:center;background:#0d1526;border:2px solid #4da6ff;border-radius:14px;
+  padding:8px 12px;box-shadow:0 0 18px rgba(77,166,255,.8),0 0 42px rgba(77,166,255,.35),0 8px 30px rgba(0,0,0,.6);
   font-size:13px;color:#fff;white-space:nowrap;transition:opacity .4s}
 .mml-toolbar.mml-idle{opacity:.22}
 .mml-toolbar button{background:#241318;border:1px solid #7a2a33;color:#ffd9dc;border-radius:8px;
@@ -284,12 +284,12 @@ footer::before{content:'';position:absolute;left:0;right:0;top:0;height:2px;
 .mml-toolbar .mml-pin{background:none;border:none;font-size:14px;cursor:pointer;opacity:.4;padding:0 2px}
 .mml-toolbar.mml-pinned .mml-pin{opacity:1}
 .mml-fab{position:fixed;bottom:16px;right:16px;z-index:9000;width:46px;height:46px;border-radius:50%;
-  border:none;color:#fff;font-size:20px;cursor:grab;
-  background:radial-gradient(circle at 35% 32%,#ff8a8a,#e63946 45%,#a4161a 100%);
-  box-shadow:0 0 20px rgba(230,57,70,.7),0 4px 14px rgba(0,0,0,.5);
-  display:flex;align-items:center;justify-content:center;opacity:.55;
+  border:2px solid #4da6ff;color:#fff;font-size:20px;cursor:grab;
+  background:radial-gradient(circle at 35% 32%,#66b3ff,#2563eb 45%,#1e3a8a 100%);
+  box-shadow:0 0 18px rgba(77,166,255,.85),0 0 36px rgba(77,166,255,.3),0 4px 14px rgba(0,0,0,.5);
+  display:flex;align-items:center;justify-content:center;opacity:.75;
   touch-action:none;user-select:none;-webkit-user-select:none}
-.mml-fab:hover{opacity:1;box-shadow:0 0 28px rgba(230,57,70,.95),0 4px 14px rgba(0,0,0,.5)}
+.mml-fab:hover{opacity:1;box-shadow:0 0 26px rgba(77,166,255,1),0 0 50px rgba(77,166,255,.4),0 4px 14px rgba(0,0,0,.5)}
 .mml-fab:active{cursor:grabbing}
 .mml-playground{display:flex;gap:16px;flex-wrap:wrap;min-height:230px;padding:22px;
   border:1px dashed #e63946;border-radius:14px;background:rgba(230,57,70,.04);position:relative}
@@ -538,14 +538,14 @@ section{transition:padding .35s ease}
         <div class="card" data-cat="games">
           <div class="card-face card-front">
             <h3>5IN1 — Multi-Game Hub</h3>
-            <p>9 games, 3 platforms. Snake, 2048, Memory, Connect 4 and more.</p>
+            <p>6 games, 3 platforms. 2048, Memory Match, Connect 4 and more.</p>
             <span class="tech">Kotlin · Swift · TypeScript</span>
             <span class="flip-hint">Click to flip ↻</span>
           </div>
           <div class="card-face card-back">
             <h3>5IN1 — Multi-Game Hub</h3>
             <span class="tech">Kotlin · Swift · TypeScript</span>
-            <p>Multi-game app evolved from a Number Guessing game. 9 games on Android (Kotlin/Compose), macOS (Swift), and web (TypeScript). v1.7.1 shipped with candy-juice polish, FPS counter, and forensically-verified no-internet APKs.</p>
+            <p>Multi-game app evolved from a Number Guessing game. 6 games on Android (Kotlin/Compose), macOS (Swift), and web (TypeScript). v1.7.1 shipped with candy-juice polish, FPS counter, and forensically-verified no-internet APKs.</p>
             <a href="https://github.com/m4sternoob/m4ster-5in1-web" target="_blank" rel="noopener">GitHub →</a>
           </div>
         </div>
@@ -671,7 +671,7 @@ section{transition:padding .35s ease}
         <div class="tl-item"><span class="tl-date">10 Years — Software &amp; CS</span><h3>A decade of building software</h3><p>From BTech Computer Science through customer-facing engineering — <strong>10 years</strong> of shipping real software, debugging under pressure, and learning what "done" actually means.</p></div>
         <div class="tl-item"><span class="tl-date">Game Design — Ontario</span><h3>Then I fell for games</h3><p>Unity + C#, level design, 2D/3D art, sound. Shipped <strong>Pac-Man</strong>, <strong>Polar Hopper 2D</strong>, <strong>ICE_BLOCK_PUZZLE</strong> — and got hooked on making things <em>feel</em> right.</p></div>
         <div class="tl-item"><span class="tl-date">Self-Directed — C++ &amp; UE5</span><h3>Went deep on systems</h3><p>Physics-driven multiplayer in <strong>pure C++</strong>. No Blueprints. Chaos physics, replicated movement, clean Singletons — the hard stuff, from scratch.</p></div>
-        <div class="tl-item"><span class="tl-date">2026 — Shipped</span><h3>5IN1: 9 games, 3 platforms</h3><p>Android, macOS, web. <strong>Offline-first</strong>, zero network permissions, CI on every push. Real users, real releases, real version numbers.</p></div>
+        <div class="tl-item"><span class="tl-date">2026 — Shipped</span><h3>5IN1: 6 games, 3 platforms</h3><p>Android, macOS, web. <strong>Offline-first</strong>, zero network permissions, CI on every push. Real users, real releases, real version numbers.</p></div>
         <div class="tl-item"><span class="tl-date">2026 — Open Source</span><h3>Reviewing engine code in public</h3><p><strong>8 code reviews</strong> across SFML, MonoGame, Godot, ImGui — reading other people's engine code and finding real bugs.</p></div>
         <div class="tl-item now"><span class="tl-date">Now</span><h3>Ready for your team</h3><p><strong>Ontario studios</strong>, open to remote across Canada. Gameplay, engine, or tools — I ship.</p></div>
       </div>
@@ -683,7 +683,10 @@ section{transition:padding .35s ease}
       <p class="sub">Short build notes. Newest first.</p>
       <div class="devlog">
         <article class="dl-item"><span class="dl-date">Oct 2026</span><h3>Shipped a project tracker with automations</h3><p>Built a full Kanban app with calendar, timeline, workload views, @mentions, time tracking, and an automation rules engine. Hardest part: keeping every serverless API route self-contained.</p></article>
-        <article class="dl-item"><span class="dl-date">Oct 2026</span><h3>5IN1 trimmed to 6 games on Android</h3><p>Removed Snake and Snakes & Ladders to focus on the strongest titles. Verified the APKs carry zero network permissions — the offline-first promise holds.</p></article>
+        <article class="dl-item"><span class="dl-date">Oct 2026</span><h3>5IN1 trimmed to 6 games</h3><p>Cut Snake and Snakes &amp; Ladders to keep the lineup tight. Fewer games, better games.</p></article>
+        <article class="dl-item"><span class="dl-date">Oct 2026</span><h3>Hat Trick v3.0 live on itch.io</h3><p>Halloween update — planet-gravity dropdown, animated cheerleader, streak system. Stable 60fps, pause menu, goal particles.</p></article>
+        <article class="dl-item"><span class="dl-date">Oct 2026</span><h3>Shipped m4ster-sprite-gen v2</h3><p>Free 2D sprite + animation-atlas web app. AI row-strip to atlas pipeline, slot-slice extraction fallback, proper phone layout.</p></article>
+        <article class="dl-item"><span class="dl-date">Oct 2026</span><h3>5IN1 hit 8 games on Android</h3><p>Added 2048 and Minesweeper. Verified the APKs carry zero network permissions — the offline-first promise holds.</p></article>
         <article class="dl-item"><span class="dl-date">Sep 2026</span><h3>Going pure C++ in UE5</h3><p>Rebuilding gameplay systems without Blueprints. Chaos physics for knockback, replicated movement from scratch.</p></article>
       </div>
     </section>
@@ -822,7 +825,7 @@ section{transition:padding .35s ease}
       <h3 class="rgb-text" style="margin:0 0 8px">5IN1 — Multi-Game Hub</h3>
       <div style="background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px">
         <div style="font-size:40px;margin-bottom:8px">🎮</div>
-        <p style="margin:0 0 4px;font-weight:700">9 games · 3 platforms · v1.7.1 live</p>
+        <p style="margin:0 0 4px;font-weight:700">6 games · 3 platforms · v1.7.1 live</p>
         <p style="margin:0 0 16px;color:var(--muted);font-size:13px">One app, nine games. Snake, 2048, Memory Match, Connect 4, and more — on Android, macOS, and web. Offline-first, zero ads, zero tracking.</p>
         <a href="https://m4ster-5in1.vercel.app/play" target="_blank" rel="noopener" style="display:inline-block;background:var(--violet);color:#fff;padding:12px 24px;border-radius:10px;text-decoration:none;font-weight:700;margin:0 6px 6px 0">Play Web Games →</a>
         <a href="https://github.com/m4sternoob/m4ster-5in1-android/releases/download/v1.7.1/5in1-withHints-v1.7.1.apk" target="_blank" rel="noopener" style="display:inline-block;border:1px solid var(--line);color:var(--mute);padding:12px 24px;border-radius:10px;text-decoration:none;margin:0 0 6px 0">Android APK</a>
