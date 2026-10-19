@@ -506,10 +506,10 @@ section{transition:padding .35s ease}
       <p class="kicker">Featured Project</p>
       <div class="featured-card">
         <div>
-          <h3>5IN1 — Multi-Game Hub</h3>
-          <div class="meta"><span><strong>6</strong> games</span><span><strong>3</strong> platforms</span><span><strong>0</strong> network permissions</span></div>
-          <p>What started as a number-guessing toy became a full multi-game hub shipping on Android, macOS, and web.</p>
-          <ul>
+          <h3 id="featLeftTitle">5IN1 — Multi-Game Hub</h3>
+          <div class="meta" id="featLeftMeta"><span><strong>6</strong> games</span><span><strong>3</strong> platforms</span><span><strong>0</strong> network permissions</span></div>
+          <p id="featLeftDesc">What started as a number-guessing toy became a full multi-game hub shipping on Android, macOS, and web.</p>
+          <ul id="featLeftList">
             <li><strong>Android</strong> (Kotlin/Compose): 2048, Memory Match, Connect 4 + 3 more — offline-first, CI on every push</li>
             <li><strong>macOS</strong> (Swift/SwiftUI): native multi-game app</li>
             <li><strong>Web</strong> (TypeScript): playable browser demo</li>
@@ -1712,9 +1712,14 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
 /* Featured carousel with dots + auto-advance */
 (function(){
   var slides=[
-    {el:'featEmpty0',title:'Featured \u2014 Slot 1',desc:'Send a GIF to fill this slot',dur:5000},
-    {el:'featEmpty1',title:'Featured \u2014 Slot 2',desc:'Send a GIF to fill this slot',dur:5000},
-    {el:'featEmpty2',title:'Featured \u2014 Slot 3',desc:'Send a GIF to fill this slot',dur:5000}
+    {el:'featEmpty0',title:'Featured \u2014 Slot 1',desc:'Send a GIF to fill this slot',dur:5000,
+     leftTitle:'5IN1 — Multi-Game Hub',leftMeta:'<span><strong>6</strong> games</span><span><strong>3</strong> platforms</span><span><strong>0</strong> network permissions</span>',
+     leftDesc:'What started as a number-guessing toy became a full multi-game hub shipping on Android, macOS, and web.',
+     leftList:'<li><strong>Android</strong> (Kotlin/Compose): 2048, Memory Match, Connect 4 + 3 more — offline-first, CI on every push</li><li><strong>macOS</strong> (Swift/SwiftUI): native multi-game app</li><li><strong>Web</strong> (TypeScript): playable browser demo</li>'},
+    {el:'featEmpty1',title:'Featured \u2014 Slot 2',desc:'Send a GIF to fill this slot',dur:5000,
+     leftTitle:'Slot 2 — Coming Soon',leftMeta:'',leftDesc:'Send a GIF and description to fill this slot.',leftList:''},
+    {el:'featEmpty2',title:'Featured \u2014 Slot 3',desc:'Send a GIF to fill this slot',dur:5000,
+     leftTitle:'Slot 3 — Coming Soon',leftMeta:'',leftDesc:'Send a GIF and description to fill this slot.',leftList:''}
   ];
   var i=0,timer=null;
   var dotsWrap=document.getElementById('featDots');
@@ -1737,6 +1742,11 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
     document.getElementById('featNum').textContent=i+1;
     document.getElementById('featTitle').textContent=slides[i].title;
     document.getElementById('featDesc').textContent=slides[i].desc;
+    var sl=slides[i];
+    if(sl.leftTitle)document.getElementById('featLeftTitle').textContent=sl.leftTitle;
+    if(sl.leftMeta!==undefined)document.getElementById('featLeftMeta').innerHTML=sl.leftMeta;
+    if(sl.leftDesc)document.getElementById('featLeftDesc').textContent=sl.leftDesc;
+    if(sl.leftList!==undefined)document.getElementById('featLeftList').innerHTML=sl.leftList;
     timer=setTimeout(function(){show(i+1);},slides[i].dur);
   }
   var pv=document.getElementById('featPrev'),nx=document.getElementById('featNext');
