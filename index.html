@@ -504,30 +504,6 @@ section{transition:padding .35s ease}
 
     <section id="featured" data-mml="featured">
       <p class="kicker">Featured Project</p>
-      <figure class="hero-media feat-carousel" style="margin:0 0 24px">
-        <div class="gif-stage" id="featStage">
-          <div class="gif-empty" id="featEmpty0">
-            <span>🎬</span>
-            <p>Drop a GIF here</p>
-          </div>
-          <div class="gif-empty" id="featEmpty1" hidden>
-            <span>🎬</span>
-            <p>Drop a GIF here</p>
-          </div>
-          <div class="gif-empty" id="featEmpty2" hidden>
-            <span>🎬</span>
-            <p>Drop a GIF here</p>
-          </div>
-          <button class="gif-nav prev" id="featPrev" type="button" aria-label="Previous">‹</button>
-          <button class="gif-nav next" id="featNext" type="button" aria-label="Next">›</button>
-          <div class="gif-count"><span id="featNum">1</span> / 3</div>
-        </div>
-        <figcaption>
-          <strong id="featTitle" class="gif-title">Featured — Slot 1</strong>
-          <span id="featDesc">Send a GIF to fill this slot</span>
-        </figcaption>
-        <div class="feat-dots" id="featDots" style="display:flex;gap:8px;justify-content:center;margin-top:10px"></div>
-      </figure>
       <div class="featured-card">
         <div>
           <h3>5IN1 — Multi-Game Hub</h3>
@@ -545,8 +521,30 @@ section{transition:padding .35s ease}
           </div>
         </div>
         <div>
-          <p style="color:var(--mute);font-size:14px;margin:0"><strong style="color:var(--text)">Engineering highlights:</strong><br><br>
-          Forensic APK verification before every release. Hint-gating across variants. Offline-first — zero network permissions.</p>
+          <figure class="hero-media feat-carousel" style="margin:0">
+            <div class="gif-stage" id="featStage">
+              <div class="gif-empty" id="featEmpty0">
+                <span>🎬</span>
+                <p>Drop a GIF here</p>
+              </div>
+              <div class="gif-empty" id="featEmpty1" hidden>
+                <span>🎬</span>
+                <p>Drop a GIF here</p>
+              </div>
+              <div class="gif-empty" id="featEmpty2" hidden>
+                <span>🎬</span>
+                <p>Drop a GIF here</p>
+              </div>
+              <button class="gif-nav prev" id="featPrev" type="button" aria-label="Previous">‹</button>
+              <button class="gif-nav next" id="featNext" type="button" aria-label="Next">›</button>
+              <div class="gif-count"><span id="featNum">1</span> / 3</div>
+            </div>
+            <figcaption>
+              <strong id="featTitle" class="gif-title">Featured — Slot 1</strong>
+              <span id="featDesc">Send a GIF to fill this slot</span>
+            </figcaption>
+            <div class="feat-dots" id="featDots" style="display:flex;gap:8px;justify-content:center;margin-top:10px"></div>
+          </figure>
         </div>
       </div>
     </section>
