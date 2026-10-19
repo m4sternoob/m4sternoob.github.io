@@ -232,8 +232,8 @@ footer::before{content:'';position:absolute;left:0;right:0;top:0;height:2px;
 .mml-guide.v{width:1px;top:0;bottom:0}
 .mml-guide.h{height:1px;left:0;right:0}
 .mml-always .mml-handle{display:flex;align-items:center;gap:8px;position:relative;z-index:60;
-  width:max-content;margin:-14px auto 0;background:#160f14;border:1px solid #e63946;border-radius:8px;
-  padding:4px 10px;font-size:12px;color:#ff8a8a;white-space:nowrap;box-shadow:0 0 14px rgba(230,57,70,.35),0 4px 14px rgba(0,0,0,.5);
+  width:max-content;margin:-14px auto 0;background:#0d1526;border:1px solid #4da6ff;border-radius:8px;
+  padding:4px 10px;font-size:12px;color:#7cc4ff;white-space:nowrap;box-shadow:0 0 14px rgba(77,166,255,.35),0 4px 14px rgba(0,0,0,.5);
   cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
 .mml-resize{display:block;position:absolute;width:16px;height:16px;z-index:61;
   cursor:nwse-resize;background:#e63946;border:2px solid #fff;border-radius:50%;box-shadow:0 0 10px rgba(230,57,70,.8)}
@@ -248,16 +248,18 @@ footer::before{content:'';position:absolute;left:0;right:0;top:0;height:2px;
 .mml-always .mml-resize.ne{top:-8px;right:-8px;cursor:nesw-resize}
 .mml-always .mml-resize.sw{bottom:-8px;left:-8px;cursor:nesw-resize}
 .mml-handle{display:flex;align-items:center;gap:8px;position:relative;z-index:60;
-  width:max-content;margin:-14px auto 0;background:#160f14;border:1px solid #e63946;border-radius:8px;
-  padding:4px 10px;font-size:12px;color:#ff8a8a;white-space:nowrap;box-shadow:0 0 14px rgba(230,57,70,.35),0 4px 14px rgba(0,0,0,.5);
+  width:max-content;margin:-14px auto 0;background:#0d1526;border:1px solid #4da6ff;border-radius:8px;
+  padding:4px 10px;font-size:12px;color:#7cc4ff;white-space:nowrap;box-shadow:0 0 14px rgba(77,166,255,.35),0 4px 14px rgba(0,0,0,.5);
   cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
-.mml-grip{letter-spacing:2px;cursor:grab;color:#ff8a8a;font-weight:700;touch-action:none;
+.mml-grip{letter-spacing:2px;cursor:grab;color:#7cc4ff;font-weight:700;touch-action:none;
   user-select:none;-webkit-user-select:none;padding:2px 4px}
 .mml-pin{background:none;border:none;font-size:14px;cursor:pointer;opacity:.4;padding:0 2px}
 .mml-pinned .mml-pin{opacity:1}
-.mml-rotate-btn{background:none;border:none;color:#ff8a8a;font-size:14px;cursor:grab;padding:2px 6px;border-radius:4px}
-.mml-rotate-btn:hover{background:rgba(230,57,70,.2)}
-.mml-deg-label{position:fixed;z-index:10001;display:none;pointer-events:none;background:#160f14;border:1px solid #e63946;color:#ff8a8a;font-size:13px;font-weight:700;padding:4px 10px;border-radius:6px;box-shadow:0 0 12px rgba(230,57,70,.4);font-family:monospace;white-space:nowrap}
+.mml-rotate-btn{background:none;border:none;color:#7cc4ff;font-size:14px;cursor:grab;padding:2px 6px;border-radius:4px}
+.mml-rotate-btn:hover{background:rgba(77,166,255,.2)}
+.mml-del{background:none;border:none;color:#7cc4ff;font-size:13px;cursor:pointer;padding:2px 6px;border-radius:4px}
+.mml-del:hover{background:rgba(255,80,80,.25);color:#ff8a8a}
+.mml-deg-label{position:fixed;z-index:10001;display:none;pointer-events:none;background:#0d1526;border:1px solid #4da6ff;color:#ff8a8a;font-size:13px;font-weight:700;padding:4px 10px;border-radius:6px;box-shadow:0 0 12px rgba(77,166,255,.4);font-family:monospace;white-space:nowrap}
 .mml-pinned .mml-grip{opacity:.3;cursor:not-allowed}
 .mml-placeholder{border:2px dashed #e63946;border-radius:12px;background:rgba(230,57,70,.08);
   margin:8px 0;flex-shrink:0}
@@ -296,7 +298,7 @@ footer::before{content:'';position:absolute;left:0;right:0;top:0;height:2px;
 .mml-fab:active{cursor:grabbing}
 .mml-playground{display:flex;gap:16px;flex-wrap:wrap;min-height:230px;padding:22px;
   border:1px dashed #e63946;border-radius:14px;background:rgba(230,57,70,.04);position:relative}
-.mml-demo{background:#160f14;border:1px solid #e63946;border-radius:12px;padding:18px;
+.mml-demo{background:#0d1526;border:1px solid #4da6ff;border-radius:12px;padding:18px;
   min-width:180px;max-width:260px;box-shadow:0 0 16px rgba(230,57,70,.25)}
 .mml-demo h4{margin:0 0 8px;color:#ff8a8a;font-size:16px}
 .mml-demo p{margin:0;font-size:13px;color:#ffd9dc;line-height:1.5}
@@ -1246,7 +1248,7 @@ window.MML_DEFAULT={desktop:{"pos":{"featured":{"x":0,"y":0,"s":1},"index":{"x":
       b.style.position='relative';
       var h=document.createElement('div');
       h.className='mml-handle';
-      h.innerHTML='<span class="mml-grip" title="Drag to move">\u22EE\u22EE</span><span></span><button class="mml-rotate-btn" type="button" title="Rotate">&#x21BB;</button><button class="mml-pin" type="button" title="Pin / unpin">&#x1F4CC;</button>';
+      h.innerHTML='<span class="mml-grip" title="Drag to move">\u22EE\u22EE</span><span></span><button class="mml-rotate-btn" type="button" title="Rotate">&#x21BB;</button><button class="mml-pin" type="button" title="Pin / unpin">&#x1F4CC;</button><button class="mml-del" type="button" title="Delete frame">\uD83D\uDDD1;</button>';
       h.children[1].textContent=label(b);
       b.insertBefore(h,b.firstChild);
       h.querySelector('.mml-pin').addEventListener('click',function(e){
@@ -1257,6 +1259,10 @@ window.MML_DEFAULT={desktop:{"pos":{"featured":{"x":0,"y":0,"s":1},"index":{"x":
       h.querySelector('.mml-rotate-btn').addEventListener('pointerdown',function(e){
         e.stopPropagation();e.preventDefault();
         startRotate(e,b);
+      });
+      h.querySelector('.mml-del').addEventListener('click',function(e){
+        e.stopPropagation();e.preventDefault();
+        deleteFrame(b);
       });
       h.addEventListener('pointerdown',function(e){
         if(e.target.closest('.mml-pin'))return;
@@ -1400,17 +1406,43 @@ window.MML_DEFAULT={desktop:{"pos":{"featured":{"x":0,"y":0,"s":1},"index":{"x":
     updateLabel(startR, e.clientX, e.clientY);
   }
 
+  var deletedStack=[];
+  function deleteFrame(b){
+    var id=b.getAttribute('data-mml');
+    deletedStack.push({id:id,html:b.outerHTML,parent:b.parentNode,next:b.nextSibling});
+    b.parentNode.removeChild(b);
+    save();
+    toast('Frame deleted \u2014 Undo in toolbar to restore');
+    updateUndoBtn();
+  }
+  function undoDelete(){
+    var d=deletedStack.pop();
+    if(!d){toast('Nothing to undo');return;}
+    var tmp=document.createElement('div');tmp.innerHTML=d.html;
+    var el=tmp.firstChild;
+    if(d.next&&d.next.parentNode===d.parent)d.parent.insertBefore(el,d.next);
+    else d.parent.appendChild(el);
+    buildHandles();save();
+    toast('Frame restored');
+    updateUndoBtn();
+  }
+  function updateUndoBtn(){
+    var btn=document.querySelector('#mmlToolbar [data-act="undo"]');
+    if(btn){btn.disabled=!deletedStack.length;btn.style.opacity=deletedStack.length?1:.4;}
+  }
+
   function buildToolbar(){
     if($('#mmlToolbar'))return;
     var t=document.createElement('div');
     t.className='mml-toolbar';t.id='mmlToolbar';
-    t.innerHTML='<span class="mml-grip" style="cursor:grab" title="Drag to move">⋮⋮</span><span class="mml-ttitle" title="Drag to move">Toolbar</span><button class="mml-pin" type="button" data-act="pin" title="Pin toolbar">&#x1F4CC;</button><button type="button" data-act="add">+ Frame</button><button type="button" data-act="copy">Copy layout</button><button type="button" data-act="publish" class="primary">Publish</button><button type="button" data-act="reset">Reset</button><button type="button" data-act="done" class="primary">Done</button>';
+    t.innerHTML='<span class="mml-grip" style="cursor:grab" title="Drag to move">⋮⋮</span><span class="mml-ttitle" title="Drag to move">Toolbar</span><button class="mml-pin" type="button" data-act="pin" title="Pin toolbar">&#x1F4CC;</button><button type="button" data-act="add">+ Frame</button><button type="button" data-act="copy">Copy layout</button><button type="button" data-act="publish" class="primary">Publish</button><button type="button" data-act="undo" style="opacity:.4" title="Undo delete">\u21A9 Undo</button><button type="button" data-act="reset">Reset</button><button type="button" data-act="done" class="primary">Done</button>';
     body.appendChild(t);
     t.addEventListener('click',function(e){
       var a=e.target&&e.target.getAttribute&&e.target.getAttribute('data-act');if(!a)return;
       if(a==='done')setEditing(false);
       else if(a==='pin'){t.classList.toggle('mml-pinned');saveTb();toast(t.classList.contains('mml-pinned')?'Toolbar pinned':'Toolbar unpinned');}
       else if(a==='add')addFrame();
+      else if(a==='undo'){undoDelete();}
       else if(a==='reset'){try{localStorage.removeItem(LS);localStorage.removeItem('mml-toolbar-v1');localStorage.removeItem('mml-fab-v1')}catch(_){} location.reload();}
       else if(a==='copy'){
         save();
