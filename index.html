@@ -41,7 +41,7 @@ a:hover{text-decoration:underline}
 /* tab bar */
 nav{display:flex;gap:4px;padding:12px 16px;background:rgba(12,9,22,.9);backdrop-filter:blur(12px);
   border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;justify-content:center}
-nav::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:2px;
+.rgb-sep{height:2px;
   background:linear-gradient(90deg,#ff004c,#ff8a00,#ffee00,#00e676,#00b0ff,#7c3aed,#ff004c);
   background-size:200% 100%;animation:rgbtext 20s linear infinite;opacity:.35}
 nav button{background:none;border:1px solid transparent;color:var(--mute);font:inherit;font-weight:700;font-size:15px;
@@ -169,9 +169,7 @@ section{padding:64px 0}
 .contact-box{display:inline-block;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:32px 48px;margin-top:24px}
 .contact-box a{display:block;margin:8px 0;font-size:17px;font-weight:600}
 footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center;position:relative}
-footer::before{content:'';position:absolute;left:0;right:0;top:0;height:2px;
-  background:linear-gradient(90deg,#ff004c,#ff8a00,#ffee00,#00e676,#00b0ff,#7c3aed,#ff004c);
-  background-size:200% 100%;animation:rgbtext 20s linear infinite;opacity:.35}
+/* footer rgb sep now a real div */
 /* cv panel */
 .cv-wrap{max-width:780px;margin:0 auto}
 .cv-box{background:var(--ink);border:1px solid var(--line);border-radius:var(--r);padding:40px;color:var(--text)}
@@ -454,6 +452,7 @@ section{transition:padding .35s ease}
   <button role="tab" aria-selected="false">CV</button>
   <button role="tab" aria-selected="false">Gamehub</button>
 </nav>
+<div class="rgb-sep" data-mml="sep-top"></div>
 
 <div class="stage">
 <!-- ============ PORTFOLIO ============ -->
@@ -787,7 +786,8 @@ section{transition:padding .35s ease}
         </div>
       </div>
     </section>
-    <footer>© 2026 M4sterNoob</footer>
+    <div class="rgb-sep" data-mml="sep-bottom"></div>
+<footer>© 2026 M4sterNoob</footer>
   </div>
 </section>
 
@@ -1156,7 +1156,7 @@ section{transition:padding .35s ease}
 </script>
 <script>
 /* Published layout: owner's saved arrangement. Desktop visitors see desktop, phone visitors see mobile. */
-window.MML_DEFAULT={desktop:{"pos":{"featured":{"x":0,"y":0,"s":1},"index":{"x":0,"y":0,"s":1},"hero-text":{"x":-158,"y":150,"s":1.2892},"gif-showcase":{"x":451,"y":-208,"s":1.22966},"projects":{"x":-299,"y":-89,"s":1},"experience":{"x":751,"y":-1415,"s":0.810472},"devlog":{"x":277,"y":-1117,"s":1},"skills":{"x":-125,"y":-1065,"s":1.31315},"oss":{"x":-9,"y":-340,"s":1.32111},"contact":{"x":-6,"y":46,"s":1},"playground":{"x":192,"y":-1826,"s":0.974137},"pg-demo1":{"x":38,"y":105,"s":1},"pg-demo2":{"x":44,"y":27,"s":1},"game-main":{"x":-133,"y":-116,"s":0.735761},"game-side":{"x":-562,"y":-128,"s":2.2194},"game-5in1":{"x":232,"y":-215,"s":1},"game-5in1-frame":{"x":-327,"y":-817,"s":1}},"pinned":[,"index"],"custom":[]},mobile:{"pos":{"featured":{"x":0,"y":0,"s":1},"index":{"x":0,"y":0,"s":1},"hero-text":{"x":0,"y":-10,"s":1},"gif-showcase":{"x":0,"y":-42,"s":1},"projects":{"x":0,"y":8,"s":1},"experience":{"x":0,"y":14,"s":1.00626},"devlog":{"x":0,"y":-48,"s":1},"skills":{"x":0,"y":-135,"s":1},"oss":{"x":0,"y":-152,"s":1},"contact":{"x":0,"y":490,"s":1},"playground":{"x":0,"y":-544,"s":1},"pg-demo1":{"x":0,"y":45,"s":1},"pg-demo2":{"x":0,"y":64,"s":1},"game-main":{"x":0,"y":7,"s":0.960544},"game-side":{"x":0,"y":25,"s":0.987874},"game-5in1":{"x":0,"y":16,"s":1},"game-5in1-frame":{"x":0,"y":-45,"s":1}},"pinned":["hero-text","gif-showcase","projects","experience","devlog","skills","oss","contact","playground","pg-demo1","pg-demo2","game-main","game-side","game-5in1","game-5in1-frame"],"custom":[]}};
+window.MML_DEFAULT={desktop:{"pos":{"featured":{"x":0,"y":0,"s":1},"sep-top":{"x":0,"y":0,"s":1},"sep-bottom":{"x":0,"y":0,"s":1},"index":{"x":0,"y":0,"s":1},"hero-text":{"x":-158,"y":150,"s":1.2892},"gif-showcase":{"x":451,"y":-208,"s":1.22966},"projects":{"x":-299,"y":-89,"s":1},"experience":{"x":751,"y":-1415,"s":0.810472},"devlog":{"x":277,"y":-1117,"s":1},"skills":{"x":-125,"y":-1065,"s":1.31315},"oss":{"x":-9,"y":-340,"s":1.32111},"contact":{"x":-6,"y":46,"s":1},"playground":{"x":192,"y":-1826,"s":0.974137},"pg-demo1":{"x":38,"y":105,"s":1},"pg-demo2":{"x":44,"y":27,"s":1},"game-main":{"x":-133,"y":-116,"s":0.735761},"game-side":{"x":-562,"y":-128,"s":2.2194},"game-5in1":{"x":232,"y":-215,"s":1},"game-5in1-frame":{"x":-327,"y":-817,"s":1}},"pinned":[,"index"],"custom":[]},mobile:{"pos":{"featured":{"x":0,"y":0,"s":1},"sep-top":{"x":0,"y":0,"s":1},"sep-bottom":{"x":0,"y":0,"s":1},"index":{"x":0,"y":0,"s":1},"hero-text":{"x":0,"y":-10,"s":1},"gif-showcase":{"x":0,"y":-42,"s":1},"projects":{"x":0,"y":8,"s":1},"experience":{"x":0,"y":14,"s":1.00626},"devlog":{"x":0,"y":-48,"s":1},"skills":{"x":0,"y":-135,"s":1},"oss":{"x":0,"y":-152,"s":1},"contact":{"x":0,"y":490,"s":1},"playground":{"x":0,"y":-544,"s":1},"pg-demo1":{"x":0,"y":45,"s":1},"pg-demo2":{"x":0,"y":64,"s":1},"game-main":{"x":0,"y":7,"s":0.960544},"game-side":{"x":0,"y":25,"s":0.987874},"game-5in1":{"x":0,"y":16,"s":1},"game-5in1-frame":{"x":0,"y":-45,"s":1}},"pinned":["hero-text","gif-showcase","projects","experience","devlog","skills","oss","contact","playground","pg-demo1","pg-demo2","game-main","game-side","game-5in1","game-5in1-frame"],"custom":[]}};
 </script>
 <script>
 /* ---- m4ster layout tools: drag-drop reorder. Locked unless edit tools enabled ---- */
@@ -1226,7 +1226,7 @@ window.MML_DEFAULT={desktop:{"pos":{"featured":{"x":0,"y":0,"s":1},"index":{"x":
     });
     Object.keys(d.pos||{}).forEach(function(id){
       var b=document.querySelector('[data-mml="'+id+'"]');
-      if(b){var pp=d.pos[id];var px=(bp()==='mobile')?0:pp.x;setTransform(b,px,pp.y,pp.s||1,pp.r||0);}
+      if(b){var pp=d.pos[id];setTransform(b,pp.x,pp.y,pp.s||1,pp.r||0);}
     });
     (d.pinned||[]).forEach(function(id){
       var b=document.querySelector('[data-mml="'+id+'"]'); if(b)b.classList.add('mml-pinned');
@@ -1307,7 +1307,6 @@ window.MML_DEFAULT={desktop:{"pos":{"featured":{"x":0,"y":0,"s":1},"index":{"x":
         b.classList.add('mml-dragging');
       }
       var nx=cur.x+ev.clientX-sx,ny=cur.y+ev.clientY-sy;
-      if(bp()==='mobile')nx=0;
       // alignment guides: snap to centers of other frames
       var br=b.getBoundingClientRect();
       var bcx=br.left+br.width/2,bcy=br.top+br.height/2;
