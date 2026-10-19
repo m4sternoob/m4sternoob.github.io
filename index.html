@@ -109,6 +109,8 @@ section{padding:64px 0}
 .gif-carousel .gif-nav:hover{background:var(--violet-deep);border-color:var(--violet)}
 .gif-carousel .gif-nav.prev{left:10px}
 .gif-carousel .gif-nav.next{right:10px}
+.feat-dots button{width:10px;height:10px;border-radius:50%;border:1px solid var(--violet);background:transparent;cursor:pointer;padding:0;transition:background .2s}
+.feat-dots button.on{background:var(--violet);box-shadow:0 0 8px var(--violet)}
 .gif-carousel .gif-count{position:absolute;bottom:12px;right:14px;z-index:5;
   font-size:12px;font-weight:700;color:#fff;background:rgba(12,9,22,.7);
   padding:3px 10px;border-radius:20px;border:1px solid rgba(255,255,255,.15)}
@@ -523,6 +525,30 @@ section{transition:padding .35s ease}
           Forensic APK verification before every release. Hint-gating across variants. Offline-first — zero network permissions.</p>
         </div>
       </div>
+      <figure class="hero-media feat-carousel" style="margin:24px 0 0">
+        <div class="gif-stage" id="featStage">
+          <div class="gif-empty" id="featEmpty0">
+            <span>🎬</span>
+            <p>Drop a GIF here</p>
+          </div>
+          <div class="gif-empty" id="featEmpty1" hidden>
+            <span>🎬</span>
+            <p>Drop a GIF here</p>
+          </div>
+          <div class="gif-empty" id="featEmpty2" hidden>
+            <span>🎬</span>
+            <p>Drop a GIF here</p>
+          </div>
+          <button class="gif-nav prev" id="featPrev" type="button" aria-label="Previous">‹</button>
+          <button class="gif-nav next" id="featNext" type="button" aria-label="Next">›</button>
+          <div class="gif-count"><span id="featNum">1</span> / 3</div>
+        </div>
+        <figcaption>
+          <strong id="featTitle" class="gif-title">Featured — Slot 1</strong>
+          <span id="featDesc">Send a GIF to fill this slot</span>
+        </figcaption>
+        <div class="feat-dots" id="featDots" style="display:flex;gap:8px;justify-content:center;margin-top:10px"></div>
+      </figure>
     </section>
 
     <section id="projects" style="padding-top:0" data-mml="projects">
@@ -1660,6 +1686,43 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-244,"y":124,"r":0,"s":1.28
   if(!pv||!nx)return;
   pv.addEventListener('click',function(e){e.stopPropagation();show(i-1);});
   nx.addEventListener('click',function(e){e.stopPropagation();show(i+1);});
+  show(0);
+})();
+</script>
+<script>
+/* Featured carousel with dots + auto-advance */
+(function(){
+  var slides=[
+    {el:'featEmpty0',title:'Featured \u2014 Slot 1',desc:'Send a GIF to fill this slot',dur:5000},
+    {el:'featEmpty1',title:'Featured \u2014 Slot 2',desc:'Send a GIF to fill this slot',dur:5000},
+    {el:'featEmpty2',title:'Featured \u2014 Slot 3',desc:'Send a GIF to fill this slot',dur:5000}
+  ];
+  var i=0,timer=null;
+  var dotsWrap=document.getElementById('featDots');
+  if(!dotsWrap)return;
+  slides.forEach(function(sl,idx){
+    var d=document.createElement('button');
+    d.type='button';d.setAttribute('aria-label','Go to slot '+(idx+1));
+    d.addEventListener('click',function(e){e.stopPropagation();show(idx);});
+    dotsWrap.appendChild(d);
+  });
+  var dots=dotsWrap.querySelectorAll('button');
+  function show(n){
+    if(timer){clearTimeout(timer);timer=null;}
+    i=(n+slides.length)%slides.length;
+    slides.forEach(function(sl,idx){
+      var el=document.getElementById(sl.el);
+      if(el)el.hidden=idx!==i;
+    });
+    dots.forEach(function(d,idx){d.classList.toggle('on',idx===i);});
+    document.getElementById('featNum').textContent=i+1;
+    document.getElementById('featTitle').textContent=slides[i].title;
+    document.getElementById('featDesc').textContent=slides[i].desc;
+    timer=setTimeout(function(){show(i+1);},slides[i].dur);
+  }
+  var pv=document.getElementById('featPrev'),nx=document.getElementById('featNext');
+  if(pv)pv.addEventListener('click',function(e){e.stopPropagation();show(i-1);});
+  if(nx)nx.addEventListener('click',function(e){e.stopPropagation();show(i+1);});
   show(0);
 })();
 </script>
