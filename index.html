@@ -1431,17 +1431,33 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-244,"y":124,"r":0,"s":1.28
     if(btn){btn.disabled=!deletedStack.length;btn.style.opacity=deletedStack.length?1:.4;}
   }
 
+  function spawnRGB(){
+    var panel=document.querySelector('.panel[data-pos="0"]');
+    var z=panel?panel.querySelector('[data-mml-zone]'):null;
+    if(!z)z=document.querySelector('[data-mml-zone="portfolio"]');
+    if(!z)z=document.querySelector('#p-portfolio .wrap')||document.body;
+    var d=document.createElement('div');
+    d.className='rgb-sep';
+    d.setAttribute('data-mml','sep-'+Date.now());
+    d.style.margin='20px 0';
+    z.appendChild(d);
+    buildHandles();save();
+    if(d.scrollIntoView)d.scrollIntoView({block:'nearest'});
+    toast('RGB separator added \u2014 drag it anywhere');
+  }
+
   function buildToolbar(){
     if($('#mmlToolbar'))return;
     var t=document.createElement('div');
     t.className='mml-toolbar';t.id='mmlToolbar';
-    t.innerHTML='<span class="mml-grip" style="cursor:grab" title="Drag to move">⋮⋮</span><span class="mml-ttitle" title="Drag to move">Toolbar</span><button class="mml-pin" type="button" data-act="pin" title="Pin toolbar">&#x1F4CC;</button><button type="button" data-act="add">+ Frame</button><button type="button" data-act="copy">Copy layout</button><button type="button" data-act="publish" class="primary">Publish</button><button type="button" data-act="undo" style="opacity:.4" title="Undo delete">\u21A9 Undo</button><button type="button" data-act="reset">Reset</button><button type="button" data-act="done" class="primary">Done</button>';
+    t.innerHTML='<span class="mml-grip" style="cursor:grab" title="Drag to move">⋮⋮</span><span class="mml-ttitle" title="Drag to move">Toolbar</span><button class="mml-pin" type="button" data-act="pin" title="Pin toolbar">&#x1F4CC;</button><button type="button" data-act="add">+ Frame</button><button type="button" data-act="addrgb" title="Add RGB separator">+ RGB</button><button type="button" data-act="copy">Copy layout</button><button type="button" data-act="publish" class="primary">Publish</button><button type="button" data-act="undo" style="opacity:.4" title="Undo delete">\u21A9 Undo</button><button type="button" data-act="reset">Reset</button><button type="button" data-act="done" class="primary">Done</button>';
     body.appendChild(t);
     t.addEventListener('click',function(e){
       var a=e.target&&e.target.getAttribute&&e.target.getAttribute('data-act');if(!a)return;
       if(a==='done')setEditing(false);
       else if(a==='pin'){t.classList.toggle('mml-pinned');saveTb();toast(t.classList.contains('mml-pinned')?'Toolbar pinned':'Toolbar unpinned');}
       else if(a==='add')addFrame();
+      else if(a==='addrgb')spawnRGB();
       else if(a==='undo'){undoDelete();}
       else if(a==='reset'){try{localStorage.removeItem(LS);localStorage.removeItem('mml-toolbar-v1');localStorage.removeItem('mml-fab-v1')}catch(_){} location.reload();}
       else if(a==='copy'){
