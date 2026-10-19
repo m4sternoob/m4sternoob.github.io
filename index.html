@@ -1543,26 +1543,29 @@ window.MML_DEFAULT={desktop:{"pos":{"featured":{"x":0,"y":0,"s":1},"index":{"x":
 /* GIF showcase carousel */
 (function(){
   var slides=[
-    {el:'gifShow0',title:'Hat Trick \u2014 Behind the Scenes',desc:'How the streak platformer came together'},
-    {el:'gifShow1',title:'Hat Trick \u2014 Streak Platformer',desc:'Planet-gravity goals \u2014 actual gameplay'},
-    {el:'gifShow2',title:'NEON RAIN \u2014 Hack the Terminals',desc:'Neon-soaked arcade action \u2014 actual gameplay'}
+    {el:'gifShow0',title:'Hat Trick \u2014 Behind the Scenes',desc:'How the streak platformer came together',dur:22000},
+    {el:'gifShow1',title:'Hat Trick \u2014 Streak Platformer',desc:'Planet-gravity goals \u2014 actual gameplay',dur:9200},
+    {el:'gifShow2',title:'NEON RAIN \u2014 Hack the Terminals',desc:'Neon-soaked arcade action \u2014 actual gameplay',dur:3360}
   ];
-  var i=0;
-  function show(n){
+  var i=0,timer=null;
+  function show(n,manual){
+    if(timer){clearTimeout(timer);timer=null;}
     i=(n+slides.length)%slides.length;
     slides.forEach(function(sl,idx){
       var el=document.getElementById(sl.el);
       if(el)el.hidden=idx!==i;
       if(el&&(el.tagName==='VIDEO'||el.tagName==='IMG'))el.style.display=idx===i?'block':'none';
+      if(el&&idx===i&&el.tagName==='IMG'){var src=el.src;el.src='';el.src=src;}
     });
     document.getElementById('gifNum').textContent=i+1;
     document.getElementById('gifTitle').textContent=slides[i].title;
     document.getElementById('gifDesc').textContent=slides[i].desc;
+    timer=setTimeout(function(){show(i+1);},slides[i].dur);
   }
   var pv=document.getElementById('gifPrev'),nx=document.getElementById('gifNext');
   if(!pv||!nx)return;
-  pv.addEventListener('click',function(e){e.stopPropagation();show(i-1);});
-  nx.addEventListener('click',function(e){e.stopPropagation();show(i+1);});
+  pv.addEventListener('click',function(e){e.stopPropagation();show(i-1,true);});
+  nx.addEventListener('click',function(e){e.stopPropagation();show(i+1,true);});
   show(0);
 })();
 </script>
