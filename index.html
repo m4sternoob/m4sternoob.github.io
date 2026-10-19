@@ -1825,5 +1825,36 @@ document.querySelectorAll('.view-playground').forEach(function(a){
   });
 });
 </script>
+<script>
+/* Bulletproof fullscreen — Chrome requires sync call in tap handler */
+(function(){
+  function isStandalone(){
+    return window.matchMedia&&matchMedia('(display-mode: standalone)').matches;
+  }
+  window.goFullscreen=function(){
+    if(isStandalone())return; // already fullscreen as PWA
+    var el=document.documentElement;
+    try{
+      if(el.requestFullscreen)el.requestFullscreen();
+      else if(el.webkitRequestFullscreen)el.webkitRequestFullscreen();
+    }catch(e){}
+  };
+  // Retry when page regains focus (fixes first-tap failure)
+  var wantsFs=false;
+  document.addEventListener('visibilitychange',function(){
+    if(!document.hidden&&wantsFs&&!document.fullscreenElement){
+      window.goFullscreen();
+      wantsFs=false;
+    }
+  });
+  // Track intent: if user tapped fullscreen, retry on focus
+  document.addEventListener('click',function(e){
+    if(e.target.closest&&e.target.closest('[data-fullscreen]')){
+      wantsFs=true;
+      window.goFullscreen(); // sync call — no async gap
+    }
+  });
+})();
+</script>
 </body>
 </html>
