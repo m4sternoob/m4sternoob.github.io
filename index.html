@@ -514,7 +514,7 @@ section{transition:padding .35s ease}
             <li><strong>macOS</strong> (Swift/SwiftUI): native multi-game app</li>
             <li><strong>Web</strong> (TypeScript): playable browser demo</li>
           </ul>
-          <div class="links">
+          <div class="links" id="featLeftLinks">
             <a href="https://github.com/m4sternoob/m4ster-5in1-android" target="_blank" rel="noopener">Android →</a>
             <a href="https://github.com/m4sternoob/m4ster-5in1" target="_blank" rel="noopener">macOS →</a>
             <a href="https://github.com/m4sternoob/m4ster-5in1-web" target="_blank" rel="noopener">Web →</a>
@@ -1715,11 +1715,12 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
     {el:'featEmpty0',title:'Featured \u2014 Slot 1',desc:'Send a GIF to fill this slot',dur:5000,
      leftTitle:'5IN1 — Multi-Game Hub',leftMeta:'<span><strong>6</strong> games</span><span><strong>3</strong> platforms</span><span><strong>0</strong> network permissions</span>',
      leftDesc:'What started as a number-guessing toy became a full multi-game hub shipping on Android, macOS, and web.',
-     leftList:'<li><strong>Android</strong> (Kotlin/Compose): 2048, Memory Match, Connect 4 + 3 more — offline-first, CI on every push</li><li><strong>macOS</strong> (Swift/SwiftUI): native multi-game app</li><li><strong>Web</strong> (TypeScript): playable browser demo</li>'},
+     leftList:'<li><strong>Android</strong> (Kotlin/Compose): 2048, Memory Match, Connect 4 + 3 more — offline-first, CI on every push</li><li><strong>macOS</strong> (Swift/SwiftUI): native multi-game app</li><li><strong>Web</strong> (TypeScript): playable browser demo</li>',
+     leftLinks:'<a href="https://github.com/m4sternoob/m4ster-5in1-android" target="_blank" rel="noopener">Android \u2192</a><a href="https://github.com/m4sternoob/m4ster-5in1" target="_blank" rel="noopener">macOS \u2192</a><a href="https://github.com/m4sternoob/m4ster-5in1-web" target="_blank" rel="noopener">Web \u2192</a>'},
     {el:'featEmpty1',title:'Featured \u2014 Slot 2',desc:'Send a GIF to fill this slot',dur:5000,
-     leftTitle:'Slot 2 — Coming Soon',leftMeta:'',leftDesc:'Send a GIF and description to fill this slot.',leftList:''},
+     leftTitle:'Slot 2 — Coming Soon',leftMeta:'',leftDesc:'Send a GIF and description to fill this slot.',leftList:'',leftLinks:''},
     {el:'featEmpty2',title:'Featured \u2014 Slot 3',desc:'Send a GIF to fill this slot',dur:5000,
-     leftTitle:'Slot 3 — Coming Soon',leftMeta:'',leftDesc:'Send a GIF and description to fill this slot.',leftList:''}
+     leftTitle:'Slot 3 — Coming Soon',leftMeta:'',leftDesc:'Send a GIF and description to fill this slot.',leftList:'',leftLinks:''}
   ];
   var i=0,timer=null;
   var dotsWrap=document.getElementById('featDots');
@@ -1747,6 +1748,7 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
     if(sl.leftMeta!==undefined)document.getElementById('featLeftMeta').innerHTML=sl.leftMeta;
     if(sl.leftDesc)document.getElementById('featLeftDesc').textContent=sl.leftDesc;
     if(sl.leftList!==undefined)document.getElementById('featLeftList').innerHTML=sl.leftList;
+    if(sl.leftLinks!==undefined)document.getElementById('featLeftLinks').innerHTML=sl.leftLinks;
     timer=setTimeout(function(){show(i+1);},slides[i].dur);
   }
   var pv=document.getElementById('featPrev'),nx=document.getElementById('featNext');
