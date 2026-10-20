@@ -1270,16 +1270,17 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
     sec.className='mml-custom';
     sec.innerHTML='<h3 data-mml-edit>New frame</h3><p data-mml-edit>Tap the text to edit it. Drag the handle to place it anywhere.</p>';
     z.appendChild(sec);
-    buildHandles();save();
+    buildHandles();commit();
     if(sec.scrollIntoView)sec.scrollIntoView({block:'nearest'});
     toast('Frame added — drag it anywhere');
   }
-  function save(){
-    var d={pos:{},pinned:[],custom:[]};
+  function collect(){
+    var d={pos:{},pinned:[],custom:[],alive:[]};
     $$('[data-mml]').forEach(function(b){
       var id=b.getAttribute('data-mml'),p=posOf(b);
+      d.alive.push(id);
       if(p.x||p.y||p.s!==1||p.r)d.pos[id]=p;
-      if(id.indexOf('custom-')===0){
+      if(id.indexOf('custom-')===0||id.indexOf('sep-')===0){
         var clone=b.cloneNode(true);
         clone.querySelectorAll('.mml-handle').forEach(function(h){h.remove()});
         clone.querySelectorAll('[data-mml-edit]').forEach(function(el){el.removeAttribute('contenteditable')});
@@ -1288,7 +1289,72 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
       }
     });
     d.pinned=$$('[data-mml].mml-pinned').map(function(b){return b.getAttribute('data-mml')});
+    return d;
+  }
+  function save(){try{localStorage.setItem(LS,JSON.stringify(collect()))}catch(e){}}
+
+  /* ---- undo/redo history: every layout change pushes a snapshot ---- */
+  var hist=[],histIdx=-1,graveHtml={},graveSpot={};
+  function snapStr(){return JSON.stringify(collect());}
+  function commit(){
+    save();
+    var s=snapStr();
+    if(histIdx>=0&&hist[histIdx]===s){updateHistBtns();return;}
+    hist=hist.slice(0,histIdx+1);hist.push(s);
+    if(hist.length>60)hist.shift();
+    histIdx=hist.length-1;updateHistBtns();
+  }
+  function seedHist(){if(hist.length)return;hist=[snapStr()];histIdx=0;updateHistBtns();}
+  function cleanRestored(el){
+    if(!el||el.nodeType!==1)return el;
+    el.querySelectorAll(':scope > .mml-handle,:scope > .mml-resize,:scope > .mml-rotate').forEach(function(h){h.remove()});
+    el.querySelectorAll('[data-mml-edit]').forEach(function(x){if(editing)x.contentEditable='true';else x.removeAttribute('contenteditable')});
+    return el;
+  }
+  function restore(d){
     try{localStorage.setItem(LS,JSON.stringify(d))}catch(e){}
+    var keepC={};(d.custom||[]).forEach(function(c){keepC[c.id]=c;});
+    $$('[data-mml]').forEach(function(b){
+      var id=b.getAttribute('data-mml');
+      if((id.indexOf('custom-')===0||id.indexOf('sep-')===0)&&!keepC[id])b.remove();
+    });
+    (d.custom||[]).forEach(function(c){
+      if(document.querySelector('[data-mml="'+c.id+'"]'))return;
+      var z=(c.zone&&document.querySelector('[data-mml-zone="'+c.zone+'"]'))||document.querySelector('[data-mml-zone="portfolio"]');
+      if(!z)return;
+      var tmp=document.createElement('div');tmp.innerHTML=c.html;
+      if(tmp.firstChild)z.appendChild(cleanRestored(tmp.firstChild));
+    });
+    (d.alive||[]).forEach(function(id){
+      if(document.querySelector('[data-mml="'+id+'"]'))return;
+      if(!graveHtml[id])return;
+      var spot=graveSpot[id]||{};
+      var tmp=document.createElement('div');tmp.innerHTML=graveHtml[id];
+      var el=cleanRestored(tmp.firstChild);if(!el)return;
+      if(spot.parent&&spot.parent.isConnected){
+        if(spot.next&&spot.next.parentNode===spot.parent)spot.parent.insertBefore(el,spot.next);
+        else spot.parent.appendChild(el);
+      }else{var z=document.querySelector('[data-mml-zone="portfolio"]');if(z)z.appendChild(el);}
+    });
+    buildHandles();
+    $$('[data-mml]').forEach(function(b){
+      var id=b.getAttribute('data-mml'),pp=(d.pos||{})[id];
+      if(pp)setTransform(b,pp.x,pp.y,pp.s||1,pp.r||0);else if(b.style.transform)b.style.transform='';
+      b.classList.toggle('mml-pinned',(d.pinned||[]).indexOf(id)>-1);
+    });
+  }
+  function undoHist(){
+    if(histIdx<=0){toast('Nothing to undo');return;}
+    histIdx--;restore(JSON.parse(hist[histIdx]));updateHistBtns();toast('Undone');
+  }
+  function redoHist(){
+    if(histIdx>=hist.length-1){toast('Nothing to redo');return;}
+    histIdx++;restore(JSON.parse(hist[histIdx]));updateHistBtns();toast('Redone');
+  }
+  function updateHistBtns(){
+    var u=document.querySelector('#mmlToolbar [data-act="undo"]'),r=document.querySelector('#mmlToolbar [data-act="redo"]');
+    if(u){var on=histIdx>0;u.disabled=!on;u.style.opacity=on?1:.4;}
+    if(r){var on2=histIdx>=0&&histIdx<hist.length-1;r.disabled=!on2;r.style.opacity=on2?1:.4;}
   }
   function bp(){return window.innerWidth<=700?'mobile':'desktop';}
   function apply(){
@@ -1332,7 +1398,7 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
       b.insertBefore(h,b.firstChild);
       h.querySelector('.mml-pin').addEventListener('click',function(e){
         e.stopPropagation();e.preventDefault();
-        b.classList.toggle('mml-pinned');save();
+        b.classList.toggle('mml-pinned');commit();
         toast(b.classList.contains('mml-pinned')?'Pinned \u2014 locked in place':'Unpinned \u2014 draggable');
       });
       h.querySelector('.mml-rotate-btn').addEventListener('pointerdown',function(e){
@@ -1349,7 +1415,7 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
       });
       h.addEventListener('dblclick',function(e){
         if(e.target.closest('.mml-pin'))return;
-        b.style.transform='';save();toast('Position cleared');
+        b.style.transform='';commit();toast('Position cleared');
       });
             if(!b.querySelector(':scope > .mml-resize.nw')){
         ['nw','ne','sw','se'].forEach(function(c){
@@ -1410,7 +1476,7 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
       if(!active)return;
       b.classList.remove('mml-dragging');
       hideGuide('v');hideGuide('h');
-      drag=null;save();
+      drag=null;commit();
       toast('Placed \u2014 layout saved');
     }
     window.addEventListener('pointermove',mv);
@@ -1439,7 +1505,7 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
       window.removeEventListener('pointerup',up);
       window.removeEventListener('pointercancel',up);
       if(!active)return;
-      save();toast('Resized — layout saved');
+      commit();toast('Resized — layout saved');
     }
     window.addEventListener('pointermove',mv);
     window.addEventListener('pointerup',up);
@@ -1476,7 +1542,7 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
       window.removeEventListener('pointerup',up);
       window.removeEventListener('pointercancel',up);
       if(label.parentNode)label.parentNode.removeChild(label);
-      save();toast('Rotated \u2014 layout saved');
+      commit();toast('Rotated \u2014 layout saved');
     }
     window.addEventListener('pointermove',mv);
     window.addEventListener('pointerup',up);
@@ -1484,29 +1550,15 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
     updateLabel(startR, e.clientX, e.clientY);
   }
 
-  var deletedStack=[];
   function deleteFrame(b){
     var id=b.getAttribute('data-mml');
-    deletedStack.push({id:id,html:b.outerHTML,parent:b.parentNode,next:b.nextSibling});
+    if(id.indexOf('custom-')!==0&&id.indexOf('sep-')!==0){
+      graveHtml[id]=b.outerHTML;
+      graveSpot[id]={parent:b.parentNode,next:b.nextSibling};
+    }
     b.parentNode.removeChild(b);
-    save();
-    toast('Frame deleted \u2014 Undo in toolbar to restore');
-    updateUndoBtn();
-  }
-  function undoDelete(){
-    var d=deletedStack.pop();
-    if(!d){toast('Nothing to undo');return;}
-    var tmp=document.createElement('div');tmp.innerHTML=d.html;
-    var el=tmp.firstChild;
-    if(d.next&&d.next.parentNode===d.parent)d.parent.insertBefore(el,d.next);
-    else d.parent.appendChild(el);
-    buildHandles();save();
-    toast('Frame restored');
-    updateUndoBtn();
-  }
-  function updateUndoBtn(){
-    var btn=document.querySelector('#mmlToolbar [data-act="undo"]');
-    if(btn){btn.disabled=!deletedStack.length;btn.style.opacity=deletedStack.length?1:.4;}
+    commit();
+    toast('Frame deleted \u2014 Ctrl+Z or Undo to restore');
   }
 
   function spawnRGB(){
@@ -1519,7 +1571,7 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
     d.setAttribute('data-mml','sep-'+Date.now());
     d.style.margin='20px 0';
     z.appendChild(d);
-    buildHandles();save();
+    buildHandles();commit();
     if(d.scrollIntoView)d.scrollIntoView({block:'nearest'});
     toast('RGB separator added \u2014 drag it anywhere');
   }
@@ -1528,7 +1580,7 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
     if($('#mmlToolbar'))return;
     var t=document.createElement('div');
     t.className='mml-toolbar';t.id='mmlToolbar';
-    t.innerHTML='<span class="mml-grip" style="cursor:grab" title="Drag to move">⋮⋮</span><span class="mml-ttitle" title="Drag to move">Toolbar</span><button class="mml-pin" type="button" data-act="pin" title="Pin toolbar">&#x1F4CC;</button><button type="button" data-act="add">+ Frame</button><button type="button" data-act="addrgb" title="Add RGB separator">+ RGB</button><button type="button" data-act="copy">Copy layout</button><button type="button" data-act="publish" class="primary">Publish</button><button type="button" data-act="undo" style="opacity:.4" title="Undo delete">\u21A9 Undo</button><button type="button" data-act="reset">Reset</button><button type="button" data-act="done" class="primary">Done</button>';
+    t.innerHTML='<span class="mml-grip" style="cursor:grab" title="Drag to move">⋮⋮</span><span class="mml-ttitle" title="Drag to move">Toolbar</span><button class="mml-pin" type="button" data-act="pin" title="Pin toolbar">&#x1F4CC;</button><button type="button" data-act="add">+ Frame</button><button type="button" data-act="addrgb" title="Add RGB separator">+ RGB</button><button type="button" data-act="copy">Copy layout</button><button type="button" data-act="publish" class="primary">Publish</button><button type="button" data-act="undo" style="opacity:.4" title="Undo last move (Ctrl+Z)">\u21A9 Undo</button><button type="button" data-act="redo" style="opacity:.4" title="Redo (Ctrl+Shift+Z)">\u21AA Redo</button><button type="button" data-act="reset">Reset</button><button type="button" data-act="done" class="primary">Done</button>';
     body.appendChild(t);
     t.addEventListener('click',function(e){
       var a=e.target&&e.target.getAttribute&&e.target.getAttribute('data-act');if(!a)return;
@@ -1536,7 +1588,8 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
       else if(a==='pin'){t.classList.toggle('mml-pinned');saveTb();toast(t.classList.contains('mml-pinned')?'Toolbar pinned':'Toolbar unpinned');}
       else if(a==='add')addFrame();
       else if(a==='addrgb')spawnRGB();
-      else if(a==='undo'){undoDelete();}
+      else if(a==='undo'){undoHist();}
+      else if(a==='redo'){redoHist();}
       else if(a==='reset'){try{localStorage.removeItem(LS);localStorage.removeItem('mml-toolbar-v1');localStorage.removeItem('mml-fab-v1')}catch(_){} location.reload();}
       else if(a==='copy'){
         save();
@@ -1594,7 +1647,7 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
   function setEditing(on){
     editing=on;document.body.classList.toggle('mml-editing',!!on);
     /* body.classList.toggle('mml-on',on); REMOVED - white screen */
-    if(on){buildHandles();buildToolbar();pokeToolbar();toast('Tools on — drag frames anywhere, pin to lock');
+    if(on){buildHandles();buildToolbar();seedHist();pokeToolbar();toast('Tools on — drag frames anywhere, pin to lock');
       $$('[data-mml-edit]').forEach(function(el){el.contentEditable='true'});}
     else{dropHandles();dropToolbar();
       $$('[data-mml-edit]').forEach(function(el){el.removeAttribute('contenteditable')});}
@@ -1671,6 +1724,15 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
     var tag=(e.target&&e.target.tagName)||'';
     if(tag==='INPUT'||tag==='TEXTAREA')return;
     if((e.ctrlKey||e.metaKey)&&e.shiftKey&&e.code==='KeyE'){e.preventDefault();setEditing(!editing);}
+  });
+  document.addEventListener('keydown',function(e){
+    if(!editing)return;
+    var t=e.target;
+    if(t&&(t.isContentEditable||t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.tagName==='SELECT'))return;
+    if(!(e.ctrlKey||e.metaKey))return;
+    var k=(e.key||'').toLowerCase();
+    if(k==='z'&&!e.shiftKey){e.preventDefault();undoHist();}
+    else if(k==='y'||(k==='z'&&e.shiftKey)){e.preventDefault();redoHist();}
     if(e.code==='Escape'&&editing)setEditing(false);
   });
   document.addEventListener('tabswitch',function(){if(editing)buildHandles();});
