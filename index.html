@@ -131,6 +131,7 @@ section{padding:64px 0}
 .meta{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--dim);margin-bottom:20px}
 /* featured stage: same box model as the gameplay stage so the img slide can't collapse it */
 #featStage{position:relative;width:100%;aspect-ratio:16/9;height:auto;min-height:200px}
+#featStage img[hidden]{display:none!important}
 .feat-carousel{width:100%}
 #featStage .gif-empty,#featStage>img{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover}
 #featStage .gif-empty{position:absolute;inset:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
@@ -1842,7 +1843,7 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
     i=(n+slides.length)%slides.length;
     slides.forEach(function(sl,idx){
       var el=document.getElementById(sl.el);
-      if(el)el.hidden=idx!==i;
+      if(el){el.hidden=idx!==i;if(el.tagName==='IMG')el.style.display=idx===i?'block':'none';}
     });
     dots.forEach(function(d,idx){d.classList.toggle('on',idx===i);});
     document.getElementById('featNum').textContent=i+1;
