@@ -129,6 +129,16 @@ section{padding:64px 0}
 .featured-card li{margin:6px 0}
 .featured-card li strong{color:var(--text)}
 .meta{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--dim);margin-bottom:20px}
+/* featured stage: same box model as the gameplay stage so the img slide can't collapse it */
+#featStage{position:relative;aspect-ratio:16/9;min-height:200px}
+#featStage .gif-empty{position:absolute;inset:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+#featStage .gif-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:5}
+#featStage .gif-nav.prev{left:10px}
+#featStage .gif-nav.next{right:10px}
+#featStage .gif-count{position:absolute;bottom:12px;right:14px;z-index:5}
+/* featured card: fixed text zones so rotating projects never resize the frame */
+#featLeftDesc{min-height:3.3em}
+#featLeftList{min-height:120px}
 .meta strong{color:var(--text)}
 .links{display:flex;gap:16px;font-weight:600;font-size:14px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
@@ -346,6 +356,10 @@ footer{padding:28px 0;color:var(--dim);font-size:14px;text-align:center;position
 .game-section:last-child{border-bottom:none}
 .game-section h3{color:var(--text)}
 @media(max-width:1024px){
+  #featLeftTitle{min-height:3.3em}
+  #featLeftDesc{min-height:4.95em}
+  #featLeftList{min-height:200px}
+  #featured .feat-carousel figcaption{min-height:43px}
   .hero-grid{grid-template-columns:1fr;gap:28px}
   .hero-media{max-width:560px;margin:0 auto}
   .hero h1{font-size:clamp(32px,5vw,52px)}
