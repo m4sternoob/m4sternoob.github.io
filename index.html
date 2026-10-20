@@ -130,7 +130,9 @@ section{padding:64px 0}
 .featured-card li strong{color:var(--text)}
 .meta{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--dim);margin-bottom:20px}
 /* featured stage: same box model as the gameplay stage so the img slide can't collapse it */
-#featStage{position:relative;aspect-ratio:16/9;min-height:200px}
+#featStage{position:relative;width:100%;aspect-ratio:16/9;height:auto;min-height:200px}
+.feat-carousel{width:100%}
+#featStage .gif-empty,#featStage>img{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover}
 #featStage .gif-empty{position:absolute;inset:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
 #featStage .gif-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:5}
 #featStage .gif-nav.prev{left:10px}
