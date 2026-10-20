@@ -130,8 +130,13 @@ section{padding:64px 0}
 .featured-card li strong{color:var(--text)}
 .meta{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--dim);margin-bottom:20px}
 /* featured stage: same box model as the gameplay stage so the img slide can't collapse it */
-#featStage{position:relative;width:100%;aspect-ratio:16/9;height:auto;min-height:200px}
+#featStage{position:relative;width:100%;aspect-ratio:16/9;height:auto}
 #featStage img[hidden]{display:none!important}
+#featured .kicker,#featured h2{text-align:left}
+#featured h3{text-align:left}
+.featured-card .meta{justify-content:flex-start;text-align:left}
+#featLeftDesc,#featLeftList,#featLeftLinks{text-align:left}
+.feat-carousel figcaption{text-align:left}
 .feat-carousel{width:100%}
 #featStage .gif-empty,#featStage>img{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover}
 #featStage .gif-empty{position:absolute;inset:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
@@ -448,6 +453,13 @@ section{transition:padding .35s ease}
 .flip-hint{display:block;margin-top:14px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
   color:var(--dim);opacity:.75}
 @media(max-width:700px){
+  .featured-card{padding:22px 18px;gap:20px}
+  .featured-card>*{min-width:0}
+  .featured-card h3{font-size:21px}
+  #featLeftDesc{text-align:left}
+  #featLeftList{text-align:left;padding-left:18px}
+  #featLeftList li{line-height:1.55;margin:7px 0}
+  #featLeftLinks{text-align:left}
   [data-mml]{margin-left:auto!important;margin-right:auto!important;text-align:center;max-width:96vw!important;box-sizing:border-box}
   .mml-resize{max-width:96vw!important}
   [data-mml] p,[data-mml] h1,[data-mml] h2,[data-mml] h3{text-align:center}
@@ -694,13 +706,13 @@ section{transition:padding .35s ease}
             <img class="card-gif" src="assets/feat-gearflush.gif" alt="GearFlush animated demo" loading="lazy" decoding="async">
             <h3>GearFlush</h3>
             <p>WinDirStat-style disk analyzer. Treemap view, fast MFT scans, 100% offline.</p>
-            <span class="tech">C++ · WinUI 3</span>
+            <span class="tech">C++ · Win32</span>
             <span class="flip-hint">Click to flip ↻</span>
           </div>
           <div class="card-face card-back">
             <h3>GearFlush</h3>
-            <span class="tech">C++ · WinUI 3</span>
-            <p>Disk-usage analyzer with a live treemap: MFT-based scanning in C++17 with a WinUI 3 front end and zero network calls — no telemetry, no accounts. Windows first, with macOS, Linux, Android, and iOS on the same core.</p>
+            <span class="tech">C++ · Win32</span>
+            <p>Disk-usage analyzer with a live treemap: MFT-based scanning in C++17 with a pure Win32 front end and zero network calls — no telemetry, no accounts. Ships as a proper installer; macOS, Linux, Android, and iOS follow on the same core.</p>
             <a href="https://m4ster-deepgearflush.vercel.app" target="_blank" rel="noopener">Visit →</a>
           </div>
         </div>
@@ -810,6 +822,51 @@ section{transition:padding .35s ease}
             
           </div>
         </div>
+        <div class="card" data-cat="tools">
+          <div class="card-face card-front">
+            <img class="card-gif" src="assets/card-m4steros.gif" alt="m4sterOS TV launcher demo" loading="lazy" decoding="async">
+            <h3>m4sterOS</h3>
+            <p>Custom USB-bootable OS. Boots any PC straight into the M4STER TV launcher — no desktop, no login.</p>
+            <span class="tech">Linux · M4STER TV</span>
+            <span class="flip-hint">Click to flip ↻</span>
+          </div>
+          <div class="card-face card-back">
+            <h3>m4sterOS</h3>
+            <span class="tech">Linux · M4STER TV</span>
+            <p>A 1.9GB USB image that turns any PC into a streaming box: power on and you're in a fullscreen TV launcher — Netflix, YouTube TV, Prime Video, Disney+, Twitch — with arrow-key navigation and a live clock. Built for a Samsung 32" over HDMI.</p>
+            <a href="https://github.com/m4sternoob" target="_blank" rel="noopener">GitHub →</a>
+          </div>
+        </div>
+        <div class="card" data-cat="games">
+          <div class="card-face card-front">
+            <img class="card-gif" src="assets/card-guessing.gif" alt="Number Guessing live gameplay" loading="lazy" decoding="async">
+            <h3>Number Guessing</h3>
+            <p>The game that started 5IN1. Hot-or-cold number hunt with narrowing ranges — born as a C++ desktop game.</p>
+            <span class="tech">C++ · TypeScript</span>
+            <span class="flip-hint">Click to flip ↻</span>
+          </div>
+          <div class="card-face card-back">
+            <h3>Number Guessing</h3>
+            <span class="tech">C++ · TypeScript</span>
+            <p>Where the whole 5IN1 universe began: a number-guessing game with difficulty tiers, attempt limits, and a live possible-range tracker that narrows as you play. Play the browser version — same rules as the original.</p>
+            <a href="https://m4ster-5in1.vercel.app/play/guessing" target="_blank" rel="noopener">Play →</a>
+          </div>
+        </div>
+        <div class="card" data-cat="web">
+          <div class="card-face card-front">
+            <img class="card-gif" src="assets/card-2d3d.gif" alt="m4ster 2D3D Lab test build" loading="lazy" decoding="async">
+            <h3>m4ster 2D3D Lab</h3>
+            <p>FrameLab's experimental wing: one prompt makes the 2D sprite AND a free 3D mesh. Test build, live now.</p>
+            <span class="tech">TypeScript · Three.js</span>
+            <span class="flip-hint">Click to flip ↻</span>
+          </div>
+          <div class="card-face card-back">
+            <h3>m4ster 2D3D Lab</h3>
+            <span class="tech">TypeScript · Three.js</span>
+            <p>The FrameLab hub experiment: flip between 2D sprite generation and 3D mesh generation in one tool. Describe it once, get the sprite and the model. Free models only — no keys, no signup, no paywall — with automatic fallback when a model hits its limit.</p>
+            <a href="https://m4ster-2d3d-labtest.vercel.app" target="_blank" rel="noopener">Try the test build →</a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -824,7 +881,9 @@ section{transition:padding .35s ease}
         <tr><td><a href="https://github.com/m4sternoob/m4ster-5in1-android" target="_blank" rel="noopener">5IN1</a></td><td>6 classic games in one app. Kotlin + Jetpack Compose, fully offline, zero network permission.</td></tr>
         <tr><td><a href="https://m4ster-tracker.vercel.app/" target="_blank" rel="noopener">m4ster-tracker</a></td><td>Freemium project tracker. Free tier + Pro at $20/year flat, no per-seat tax. <a href="https://m4ster-tracker.vercel.app/" target="_blank" rel="noopener">Live</a></td></tr>
         <tr><td><a href="https://m4ster-framelab.vercel.app/" target="_blank" rel="noopener">m4ster-framelab</a></td><td>Free, open-source 2D sprite and animation-atlas generator. No keys, no signup, no paywall.</td></tr>
-        <tr><td><a href="https://github.com/m4sternoob/m4ster-deepgearflush" target="_blank" rel="noopener">DeepGearFLUSH</a></td><td>Disk usage analyzer with treemap visualization. Native C++ core, fully offline.</td></tr>
+        <tr><td><a href="https://github.com/m4sternoob/m4ster-deepgearflush" target="_blank" rel="noopener">GearFlush</a></td><td>Disk usage analyzer with treemap visualization. Pure C++ Win32, fully offline.</td></tr>
+        <tr><td>m4sterOS</td><td>Custom USB-bootable OS that boots straight into the M4STER TV launcher.</td></tr>
+        <tr><td><a href="https://m4ster-2d3d-labtest.vercel.app" target="_blank" rel="noopener">m4ster 2D3D Lab</a></td><td>FrameLab experiment: one prompt, a 2D sprite and a free 3D mesh. Test build.</td></tr>
         <tr class="blank"><td>&mdash;</td><td>Next drop lands here</td></tr>
         <tr class="blank"><td>&mdash;</td><td>Next drop lands here</td></tr>
       </table>
@@ -833,7 +892,8 @@ section{transition:padding .35s ease}
       <table class="idx-table">
         <tr><th style="width:28%">Project</th><th>Description</th></tr>
         <tr><td><a href="https://m4sternoob.itch.io/m4ster-hat-trick" target="_blank" rel="noopener">Hat Trick</a></td><td>HTML5 arcade game. Score 3 goals in a row to win; one miss resets the streak.</td></tr>
-        <tr><td><a href="https://m4ster-neon-rain.vercel.app/" target="_blank" rel="noopener">NEON RAIN</a></td><td>Neon-soaked arcade action. Hack the terminals.</td></tr>
+        <tr><td><a href="https://m4sternoob.itch.io/m4ster-street-turf" target="_blank" rel="noopener">STREET-TURF</a></td><td>Open-world action in a living city. Stack cash, dodge heat, own the turf.</td></tr>
+        <tr><td><a href="https://m4ster-5in1.vercel.app/play/guessing" target="_blank" rel="noopener">Number Guessing</a></td><td>The original that started 5IN1. Hot-or-cold number hunt, narrowing range.</td></tr>
         <tr><td><a href="https://github.com/m4sternoob/m4ster-blackout" target="_blank" rel="noopener">m4ster BLACKOUT</a></td><td>3D rainy neon-noir tactical vignette. Three.js, fully procedural.</td></tr>
         <tr class="blank"><td>&mdash;</td><td>Next drop lands here</td></tr>
         <tr class="blank"><td>&mdash;</td><td>Next drop lands here</td></tr>
@@ -931,24 +991,36 @@ section{transition:padding .35s ease}
         <p class="role">Gameplay &amp; Engine Programmer | C++, Unreal Engine 5.6, Swift</p>
         <p class="contact-line">Ontario, Canada | <a href="https://github.com/m4sternoob" target="_blank" rel="noopener">github.com/m4sternoob</a> | <a href="https://linkedin.com/in/m4sternoob" target="_blank" rel="noopener">linkedin.com/in/m4sternoob</a></p>
         <h2>Summary</h2>
-        <p>Gameplay and engine programmer (BTech, Computer Science) building physics-driven multiplayer games in C++ and Unreal Engine 5.6. Shipped 5IN1 (6 games, 3 platforms). Gameplay code is pure C++ — no Blueprints. Seeking gameplay, engine, or tools roles at Ontario studios.</p>
+        <p>Gameplay and engine programmer with <strong>10 years in software development</strong> (BTech, Computer Science). I design, build, and ship complete products solo — games, tools, and web apps — from first prototype to published release and live updates. Gameplay code is pure C++ — no Blueprints. Four games live on itch.io; apps live on web, Android, macOS, and Windows. Seeking gameplay, engine, or tools roles at Ontario studios.</p>
+        <h2>Highlights</h2>
+        <ul><li><strong>15+ shipped projects</strong> across games, developer tools, and web apps</li>
+        <li><strong>One codebase → 5 platforms:</strong> web, Windows, macOS, Android, iOS</li>
+        <li><strong>4 games published on itch.io</strong>, plus live web apps with real users</li>
+        <li><strong>Privacy-first builds</strong> — flagship app ships with zero network permissions, verified at the binary level</li></ul>
         <h2>Technical Skills</h2>
-        <ul><li><strong>Languages:</strong> C++, Swift, Kotlin, TypeScript, C#, Python</li>
-        <li><strong>Engines &amp; Tools:</strong> Unreal Engine 5.6, Chaos Physics, Unity, Git, GitHub Actions</li>
-        <li><strong>Systems:</strong> gameplay programming, physics &amp; collision, replication, build automation</li></ul>
-        <h2>Projects</h2>
-        <h3>5IN1 — Solo Developer | Kotlin, Swift, TypeScript | Shipped</h3>
-        <ul><li>Shipped 6 mini-games across Android, macOS, and web — offline-first, zero network permissions, CI on every push</li>
-        <li>Forensically verified APKs carry no INTERNET permission; v1.7.1 live with real users</li></ul>
-        <h3>Hat Trick (3 To Win) — Solo Developer | HTML5, JavaScript | Live on itch.io</h3>
-        <ul><li>Planet-gravity platformer with streak system — stable 60fps, pause menu, goal particles</li></ul>
-        <h3>m4ster-sprite-gen — Solo Developer | TypeScript, Vercel | Live</h3>
-        <ul><li>Free 2D sprite + animation-atlas generator: AI row-strip to packed atlas pipeline with slot-slice extraction fallback</li></ul>
-        <h3>StumbleGuysClone — Solo Developer | UE 5.6, C++ | In progress</h3>
-        <ul><li>Multiplayer party game, 100% C++ gameplay — no Blueprints; Chaos physics knockback, replicated movement from scratch</li></ul>
-        <h3>Roadmap Tracker — Solo Developer | React, TypeScript | Live</h3>
-        <ul><li>Full Kanban app: sprints, calendar, timeline, workload views, @mentions, automation rules</li>
-        <li>GitHub OAuth, per-user workspaces, real-time sync via Upstash Redis, serverless on Vercel</li></ul>
+        <ul><li><strong>Languages:</strong> C++ (primary), C#, Swift, Kotlin, TypeScript, JavaScript, Python</li>
+        <li><strong>Engines &amp; Graphics:</strong> Unreal Engine 5.6, Unity, Three.js / WebGL, HTML5 Canvas</li>
+        <li><strong>Gameplay Systems:</strong> physics &amp; collision (custom solvers, Chaos Physics), replication &amp; multiplayer, AI opponents &amp; drone AI, camera systems (third-person / first-person), procedural world generation, input &amp; touch controls, sprite &amp; animation pipelines</li>
+        <li><strong>Platforms &amp; Shipping:</strong> Android, iOS, macOS, Windows (native C++ Win32), Web / PWA — service workers, installable, offline-first</li>
+        <li><strong>Web &amp; Backend:</strong> React, Next.js, Node.js, serverless APIs, Redis, OAuth, real-time sync</li>
+        <li><strong>Tools &amp; Practice:</strong> Git &amp; GitHub, GitHub Actions CI/CD, Playwright end-to-end testing, performance profiling (120fps frame budgets), build automation, versioned release management</li></ul>
+        <h2>Experience</h2>
+        <h3>Independent Developer — Games &amp; Software | 10 years</h3>
+        <ul><li>Own the full pipeline solo: design, architecture, code, art integration, testing, publishing, and post-launch updates</li>
+        <li>Shipped a 6-game hub (5IN1) across Android, macOS, and web — offline-first, CI on every push, zero-permission APKs verified forensically</li>
+        <li>Built and published 4 browser games on itch.io, including a procedural-city stealth game and an open-world action game in Three.js — drone AI, drivable vehicles, day/night systems</li>
+        <li>Built production web tools with real users: a Kanban tracker with collaboration and real-time sync, a sprite-generation studio, and a finance tracker</li>
+        <li>Built native Windows software in pure C++ Win32 (disk analyzer with treemap visualization), shipped as an installer through CI releases</li>
+        <li>Performance discipline on every build: profiling, frame budgets, and optimization that never trades away visuals</li></ul>
+        <h3>Customer &amp; Technical Support — Apple · Mercer Mettl | Prior</h3>
+        <ul><li>High-volume chat support: technical troubleshooting and product issues with consistently strong resolution rates</li>
+        <li>Learned to diagnose under pressure, write clearly, and ship fixes users can actually follow</li></ul>
+        <h2>Selected Work</h2>
+        <ul><li><strong>5IN1</strong> — 6 games, 3 platforms, one hub</li>
+        <li><strong>BLACKOUT</strong> — procedural-city stealth (Three.js), live on itch.io</li>
+        <li><strong>STREET-TURF</strong> — open-world action (Three.js), live on itch.io</li>
+        <li><strong>Hat Trick</strong> — physics platformer (HTML5), live on itch.io</li>
+        <li><strong>StumbleGuysClone</strong> — multiplayer party game (UE 5.6, C++), in progress</li></ul>
         <h2>Education</h2>
         <p><strong>BTech, Computer Science</strong> — MRSPTU, India<br><strong>Game Design</strong> (2 years) — Ontario, Canada</p>
       </div></div>
@@ -1044,9 +1116,9 @@ section{transition:padding .35s ease}
   var orb={x:0,y:0,targetX:0,targetY:0,radius:180,opacity:0.15};
   function resize(){
     var s=mobile?0.7:1;
-    w=canvas.width=Math.round(innerWidth*s);
-    h=canvas.height=Math.round(innerHeight*s);
-    canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';
+    var cw=canvas.clientWidth||Math.round(innerWidth/0.9), ch=canvas.clientHeight||Math.round(innerHeight/0.9);
+    w=canvas.width=Math.round(cw*s);
+    h=canvas.height=Math.round(ch*s);
     cols=Math.floor(w/fontSize);
     if(drops.length!==cols){
       drops=[];
@@ -1430,6 +1502,24 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
     if(r){var on2=histIdx>=0&&histIdx<hist.length-1;r.disabled=!on2;r.style.opacity=on2?1:.4;}
   }
   function bp(){return window.innerWidth<=700?'mobile':'desktop';}
+  function clampToViewport(){
+    if(bp()!=='mobile'||editing)return;
+    $$('[data-mml]').forEach(function(b){
+      var hid=b.closest('.panel[data-pos]');
+      if(hid&&hid.getAttribute('data-pos')!=='0')return;
+      var r=b.getBoundingClientRect();
+      if(!r.width)return;
+      var dx=0;
+      if(r.left<-16)dx=-16-r.left;
+      else if(r.right>window.innerWidth+16)dx=window.innerWidth+16-r.right;
+      if(dx){
+        var p=posOf(b);
+        var k=r.width/((b.offsetWidth||r.width)*(p.s||1));if(!isFinite(k)||k<=0)k=1;
+        setTransform(b,p.x+dx/k,p.y,p.s,p.r);
+      }
+    });
+  }
+  window.addEventListener('orientationchange',function(){setTimeout(clampToViewport,350);});
   function apply(){
     var d=load();
     if(!d||!Object.keys(d).length){
@@ -1449,6 +1539,7 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
     (d.pinned||[]).forEach(function(id){
       var b=document.querySelector('[data-mml="'+id+'"]'); if(b)b.classList.add('mml-pinned');
     });
+    clampToViewport();
   }
   function toast(msg){
     var t=$('#mmlToast');
