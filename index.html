@@ -135,7 +135,11 @@ section{padding:64px 0}
 .feat-carousel{width:100%}
 #featStage .gif-empty,#featStage>img{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover}
 #featStage .gif-empty{position:absolute;inset:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
-#featStage .gif-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:5}
+#featStage .gif-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:5;
+  width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.25);
+  background:rgba(12,9,22,.75);color:#fff;font-size:22px;line-height:1;cursor:pointer;
+  backdrop-filter:blur(6px);transition:all .2s;padding:0}
+#featStage .gif-nav:hover{background:var(--violet-deep);border-color:var(--violet)}
 #featStage .gif-nav.prev{left:10px}
 #featStage .gif-nav.next{right:10px}
 #featStage .gif-count{position:absolute;bottom:12px;right:14px;z-index:5}
