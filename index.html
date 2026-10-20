@@ -539,35 +539,14 @@ section{transition:padding .35s ease}
         <div>
           <figure class="hero-media feat-carousel" style="margin:0">
             <div class="gif-stage" id="featStage">
-              <div class="gif-empty" id="featEmpty0">
-                <span>🎬</span>
-                <p>Drop a GIF here</p>
-              </div>
+              <img id="featGif0" src="assets/feat-5in1.gif" alt="5IN1 animated showcase" style="position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover;border-radius:var(--r);background:#0a0a12;pointer-events:none">
               <img id="featHatTrick" src="assets/slot3.gif" alt="Hat Trick gameplay" hidden style="position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover;border-radius:var(--r);background:#0a0a12;pointer-events:none">
-              <div class="gif-empty" id="featEmpty2" hidden>
-                <span>🎬</span>
-                <p>Drop a GIF here</p>
-              </div>
-              <div class="gif-empty" id="featEmpty3" hidden>
-                <span>🎬</span>
-                <p>Drop a GIF here</p>
-              </div>
-              <div class="gif-empty" id="featEmpty4" hidden>
-                <span>🎬</span>
-                <p>Drop a GIF here</p>
-              </div>
-              <div class="gif-empty" id="featEmpty5" hidden>
-                <span>🎬</span>
-                <p>Drop a GIF here</p>
-              </div>
-              <div class="gif-empty" id="featEmpty6" hidden>
-                <span>🎬</span>
-                <p>Drop a GIF here</p>
-              </div>
-              <div class="gif-empty" id="featEmpty7" hidden>
-                <span>🎬</span>
-                <p>Drop a GIF here</p>
-              </div>
+              <img id="featGif2" src="assets/feat-blackout.gif" alt="BLACKOUT animated showcase" hidden style="position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover;border-radius:var(--r);background:#0a0a12;pointer-events:none">
+              <img id="featGif3" src="assets/feat-street-turf.gif" alt="STREET-TURF animated showcase" hidden style="position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover;border-radius:var(--r);background:#0a0a12;pointer-events:none">
+              <img id="featGif4" src="assets/feat-tracker.gif" alt="M4ster Tracker animated showcase" hidden style="position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover;border-radius:var(--r);background:#0a0a12;pointer-events:none">
+              <img id="featGif5" src="assets/feat-framelab.gif" alt="FrameLab animated showcase" hidden style="position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover;border-radius:var(--r);background:#0a0a12;pointer-events:none">
+              <img id="featGif6" src="assets/feat-wealth.gif" alt="M4ster Wealth animated showcase" hidden style="position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover;border-radius:var(--r);background:#0a0a12;pointer-events:none">
+              <img id="featGif7" src="assets/feat-gearflush.gif" alt="GearFlush animated showcase" hidden style="position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover;border-radius:var(--r);background:#0a0a12;pointer-events:none">
               <button class="gif-nav prev" id="featPrev" type="button" aria-label="Previous">‹</button>
               <button class="gif-nav next" id="featNext" type="button" aria-label="Next">›</button>
               <div class="gif-count"><span id="featNum">1</span> / 8</div>
@@ -1807,7 +1786,7 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
 /* Featured carousel with dots + auto-advance */
 (function(){
   var slides=[
-    {el:'featEmpty0',title:'5IN1 \u2014 Multi-Game Hub',desc:'6 games, 3 platforms, 0 network permissions',dur:5000,
+    {el:'featGif0',title:'5IN1 \u2014 Multi-Game Hub',desc:'6 games, 3 platforms, 0 network permissions',dur:5000,
      leftTitle:'5IN1 — Multi-Game Hub',leftMeta:'<span><strong>6</strong> games</span><span><strong>3</strong> platforms</span><span><strong>0</strong> network permissions</span>',
      leftDesc:'What started as a number-guessing toy became a full multi-game hub shipping on Android, macOS, and web.',
      leftList:'<li><strong>Android</strong> (Kotlin/Compose): 2048, Memory Match, Connect 4 + 3 more — offline-first, CI on every push</li><li><strong>macOS</strong> (Swift/SwiftUI): native multi-game app</li><li><strong>Web</strong> (TypeScript): playable browser demo</li>',
@@ -1817,32 +1796,32 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
      leftDesc:'Play as a zombie, bounce the ball, score 3 in a row. Rebuilt from Unity to single-file HTML5 when licensing blocked CI builds.',
      leftList:'<li><strong>Physics</strong>: custom 2D — gravity, bounce damping, AABB collision</li><li><strong>Planets</strong>: 7-gravity selector with real-time physics changes</li><li><strong>Shipped</strong>: live on itch.io, 60fps delta-time loop</li>',
      leftLinks:'<a href="https://m4sternoob.itch.io/m4ster-hat-trick" target="_blank" rel="noopener">Play on itch.io \u2192</a>'},
-    {el:'featEmpty2',title:'m4ster BLACKOUT',desc:'3D rainy neon-noir tactical — gameplay GIF coming',dur:5000,
+    {el:'featGif2',title:'m4ster BLACKOUT',desc:'3D rainy neon-noir tactical — hack the terminals',dur:5000,
      leftTitle:'m4ster BLACKOUT',leftMeta:'<span><strong>Three.js</strong></span><span><strong>3D</strong></span>',
      leftDesc:'Rainy neon-noir 3D tactical vignette. Hack terminals, dodge patrol drones, drive cars. Fully procedural.',
      leftList:'<li><strong>Engine</strong>: Three.js, fully procedural city</li><li><strong>AI</strong>: patrol drones with vision cones + chase</li><li><strong>Audio</strong>: procedural Web Audio — rain, dread pad, BRAAAM</li>',
      leftLinks:'<a href="https://m4ster-blackout.vercel.app" target="_blank" rel="noopener">Play \u2192</a>'},
-    {el:'featEmpty3',title:'STREET-TURF',desc:'GTA-like open world — gameplay GIF coming',dur:5000,
+    {el:'featGif3',title:'STREET-TURF',desc:'GTA-like open world — turf, empire, pursuit',dur:5000,
      leftTitle:'STREET-TURF — Open World',leftMeta:'<span><strong>Three.js</strong></span><span><strong>3D</strong></span>',
      leftDesc:'GTA-like open world. Dre protagonist, turf war, empire loop, police pursuit, pet dog Rocco.',
      leftList:'<li><strong>World</strong>: night city, houses, traffic, peds</li><li><strong>Systems</strong>: wanted level, turf war, day/night cycle</li><li><strong>Companion</strong>: Rocco the dog — follows, sits, barks</li>',
      leftLinks:'<a href="https://m4ster-street-turf.pages.dev" target="_blank" rel="noopener">Play \u2192</a>'},
-    {el:'featEmpty4',title:'M4ster Tracker',desc:'Project management — GIF coming',dur:5000,
+    {el:'featGif4',title:'M4ster Tracker',desc:'Project management — boards, calendar, timeline',dur:5000,
      leftTitle:'M4ster Tracker',leftMeta:'<span><strong>Web App</strong></span>',
      leftDesc:'Kanban-style project tracker. Boards, cards, calendar, timeline.',
      leftList:'<li><strong>Boards</strong>: backlog, todo, in progress, review, done</li><li><strong>Views</strong>: board, calendar, timeline</li>',
      leftLinks:'<a href="https://m4ster-tracker.vercel.app" target="_blank" rel="noopener">Visit \u2192</a>'},
-    {el:'featEmpty5',title:'m4ster FrameLab',desc:'Sprite generator — GIF coming',dur:5000,
+    {el:'featGif5',title:'m4ster FrameLab',desc:'Sprite generator — prompt to pixel art',dur:5000,
      leftTitle:'m4ster FrameLab',leftMeta:'<span><strong>Web App</strong></span><span><strong>AI</strong></span>',
      leftDesc:'AI sprite generator. Prompt to pixel art, animations, export bundles.',
      leftList:'<li><strong>AI</strong>: FLUX image generation</li><li><strong>Export</strong>: PNG, GIF, JSON, ZIP bundle</li>',
      leftLinks:'<a href="https://m4ster-framelab.vercel.app" target="_blank" rel="noopener">Visit \u2192</a>'},
-    {el:'featEmpty6',title:'m4ster Wealth',desc:'Net worth tracker — GIF coming',dur:5000,
+    {el:'featGif6',title:'m4ster Wealth',desc:'Net worth tracker — holdings, debts, charts',dur:5000,
      leftTitle:'m4ster Wealth',leftMeta:'<span><strong>Web App</strong></span>',
      leftDesc:'Net worth terminal. Holdings, debts, allocation, market charts.',
      leftList:'<li><strong>Track</strong>: holdings, debts, net worth history</li><li><strong>Market</strong>: live TradingView charts</li>',
      leftLinks:'<a href="https://m4ster-wealth.pages.dev" target="_blank" rel="noopener">Visit \u2192</a>'},
-    {el:'featEmpty7',title:'GearFlush',desc:'Disk analyzer — GIF coming',dur:5000,
+    {el:'featGif7',title:'GearFlush',desc:'Disk analyzer — treemap, 100% offline',dur:5000,
      leftTitle:'GearFlush',leftMeta:'<span><strong>Desktop</strong></span><span><strong>100% Offline</strong></span>',
      leftDesc:'WinDirStat-style disk analyzer. Treemap visualization, 100% offline.',
      leftList:'<li><strong>Scan</strong>: MFT-based, blazing fast</li><li><strong>Visual</strong>: treemap with violet theme</li><li><strong>Privacy</strong>: zero network calls, offline license</li>',
