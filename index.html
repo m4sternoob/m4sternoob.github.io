@@ -146,6 +146,7 @@ section{padding:64px 0}
 .links{display:flex;gap:16px;font-weight:600;font-size:14px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.card-gif{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px;display:block;margin-bottom:14px;border:1px solid var(--line);background:#0a0a12}
 .card:hover{border-color:var(--violet)}
 .card h3{margin:0 0 8px;font-size:18px}
 .card h3 a{color:var(--text)}
@@ -575,13 +576,14 @@ section{transition:padding .35s ease}
       <div class="grid" id="projGrid">
         <div class="card" data-cat="web">
           <div class="card-face card-front">
-            <h3>Roadmap Tracker</h3>
+            <img class="card-gif" src="assets/feat-tracker.gif" alt="M4ster Tracker animated demo" loading="lazy" decoding="async">
+            <h3>M4ster Tracker</h3>
             <p>Kanban with sprints, calendar, timeline, sync. Serverless on Vercel.</p>
             <span class="tech">React · TypeScript</span>
             <span class="flip-hint">Click to flip ↻</span>
           </div>
           <div class="card-face card-back">
-            <h3>Roadmap Tracker</h3>
+            <h3>M4ster Tracker</h3>
             <span class="tech">React · TypeScript</span>
             <p>Full project-management app: Kanban board, list, backlog, sprints, calendar, timeline, workload views. GitHub OAuth, per-user workspaces, real-time sync via Upstash Redis, serverless on Vercel. Shipped with keyboard shortcuts, @mentions, notifications, dependencies, time tracking, and automation rules.</p>
             <a href="https://github.com/m4sternoob/m4ster-roadmap-tracker" target="_blank" rel="noopener">GitHub ↗</a><br>
@@ -590,6 +592,7 @@ section{transition:padding .35s ease}
         </div>
         <div class="card" data-cat="games">
           <div class="card-face card-front">
+            <img class="card-gif" src="assets/feat-5in1.gif" alt="5IN1 animated demo" loading="lazy" decoding="async">
             <h3>5IN1 — Multi-Game Hub</h3>
             <p>6 games, 3 platforms. 2048, Memory Match, Connect 4 and more.</p>
             <span class="tech">Kotlin · Swift · TypeScript</span>
@@ -605,13 +608,14 @@ section{transition:padding .35s ease}
         </div>
         <div class="card" data-cat="games">
           <div class="card-face card-front">
-            <h3>Hat Trick (3 To Win)</h3>
+            <img class="card-gif" src="assets/slot3.gif" alt="Hat Trick gameplay" loading="lazy" decoding="async">
+            <h3>Hat Trick</h3>
             <p>Unity 2D streak platformer. 3 goals in a row wins — miss resets.</p>
             <span class="tech">C# · Unity</span>
             <span class="flip-hint">Click to flip ↻</span>
           </div>
           <div class="card-face card-back">
-            <h3>Hat Trick (3 To Win)</h3>
+            <h3>Hat Trick</h3>
             <span class="tech">C# · Unity</span>
             <p>2D platformer with a streak mechanic: score 3 consecutive goals to win, any miss resets the streak. 10 scripts rewritten to professional standard — clean Singletons, defensive null checks, [SerializeField] privates. Portfolio hero GIF game.</p>
             <a href="https://github.com/m4sternoob/m4ster_Hat_Trick" target="_blank" rel="noopener">GitHub →</a><br>
@@ -620,6 +624,85 @@ section{transition:padding .35s ease}
         </div>
         <div class="card" data-cat="games">
           <div class="card-face card-front">
+            <img class="card-gif" src="assets/feat-blackout.gif" alt="BLACKOUT animated demo" loading="lazy" decoding="async">
+            <h3>m4ster BLACKOUT</h3>
+            <p>Rainy neon-noir 3D tactical. Hack terminals, dodge patrol drones, drive cars.</p>
+            <span class="tech">Three.js · WebGL</span>
+            <span class="flip-hint">Click to flip ↻</span>
+          </div>
+          <div class="card-face card-back">
+            <h3>m4ster BLACKOUT</h3>
+            <span class="tech">Three.js · WebGL</span>
+            <p>Procedural neon city in the rain. Patrol drones with vision cones, hackable terminals, drivable cars, and procedural Web Audio — rain, dread pad, impact booms. Built with Three.js, no build step.</p>
+            <a href="https://github.com/m4sternoob/m4ster-blackout" target="_blank" rel="noopener">GitHub →</a><br>
+            <a href="https://m4ster-blackout.vercel.app" target="_blank" rel="noopener">Play →</a>
+          </div>
+        </div>
+        <div class="card" data-cat="games">
+          <div class="card-face card-front">
+            <img class="card-gif" src="assets/feat-street-turf.gif" alt="STREET-TURF animated demo" loading="lazy" decoding="async">
+            <h3>STREET-TURF</h3>
+            <p>GTA-like open world. Turf war, empire loop, police pursuit — and Rocco the dog.</p>
+            <span class="tech">Three.js · WebGL</span>
+            <span class="flip-hint">Click to flip ↻</span>
+          </div>
+          <div class="card-face card-back">
+            <h3>STREET-TURF</h3>
+            <span class="tech">Three.js · WebGL</span>
+            <p>Open-world night city: houses, traffic, pedestrians, a wanted system, turf wars, and a day/night cycle. Play as Dre, build the empire, outrun the law. Rocco the dog follows, sits, and barks on command.</p>
+            <a href="https://github.com/m4sternoob/m4ster-street-turf" target="_blank" rel="noopener">GitHub →</a><br>
+            <a href="https://m4ster-street-turf.pages.dev" target="_blank" rel="noopener">Play →</a>
+          </div>
+        </div>
+        <div class="card" data-cat="web">
+          <div class="card-face card-front">
+            <img class="card-gif" src="assets/feat-framelab.gif" alt="FrameLab animated demo" loading="lazy" decoding="async">
+            <h3>m4ster FrameLab</h3>
+            <p>AI sprite generator. Prompt to pixel art, animations, export bundles.</p>
+            <span class="tech">JavaScript · FLUX AI</span>
+            <span class="flip-hint">Click to flip ↻</span>
+          </div>
+          <div class="card-face card-back">
+            <h3>m4ster FrameLab</h3>
+            <span class="tech">JavaScript · FLUX AI</span>
+            <p>Free-forever sprite and animation generator: AI image generation, an image-to-pixel converter, a sprite slicer, and motion presets. Exports PNG, GIF, and Aseprite-ready JSON bundles. No login, no paywall.</p>
+            <a href="https://github.com/m4sternoob/m4ster-sprite-gen" target="_blank" rel="noopener">GitHub →</a><br>
+            <a href="https://m4ster-framelab.vercel.app" target="_blank" rel="noopener">Visit →</a>
+          </div>
+        </div>
+        <div class="card" data-cat="web">
+          <div class="card-face card-front">
+            <img class="card-gif" src="assets/feat-wealth.gif" alt="M4ster Wealth animated demo" loading="lazy" decoding="async">
+            <h3>m4ster Wealth</h3>
+            <p>Net worth terminal. Holdings, debts, allocation, live market charts.</p>
+            <span class="tech">JavaScript · TradingView</span>
+            <span class="flip-hint">Click to flip ↻</span>
+          </div>
+          <div class="card-face card-back">
+            <h3>m4ster Wealth</h3>
+            <span class="tech">JavaScript · TradingView</span>
+            <p>Personal finance dashboard: track holdings and debts, net-worth history, and an allocation breakdown, plus a live TradingView market terminal with search and fullscreen. Google sign-in syncs your data across devices.</p>
+            <a href="https://m4ster-wealth.pages.dev" target="_blank" rel="noopener">Visit →</a>
+          </div>
+        </div>
+        <div class="card" data-cat="tools">
+          <div class="card-face card-front">
+            <img class="card-gif" src="assets/feat-gearflush.gif" alt="GearFlush animated demo" loading="lazy" decoding="async">
+            <h3>GearFlush</h3>
+            <p>WinDirStat-style disk analyzer. Treemap view, fast MFT scans, 100% offline.</p>
+            <span class="tech">C++ · WinUI 3</span>
+            <span class="flip-hint">Click to flip ↻</span>
+          </div>
+          <div class="card-face card-back">
+            <h3>GearFlush</h3>
+            <span class="tech">C++ · WinUI 3</span>
+            <p>Disk-usage analyzer with a live treemap: MFT-based scanning in C++17 with a WinUI 3 front end and zero network calls — no telemetry, no accounts. Windows first, with macOS, Linux, Android, and iOS on the same core.</p>
+            <a href="https://m4ster-deepgearflush.vercel.app" target="_blank" rel="noopener">Visit →</a>
+          </div>
+        </div>
+        <div class="card" data-cat="games">
+          <div class="card-face card-front">
+            <img class="card-gif" src="assets/card-snake.gif" alt="Nokia Snake animated demo" loading="lazy" decoding="async">
             <h3>Nokia Snake</h3>
             <p>Classic Snake on a Nokia 1100. Playable right on this site.</p>
             <span class="tech">JavaScript · Canvas</span>
@@ -634,6 +717,7 @@ section{transition:padding .35s ease}
         </div>
         <div class="card" data-cat="games">
           <div class="card-face card-front">
+            <img class="card-gif" src="assets/card-stumble.gif" alt="StumbleGuysClone animated demo" loading="lazy" decoding="async">
             <h3>StumbleGuysClone</h3>
             <p>Multiplayer party game in UE5. 100% C++ gameplay — no Blueprints. Chaos physics.</p>
             <span class="tech">C++ · Unreal Engine 5</span>
@@ -648,6 +732,7 @@ section{transition:padding .35s ease}
         </div>
         <div class="card" data-cat="games">
           <div class="card-face card-front">
+            <img class="card-gif" src="assets/card-polar.gif" alt="Polar Hopper 2D animated demo" loading="lazy" decoding="async">
             <h3>Polar Hopper 2D</h3>
             <p>Ice-physics platformer in Unity. Custom slippery-surface movement.</p>
             <span class="tech">C# · Unity</span>
@@ -662,6 +747,7 @@ section{transition:padding .35s ease}
         </div>
         <div class="card" data-cat="web">
           <div class="card-face card-front">
+            <img class="card-gif" src="assets/card-spice.gif" alt="Spice Sector animated demo" loading="lazy" decoding="async">
             <h3>Spice Sector</h3>
             <p>Food-truck web app: cart, accounts, admin, email notifications.</p>
             <span class="tech">React · Node.js</span>
@@ -676,6 +762,7 @@ section{transition:padding .35s ease}
         </div>
         <div class="card" data-cat="tools">
           <div class="card-face card-front">
+            <img class="card-gif" src="assets/card-mirror.gif" alt="Phone Mirror Pipeline animated demo" loading="lazy" decoding="async">
             <h3>Phone Mirror Pipeline</h3>
             <p>Automated wireless Android debugging with Python + adb + scrcpy.</p>
             <span class="tech">Python · adb</span>
@@ -690,6 +777,7 @@ section{transition:padding .35s ease}
         </div>
         <div class="card" data-cat="tools">
           <div class="card-face card-front">
+            <img class="card-gif" src="assets/card-editor.gif" alt="Layout Editor animated demo" loading="lazy" decoding="async">
             <h3>On-Site Layout Editor</h3>
             <p>Drag, resize, pin any section of this site live. Figma-style, zero dependencies.</p>
             <span class="tech">JavaScript · CSS 3D</span>
@@ -705,6 +793,7 @@ section{transition:padding .35s ease}
         </div>
         <div class="card" data-cat="games">
           <div class="card-face card-front">
+            <img class="card-gif" src="assets/card-groundwork.gif" alt="Groundwork animated demo" loading="lazy" decoding="async">
             <h3>Groundwork</h3>
             <p>Pac-Man clone, puzzle games, 15+ Maya 3D models, vector/pixel art, sound packs.</p>
             <span class="tech">C# · Unity · Maya</span>
