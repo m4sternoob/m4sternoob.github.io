@@ -1,1 +1,18 @@
-{"background_color":"#0c0916","description":"Game programmer portfolio \u2014 10 years building software, physics-driven games in C++ and Unreal Engine 5.","display":"standalone","icons":[{"sizes":"192x192","src":"/icon-192.png","type":"image/png","purpose":"any"},{"sizes":"512x512","src":"/icon-512.png","type":"image/png","purpose":"any"},{"sizes":"512x512","src":"/icon-maskable-512.png","type":"image/png","purpose":"maskable"}],"name":"M4sterNoob \u2014 Game Programmer","short_name":"M4sterNoob","start_url":"/","theme_color":"#0c0916"}
+{
+  "name": "M4sterNoob — Game Programmer",
+  "short_name": "M4sterNoob",
+  "description": "Game programmer portfolio — 10 years building software, physics-driven games in C++ and Unreal Engine 5.",
+  "id": "/",
+  "scope": "/",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#0c0916",
+  "background_color": "#0c0916",
+  "categories": ["developer tools", "entertainment"],
+  "icons": [
+    {"src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
