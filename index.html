@@ -124,9 +124,24 @@ section{padding:64px 0}
   padding:3px 10px;border-radius:20px;border:1px solid rgba(255,255,255,.15)}
 .gif-carousel figcaption{display:flex;flex-direction:column;gap:2px}
 .game-frame{border:2px solid #a78bfa;border-radius:16px;padding:24px;
-#game-5in1-frame .game-frame{width:100%}
-@media(max-width:700px){#p-game .wrap{padding:0 6px}#game-5in1-frame .game-frame{padding:8px;border-radius:12px}}
   background:rgba(167,139,250,.04);box-shadow:0 0 24px rgba(167,139,250,.15)}
+#game-5in1-frame .game-frame{width:100%}
+.hub-frame{width:100%;max-width:940px;margin:0 auto;text-align:center}
+.hub-iframe{width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:12px;display:block;background:#05050a}
+.hub-links{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+.hub-links a{border:1px solid var(--line);color:var(--text);padding:9px 18px;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600}
+.hub-links a:hover{border-color:#a78bfa;color:#c4b5fd}
+.hub-hint{margin:10px 0 0;color:var(--mute);font-size:13px}
+@media(max-width:700px){#p-game .game-frame{padding:8px}}
+.nokia-wrap{max-width:520px;margin:0 auto;background:#8fa35c;border:6px solid #22300f;border-radius:14px;padding:14px;box-shadow:inset 0 0 0 3px rgba(34,48,15,.35)}
+.nokia-top{display:flex;justify-content:space-between;font-family:'Courier New',monospace;font-weight:700;color:#22300f;letter-spacing:2px;font-size:14px;padding:0 2px 8px}
+#nokiaCanvas{display:block;width:100%;background:#9cae6d;image-rendering:pixelated;border:3px solid #22300f;border-radius:4px;touch-action:none}
+.nokia-msg{font-family:'Courier New',monospace;color:#22300f;font-weight:700;font-size:13px;letter-spacing:1px;padding:8px 0 2px;min-height:20px}
+.nokia-pad{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:8px}
+.nokia-pad button{width:52px;height:44px;border-radius:10px;border:3px solid #22300f;background:#aebd77;color:#22300f;font-size:18px;font-weight:700;cursor:pointer;padding:0}
+.nokia-pad button:active{background:#8fa35c;transform:translateY(1px)}
+.nokia-mid{display:flex;gap:6px}
+@media(max-width:700px){#p-game .wrap{padding:0 6px}#game-5in1-frame .game-frame{padding:8px;border-radius:12px}}
 .gif-carousel .gif-title{font-size:14px;
   background:linear-gradient(90deg,#fff,#c4b5fd,#a78bfa,#fff);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
@@ -1099,10 +1114,71 @@ body.rgb-rainbow .card-back::-webkit-scrollbar-thumb{background:linear-gradient(
       <div data-mml="game-5in1-frame" class="game-frame" style="text-align:center;max-width:940px;margin:0 auto">
       <h3 class="rgb-text" style="margin:0 0 12px">Play 5IN1 In-Frame</h3>
       <iframe src="https://m4ster-5in1.vercel.app/play" title="5IN1 Web Games" style="width:100%;height:800px;border:1px solid var(--line);border-radius:12px;display:block;background:#0a0a12" loading="lazy" allow="fullscreen"></iframe>
+      <div class="hub-links">
+        <a href="https://m4ster-5in1.vercel.app" target="_blank" rel="noopener">Full site ↗</a>
+        <a href="https://m4sternoob.itch.io/m4ster-5in1" target="_blank" rel="noopener">itch.io ↗</a>
+        <a href="https://github.com/m4sternoob/m4ster-5in1-web" target="_blank" rel="noopener">Web repo ↗</a>
+      </div>
       </div>
       </div><!-- /game-5in1-frame -->
       </div>
       </div><!-- /game-snake -->
+      <div class="game-section" id="game-streetturf">
+      <div class="game-frame hub-frame">
+      <h3 class="rgb-text" style="margin:0 0 12px">STREET-TURF — Play In-Frame</h3>
+      <iframe class="hub-iframe" src="https://m4ster-street-turf.pages.dev/play.html" title="STREET-TURF" loading="lazy" allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
+      <div class="hub-links">
+        <a href="https://m4ster-street-turf.pages.dev/play.html" target="_blank" rel="noopener">Play full site ↗</a>
+        <a href="https://m4sternoob.itch.io/m4ster-street-turf" target="_blank" rel="noopener">itch.io ↗</a>
+      </div>
+      <p class="hub-hint">Click the game first so it grabs your keys — then drive.</p>
+      </div>
+      </div><!-- /game-streetturf -->
+      <div style="height:48px"></div>
+      <div class="game-section" id="game-blackout">
+      <div class="game-frame hub-frame">
+      <h3 class="rgb-text" style="margin:0 0 12px">BLACKOUT — Play In-Frame</h3>
+      <iframe class="hub-iframe" src="https://m4ster-blackout.pages.dev" title="BLACKOUT" loading="lazy" allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
+      <div class="hub-links">
+        <a href="https://m4ster-blackout.pages.dev" target="_blank" rel="noopener">Play full site ↗</a>
+        <a href="https://m4ster-blackout.vercel.app" target="_blank" rel="noopener">Mirror ↗</a>
+        <a href="https://m4sternoob.itch.io/m4ster-blackout" target="_blank" rel="noopener">itch.io ↗</a>
+      </div>
+      <p class="hub-hint">Click in, hit JACK IN — mouse + WASD, hack the terminals, kill the lights.</p>
+      </div>
+      </div><!-- /game-blackout -->
+      <div style="height:48px"></div>
+      <div class="game-section" id="game-hattrick-frame">
+      <div class="game-frame hub-frame">
+      <h3 class="rgb-text" style="margin:0 0 12px">Hat Trick — Play In-Frame</h3>
+      <iframe class="hub-iframe" src="https://html-classic.itch.zone/html/19875424/index.html" title="Hat Trick" loading="lazy" allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
+      <div class="hub-links">
+        <a href="https://m4sternoob.itch.io/m4ster-hat-trick" target="_blank" rel="noopener">Play on itch.io ↗</a>
+      </div>
+      <p class="hub-hint">Score 3 goals in a row for the hat trick — one miss resets the streak.</p>
+      </div>
+      </div><!-- /game-hattrick-frame -->
+      <div style="height:48px"></div>
+      <div class="game-section" id="game-nokia">
+      <div class="game-frame hub-frame">
+      <h3 class="rgb-text" style="margin:0 0 12px">Snake Classic — Nokia Style</h3>
+      <div class="nokia-wrap" id="nokiaWrap">
+        <div class="nokia-top"><span id="nokiaScore">SCORE 0000</span><span id="nokiaBest">BEST 0000</span></div>
+        <canvas id="nokiaCanvas" width="480" height="320"></canvas>
+        <div class="nokia-msg" id="nokiaMsg">PRESS START — ARROWS / WASD / SWIPE</div>
+        <div class="nokia-pad">
+          <button type="button" data-nk="up" aria-label="Up">↑</button>
+          <div class="nokia-mid">
+            <button type="button" data-nk="left" aria-label="Left">←</button>
+            <button type="button" data-nk="start" aria-label="Start or pause">▶</button>
+            <button type="button" data-nk="right" aria-label="Right">→</button>
+          </div>
+          <button type="button" data-nk="down" aria-label="Down">↓</button>
+        </div>
+      </div>
+      <p class="hub-hint">The old-school one — green screen, pixel snake, walls are death. Eat, grow, don’t bite yourself.</p>
+      </div>
+      </div><!-- /game-nokia -->
       <!-- Future games go here as .game-section blocks -->
     </div>
   </div>
@@ -2124,6 +2200,72 @@ if('serviceWorker' in navigator){
   });
   navigator.serviceWorker.register('/sw.js').catch(function(){});
 }
+</script>
+
+<script>
+/* Snake Classic — Nokia style, self-contained */
+(function(){
+  var cv = document.getElementById('nokiaCanvas'); if(!cv) return;
+  var ctx = cv.getContext('2d');
+  var scoreEl = document.getElementById('nokiaScore'), bestEl = document.getElementById('nokiaBest'), msgEl = document.getElementById('nokiaMsg');
+  var COLS = 24, ROWS = 16, CELL = 20;
+  var snake, dir, nextDir, apple, score, best = +(localStorage.getItem('nokiaBest')||0), state = 'idle', last = 0, acc = 0, armed = false;
+  function pad4(n){ return ('0000'+n).slice(-4); }
+  function showScore(){ scoreEl.textContent = 'SCORE ' + pad4(score); bestEl.textContent = 'BEST ' + pad4(best); }
+  function placeApple(){ while(true){ var a = {x:(Math.random()*COLS)|0, y:(Math.random()*ROWS)|0};
+    if(!snake.some(function(p){return p.x===a.x && p.y===a.y;})){ apple = a; return; } } }
+  function reset(){ snake = [{x:11,y:8},{x:10,y:8},{x:9,y:8},{x:8,y:8}]; dir = {x:1,y:0}; nextDir = dir; score = 0; placeApple(); showScore(); }
+  function draw(){ ctx.fillStyle = '#9cae6d'; ctx.fillRect(0,0,cv.width,cv.height);
+    ctx.fillStyle = 'rgba(34,48,15,.14)';
+    for(var x=0;x<COLS;x++) for(var y=0;y<ROWS;y++){ if((x+y)%2===0) ctx.fillRect(x*CELL+CELL/2-1, y*CELL+CELL/2-1, 2, 2); }
+    ctx.fillStyle = '#22300f'; ctx.fillRect(apple.x*CELL+3, apple.y*CELL+3, CELL-6, CELL-6);
+    ctx.fillStyle = '#9cae6d'; ctx.fillRect(apple.x*CELL+8, apple.y*CELL+5, 4, 4);
+    snake.forEach(function(p,i){ ctx.fillStyle = i===0 ? '#2e4214' : '#22300f'; ctx.fillRect(p.x*CELL+1, p.y*CELL+1, CELL-2, CELL-2); });
+    if(state==='idle'){ ctx.fillStyle = 'rgba(156,174,109,.82)'; ctx.fillRect(0,0,cv.width,cv.height);
+      ctx.fillStyle = '#22300f'; ctx.font = '700 26px "Courier New",monospace'; ctx.textAlign = 'center';
+      ctx.fillText('SNAKE CLASSIC', cv.width/2, cv.height/2 - 8);
+      ctx.font = '700 14px "Courier New",monospace'; ctx.fillText('PRESS START', cv.width/2, cv.height/2 + 22); }
+    if(state==='over'){ ctx.fillStyle = 'rgba(156,174,109,.82)'; ctx.fillRect(0,0,cv.width,cv.height);
+      ctx.fillStyle = '#22300f'; ctx.font = '700 26px "Courier New",monospace'; ctx.textAlign = 'center';
+      ctx.fillText('GAME OVER', cv.width/2, cv.height/2 - 8);
+      ctx.font = '700 14px "Courier New",monospace'; ctx.fillText('SCORE ' + pad4(score) + ' — PRESS START', cv.width/2, cv.height/2 + 22); } }
+  function step(){ dir = nextDir; var head = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
+    if(head.x<0 || head.y<0 || head.x>=COLS || head.y>=ROWS || snake.some(function(p){return p.x===head.x && p.y===head.y;})){
+      state = 'over'; if(score>best){ best = score; localStorage.setItem('nokiaBest', best); } showScore();
+      msgEl.textContent = 'GAME OVER — SCORE ' + pad4(score); draw(); return; }
+    snake.unshift(head);
+    if(head.x===apple.x && head.y===apple.y){ score += 10; showScore(); placeApple(); } else snake.pop();
+    draw(); }
+  function loop(t){ if(state!=='run'){ return; } var dt = t - last; last = t; acc += dt;
+    var speed = Math.max(70, 135 - Math.floor(score/40)*8);
+    while(acc >= speed){ acc -= speed; step(); if(state!=='run'){ return; } }
+    requestAnimationFrame(loop); }
+  function start(){ if(state==='run'){ state='pause'; msgEl.textContent = 'PAUSED — PRESS START'; draw(); return; }
+    if(state==='over' || state==='idle') reset();
+    state = 'run'; msgEl.textContent = 'GO!'; last = performance.now(); acc = 0; draw(); requestAnimationFrame(loop); }
+  function setDir(x,y){ if(state!=='run') return; if(dir.x === -x && dir.y === -y) return; if(dir.x === x && dir.y === y) return; nextDir = {x:x, y:y}; }
+  var wrap = document.getElementById('nokiaWrap');
+  wrap.addEventListener('pointerdown', function(){ armed = true; });
+  document.addEventListener('pointerdown', function(e){ if(!wrap.contains(e.target)) armed = false; });
+  document.addEventListener('keydown', function(e){ if(!armed) return;
+    var k = e.key.toLowerCase();
+    if(k==='arrowup' || k==='w'){ e.preventDefault(); if(state==='idle'||state==='over') start(); setDir(0,-1); }
+    else if(k==='arrowdown' || k==='s'){ e.preventDefault(); if(state==='idle'||state==='over') start(); setDir(0,1); }
+    else if(k==='arrowleft' || k==='a'){ e.preventDefault(); if(state==='idle'||state==='over') start(); setDir(-1,0); }
+    else if(k==='arrowright' || k==='d'){ e.preventDefault(); if(state==='idle'||state==='over') start(); setDir(1,0); }
+    else if(k==='enter' || k===' '){ e.preventDefault(); start(); } });
+  wrap.querySelectorAll('[data-nk]').forEach(function(b){ b.addEventListener('pointerdown', function(e){ e.preventDefault(); armed = true;
+    var d = b.getAttribute('data-nk');
+    if(d==='start'){ start(); return; }
+    if(state==='idle'||state==='over') start();
+    if(d==='up') setDir(0,-1); if(d==='down') setDir(0,1); if(d==='left') setDir(-1,0); if(d==='right') setDir(1,0); }); });
+  var tx = 0, ty = 0;
+  cv.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, {passive:true});
+  cv.addEventListener('touchend', function(e){ var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+    if(Math.abs(dx) < 24 && Math.abs(dy) < 24) return; armed = true; if(state==='idle'||state==='over') start();
+    if(Math.abs(dx) > Math.abs(dy)) setDir(dx>0?1:-1, 0); else setDir(0, dy>0?1:-1); }, {passive:true});
+  reset(); draw();
+})();
 </script>
 </body>
 </html>
