@@ -128,7 +128,7 @@ section{padding:64px 0}
 #game-5in1-frame .game-frame{width:100%}
 .hub-frame{width:100%;max-width:940px;margin:0 auto;text-align:center}
 .hub-iframe{width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:12px;display:block;background:#05050a}
-.hub-links{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}.scale-wrap{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:12px;background:#000}.scale-frame{position:absolute;top:0;left:0;width:1280px!important;height:720px!important;aspect-ratio:auto!important;transform-origin:0 0}.hub-links .frame-reset{background:var(--violet);color:#fff;border:0;border-radius:8px;padding:7px 16px;font:inherit;font-weight:700;cursor:pointer}
+.hub-links{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}.scale-wrap{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:12px;background:#000}.scale-frame{position:absolute;top:0;left:0;width:1280px!important;height:720px!important;aspect-ratio:auto!important;transform-origin:0 0}.hub-links .frame-reset{background:var(--violet);color:#fff;border:0;border-radius:8px;padding:7px 16px;font:inherit;font-weight:700;cursor:pointer}.frame-overlay{position:absolute;top:10px;left:10px;z-index:7}.fo-btn{background:rgba(14,10,30,.85);color:#fff;border:1px solid var(--violet);border-radius:999px;padding:8px 16px;font:inherit;font-weight:700;cursor:pointer;backdrop-filter:blur(6px);box-shadow:0 4px 18px rgba(0,0,0,.55)}
 .hub-links a{border:1px solid var(--line);color:var(--text);padding:9px 18px;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600}
 .hub-links a:hover{border-color:#a78bfa;color:#c4b5fd}
 .hub-hint{margin:10px 0 0;color:var(--mute);font-size:13px}
@@ -1094,7 +1094,8 @@ body.rgb-rainbow .card-back::-webkit-scrollbar-thumb{background:linear-gradient(
       <div class="game-section" id="game-5in1-frame">
       <div data-mml="game-5in1-frame" class="game-frame" style="text-align:center;max-width:940px;margin:0 auto">
       <h3 class="rgb-text" style="margin:0 0 12px">Play 5IN1 In-Frame</h3>
-      <div style="overflow:hidden;border-radius:12px;border:1px solid var(--line);height:800px">
+      <div style="position:relative;overflow:hidden;border-radius:12px;border:1px solid var(--line);height:800px">
+      <div class="frame-overlay"><button type="button" class="frame-reset fo-btn" data-sel="#game-5in1-frame iframe">&#8592; All games</button></div>
       <iframe src="https://m4ster-5in1.vercel.app/play" title="5IN1 Web Games" sandbox="allow-scripts allow-same-origin allow-pointer-lock" style="width:100%;height:890px;margin-top:-90px;border:0;display:block;background:#0a0a12" loading="lazy" allow="fullscreen"></iframe>
       </div>
       <div class="hub-links">
