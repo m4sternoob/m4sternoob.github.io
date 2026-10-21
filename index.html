@@ -128,7 +128,7 @@ section{padding:64px 0}
 #game-5in1-frame .game-frame{width:100%}
 .hub-frame{width:100%;max-width:940px;margin:0 auto;text-align:center}
 .hub-iframe{width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:12px;display:block;background:#05050a}
-.hub-links{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}.hub-links .frame-reset{background:var(--violet);color:#fff;border:0;border-radius:8px;padding:7px 16px;font:inherit;font-weight:700;cursor:pointer}
+.hub-links{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}.scale-wrap{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:12px;background:#000}.scale-frame{position:absolute;top:0;left:0;width:1280px!important;height:720px!important;aspect-ratio:auto!important;transform-origin:0 0}.hub-links .frame-reset{background:var(--violet);color:#fff;border:0;border-radius:8px;padding:7px 16px;font:inherit;font-weight:700;cursor:pointer}
 .hub-links a{border:1px solid var(--line);color:var(--text);padding:9px 18px;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600}
 .hub-links a:hover{border-color:#a78bfa;color:#c4b5fd}
 .hub-hint{margin:10px 0 0;color:var(--mute);font-size:13px}
@@ -1110,7 +1110,7 @@ body.rgb-rainbow .card-back::-webkit-scrollbar-thumb{background:linear-gradient(
       <div class="game-section" id="game-streetturf">
       <div data-mml="game-streetturf" class="game-frame hub-frame">
       <h3 class="rgb-text" style="margin:0 0 12px">STREET-TURF — Play In-Frame</h3>
-      <iframe class="hub-iframe" src="https://m4ster-street-turf.pages.dev/play.html" title="STREET-TURF" loading="lazy" allow="fullscreen; autoplay; gamepad" allowfullscreen sandbox="allow-scripts allow-same-origin allow-pointer-lock"></iframe>
+      <div class="scale-wrap"><iframe class="hub-iframe scale-frame" data-native="1280x720" src="https://m4ster-street-turf.pages.dev/play.html" title="STREET-TURF" loading="lazy" allow="fullscreen; autoplay; gamepad" allowfullscreen sandbox="allow-scripts allow-same-origin allow-pointer-lock"></iframe></div>
       <div class="hub-links">
         <button type="button" class="frame-reset" data-sel="#game-streetturf iframe">&#8635; Restart</button>
         <a href="https://m4ster-street-turf.pages.dev/play.html" target="_blank" rel="noopener">Play full site ↗</a>
@@ -1137,7 +1137,7 @@ body.rgb-rainbow .card-back::-webkit-scrollbar-thumb{background:linear-gradient(
       <div class="game-section" id="game-hattrick-frame">
       <div data-mml="game-hattrick" class="game-frame hub-frame">
       <h3 class="rgb-text" style="margin:0 0 12px">Hat Trick — Play In-Frame</h3>
-      <iframe class="hub-iframe" src="https://itch.io/embed-upload/19875424?color=0c0916" title="Hat Trick" loading="lazy" allow="fullscreen; autoplay; gamepad" allowfullscreen sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-forms"></iframe>
+      <iframe class="hub-iframe" src="hat-trick.html" title="Hat Trick" allow="fullscreen; autoplay; gamepad" allowfullscreen sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-forms"></iframe>
       <div class="hub-links">
         <button type="button" class="frame-reset" data-sel="#game-hattrick-frame iframe">&#8635; Restart</button>
         <a href="https://m4sternoob.itch.io/m4ster-hat-trick" target="_blank" rel="noopener">Play on itch.io ↗</a>
@@ -2176,11 +2176,11 @@ if('serviceWorker' in navigator){
     '#game-5in1-frame iframe': 'https://m4ster-5in1.vercel.app/play',
     '#game-streetturf iframe': 'https://m4ster-street-turf.pages.dev/play.html',
     '#game-blackout iframe': 'https://m4ster-blackout.pages.dev',
-    '#game-hattrick-frame iframe': 'https://itch.io/embed-upload/19875424?color=0c0916'
+    '#game-hattrick-frame iframe': '/hat-trick.html'
   };
   Object.keys(homes).forEach(function(sel){
     var f = document.querySelector(sel); if(!f) return;
-    var home = homes[sel], loads = 0, expected = false;
+    var home = homes[sel].charAt(0) === '/' ? location.origin + homes[sel] : homes[sel], loads = 0, expected = false;
     f.addEventListener('load', function(){
       loads++;
       if(loads > 1){
@@ -2190,6 +2190,14 @@ if('serviceWorker' in navigator){
     });
     f._goHome = function(){ expected = true; f.src = home; };
   });
+  function fitScaled(){
+    document.querySelectorAll('iframe[data-native]').forEach(function(f){
+      var wrap = f.parentElement; if(!wrap) return;
+      f.style.transform = 'scale(' + (wrap.clientWidth / 1280) + ')';
+    });
+  }
+  window.addEventListener('resize', fitScaled);
+  fitScaled(); setTimeout(fitScaled, 600); setTimeout(fitScaled, 2000);
   document.querySelectorAll('.frame-reset').forEach(function(btn){
     btn.addEventListener('click', function(){
       var f = document.querySelector(btn.getAttribute('data-sel'));
