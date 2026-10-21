@@ -128,7 +128,7 @@ section{padding:64px 0}
 #game-5in1-frame .game-frame{width:100%}
 .hub-frame{width:100%;max-width:940px;margin:0 auto;text-align:center}
 .hub-iframe{width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:12px;display:block;background:#05050a}
-.hub-links{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+.hub-links{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}.hub-links .frame-reset{background:var(--violet);color:#fff;border:0;border-radius:8px;padding:7px 16px;font:inherit;font-weight:700;cursor:pointer}
 .hub-links a{border:1px solid var(--line);color:var(--text);padding:9px 18px;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600}
 .hub-links a:hover{border-color:#a78bfa;color:#c4b5fd}
 .hub-hint{margin:10px 0 0;color:var(--mute);font-size:13px}
@@ -498,6 +498,7 @@ body.rgb-rainbow .card-back::-webkit-scrollbar-thumb{background:linear-gradient(
 .idx-table td a{color:#7cc4ff;font-weight:600}
 .idx-table tr.blank td{color:#3a3a52;font-style:italic}
 .idx-table tr:hover td{background:rgba(124,60,237,.06)}
+@media (max-width:700px){#game-5in1-frame iframe{height:867px!important;margin-top:-67px!important}}
 </style>
 </head>
 <body>
@@ -1089,18 +1090,6 @@ body.rgb-rainbow .card-back::-webkit-scrollbar-thumb{background:linear-gradient(
       </div>
       </div>
       </div><!-- /game-snake -->
-      <div class="game-section" id="game-5in1" style="margin-top:32px">
-      <div data-mml="game-5in1" class="game-frame" style="text-align:center;max-width:560px;margin:0 auto">
-      <h3 class="rgb-text" style="margin:0 0 8px">5IN1 — Multi-Game Hub</h3>
-      <div style="background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px">
-        <div style="font-size:40px;margin-bottom:8px">🎮</div>
-        <p style="margin:0 0 4px;font-weight:700">6 games · 3 platforms · v1.7.1 live</p>
-        <p style="margin:0 0 16px;color:var(--muted);font-size:13px">One app, six games — on Android, macOS, and web. Offline-first, zero ads, zero tracking.</p>
-        <a href="https://m4ster-5in1.vercel.app/play" target="_blank" rel="noopener" style="display:inline-block;background:var(--violet);color:#fff;padding:12px 24px;border-radius:10px;text-decoration:none;font-weight:700;margin:0 6px 6px 0">Play Web Games →</a>
-        <a href="https://m4sternoob.itch.io/m4ster-5in1" target="_blank" rel="noopener" style="display:inline-block;border:1px solid var(--line);color:var(--mute);padding:12px 24px;border-radius:10px;text-decoration:none;margin:0 0 6px 0">Get it on itch.io</a>
-      </div>
-      </div>
-      </div><!-- /game-5in1 -->
       <div style="height:48px"></div>
       <div class="game-section" id="game-5in1-frame">
       <div data-mml="game-5in1-frame" class="game-frame" style="text-align:center;max-width:940px;margin:0 auto">
@@ -1109,6 +1098,7 @@ body.rgb-rainbow .card-back::-webkit-scrollbar-thumb{background:linear-gradient(
       <iframe src="https://m4ster-5in1.vercel.app/play" title="5IN1 Web Games" sandbox="allow-scripts allow-same-origin allow-pointer-lock" style="width:100%;height:890px;margin-top:-90px;border:0;display:block;background:#0a0a12" loading="lazy" allow="fullscreen"></iframe>
       </div>
       <div class="hub-links">
+        <button type="button" class="frame-reset" data-sel="#game-5in1-frame iframe">&#8592; All games</button>
         <a href="https://m4ster-5in1.vercel.app" target="_blank" rel="noopener">Full site ↗</a>
         <a href="https://m4sternoob.itch.io/m4ster-5in1" target="_blank" rel="noopener">itch.io ↗</a>
         <a href="https://github.com/m4sternoob/m4ster-5in1-web" target="_blank" rel="noopener">Web repo ↗</a>
@@ -1122,6 +1112,7 @@ body.rgb-rainbow .card-back::-webkit-scrollbar-thumb{background:linear-gradient(
       <h3 class="rgb-text" style="margin:0 0 12px">STREET-TURF — Play In-Frame</h3>
       <iframe class="hub-iframe" src="https://m4ster-street-turf.pages.dev/play.html" title="STREET-TURF" loading="lazy" allow="fullscreen; autoplay; gamepad" allowfullscreen sandbox="allow-scripts allow-same-origin allow-pointer-lock"></iframe>
       <div class="hub-links">
+        <button type="button" class="frame-reset" data-sel="#game-streetturf iframe">&#8635; Restart</button>
         <a href="https://m4ster-street-turf.pages.dev/play.html" target="_blank" rel="noopener">Play full site ↗</a>
         <a href="https://m4sternoob.itch.io/m4ster-street-turf" target="_blank" rel="noopener">itch.io ↗</a>
       </div>
@@ -1134,6 +1125,7 @@ body.rgb-rainbow .card-back::-webkit-scrollbar-thumb{background:linear-gradient(
       <h3 class="rgb-text" style="margin:0 0 12px">BLACKOUT — Play In-Frame</h3>
       <iframe class="hub-iframe" src="https://m4ster-blackout.pages.dev" title="BLACKOUT" loading="lazy" allow="fullscreen; autoplay; gamepad" allowfullscreen sandbox="allow-scripts allow-same-origin allow-pointer-lock"></iframe>
       <div class="hub-links">
+        <button type="button" class="frame-reset" data-sel="#game-blackout iframe">&#8635; Restart</button>
         <a href="https://m4ster-blackout.pages.dev" target="_blank" rel="noopener">Play full site ↗</a>
         <a href="https://m4ster-blackout.vercel.app" target="_blank" rel="noopener">Mirror ↗</a>
         <a href="https://m4sternoob.itch.io/m4ster-blackout" target="_blank" rel="noopener">itch.io ↗</a>
@@ -1147,6 +1139,7 @@ body.rgb-rainbow .card-back::-webkit-scrollbar-thumb{background:linear-gradient(
       <h3 class="rgb-text" style="margin:0 0 12px">Hat Trick — Play In-Frame</h3>
       <iframe class="hub-iframe" src="https://itch.io/embed-upload/19875424?color=0c0916" title="Hat Trick" loading="lazy" allow="fullscreen; autoplay; gamepad" allowfullscreen sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-forms"></iframe>
       <div class="hub-links">
+        <button type="button" class="frame-reset" data-sel="#game-hattrick-frame iframe">&#8635; Restart</button>
         <a href="https://m4sternoob.itch.io/m4ster-hat-trick" target="_blank" rel="noopener">Play on itch.io ↗</a>
       </div>
       <p class="hub-hint">Score 3 goals in a row for the hat trick — one miss resets the streak.</p>
@@ -1436,7 +1429,7 @@ body.rgb-rainbow .card-back::-webkit-scrollbar-thumb{background:linear-gradient(
 </script>
 <script>
 /* Published layout: owner's saved arrangement. Desktop visitors see desktop, phone visitors see mobile. */
-window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.2892},"gif-showcase":{"x":451,"y":-208,"r":0,"s":1.22966},"featured":{"x":136,"y":-119,"r":0,"s":1},"projects":{"x":-299,"y":-89,"r":0,"s":1},"index":{"x":-215,"y":-10,"r":0,"s":1},"experience":{"x":751,"y":-1415,"r":0,"s":0.810472},"devlog":{"x":277,"y":-1117,"r":0,"s":1},"skills":{"x":-125,"y":-1065,"r":0,"s":1.31315},"oss":{"x":-9,"y":-340,"r":0,"s":1.32111},"contact":{"x":-12,"y":155,"r":0,"s":1},"playground":{"x":192,"y":-1826,"r":0,"s":0.974137},"pg-demo1":{"x":-138,"y":155,"r":0,"s":1},"pg-demo2":{"x":44,"y":27,"r":0,"s":1},"game-main":{"x":-133,"y":-116,"r":0,"s":0.735761},"game-side":{"x":-303,"y":-142,"r":0,"s":2.2194},"game-5in1-frame":{"x":-316,"y":-1227,"r":0,"s":0.718879},"game-streetturf":{"x":502,"y":-1171,"r":0,"s":1},"game-blackout":{"x":5,"y":-1218,"r":0,"s":0.980158},"game-hattrick":{"x":-509,"y":-2765,"r":0,"s":1}},"pinned":[],"custom":[{"id":"sep-top","zone":null,"html":"<div class=\"rgb-sep\" data-mml=\"sep-top\" style=\"position: relative;\"><div class=\"mml-resize nw\"></div><div class=\"mml-resize ne\"></div><div class=\"mml-resize sw\"></div><div class=\"mml-resize se\"></div></div>"},{"id":"sep-bottom","zone":"portfolio","html":"<div class=\"rgb-sep\" data-mml=\"sep-bottom\"></div>"}],"alive":["sep-top","hero-text","gif-showcase","featured","projects","index","experience","devlog","skills","oss","contact","playground","pg-demo1","pg-demo2","sep-bottom","game-main","game-side","game-5in1-frame","game-streetturf","game-blackout","game-hattrick"]},mobile:{"pos":{"featured":{"x":0,"y":0,"s":1},"sep-top":{"x":0,"y":0,"s":1},"sep-bottom":{"x":0,"y":0,"s":1},"index":{"x":0,"y":0,"s":1},"hero-text":{"x":0,"y":-10,"s":1},"gif-showcase":{"x":0,"y":-42,"s":1},"projects":{"x":0,"y":8,"s":1},"experience":{"x":0,"y":14,"s":1.00626},"devlog":{"x":0,"y":-48,"s":1},"skills":{"x":0,"y":-135,"s":1},"oss":{"x":0,"y":-152,"s":1},"contact":{"x":0,"y":490,"s":1},"playground":{"x":0,"y":-544,"s":1},"pg-demo1":{"x":0,"y":45,"s":1},"pg-demo2":{"x":0,"y":64,"s":1},"game-main":{"x":0,"y":7,"s":0.960544},"game-side":{"x":0,"y":25,"s":0.987874},"game-5in1":{"x":0,"y":16,"s":1},"game-5in1-frame":{"x":0,"y":-45,"s":1},"game-streetturf":{"x":0,"y":0,"s":1},"game-blackout":{"x":0,"y":0,"s":1},"game-hattrick":{"x":0,"y":0,"s":1}},"pinned":["hero-text","gif-showcase","projects","experience","devlog","skills","oss","contact","playground","pg-demo1","pg-demo2","game-main","game-side","game-5in1","game-5in1-frame","game-streetturf","game-blackout","game-hattrick"],"custom":[]}};};};};
+window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.2892},"gif-showcase":{"x":451,"y":-208,"r":0,"s":1.22966},"featured":{"x":136,"y":-119,"r":0,"s":1},"projects":{"x":-299,"y":-89,"r":0,"s":1},"index":{"x":-215,"y":-10,"r":0,"s":1},"experience":{"x":751,"y":-1415,"r":0,"s":0.810472},"devlog":{"x":277,"y":-1117,"r":0,"s":1},"skills":{"x":-125,"y":-1065,"r":0,"s":1.31315},"oss":{"x":-9,"y":-340,"r":0,"s":1.32111},"contact":{"x":-12,"y":155,"r":0,"s":1},"playground":{"x":192,"y":-1826,"r":0,"s":0.974137},"pg-demo1":{"x":-138,"y":155,"r":0,"s":1},"pg-demo2":{"x":44,"y":27,"r":0,"s":1},"game-main":{"x":-133,"y":-116,"r":0,"s":0.735761},"game-side":{"x":-303,"y":-142,"r":0,"s":2.2194},"game-5in1-frame":{"x":-316,"y":-1227,"r":0,"s":0.718879},"game-streetturf":{"x":502,"y":-1171,"r":0,"s":1},"game-blackout":{"x":5,"y":-1218,"r":0,"s":0.980158},"game-hattrick":{"x":-509,"y":-2765,"r":0,"s":1}},"pinned":[],"custom":[{"id":"sep-top","zone":null,"html":"<div class=\"rgb-sep\" data-mml=\"sep-top\" style=\"position: relative;\"><div class=\"mml-resize nw\"></div><div class=\"mml-resize ne\"></div><div class=\"mml-resize sw\"></div><div class=\"mml-resize se\"></div></div>"},{"id":"sep-bottom","zone":"portfolio","html":"<div class=\"rgb-sep\" data-mml=\"sep-bottom\"></div>"}],"alive":["sep-top","hero-text","gif-showcase","featured","projects","index","experience","devlog","skills","oss","contact","playground","pg-demo1","pg-demo2","sep-bottom","game-main","game-side","game-5in1-frame","game-streetturf","game-blackout","game-hattrick"]},mobile:{"pos":{"featured":{"x":0,"y":0,"s":1},"sep-top":{"x":0,"y":0,"s":1},"sep-bottom":{"x":0,"y":0,"s":1},"index":{"x":0,"y":0,"s":1},"hero-text":{"x":0,"y":-10,"s":1},"gif-showcase":{"x":0,"y":-42,"s":1},"projects":{"x":0,"y":8,"s":1},"experience":{"x":0,"y":14,"s":1.00626},"devlog":{"x":0,"y":-48,"s":1},"skills":{"x":0,"y":-135,"s":1},"oss":{"x":0,"y":-152,"s":1},"contact":{"x":0,"y":490,"s":1},"playground":{"x":0,"y":-544,"s":1},"pg-demo1":{"x":0,"y":45,"s":1},"pg-demo2":{"x":0,"y":64,"s":1},"game-main":{"x":0,"y":7,"s":0.960544},"game-side":{"x":0,"y":25,"s":0.987874},"game-5in1-frame":{"x":0,"y":-45,"s":1},"game-streetturf":{"x":0,"y":0,"s":1},"game-blackout":{"x":0,"y":0,"s":1},"game-hattrick":{"x":0,"y":0,"s":1}},"pinned":["hero-text","gif-showcase","projects","experience","devlog","skills","oss","contact","playground","pg-demo1","pg-demo2","game-main","game-side","game-5in1-frame","game-streetturf","game-blackout","game-hattrick"],"custom":[]}};
 </script>
 <script>
 /* ---- m4ster layout tools: drag-drop reorder. Locked unless edit tools enabled ---- */
@@ -2187,10 +2180,20 @@ if('serviceWorker' in navigator){
   };
   Object.keys(homes).forEach(function(sel){
     var f = document.querySelector(sel); if(!f) return;
-    var home = homes[sel], loads = 0;
+    var home = homes[sel], loads = 0, expected = false;
     f.addEventListener('load', function(){
       loads++;
-      if(loads > 1){ f.src = home; }
+      if(loads > 1){
+        if(expected){ expected = false; }
+        else if(f.src !== home){ f.src = home; }
+      }
+    });
+    f._goHome = function(){ expected = true; f.src = home; };
+  });
+  document.querySelectorAll('.frame-reset').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var f = document.querySelector(btn.getAttribute('data-sel'));
+      if(f && f._goHome) f._goHome();
     });
   });
 })();
