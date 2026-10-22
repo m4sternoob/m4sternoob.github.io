@@ -520,7 +520,7 @@ html.light #themeToggle{box-shadow:0 4px 16px rgba(76,29,149,.18)}
 html.light #themeToggle .ic-sun{display:block}
 html.light #themeToggle .ic-moon{display:none}
 </style>
-<script>(function(){try{if(localStorage.getItem('pf-theme')==='light'){document.documentElement.classList.add('light');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#f5f3fa');}}catch(e){}})();</script>
+<script>(function(){var d=false;try{d=localStorage.getItem('pf-theme')==='dark'}catch(e){}if(!d){document.documentElement.classList.add('light');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#f5f3fa');}})();</script>
 </head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
