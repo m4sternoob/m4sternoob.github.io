@@ -499,7 +499,28 @@ body.rgb-rainbow .card-back::-webkit-scrollbar-thumb{background:linear-gradient(
 .idx-table tr.blank td{color:#3a3a52;font-style:italic}
 .idx-table tr:hover td{background:rgba(124,60,237,.06)}
 @media (max-width:700px){#game-5in1-frame iframe{height:867px!important;margin-top:-67px!important}}
+
+/* ===== light theme + sun/moon toggle ===== */
+html.light{--bg:#f5f3fa;--ink:#ffffff;--panel:#ffffff;--line:#e2dbf4;--text:#221d38;--mute:#5d5680;--dim:#8f88ad;--violet:#7c3aed;--violet-deep:#6d28d9;--green:#7c3aed;background:#f5f3fa}
+html.light nav{background:rgba(255,255,255,.88)}
+html.light .btn-primary{color:#fff}
+html.light .fbtn.on{color:#fff}
+html.light #bg-canvas{opacity:.13}
+html.light .hero-media figcaption{background:linear-gradient(90deg,#4c1d95,#7c3aed,#a78bfa,#4c1d95);-webkit-background-clip:text;background-clip:text}
+html.light .stat-chip{background:rgba(124,58,237,.06);color:var(--mute)}
+html.light .stat-chip b{color:var(--violet-deep)}
+html.light .gif-carousel .gif-empty{background:#ece8f7;color:var(--mute)}
+html.light .featured-card:hover,html.light .card:hover{box-shadow:0 12px 32px rgba(76,29,149,.16)}
+#themeToggle{position:fixed;left:16px;bottom:16px;z-index:9000;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--violet);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.35);transition:transform .15s ease,box-shadow .2s ease;padding:0}
+#themeToggle:hover{transform:translateY(-2px)}
+#themeToggle:active{transform:scale(.94)}
+#themeToggle svg{width:21px;height:21px;display:block}
+#themeToggle .ic-sun{display:none}
+html.light #themeToggle{box-shadow:0 4px 16px rgba(76,29,149,.18)}
+html.light #themeToggle .ic-sun{display:block}
+html.light #themeToggle .ic-moon{display:none}
 </style>
+<script>(function(){try{if(localStorage.getItem('pf-theme')==='light'){document.documentElement.classList.add('light');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#f5f3fa');}}catch(e){}})();</script>
 </head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
@@ -2219,5 +2240,10 @@ if('serviceWorker' in navigator){
   });
 })();
 </script>
+<button id="themeToggle" type="button" aria-label="Toggle light / dark mode" title="Light / dark mode">
+<svg class="ic-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+<svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+</button>
+<script>document.getElementById('themeToggle').addEventListener('click',function(){var on=document.documentElement.classList.toggle('light');try{localStorage.setItem('pf-theme',on?'light':'dark')}catch(e){}var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',on?'#f5f3fa':'#0c0916');});</script>
 </body>
 </html>
