@@ -566,13 +566,13 @@ html.light #themeToggle .ic-moon{display:none}
         <div class="gif-stage">
           <img id="gifShow0" src="assets/32win-new.gif" alt="3 To Win gameplay" style="position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover;border-radius:var(--r);background:#0a0a12;pointer-events:none">
           <img id="gifShow1" src="assets/slot3.gif" alt="Hat Trick gameplay" hidden style="position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover;border-radius:var(--r);background:#0a0a12;pointer-events:none">
-          <img id="gifShow2" src="assets/neon-rain.gif" alt="NEON RAIN gameplay" hidden style="position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover;border-radius:var(--r);background:#0a0a12;pointer-events:none">
+          <img id="gifShow2" src="assets/neon-rain.gif" alt="BLACKOUT gameplay" hidden style="position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);object-fit:cover;border-radius:var(--r);background:#0a0a12;pointer-events:none">
           <button class="gif-nav prev" id="gifPrev" type="button" aria-label="Previous">&#8249;</button>
           <button class="gif-nav next" id="gifNext" type="button" aria-label="Next">&#8250;</button>
           <div class="gif-count"><span id="gifNum">1</span> / 3</div>
         </div>
         <figcaption>
-          <strong id="gifTitle" class="gif-title">3 To Win — Streak Platformer</strong>
+          <strong id="gifTitle" class="gif-title">Hat Trick — Streak Platformer</strong>
           <span id="gifDesc">Actual gameplay — from a shipped build</span>
         </figcaption>
       </figure>
@@ -660,7 +660,7 @@ html.light #themeToggle .ic-moon{display:none}
           <div class="card-face card-back">
             <h3>5IN1 — Multi-Game Hub</h3>
             <span class="tech">Kotlin · Swift · TypeScript</span>
-            <p>Multi-game app evolved from a Number Guessing game. 6 games on Android (Kotlin/Compose), macOS (Swift), and web (TypeScript). v1.7.1 shipped with candy-juice polish, FPS counter, and forensically-verified no-internet APKs.</p>
+            <p>Multi-game app evolved from a Number Guessing game. 6 games on Android (Kotlin/Compose), a native macOS app (Swift), and a 5-game web demo (TypeScript). v1.7.1 shipped with candy-juice polish, FPS counter, and forensically-verified no-internet APKs.</p>
             <a href="https://github.com/m4sternoob/m4ster-5in1-web" target="_blank" rel="noopener">GitHub →</a><br>
             <a href="https://m4ster-5in1.vercel.app" target="_blank" rel="noopener">Website →</a><br>
             <a href="https://m4ster-5in1.vercel.app/play" target="_blank" rel="noopener">Play web version →</a><br>
@@ -761,7 +761,7 @@ html.light #themeToggle .ic-moon{display:none}
           <div class="card-face card-back">
             <h3>GearFlush</h3>
             <span class="tech">C++ · Win32</span>
-            <p>Disk-usage analyzer with a live treemap: MFT-based scanning in C++17 with a pure Win32 front end and zero network calls — no telemetry, no accounts. Ships as a proper installer; macOS, Linux, Android, and iOS follow on the same core.</p>
+            <p>Disk-usage analyzer with a live treemap: MFT-based scanning in C++17 with a pure Win32 front end and zero network calls — no telemetry, no accounts. Ships as a proper installer on Windows, with a native macOS app alongside; Linux, Android, and iOS follow.</p>
             <a href="https://m4ster-deepgearflush.vercel.app" target="_blank" rel="noopener">Visit →</a><br>
             <a href="assets/media/gearflush/video-1.mp4" target="_blank" rel="noopener">▶ Watch it in action</a>
           </div>
@@ -930,7 +930,7 @@ html.light #themeToggle .ic-moon{display:none}
         <tr><td><a href="https://m4ster-5in1.vercel.app" target="_blank" rel="noopener">5IN1</a></td><td>6 classic games in one app. Kotlin + Jetpack Compose, fully offline, zero network permission.</td></tr>
         <tr><td><a href="https://m4ster-tracker.vercel.app/" target="_blank" rel="noopener">m4ster-tracker</a></td><td>Freemium project tracker. Free tier + Pro at $20/year flat, no per-seat tax. <a href="https://m4ster-tracker.vercel.app/" target="_blank" rel="noopener">Live</a></td></tr>
         <tr><td><a href="https://m4ster-framelab.vercel.app/" target="_blank" rel="noopener">m4ster-framelab</a></td><td>Free, open-source 2D sprite and animation-atlas generator. No keys, no signup, no paywall.</td></tr>
-        <tr><td><a href="https://m4ster-deepgearflush.vercel.app" target="_blank" rel="noopener">GearFlush</a></td><td>Disk usage analyzer with treemap visualization. Pure C++ Win32, fully offline.</td></tr>
+        <tr><td><a href="https://m4ster-deepgearflush.vercel.app" target="_blank" rel="noopener">GearFlush</a></td><td>Disk usage analyzer with treemap visualization. Windows (C++ Win32) + native macOS, fully offline.</td></tr>
         <tr><td>m4sterOS</td><td>Custom USB-bootable OS that boots straight into the M4STER TV launcher.</td></tr>
         <tr><td><a href="https://m4ster-framelab-test.vercel.app" target="_blank" rel="noopener">m4ster 2D3D Lab</a></td><td>FrameLab experiment: one prompt, a 2D sprite and a free 3D mesh. Test build.</td></tr>
       </table>
@@ -963,6 +963,7 @@ html.light #themeToggle .ic-moon{display:none}
       <h2 class="sec">Devlog</h2>
       <p class="sub">Short build notes. Newest first.</p>
       <div class="devlog">
+        <article class="dl-item"><span class="dl-date">Oct 2026</span><h3>FrameLab v8.0 — the full hub</h3><p>The 2D⇄3D hub went live: AI sprite generation across free providers, 3D mesh generation, an Animate lab, and My Assets. Still free — no login, no paywall.</p></article>
         <article class="dl-item"><span class="dl-date">Oct 2026</span><h3>Shipped a project tracker with automations</h3><p>Built a full Kanban app with calendar, timeline, workload views, @mentions, time tracking, and an automation rules engine. Hardest part: keeping every serverless API route self-contained.</p></article>
         <article class="dl-item"><span class="dl-date">Oct 2026</span><h3>5IN1 trimmed to 6 games</h3><p>Cut Snake and Snakes &amp; Ladders to keep the lineup tight. Fewer games, better games.</p></article>
         <article class="dl-item"><span class="dl-date">Oct 2026</span><h3>Hat Trick v3.0 live on itch.io</h3><p>Halloween update — planet-gravity dropdown, animated cheerleader, streak system. Stable 60fps, pause menu, goal particles.</p></article>
@@ -1052,7 +1053,7 @@ html.light #themeToggle .ic-moon{display:none}
         <h2>Experience</h2>
         <h3>Independent Developer — Games &amp; Software | 10 years</h3>
         <ul><li>Own the full pipeline solo: design, architecture, code, art integration, testing, publishing, and post-launch updates</li>
-        <li>Shipped a 6-game hub (5IN1) across Android, macOS, and web — offline-first, CI on every push, zero-permission APKs verified forensically</li>
+        <li>Shipped a 6-game hub (5IN1) on Android and macOS, with a web demo — offline-first, CI on every push, zero-permission APKs verified forensically</li>
         <li>Built and published 4 browser games on itch.io, including a procedural-city stealth game and an open-world action game in Three.js — drone AI, drivable vehicles, day/night systems</li>
         <li>Built production web tools with real users: a Kanban tracker with collaboration and real-time sync, a sprite-generation studio, and a finance tracker</li>
         <li>Built native Windows software in pure C++ Win32 (disk analyzer with treemap visualization), shipped as an installer through CI releases</li>
@@ -2040,7 +2041,7 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
   var slides=[
     {el:'gifShow0',title:'Hat Trick \u2014 Behind the Scenes',desc:'How the streak platformer came together'},
     {el:'gifShow1',title:'Hat Trick \u2014 Streak Platformer',desc:'Planet-gravity goals \u2014 actual gameplay'},
-    {el:'gifShow2',title:'NEON RAIN \u2014 Hack the Terminals',desc:'Neon-soaked arcade action \u2014 actual gameplay'}
+    {el:'gifShow2',title:'m4ster BLACKOUT \u2014 Hack the Terminals',desc:'Rainy neon-noir tactical \u2014 actual gameplay'}
   ];
   var i=0;
   function show(n){
