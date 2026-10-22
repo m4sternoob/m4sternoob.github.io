@@ -1495,13 +1495,16 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
   var body=document.body, editing=false, drag=null, toastT=null;
 
   function load(){try{return JSON.parse(localStorage.getItem(LS))||{}}catch(e){return{}}}
+  var FIT_REF=2133,fitScale=1;
+  function computeFit(){fitScale=bp()==='mobile'?1:Math.min(1,window.innerWidth/FIT_REF);}
+  computeFit();
   function posOf(b){
     var m=/translate\(([-\d.]+)px,\s*([-\d.]+)px\)(?:\s*rotate\(([-\d.]+)deg\))?(?:\s*scale\(([-\d.]+)\))?/.exec(b.style.transform||'');
-    return m?{x:Math.round(+m[1]),y:Math.round(+m[2]),r:+(m[3]||0),s:+(m[4]||1)}:{x:0,y:0,r:0,s:1};
+    return m?{x:Math.round(+m[1]/fitScale),y:Math.round(+m[2]/fitScale),r:+(m[3]||0),s:+(m[4]||1)}:{x:0,y:0,r:0,s:1};
   }
   function setTransform(b,x,y,s,r){
     r=r||0;
-    b.style.transform='translate('+x+'px,'+y+'px)'+(r?' rotate('+r+'deg)':'')+' scale('+s+')';
+    b.style.transform='translate('+(x*fitScale)+'px,'+(y*fitScale)+'px)'+(r?' rotate('+r+'deg)':'')+' scale('+s+')';
     var inv=1/s,hz=b.querySelector(':scope > .mml-handle');
     if(hz)hz.style.transform='translateX(-50%) scale('+inv+')'+(r?' rotate('+(-r)+'deg)':'');
     b.querySelectorAll(':scope > .mml-resize').forEach(function(rh){rh.style.transform='scale('+inv+')'+(r?' rotate('+(-r)+'deg)':'')});
@@ -1607,23 +1610,31 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
   }
   function bp(){return window.innerWidth<=700?'mobile':'desktop';}
   function clampToViewport(){
-    if(bp()!=='mobile'||editing)return;
+    if(editing)return;
+    var mob=bp()==='mobile',tol=mob?16:2;
     $$('[data-mml]').forEach(function(b){
       var hid=b.closest('.panel[data-pos]');
       if(hid&&hid.getAttribute('data-pos')!=='0')return;
       var r=b.getBoundingClientRect();
       if(!r.width)return;
-      var dx=0;
-      if(r.left<-16)dx=-16-r.left;
-      else if(r.right>window.innerWidth+16)dx=window.innerWidth+16-r.right;
-      if(dx){
-        var p=posOf(b);
-        var k=r.width/((b.offsetWidth||r.width)*(p.s||1));if(!isFinite(k)||k<=0)k=1;
-        setTransform(b,p.x+dx/k,p.y,p.s,p.r);
+      var p=posOf(b);
+      var k=r.width/((b.offsetWidth||r.width)*(p.s||1));if(!isFinite(k)||k<=0)k=1;
+      var ks=k*fitScale;
+      if(!mob&&r.width>window.innerWidth-tol*2){
+        var ns=(p.s||1)*(window.innerWidth-tol*2)/r.width;
+        if(ns>=0.3){setTransform(b,p.x,p.y,ns,p.r);p=posOf(b);r=b.getBoundingClientRect();k=r.width/((b.offsetWidth||r.width)*(p.s||1));if(!isFinite(k)||k<=0)k=1;ks=k*fitScale;}
       }
+      var dx=0,minL=mob?-tol:0,maxR=mob?window.innerWidth+tol:window.innerWidth;
+      if(r.left<minL)dx=minL-r.left;
+      else if(r.right>maxR)dx=maxR-r.right;
+      if(dx)setTransform(b,p.x+dx/ks,p.y,p.s,p.r);
     });
   }
   window.addEventListener('orientationchange',function(){setTimeout(clampToViewport,350);});
+  var fitT;window.addEventListener('resize',function(){clearTimeout(fitT);fitT=setTimeout(function(){var old=fitScale;computeFit();if(fitScale!==old&&!editing)apply();},180);});
+  document.querySelectorAll('[role=tab]').forEach(function(t){t.addEventListener('click',function(){setTimeout(clampToViewport,700);});});
+  window.addEventListener('load',function(){setTimeout(clampToViewport,1700);setTimeout(clampToViewport,3200);});
+  var fitT2;document.addEventListener('animationend',function(e){if(e.target&&e.target.closest&&e.target.closest('[data-mml]')){clearTimeout(fitT2);fitT2=setTimeout(clampToViewport,60);}});
   function apply(){
     var d=load();
     if(!d||!Object.keys(d).length){
@@ -1715,7 +1726,7 @@ window.MML_DEFAULT={desktop:{"pos":{"hero-text":{"x":-158,"y":150,"r":0,"s":1.28
     var sx=e.clientX,sy=e.clientY,active=false;
     var cur=posOf(b);
     var br0=b.getBoundingClientRect();
-    var kF=br0.width/((b.offsetWidth||br0.width)*(cur.s||1));if(!isFinite(kF)||kF<=0)kF=1;
+    var kF=br0.width/((b.offsetWidth||br0.width)*(cur.s||1));if(!isFinite(kF)||kF<=0)kF=1;kF=kF*fitScale;
     function mv(ev){
       if(!active){
         if(Math.hypot(ev.clientX-sx,ev.clientY-sy)<6)return;
